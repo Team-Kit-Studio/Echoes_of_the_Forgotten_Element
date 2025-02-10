@@ -28,19 +28,20 @@ func _ready():
 			
 	
 			
-func save_data():
+func save_data() -> void:
 	config.save(PATH)
 	
-func load_data():
+func load_data() -> void:
 	if config.load("user://settings.cfg") != OK:
-		print("нет доступа, сохраняю")
 		save_data()
-		return
-	print("Загрузка файла", "\n")
+		print("нет доступа, сохраняю")
+		
+		return 
 	load_control_settings()
 	load_video_settings()
+	print("Загрузка файла", "\n")
 
-func save_control_settings(action: String, event: InputEvent):
+func save_control_settings(action: String, event: InputEvent) -> void:
 	var event_str
 	if event is InputEventKey:
 		event_str = OS.get_keycode_string(event.physical_keycode)
@@ -51,7 +52,7 @@ func save_control_settings(action: String, event: InputEvent):
 	save_data()
 
 
-func load_control_settings():
+func load_control_settings() -> Dictionary:
 	var binds_settings = {}
 	var keys = config.get_section_keys("Управление") #получаем список всех ключей из секции Управление
 	for action in keys: #запускаем цикл по всем ключам в keys
@@ -70,7 +71,7 @@ func load_control_settings():
 		#print(binds_settings[action])
 	return binds_settings
 
-func load_video_settings():
+func load_video_settings() -> void:
 	var screen_type = config.get_value("Видео", "fullscreen")
 	DisplayServer.window_set_mode(screen_type)
 	
@@ -80,16 +81,17 @@ func load_video_settings():
 	var vsync_index = config.get_value("Видео", "vsync")
 	DisplayServer.window_set_vsync_mode(vsync_index)
 	
-func save_audio_settings(key:String, value):
+func save_audio_settings(key:String, value)-> void:
 	config.set_value("Аудио", key, value)
 	save_data()
 	
-func load_audio_settings():
+func load_audio_settings() -> Dictionary:
 	var audio_settings: Dictionary
 	for key in config.get_section_keys("Аудио"):
 		audio_settings[key] = config.get_value("Аудио", key)
-	return audio_settings
 	print(audio_settings)
+	return audio_settings
+	
 	
 
 	

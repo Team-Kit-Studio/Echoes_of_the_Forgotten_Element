@@ -12,7 +12,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	match state:
 		INTRO_IN:
 			state_intro_in()
@@ -23,17 +23,17 @@ func _process(delta):
 func state_intro_in():
 	var tween = get_tree().create_tween()
 	tween.tween_property($DirectionalLight2D, "energy", 0 , 3)
-	print("gg1")
+	#print("gg1")
 
 func state_intro_out():
 	var tween = get_tree().create_tween()
 	tween.tween_property($DirectionalLight2D, "energy", 1 , 1)
 	await tween.finished
 	get_tree().change_scene_to_file("res://Menu.tscn" )
-	print("gg2")
+	#print("gg2")
 
 
 func _on_timer_timeout():
 	state = INTRO_OUT
-	print("gggg")
+	#print("gggg")
 	

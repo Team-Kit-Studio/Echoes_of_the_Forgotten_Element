@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
-@onready var anim = $AnimatedSprite2D
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-var chase = false
-var atack = false
-var SPEED = 100
-var alive = true
-var health = 100
+var chase: bool = false
+var atack: bool = false
+var SPEED: int = 100
+var alive: bool = true
+var health: int = 100
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta) -> void:
 	var player = $"../../player/Player"
 	var direction = (player.position - self.position).normalized()
 	if alive == true:
@@ -36,17 +36,17 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body) -> void:
 	if body.name == "Player":
 		chase = true
 
 
-func _on_area_2d_body_exited(body):
+func _on_area_2d_body_exited(body) -> void:
 	if body.name == "Player":
 		chase = false
 		
 
-func _on_atack_body_entered(body):
+func _on_atack_body_entered(body) -> void:
 	if body.name == "Player":
 		if alive == true:
 			#body.velocity.x -= 500
@@ -55,15 +55,15 @@ func _on_atack_body_entered(body):
 			await Atack()
 			
 			body.health -= 40
-			$"../Player".cycle = true
+
 		
-func Death():
+func Death() -> void:
 	alive = false
 	anim.play('Death')
 	await anim.animation_finished
-	queue_free()
+	self.queue_free()
 	
-func Atack():
+func Atack() -> void:
 	alive = false
 	velocity.x = 0
 	velocity.y = 0

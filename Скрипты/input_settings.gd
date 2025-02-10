@@ -3,11 +3,11 @@ extends Control
 @onready var input_button_scene = preload("res://button.tscn")
 @onready var changable_list = $PanelContainer/MarginContainer/ScrollContainer/ChangableList
 
-var is_remapping = false
+var is_remapping: bool = false
 var action_to_remap = null
 var remaping_button = null
 
-var input_actions = {
+var input_actions: Dictionary = {
 	"up": "Вверх", #Inputmode NAME: "New Name"
 	"left": "Влево",
 	"down": "Вниз",
@@ -21,7 +21,7 @@ func _ready():
 
 
 
-func _create_action_list():
+func _create_action_list() -> void:
 	for item in changable_list.get_children():
 		item.queue_free()
 	for action in input_actions:
@@ -39,14 +39,14 @@ func _create_action_list():
 		changable_list.add_child(button)
 		button.pressed.connect(_on_button_pressed.bind(button, action))
 
-func _on_button_pressed(button, action):
+func _on_button_pressed(button: InputEvent, action: InputEvent) -> void:
 	if !is_remapping:
 		is_remapping = true
 		action_to_remap = action
 		remaping_button = button
 		button.find_child("InputLabel").text ="Press Key To Bind"
 		
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if is_remapping:
 		if (
 			event is InputEventKey ||
@@ -62,7 +62,7 @@ func _input(event):
 			action_to_remap = null
 			remaping_button = null
 			
-func load_control_from_settings():
+func load_control_from_settings() -> void:
 	var keybinds = Persistence.load_control_settings()
 	for action in keybinds.keys():
 		InputMap.action_erase_events(action)
