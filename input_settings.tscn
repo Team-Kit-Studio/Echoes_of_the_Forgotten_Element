@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjbl0hur6i7v"]
+
+[ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://инструменты/tema/new_theme.tres" id="1_an24d"]
+[ext_resource type="Script" path="res://Скрипты/input_settings.gd" id="1_eq6fv"]
+[ext_resource type="PackedScene" uid="uid://b0fh2i8c4j20p" path="res://button.tscn" id="2_josp4"]
+
+[node name="InputSettings" type="Control"]
+layout_mode = 3
+anchor_top = 0.21142
+anchor_right = 0.505208
+anchor_bottom = 0.748457
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_an24d")
+script = ExtResource("1_eq6fv")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ChangableList" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("2_josp4")]
+layout_mode = 2
+size_flags_vertical = 11
+size_flags_stretch_ratio = 0.09
+autowrap_mode = 1
+
+[node name="Button2" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("2_josp4")]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 11
+size_flags_stretch_ratio = 0.09
+
+[node name="Button3" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("2_josp4")]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 11
+size_flags_stretch_ratio = 0.09
+
+[node name="Button4" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("2_josp4")]
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 11
+size_flags_stretch_ratio = 0.09
