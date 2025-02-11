@@ -1,10 +1,13 @@
+
 extends Node
 
 
-const  PATH = "user://settings.cfg" # задаем путь для конфига, он по стандарту
-var config = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
+const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
+const  PATH_SAVE: String = "user://"
+var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
+var json: JSON = JSON.new()
 
-func _ready():
+func _ready() -> void:
 	if !FileAccess.file_exists(PATH):
 		
 		config.set_value("Управление", "up", "W")
@@ -31,12 +34,16 @@ func _ready():
 func save_data() -> void:
 	config.save(PATH)
 	
+func save_game(sт: String) -> void:
+	var save_name
+	var file: FileAccess = FileAccess.open(save_names)
+	
 func load_data() -> void:
 	if config.load("user://settings.cfg") != OK:
 		save_data()
 		print("нет доступа, сохраняю")
-		
 		return 
+	
 	load_control_settings()
 	load_video_settings()
 	print("Загрузка файла", "\n")

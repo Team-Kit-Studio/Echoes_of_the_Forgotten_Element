@@ -58,3 +58,5 @@ func _on_exit_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://Menu.tscn")
 	
 	
+func _on_load_game_pressed() -> void:
+	pass

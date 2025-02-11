@@ -16,7 +16,6 @@ grow_vertical = 2
 script = ExtResource("1_wlcv1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Main_Menu" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -262,6 +261,7 @@ offset_bottom = 31.0
 text = "Пауза"
 
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Load Game" to="." method="_on_load_game_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_toggled"]
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit Game" to="." method="_on_exit_game_pressed"]
 [connection signal="toggled" from="CanvasLayer/Options/Settings/Видео/HBoxContainer/VBoxContainer2/Fullscreen" to="CanvasLayer/Options/Settings/Видео" method="_on_fullscreen_toggled"]
