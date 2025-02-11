@@ -1,7 +1,7 @@
 
 extends Node
 
-
+"321"
 const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
 const  PATH_SAVE: String = "user://"
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
