@@ -13,7 +13,7 @@ func _ready():
 	%VSync.selected = vsync_index
 
 
-func _on_fullscreen_toggled(toggled_on):
+func _on_fullscreen_toggled(_toggled_on):
 	if %Fullscreen.button_pressed == true:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		Persistence.config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_FULLSCREEN)

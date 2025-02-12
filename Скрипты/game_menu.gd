@@ -27,7 +27,7 @@ func toggle() -> void:
 	visible = !visible
 	get_tree().paused
 	$CanvasLayer/Main_Menu.visible = visible
-	$CanvasLayer/Button.visible = !visible
+	$CanvasLayer/Pause.visible = !visible
 
 
 
@@ -46,12 +46,12 @@ func _on_options_toggled(toggled_on) -> void:
 
 func _on_continue_pressed() -> void:
 	$CanvasLayer/Main_Menu.visible = false
-	$CanvasLayer/Button.visible = true
+	$CanvasLayer/Pause.visible = true
 
 
 func _on_button_pressed() -> void:
 	$CanvasLayer/Main_Menu.visible = true
-	$CanvasLayer/Button.visible = false
+	$CanvasLayer/Pause.visible = false
 
 
 func _on_exit_game_pressed() -> void:
@@ -59,8 +59,11 @@ func _on_exit_game_pressed() -> void:
 	
 	
 func _on_load_game_pressed() -> void:
-	pass
+	SaveSystem.save_load("def", "kye")
+
 
 
 func _on_save_game_pressed() -> void:
-	pass # Replace with function body.
+	SaveSystem.save_game("def")
+	SaveSystem.save_game("base_save")
+	SaveSystem.save_game("save_game")

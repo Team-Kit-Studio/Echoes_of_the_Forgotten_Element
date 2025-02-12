@@ -1,6 +1,3 @@
 extends Node2D
-var save_sustem = SaveSystem.new()
 func _ready() -> void:
-	save_sustem.save_game()
-	
-	
+	Persistence.array_save = get_tree().get_nodes_in_group("save_it")

@@ -3,12 +3,11 @@ extends Node
 const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
 
+#часть сохранения
 var array_save: Array[Node]
-var player_node: Node
+var player_node: Node 
 
 func _ready() -> void:
-	array_save = get_tree().get_nodes_in_group("save_it")
-	
 	if !FileAccess.file_exists(PATH):
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
