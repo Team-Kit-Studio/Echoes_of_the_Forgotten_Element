@@ -8,10 +8,10 @@ enum {
 }
 
 
-@onready var anim = $AnimatedSprite2D
-@onready var AnimPlayer = $AnimationPlayer
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
 
-const speed = 100.0
+const speed: int = 100.0
 
 const direction_run: Dictionary = {
 	Vector2.RIGHT: "State_Run_FromSide",
@@ -27,14 +27,15 @@ const direction_idle: Dictionary = {
 	Vector2.DOWN: "State_Idle_Down" 
 }
 
-var alive = true
-var health = 100
-var state = MOVE
-var combo = false
-var input_direction = Vector2.ZERO
+var alive: bool = true
+var health: int = 100
+var state: int = MOVE
+var combo: bool = false
+var input_direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2 = Vector2.ZERO
 
-func _physics_process(_delta):
+
+func _physics_process(_delta: float) -> void:
 	match state:
 		MOVE:
 			Move_State()
@@ -47,7 +48,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 	
-func Move_State():
+func Move_State() -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	if input_direction != Vector2.ZERO:
@@ -73,6 +74,5 @@ func Move_State():
 			play_animation("State_Idle_FromSide")
 		
 func play_animation(animation: String) -> void:
-
 	#print("Играет анимация: ", animation)
 	AnimPlayer.play(animation)

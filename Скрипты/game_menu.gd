@@ -12,7 +12,7 @@ func _ready() -> void:
 	Canvas.visible = true
 	$CanvasLayer/Main_Menu.visible = false
 	$CanvasLayer/Options/Settings.visible = false	
-	$CanvasLayer/Button.visible = true
+	$CanvasLayer/Pause.visible = true
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
@@ -60,3 +60,7 @@ func _on_exit_game_pressed() -> void:
 	
 func _on_load_game_pressed() -> void:
 	pass
+
+
+func _on_save_game_pressed() -> void:
+	pass # Replace with function body.

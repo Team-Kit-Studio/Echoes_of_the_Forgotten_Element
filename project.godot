@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[global_group]
+
+save_it=""
+
 [input]
 
 ui_left={

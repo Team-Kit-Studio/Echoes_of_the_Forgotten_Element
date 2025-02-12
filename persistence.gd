@@ -3,13 +3,12 @@ extends Node
 const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
 
-#часть сохранения
-const  PATH_SAVE: String = "user://save/"
-
-
+var array_save: Array[Node]
+var player_node: Node
 
 func _ready() -> void:
-	save_game("test")
+	array_save = get_tree().get_nodes_in_group("save_it")
+	
 	if !FileAccess.file_exists(PATH):
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
@@ -99,35 +98,3 @@ func load_audio_settings() -> Dictionary:
 	return audio_settings
 	
 	
-func save_game(save_name: String = "default_save", _scene_chidre: Array[Node] = []) -> void:
-	var name_path: String = PATH_SAVE + save_name + ".json"
-	var base_data: SaveDataDefault = SaveDataDefault.new(save_name)
-	var file = FileAccess.open(name_path, FileAccess.WRITE)
-	
-	var coutn = 0
-	if FileAccess.get_open_error() == OK and _scene_chidre != []:
-		base_data.data["metadata"]["object_data"] = {}
-		for child in _scene_chidre: 
-			coutn += 1
-			base_data.data["metadata"]["object_data"][child.name] = {}
-			base_data.data["metadata"]["object_data"][child.name]["pos_x"] = child.position.x
-			base_data.data["metadata"]["object_data"][child.name]["pos_y"] = child.position.y
-			if coutn == _scene_chidre.size():
-				file.store_string(JSON.stringify(base_data.data, "\t"))
-				file.close()
-				coutn = 0
-	else:
-		printerr("Error: ", FileAccess.get_open_error())
-		pass
-		
-func load_game(save_name: String, child_set_settings: Array[Node]) -> void:
-	var file: FileAccess = FileAccess.open(PATH_SAVE + save_name + ".json", FileAccess.READ)
-	var _content: Dictionary
-	if FileAccess.get_open_error() == OK:
-		_content = JSON.parse_string(file.get_as_text())
-		file.close()
-		
-	else:
-		_content = {}
-		file.close()
-		printerr("Error: ", "ERROR LOAD")

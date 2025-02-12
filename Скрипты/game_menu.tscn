@@ -254,13 +254,14 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="Pause" type="Button" parent="CanvasLayer"]
 offset_left = 1.0
 offset_right = 57.0
 offset_bottom = 31.0
 text = "Пауза"
 
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Save Game" to="." method="_on_save_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Load Game" to="." method="_on_load_game_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_toggled"]
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit Game" to="." method="_on_exit_game_pressed"]
@@ -269,4 +270,4 @@ text = "Пауза"
 [connection signal="item_selected" from="CanvasLayer/Options/Settings/Видео/HBoxContainer/VBoxContainer2/VSync" to="CanvasLayer/Options/Settings/Видео" method="_on_v_sync_item_selected"]
 [connection signal="value_changed" from="CanvasLayer/Options/Settings/Аудио/HBoxContainer/VBoxContainer2/music" to="CanvasLayer/Options/Settings/Аудио" method="_on_music_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Options/Settings/Аудио/HBoxContainer/VBoxContainer2/Sound_FX" to="CanvasLayer/Options/Settings/Аудио" method="_on_sound_fx_value_changed"]
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause" to="." method="_on_button_pressed"]
