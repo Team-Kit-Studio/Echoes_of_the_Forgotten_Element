@@ -34,7 +34,7 @@ var combo = false
 var input_direction = Vector2.ZERO
 var last_direction: Vector2 = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		MOVE:
 			Move_State()

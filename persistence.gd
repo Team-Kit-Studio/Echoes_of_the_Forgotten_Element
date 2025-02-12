@@ -1,15 +1,16 @@
-
 extends Node
 
-"321"
 const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
-const  PATH_SAVE: String = "user://"
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
-var json: JSON = JSON.new()
+
+#часть сохранения
+const  PATH_SAVE: String = "user://save/"
+
+
 
 func _ready() -> void:
+	save_game("test")
 	if !FileAccess.file_exists(PATH):
-		
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
 		config.set_value("Управление", "down", "S")
@@ -29,14 +30,10 @@ func _ready() -> void:
 	else:
 		load_data()
 			
-	
 			
 func save_data() -> void:
 	config.save(PATH)
 	
-func save_game(sт: String) -> void:
-	var save_name
-	var file: FileAccess = FileAccess.open(save_names)
 	
 func load_data() -> void:
 	if config.load("user://settings.cfg") != OK:
@@ -47,6 +44,7 @@ func load_data() -> void:
 	load_control_settings()
 	load_video_settings()
 	print("Загрузка файла", "\n")
+
 
 func save_control_settings(action: String, event: InputEvent) -> void:
 	var event_str
@@ -92,6 +90,7 @@ func save_audio_settings(key:String, value)-> void:
 	config.set_value("Аудио", key, value)
 	save_data()
 	
+	
 func load_audio_settings() -> Dictionary:
 	var audio_settings: Dictionary
 	for key in config.get_section_keys("Аудио"):
@@ -100,5 +99,35 @@ func load_audio_settings() -> Dictionary:
 	return audio_settings
 	
 	
-
+func save_game(save_name: String = "default_save", _scene_chidre: Array[Node] = []) -> void:
+	var name_path: String = PATH_SAVE + save_name + ".json"
+	var base_data: SaveDataDefault = SaveDataDefault.new(save_name)
+	var file = FileAccess.open(name_path, FileAccess.WRITE)
 	
+	var coutn = 0
+	if FileAccess.get_open_error() == OK and _scene_chidre != []:
+		base_data.data["metadata"]["object_data"] = {}
+		for child in _scene_chidre: 
+			coutn += 1
+			base_data.data["metadata"]["object_data"][child.name] = {}
+			base_data.data["metadata"]["object_data"][child.name]["pos_x"] = child.position.x
+			base_data.data["metadata"]["object_data"][child.name]["pos_y"] = child.position.y
+			if coutn == _scene_chidre.size():
+				file.store_string(JSON.stringify(base_data.data, "\t"))
+				file.close()
+				coutn = 0
+	else:
+		printerr("Error: ", FileAccess.get_open_error())
+		pass
+		
+func load_game(save_name: String, child_set_settings: Array[Node]) -> void:
+	var file: FileAccess = FileAccess.open(PATH_SAVE + save_name + ".json", FileAccess.READ)
+	var _content: Dictionary
+	if FileAccess.get_open_error() == OK:
+		_content = JSON.parse_string(file.get_as_text())
+		file.close()
+		
+	else:
+		_content = {}
+		file.close()
+		printerr("Error: ", "ERROR LOAD")

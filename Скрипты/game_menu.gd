@@ -13,7 +13,7 @@ func _ready() -> void:
 	$CanvasLayer/Main_Menu.visible = false
 	$CanvasLayer/Options/Settings.visible = false	
 	$CanvasLayer/Button.visible = true
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
 	
