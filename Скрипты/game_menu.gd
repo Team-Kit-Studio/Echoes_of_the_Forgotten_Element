@@ -65,5 +65,3 @@ func _on_load_game_pressed() -> void:
 
 func _on_save_game_pressed() -> void:
 	SaveSystem.save_game("def")
-	SaveSystem.save_game("base_save")
-	SaveSystem.save_game("save_game")
