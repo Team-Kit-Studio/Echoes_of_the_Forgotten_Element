@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://5u7mtlbqv4dg"]
+
+[ext_resource type="PackedScene" uid="uid://u8oj86u1pdy" path="res://SaveSlot.tscn" id="1_va2kt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -349.0
+offset_bottom = -378.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 16.0
+offset_right = -25.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "Сохраните свой прогресс!"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
+modulate = Color(0.501407, 0.501406, 0.501406, 1)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SaveListH" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SavelistV" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveSlot" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_va2kt")]
+custom_minimum_size = Vector2(320, 70.185)
+layout_mode = 2

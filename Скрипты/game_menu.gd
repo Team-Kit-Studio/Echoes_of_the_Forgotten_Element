@@ -2,17 +2,20 @@ extends Control
 
 @onready var button: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var Canvas: CanvasLayer = $CanvasLayer
-
-
-
+@onready var Main_Menu: Control = $CanvasLayer/Main_Menu
+@onready var Settings: TabContainer = $CanvasLayer/Options/Settings
+@onready var Pause_Button: Button = $CanvasLayer/Pause
+@onready var Options: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
+@onready var SaveMenu: Control = $CanvasLayer/SaveMenu/SaveMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#load_control_from_settings()
 	Canvas.visible = true
-	$CanvasLayer/Main_Menu.visible = false
-	$CanvasLayer/Options/Settings.visible = false	
-	$CanvasLayer/Pause.visible = true
+	Main_Menu.visible = false
+	Settings.visible = false	
+	Pause_Button.visible = true
+	SaveMenu.hide()
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
@@ -26,32 +29,36 @@ func load_control_from_settings() -> void:
 func toggle() -> void:
 	visible = !visible
 	get_tree().paused
-	$CanvasLayer/Main_Menu.visible = visible
-	$CanvasLayer/Pause.visible = !visible
+	Main_Menu.visible = visible
+	Pause_Button.visible = !visible
 
 
 
 func _on_options_toggled(toggled_on) -> void:
 	var tween = get_tree().create_tween()
 	if toggled_on:
-		$CanvasLayer/Options/Settings.visible = true
-		tween.tween_property($CanvasLayer/Options/Settings, "position:x", 310, 0.2)
+		Settings.visible = true
+		tween.tween_property(Settings, "position:x", 310, 0.2)
 		await tween.finished
 		
 	else:
-		tween.tween_property($CanvasLayer/Options/Settings, "position:x", -240, 0.2)
+		tween.tween_property(Settings, "position:x", -240, 0.2)
 		await tween.finished
-		$CanvasLayer/Options/Settings.visible = false
+		Settings.visible = false
 	
 
 func _on_continue_pressed() -> void:
-	$CanvasLayer/Main_Menu.visible = false
-	$CanvasLayer/Pause.visible = true
+	Main_Menu.visible = false
+	Pause_Button.visible = true
+	Settings.hide()
+	if Settings.visible == false:
+		Options.button_pressed = false
+	
 
 
 func _on_button_pressed() -> void:
-	$CanvasLayer/Main_Menu.visible = true
-	$CanvasLayer/Pause.visible = false
+	Main_Menu.visible = true
+	Pause_Button.visible = false
 
 
 func _on_exit_game_pressed() -> void:
@@ -63,5 +70,14 @@ func _on_load_game_pressed() -> void:
 
 
 
-func _on_save_game_pressed() -> void:
-	SaveSystem.save_game("def")
+
+	#SaveSystem.save_game("def")
+	#SaveSystem.save_game("base_save")
+	#SaveSystem.save_game("save_game")
+
+
+func _on_save_game_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		SaveMenu.visible = true
+	else:
+		SaveMenu.visible = false

@@ -1,0 +1,170 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbufcy3dd28sr"]
+
+[ext_resource type="Script" path="res://Скрипты/видео.gd" id="1_isf8u"]
+[ext_resource type="Script" path="res://Скрипты/аудио.gd" id="2_lnqee"]
+[ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://input_settings.tscn" id="3_gkmwd"]
+
+[node name="Settings" type="TabContainer"]
+offset_left = 303.0
+offset_top = 2.0
+offset_right = 850.0
+offset_bottom = 650.0
+mouse_filter = 0
+current_tab = 1
+
+[node name="Видео" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("1_isf8u")
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Видео"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -367.0
+offset_bottom = 84.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Видео/HBoxContainer"]
+layout_mode = 2
+
+[node name="Fullscreen" type="Label" parent="Видео/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Полноэкранный режим"
+
+[node name="Borderless" type="Label" parent="Видео/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Оконный режим"
+
+[node name="VSync" type="Label" parent="Видео/HBoxContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "Верт. Синхронизация"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Видео/HBoxContainer"]
+layout_mode = 2
+
+[node name="Fullscreen" type="CheckBox" parent="Видео/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Borderless" type="CheckBox" parent="Видео/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="VSync" type="OptionButton" parent="Видео/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Включено"
+popup/item_1/text = "Отключено"
+popup/item_1/id = 1
+popup/item_2/text = "Адаптивная"
+popup/item_2/id = 2
+
+[node name="Аудио" type="TabBar" parent="."]
+layout_mode = 2
+script = ExtResource("2_lnqee")
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Аудио"]
+layout_mode = 1
+offset_left = 31.0
+offset_top = 15.0
+offset_right = 470.0
+offset_bottom = 141.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Аудио/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="music" type="Label" parent="Аудио/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Громкость"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sound_FX" type="Label" parent="Аудио/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "Эффекты
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Аудио/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="music" type="HSlider" parent="Аудио/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/grabber_offset = 0
+max_value = 1.0
+step = 0.05
+
+[node name="Sound_FX" type="HSlider" parent="Аудио/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Аудио/HBoxContainer"]
+layout_mode = 2
+
+[node name="Audio_Num_LBL" type="Label" parent="Аудио/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.19
+text = "Audio_Num_LBL
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio_Num_LBL2" type="Label" parent="Аудио/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.19
+text = "Audio_Num_LBL
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Управление" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="InputSettings" parent="Управление" instance=ExtResource("3_gkmwd")]
+layout_mode = 1
+anchor_left = 0.0219378
+anchor_top = 0.0292208
+anchor_right = 0.967093
+anchor_bottom = 0.433442
+
+[node name="Графика" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[connection signal="toggled" from="Видео/HBoxContainer/VBoxContainer2/Fullscreen" to="Видео" method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="Видео/HBoxContainer/VBoxContainer2/Borderless" to="Видео" method="_on_borderless_toggled"]
+[connection signal="item_selected" from="Видео/HBoxContainer/VBoxContainer2/VSync" to="Видео" method="_on_v_sync_item_selected"]
+[connection signal="value_changed" from="Аудио/HBoxContainer/VBoxContainer2/music" to="Аудио" method="_on_music_value_changed"]
+[connection signal="value_changed" from="Аудио/HBoxContainer/VBoxContainer2/Sound_FX" to="Аудио" method="_on_sound_fx_value_changed"]

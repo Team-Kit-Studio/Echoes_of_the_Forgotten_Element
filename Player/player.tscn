@@ -1,8 +1,7 @@
-[gd_scene load_steps=104 format=3 uid="uid://dn8amxut4hceo"]
+[gd_scene load_steps=103 format=3 uid="uid://dn8amxut4hceo"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_c30st"]
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://Спрайты/Player/SpriteList_Idle.png" id="2_ssr53"]
-[ext_resource type="Resource" path="res://systems/save_system/base_prefab_save/player_vars.tres" id="2_vfngi"]
 [ext_resource type="Texture2D" uid="uid://cc30f5f1mltn4" path="res://Спрайты/Player/SpriteList_Player_Run.png" id="3_bd4fw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkmih"]
@@ -851,7 +850,6 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(298, 331)
 script = ExtResource("1_c30st")
-settings = ExtResource("2_vfngi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_lkmih")

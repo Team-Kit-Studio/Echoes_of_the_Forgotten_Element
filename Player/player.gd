@@ -6,13 +6,12 @@ enum {
 	ATTACK,
 	DEATH
 }
-@export var settings: ObjectVars
+
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
-func _ready() -> void:
-	pass
-var speed: int = 100.0
+
+const speed: int = 100.0
 
 const direction_run: Dictionary = {
 	Vector2.RIGHT: "State_Run_FromSide",
@@ -53,27 +52,26 @@ func Move_State() -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	if input_direction != Vector2.ZERO:
-		# Устанавливаем скорость передвижения
+		
 		velocity = input_direction * speed
 		
-		# Сохраняем последнее направление
+		
 		last_direction = input_direction
 		
-		if last_direction.x != 0:  # То есть если есть горизонтальное движение
+		if last_direction.x != 0:  
 			anim.flip_h = last_direction.x > 0
-		# Управляем анимацией бега
+		
 		if direction_run.has(last_direction):
 			play_animation(direction_run[last_direction])
 	else:
-		velocity = Vector2.ZERO  # Останавливаем персонажа
+		velocity = Vector2.ZERO  
 
-		# Играть анимацию бездействия, основываясь на последнем направлении
+		
 		if last_direction != Vector2.ZERO and direction_idle.has(last_direction):
 			play_animation(direction_idle[last_direction])
 		else:
-			# Если не было движения, переключаем на обычную анимацию бездействия
+			
 			play_animation("State_Idle_FromSide")
 		
 func play_animation(animation: String) -> void:
-	#print("Играет анимация: ", animation)
 	AnimPlayer.play(animation)
