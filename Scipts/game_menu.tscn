@@ -96,10 +96,11 @@ offset_right = 547.0
 offset_bottom = 648.0
 
 [node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
+visible = false
 layout_mode = 1
-offset_left = 310.0
+offset_left = -391.0
 offset_top = -2.0
-offset_right = -40.0
+offset_right = -741.0
 offset_bottom = -382.0
 
 [node name="Pause" type="Button" parent="CanvasLayer"]

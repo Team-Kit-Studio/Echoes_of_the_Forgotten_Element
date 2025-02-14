@@ -5,6 +5,7 @@ extends Control
 @onready var ApplyButon = preload("res://systems/save_system/GUI/NewSave.tscn")
 @onready var NewSave: Control = $NewSave
 @onready var SaveMenu: Control = $"."
+@onready var SaveLoad_Game: Button = $"../../Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad Game"
 var button_instance
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,23 +21,30 @@ func _process(delta: float) -> void:
 
 
 func _on_new_save_pressed() -> void:
-	var tween = get_tree().create_tween()
-	NewSave.scale = Vector2(0.3, 0.3)
-	NewSave.show()
-	tween.tween_property(NewSave, "scale", Vector2(1,1), 0.1)
+	if NewSave.visible == false:
+		NewSave.show()
+		var tween = get_tree().create_tween()
+		NewSave.scale = Vector2(0.3, 0.3)
+		tween.tween_property(NewSave, "scale", Vector2(1,1), 0.1)
+		
 
 
 func _on_cancel_pressed() -> void:
-	var gameMenu = game_menu.instantiate()
-	var tween = get_tree().create_tween()
+	#var gameMenu: Node = game_menu.instantiate()
+	var tween: Tween = get_tree().create_tween()
+	tween.set_parallel(true)
 	tween.tween_property(SaveMenu, "position:x", -240, 0.2)
+	tween.tween_property(SaveMenu, "modulate", Color(1, 1, 1, 0.1), 0.15) 
+	tween.set_parallel(false)
+	tween.tween_property(NewSave, "scale", Vector2(0.4, 0.4), 0.1)
 	await tween.finished
-	SaveMenu.visible = false
-	#game_menu.SaveLoadButton.button_pressed = false
+	NewSave.hide()
+	SaveMenu.hide()
+	SaveLoad_Game.button_pressed = false
 
 func _on_Create_Item_Pressed():
-	var new_save = add_save.instantiate()
-	new_save.position = Vector2()
+	pass
+
 
 
 func _on_load_pressed() -> void:

@@ -97,6 +97,12 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
+[node name="SaveSlot5" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
+custom_minimum_size = Vector2(375.135, 70.185)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
 [node name="NewSave" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 421.0

@@ -29,7 +29,7 @@ func state_intro_out():
 	var tween = get_tree().create_tween()
 	tween.tween_property($DirectionalLight2D, "energy", 1 , 1)
 	await tween.finished
-	get_tree().change_scene_to_file("res://Menu.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://Menu.tscn")
 	#print("gg2")
 
 
