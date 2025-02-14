@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbufcy3dd28sr"]
 
-[ext_resource type="Script" path="res://Скрипты/видео.gd" id="1_isf8u"]
-[ext_resource type="Script" path="res://Скрипты/аудио.gd" id="2_lnqee"]
+[ext_resource type="Script" path="res://Scipts/видео.gd" id="1_isf8u"]
+[ext_resource type="Script" path="res://Scipts/аудио.gd" id="2_lnqee"]
 [ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://input_settings.tscn" id="3_gkmwd"]
 
 [node name="Settings" type="TabContainer"]

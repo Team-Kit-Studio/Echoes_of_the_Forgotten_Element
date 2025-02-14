@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfjbl0hur6i7v"]
 
-[ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://инструменты/tema/new_theme.tres" id="1_an24d"]
-[ext_resource type="Script" path="res://Скрипты/input_settings.gd" id="1_eq6fv"]
+[ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://Tools/tema/new_theme.tres" id="1_an24d"]
+[ext_resource type="Script" path="res://Scipts/input_settings.gd" id="1_eq6fv"]
 [ext_resource type="PackedScene" uid="uid://b0fh2i8c4j20p" path="res://button.tscn" id="2_josp4"]
 
 [node name="InputSettings" type="Control"]

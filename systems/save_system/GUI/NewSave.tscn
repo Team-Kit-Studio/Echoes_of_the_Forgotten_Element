@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://l7jr0kxb6rqm"]
+
+[ext_resource type="Script" path="res://systems/save_system/GUI/NewSave.gd" id="1_ysf5d"]
+[ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://Tools/tema/GUI.tres" id="2_vbgk0"]
+
+[node name="NewSave" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -662.0
+offset_bottom = -529.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ysf5d")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_vbgk0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Введите название сохранения"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LineEdit" type="LineEdit" parent="Panel/HBoxContainer/VBoxContainer/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "вввв"
+placeholder_text = "Введите название"
+alignment = 1
+max_length = 100
+expand_to_text_length = true
+
+[node name="Apply" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 82.0
+offset_right = 225.0
+offset_bottom = 108.0
+text = "Применить"
+
+[node name="Cancel" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 82.0
+offset_right = 404.0
+offset_bottom = 108.0
+text = "Отмена"
+
+[connection signal="pressed" from="Panel/Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="Panel/Cancel" to="." method="_on_cancel_pressed"]
