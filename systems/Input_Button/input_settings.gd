@@ -37,9 +37,11 @@ func _create_action_list() -> void:
 		else:
 			input_label.text = ""
 		changable_list.add_child(button)
-		button.pressed.connect(_on_button_pressed.bind(button, action))
+		#button.pressed.connect(_on_button_pressed, Callable(button, action))
+		button.pressed.connect(Callable(self, "_on_button_pressed").bindv([button, action]))
 
-func _on_button_pressed(button: InputEvent, action: InputEvent) -> void:
+func _on_button_pressed(button: Button, action: String)-> void:
+	print("Button:", button, "Action:", action)
 	if !is_remapping:
 		is_remapping = true
 		action_to_remap = action
