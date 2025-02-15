@@ -1,6 +1,6 @@
 extends Control
 
-@onready var game_menu = preload("res://Scipts/game_menu.tscn")
+@onready var game_menu = preload("res://systems/Game_Menu/game_menu.tscn")
 @onready var add_save = preload("res://systems/save_system/GUI/SaveSlot.tscn")
 @onready var ApplyButon = preload("res://systems/save_system/GUI/NewSave.tscn")
 @onready var NewSave: Control = $NewSave
