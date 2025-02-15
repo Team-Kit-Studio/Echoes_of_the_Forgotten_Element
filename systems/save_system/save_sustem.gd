@@ -1,13 +1,13 @@
 class_name SaveSystem
 extends Node
 
-const save_path: String = "user://save/"
+const save_paths: String = "user://save/"
 
 static func save_game(save_name: String = "default_save") -> void:
-	var save_path: String = save_path + save_name + ".json"
+	var save_path: String = save_paths + save_name + ".json"
 	var file_save: SaveDataDefault = SaveDataDefault.new(save_name + ".json", Time.get_datetime_dict_from_system())
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
-	if file and file.get_open_error() == OK:
+	if file and FileAccess.get_open_error() == OK:
 		var count: int = 0
 		print("Сохранение успешно: ", save_path)
 		for node in Persistence.array_save:
@@ -26,7 +26,7 @@ static func save_game(save_name: String = "default_save") -> void:
 		
 		
 static func save_load(save_name: String, _key_loaded: String) -> Dictionary:
-	var save_path: String = save_path + save_name + ".json"
+	var save_path: String = save_paths + save_name + ".json"
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
 	var content: Dictionary = {} 
 	if file.get_as_text() and FileAccess.get_open_error() == OK:

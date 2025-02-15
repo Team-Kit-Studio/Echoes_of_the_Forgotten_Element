@@ -56,7 +56,7 @@ size_flags_vertical = 3
 action_mode = 0
 text = "Продолжить"
 
-[node name="SaveLoad Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="SaveLoad_Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
@@ -110,7 +110,7 @@ offset_bottom = 31.0
 text = "Пауза"
 
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad Game" to="." method="_on_save_game_toggled"]
+[connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game" to="." method="_on_save_game_toggled"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_toggled"]
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit Game" to="." method="_on_exit_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause" to="." method="_on_button_pressed"]

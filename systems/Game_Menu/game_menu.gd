@@ -5,7 +5,7 @@ extends Control
 @onready var Main_Menu: Control = $CanvasLayer/Main_Menu
 @onready var Settings: TabContainer = $CanvasLayer/GUI/Settings
 @onready var Pause_Button: Button = $CanvasLayer/Pause
-@onready var SaveLoadButton: Button = $"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad Game"
+@onready var SaveLoadButton: Button = $"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game"
 @onready var Options: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var SaveMenu: Control = $CanvasLayer/GUI/SaveMenu
 
@@ -45,7 +45,7 @@ func _on_options_toggled(toggled_on) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	if toggled_on:
-		$"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad Game".button_pressed = false
+		$"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game".button_pressed = false
 		Settings.visible = true
 		tween.tween_property(Settings, "modulate", Color(1, 1, 1, 1), 0.30) 
 		tween.tween_property(Settings, "position:x", 310, 0.2)
@@ -59,10 +59,13 @@ func _on_options_toggled(toggled_on) -> void:
 
 func _on_continue_pressed() -> void:
 	Main_Menu.visible = false
+	SaveMenu.visible = false
 	Pause_Button.visible = true
 	Settings.hide()
 	if Settings.visible == false:
 		Options.button_pressed = false
+		
+		
 	
 
 

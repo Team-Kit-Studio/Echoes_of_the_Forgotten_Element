@@ -1,8 +1,10 @@
 extends Panel
 
 signal pressed(panel)
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	self.pressed.connect(h)
+	$VBoxContainer/HBoxContainer/SaveName.text = self.name
 	$Line2D.hide()
 
 func _on_mouse_entered() -> void:
@@ -15,4 +17,5 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			pressed.emit(self)
-			
+func h(panel):
+	print(self.name)

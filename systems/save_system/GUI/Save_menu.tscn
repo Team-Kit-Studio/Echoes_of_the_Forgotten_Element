@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://5u7mtlbqv4dg"]
+[gd_scene load_steps=3 format=3 uid="uid://5u7mtlbqv4dg"]
 
-[ext_resource type="PackedScene" uid="uid://u8oj86u1pdy" path="res://systems/save_system/GUI/SaveSlot.tscn" id="1_0b8g5"]
 [ext_resource type="Script" path="res://systems/save_system/GUI/save_menu.gd" id="1_c4y5q"]
 [ext_resource type="PackedScene" uid="uid://l7jr0kxb6rqm" path="res://systems/save_system/GUI/NewSave.tscn" id="2_3ltuu"]
 
@@ -72,36 +71,6 @@ size_flags_vertical = 3
 [node name="SavelistV" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="SaveSlot" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
-custom_minimum_size = Vector2(375.135, 70.185)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="SaveSlot2" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
-custom_minimum_size = Vector2(375.135, 70.185)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="SaveSlot3" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
-custom_minimum_size = Vector2(375.135, 70.185)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="SaveSlot4" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
-custom_minimum_size = Vector2(375.135, 70.185)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="SaveSlot5" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV" instance=ExtResource("1_0b8g5")]
-custom_minimum_size = Vector2(375.135, 70.185)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
 
 [node name="NewSave" type="Button" parent="Panel"]
 layout_mode = 0
@@ -231,6 +200,4 @@ offset_right = -216.0
 offset_bottom = -31.0
 
 [connection signal="pressed" from="Panel/NewSave" to="." method="_on_new_save_pressed"]
-[connection signal="pressed" from="Panel/Delete" to="." method="_on_delete_pressed"]
-[connection signal="pressed" from="Panel/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Panel/Cancel" to="." method="_on_cancel_pressed"]
