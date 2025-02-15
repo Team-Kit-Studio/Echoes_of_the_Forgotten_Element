@@ -72,7 +72,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewSave" type="Button" parent="Panel"]
+[node name="NewSaveButton" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 421.0
 offset_top = 332.0
@@ -95,6 +95,7 @@ offset_left = 421.0
 offset_top = 280.0
 offset_right = 685.0
 offset_bottom = 311.0
+disabled = true
 text = "Загрузить"
 
 [node name="Cancel" type="Button" parent="Panel"]
@@ -199,5 +200,7 @@ offset_top = 103.0
 offset_right = -216.0
 offset_bottom = -31.0
 
-[connection signal="pressed" from="Panel/NewSave" to="." method="_on_new_save_pressed"]
+[connection signal="pressed" from="Panel/NewSaveButton" to="." method="_on_new_save_pressed"]
+[connection signal="pressed" from="Panel/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="Panel/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Panel/Cancel" to="." method="_on_cancel_pressed"]

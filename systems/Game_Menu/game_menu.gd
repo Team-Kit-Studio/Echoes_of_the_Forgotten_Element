@@ -9,8 +9,6 @@ extends Control
 @onready var Options: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var SaveMenu: Control = $CanvasLayer/GUI/SaveMenu
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#load_control_from_settings()
 	Canvas.visible = true
@@ -18,6 +16,7 @@ func _ready() -> void:
 	Settings.visible = false	
 	Pause_Button.visible = true
 	SaveMenu.hide()
+	
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
@@ -37,9 +36,7 @@ func toggle() -> void:
 	Main_Menu.visible = visible
 	SaveMenu.visible = false
 	Settings.visible = false
-
-
-
+	
 func _on_options_toggled(toggled_on) -> void:
 	SaveMenu.hide()
 	var tween: Tween = get_tree().create_tween()
