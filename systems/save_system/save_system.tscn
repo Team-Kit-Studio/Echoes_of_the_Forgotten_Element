@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dteq163rlspuy"]
-
-[ext_resource type="Script" path="res://systems/save_system/save_sustem.gd" id="1_u8gep"]
-
-[node name="SaveSystem" type="Node"]
-script = ExtResource("1_u8gep")

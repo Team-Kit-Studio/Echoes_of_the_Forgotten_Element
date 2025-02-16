@@ -4,11 +4,6 @@ extends Control
 @onready var apply_button: Button = $Panel/Apply
 @onready var line_edit: LineEdit = $Panel/HBoxContainer/VBoxContainer/MarginContainer/LineEdit
 
-const FORBIDDEN_CHARACTERS: PackedStringArray = [
-	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", " ", "#", "%", "{",
-	"}", "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", ""
-]
-
 func _ready() -> void:
 	line_edit.grab_focus()
 
@@ -38,6 +33,6 @@ func show_invalid_name_message() -> void:
 
 func restriction_check(input_text: String) -> String:
 	for c in input_text:
-		if c in FORBIDDEN_CHARACTERS:
+		if c in Gvars.FORBIDDEN_CHARACTERS:
 			return ""
 	return input_text

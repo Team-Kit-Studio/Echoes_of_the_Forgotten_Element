@@ -1,21 +1,22 @@
-class_name DefaultDataObject
+class_name DefaultObject
 extends Object
 
-func _init(obj_name: String = "default_object", obj_node: Node = null, instantiate: bool = true, obj_group: String = "no_save") -> void:
-	object["metadata"]["object_name"] = obj_name
-	object["metadata"]["object_node"] = obj_node
-	object["metadata"]["object_group"] = obj_group
-	object["metadata"]["object_instantiate"] = instantiate
-	
+func _init(name: String = "default_object", path: String = "res://", dynamic: bool = false) -> void:
+	object["info"]["name"] = name
+	object["info"]["path"] = path
+	object["info"]["dynamic"] = dynamic
+
+
 var object: Dictionary = {
-	"metadata": {
-		"object_name": "default_object",
-		"object_node": null,
-		"object_instantiate": true,
-		"object_group": null
+	"info":{
+		"name": "default_object",
+		"path": "res://",
+		"dynamic": false,
 	},
+
 	"data": {
-		"pos_x": 0,
-		"pos_y": 0
+		"position": {"x": 0, "y": 0},
+		"health": 100,
+		"state": "IDLE",
 	}
 }

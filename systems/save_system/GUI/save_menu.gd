@@ -96,3 +96,6 @@ func get_unique_save_name(base_name: String) -> String:
 		name = base_name + "-(" + str(counter) + ")"
 		counter += 1
 	return name
+
+var static_array: Array[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+var dynamic_array: Array = [1, 2, 3, 4, Node, 6, 7, 8, 9, "hello", "world", 10]
