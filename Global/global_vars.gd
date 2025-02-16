@@ -1,6 +1,6 @@
 extends Node
 
-const FORBIDDEN_CHARACTERS: PackedStringArray = [
+const FORBIDDEN_CHARACTERS: Array[String] = [
 	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", "#", "%", "{", "}",
      "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", "!", "+"
 ]
