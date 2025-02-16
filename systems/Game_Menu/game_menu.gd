@@ -65,7 +65,7 @@ func _on_exit_game_pressed() -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://systems/Main_Menu/Main_Menu.tscn")
 	
 func _on_load_game_pressed() -> void:
-	SaveSystem.save_load("def", "kye")
+	pass
 
 func _on_save_game_toggled(toggled_on: bool) -> void:
 	settings.hide()

@@ -18,7 +18,7 @@ var combo = false
 @onready var anim = $AnimatedSprite2D
 @onready var animPlayer = $AnimationPlayer
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		MOVE:
 			move_state()

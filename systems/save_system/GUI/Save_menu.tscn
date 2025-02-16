@@ -76,35 +76,35 @@ size_flags_horizontal = 3
 process_mode = 3
 layout_mode = 0
 offset_left = 421.0
-offset_top = 332.0
-offset_right = 548.0
-offset_bottom = 363.0
+offset_top = 305.0
+offset_right = 685.0
+offset_bottom = 338.0
 text = "Создать "
 
 [node name="Delete" type="Button" parent="Panel"]
-visible = false
 layout_mode = 0
 offset_left = 421.0
-offset_top = 332.0
+offset_top = 344.0
 offset_right = 548.0
-offset_bottom = 363.0
+offset_bottom = 375.0
+disabled = true
 text = "Удалить"
 
 [node name="Load" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 421.0
-offset_top = 280.0
+offset_top = 271.0
 offset_right = 685.0
-offset_bottom = 311.0
+offset_bottom = 302.0
 disabled = true
 text = "Загрузить"
 
 [node name="Cancel" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 563.0
-offset_top = 331.0
-offset_right = 688.0
-offset_bottom = 362.0
+offset_left = 561.0
+offset_top = 344.0
+offset_right = 686.0
+offset_bottom = 375.0
 text = "Отмена"
 
 [node name="Line2D8" type="Control" parent="Panel"]
@@ -115,6 +115,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Line2D" type="Line2D" parent="Panel/Line2D8"]
 position = Vector2(413.667, 4.76721)
