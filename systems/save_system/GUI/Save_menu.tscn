@@ -73,6 +73,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewSaveButton" type="Button" parent="Panel"]
+process_mode = 3
 layout_mode = 0
 offset_left = 421.0
 offset_top = 332.0

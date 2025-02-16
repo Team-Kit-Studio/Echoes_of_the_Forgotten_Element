@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://systems/Input_Button/input_settings.tscn" id="3_i4v1l"]
 
 [node name="Settings" type="TabContainer"]
+process_mode = 3
 offset_left = 303.0
 offset_top = 2.0
 offset_right = 850.0

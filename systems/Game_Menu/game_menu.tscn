@@ -15,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_wlcv1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="Main_Menu" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -78,6 +79,7 @@ size_flags_vertical = 3
 text = "Выход в меню"
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_left = -1.0

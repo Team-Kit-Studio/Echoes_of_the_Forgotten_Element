@@ -58,6 +58,7 @@ max_length = 100
 expand_to_text_length = true
 
 [node name="Apply" type="Button" parent="Panel"]
+process_mode = 3
 layout_mode = 0
 offset_left = 98.0
 offset_top = 82.0

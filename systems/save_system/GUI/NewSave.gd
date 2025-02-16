@@ -1,50 +1,43 @@
 extends Control
 
-signal save_create(save_name: String)
+@onready var cancel_button: Button = $Panel/Cancel
+@onready var apply_button: Button = $Panel/Apply
+@onready var line_edit: LineEdit = $Panel/HBoxContainer/VBoxContainer/MarginContainer/LineEdit
 
-@onready var CancelButton: Button = $Panel/Cancel
-@onready var ApplyButton: Button = $Panel/Apply
-@onready var linedit: LineEdit = $Panel/HBoxContainer/VBoxContainer/MarginContainer/LineEdit
-
-const forbidden_characters: Array[String] = [
-	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", " ", "#", "%", "{"
-	, "}", "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", ""
+const FORBIDDEN_CHARACTERS: PackedStringArray = [
+	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", " ", "#", "%", "{",
+	"}", "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", ""
 ]
 
 func _ready() -> void:
-	linedit.grab_focus()
+	line_edit.grab_focus()
 
 func _on_apply_pressed() -> void:
-	var SaveName: String = linedit.text
-	SaveName = restriction_check(SaveName, forbidden_characters)
-	linedit.text = ""
-	if SaveName: 
+	var save_name: String = restriction_check(line_edit.text)
+	line_edit.clear()
+	if save_name:
 		animate_and_hide()
-		emit_signal("save_create", SaveName)
+		get_parent().emit_signal("create_a_save", save_name)
 	else:
 		show_invalid_name_message()
-	
-	
+
 func _on_cancel_pressed() -> void:
-	linedit.text = ""
+	line_edit.clear()
 	animate_and_hide()
-	
-	
+
 func animate_and_hide() -> void:
-	var tween = get_tree().create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0.4, 0.4), 0.1)
 	await tween.finished
-	self.hide()
-	
-	
+	hide()
+
 func show_invalid_name_message() -> void:
-	linedit.placeholder_text = "Неверное название!"
+	line_edit.placeholder_text = "Неверное название!"
 	await get_tree().create_timer(2.2).timeout
-	linedit.placeholder_text = "Введите название..."
-	
-	
-func restriction_check(Check: String, From: Array[String]) -> String:
-	for letter in Check:
-		if letter in From:
+	line_edit.placeholder_text = "Введите название..."
+
+func restriction_check(input_text: String) -> String:
+	for c in input_text:
+		if c in FORBIDDEN_CHARACTERS:
 			return ""
-	return Check
+	return input_text
