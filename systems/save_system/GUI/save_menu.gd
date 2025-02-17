@@ -17,14 +17,10 @@ const MODE_TEXT: Dictionary = {
 var CurrentSave: String
 
 func _ready() -> void:
-	SaveSustem.create_a_save.connect(create_save_visual)
-	SaveSustem.delete_a_save.connect(delete_save_handler)
-	self.update_save_name.connect(update_save_name_handler)
+	SaveSustem.create_a_save.connect(Callable(self, "create_save_visual"))
+	SaveSustem.delete_a_save.connect(Callable(self, "delete_save_handler"))
+	self.update_save_name.connect(Callable(self, "update_save_name_handler"))
 	save_create_ready()
-	
-# func _physics_process(_delta: float) -> void:
-# 	print(SaveSustem.get_files_in_directory(Gvars.SAVE_PATH))
-
 	
 func _on_new_save_pressed() -> void:
 	if NewSaveButton.text != "Перезаписать":

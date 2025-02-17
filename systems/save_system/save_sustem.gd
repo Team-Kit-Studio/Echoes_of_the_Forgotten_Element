@@ -7,8 +7,8 @@ signal delete_a_save(_name: String)
 func  _ready() -> void:
 	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
 		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
-	self.connect("create_a_save", Callable(self, "create_save"))
-	self.connect("delete_a_save", Callable(self, "delete_save"))
+	self.create_a_save.connect(Callable(self, "create_save"))
+	self.delete_a_save.connect(Callable(self, "delete_save"))
 
 func create_save(_name: String) -> void:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"

@@ -5,7 +5,6 @@ var is_pressed: bool = false
 var is_mouse_over: bool = false
 
 func _ready() -> void:
-	# update_time()
 	$VBoxContainer/HBoxContainer/SaveName.text = self.name
 	$Line2D.hide()
 
