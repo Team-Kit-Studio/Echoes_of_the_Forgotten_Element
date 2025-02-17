@@ -8,11 +8,11 @@ func _ready() -> void:
 	line_edit.grab_focus()
 
 func _on_apply_pressed() -> void:
-	var save_name: String = restriction_check(line_edit.text)
+	var save_name: String = check_restrictions(line_edit.text)
 	line_edit.clear()
 	if save_name:
 		animate_and_hide()
-		get_parent().emit_signal("create_a_save", save_name)
+		SaveSustem.emit_signal("create_a_save", get_parent().get_unique_save_name(save_name))
 	else:
 		show_invalid_name_message()
 
@@ -31,7 +31,7 @@ func show_invalid_name_message() -> void:
 	await get_tree().create_timer(2.2).timeout
 	line_edit.placeholder_text = "Введите название..."
 
-func restriction_check(input_text: String) -> String:
+func check_restrictions(input_text: String) -> String:
 	for c in input_text:
 		if c in Gvars.FORBIDDEN_CHARACTERS:
 			return ""

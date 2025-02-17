@@ -1,7 +1,5 @@
 extends Control
 
-signal create_a_save(_name: String)
-signal delete_save(_name: String)
 signal update_save_name(_name: String)
 
 @onready var NewSave: Control = $NewSave
@@ -19,11 +17,13 @@ const MODE_TEXT: Dictionary = {
 var CurrentSave: String
 
 func _ready() -> void:
-	self.create_a_save.connect(create_save)
-	self.delete_save.connect(delete_save_handler)
+	SaveSustem.create_a_save.connect(create_save_visual)
+	SaveSustem.delete_a_save.connect(delete_save_handler)
 	self.update_save_name.connect(update_save_name_handler)
-# func _physics_process(delta: float) -> void:
+	
+# func _physics_process(_delta: float) -> void:
 # 	print(CurrentSave)
+# 	pass
 
 	
 func _on_new_save_pressed() -> void:
@@ -32,7 +32,7 @@ func _on_new_save_pressed() -> void:
 			NewSave.show()
 			NewSave.scale = Vector2(0.3, 0.3)
 			var tween = get_tree().create_tween()
-			tween.tween_property(NewSave, "scale", Vector2(1,1), 0.1)
+			tween.tween_property(NewSave, "scale", Vector2(1,1), 0.15)
 		else:
 			await NewSave.animate_and_hide()
 			NewSave.hide()
@@ -54,7 +54,7 @@ func cancel_save_menu() -> void:
 	NewSave.hide()
 	self.hide()
 	
-func create_save(_name: String) -> void:
+func create_save_visual(_name: String) -> void:
 	var created_save: Node = SaveSlot.instantiate()
 	created_save.custom_minimum_size = Vector2(375.135, 70.185)
 	created_save.name = get_unique_save_name(_name)
@@ -62,7 +62,7 @@ func create_save(_name: String) -> void:
 	
 func _on_delete_pressed() -> void:
 	set_save_button_text("SAVE")
-	emit_signal("delete_save", CurrentSave)
+	SaveSustem.emit_signal("delete_a_save", CurrentSave)
 	
 func delete_save_handler(_name: String) -> void:
 	print(_name)
@@ -90,12 +90,9 @@ func find_save(_name: String) -> Node:
 	return null
 
 func get_unique_save_name(base_name: String) -> String:
-	var name = base_name
+	var _name = base_name
 	var counter = 1
-	while find_save(name) != null:
-		name = base_name + "-(" + str(counter) + ")"
+	while find_save(_name) != null:
+		_name = base_name + "-(" + str(counter) + ")"
 		counter += 1
-	return name
-
-var static_array: Array[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-var dynamic_array: Array = [1, 2, 3, 4, Node, 6, 7, 8, 9, "hello", "world", 10]
+	return _name

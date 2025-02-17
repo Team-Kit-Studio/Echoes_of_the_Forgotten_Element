@@ -11,7 +11,7 @@ enum {
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
 
-const speed: int = 100.0
+const speed: int = 100
 
 const direction_run: Dictionary = {
 	Vector2.RIGHT: "State_Run_FromSide",
