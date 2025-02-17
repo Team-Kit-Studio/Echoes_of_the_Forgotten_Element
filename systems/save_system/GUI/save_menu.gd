@@ -20,10 +20,10 @@ func _ready() -> void:
 	SaveSustem.create_a_save.connect(create_save_visual)
 	SaveSustem.delete_a_save.connect(delete_save_handler)
 	self.update_save_name.connect(update_save_name_handler)
+	save_create_ready()
 	
 # func _physics_process(_delta: float) -> void:
-# 	print(CurrentSave)
-# 	pass
+# 	print(SaveSustem.get_files_in_directory(Gvars.SAVE_PATH))
 
 	
 func _on_new_save_pressed() -> void:
@@ -58,6 +58,7 @@ func create_save_visual(_name: String) -> void:
 	var created_save: Node = SaveSlot.instantiate()
 	created_save.custom_minimum_size = Vector2(375.135, 70.185)
 	created_save.name = get_unique_save_name(_name)
+	created_save.update_time()
 	SaveList.add_child(created_save)
 	
 func _on_delete_pressed() -> void:
@@ -73,6 +74,7 @@ func delete_save_handler(_name: String) -> void:
 	if save:
 		print(save)
 		save.call_deferred("queue_free")
+		return
 	
 func update_save_name_handler(_name: String) -> void:
 	CurrentSave = _name
@@ -96,3 +98,14 @@ func get_unique_save_name(base_name: String) -> String:
 		_name = base_name + "-(" + str(counter) + ")"
 		counter += 1
 	return _name
+
+func save_create_ready() -> void:
+	for save in SaveSustem.get_files_in_directory(Gvars.SAVE_PATH):
+		var save_name: String = remove_save_extension(save)
+		print(save_name)
+		if save:
+			create_save_visual(save_name)
+
+func remove_save_extension(file_name: String) -> String:
+	return file_name.substr(0, file_name.length() - 5)
+	

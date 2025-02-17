@@ -1,39 +1,51 @@
 class_name SaveSystem
 extends Node
 
-
-
 signal create_a_save(_name: String)
 signal delete_a_save(_name: String)
 
 func  _ready() -> void:
 	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
 		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
-	self.create_a_save.connect(create_save_handler)
-	self.delete_a_save.connect(delete_save_handler)
-
-func create_save_handler(_name: String) -> void:
-	create_save(_name)
+	self.connect("create_a_save", Callable(self, "create_save"))
+	self.connect("delete_a_save", Callable(self, "delete_save"))
 
 func create_save(_name: String) -> void:
+	var path: String = Gvars.SAVE_PATH + _name + ".save"
 	var Save: DefaultSave = DefaultSave.new(_name)
-	var file: FileAccess = FileAccess.open(Gvars.SAVE_PATH + _name + ".save", FileAccess.WRITE)
-	if FileAccess.get_open_error() == OK:
-		file.store_string(JSON.stringify(Save.data.duplicate(), "\t"))
-		file.close()
+	if not FileAccess.file_exists(path):
+		var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+		if FileAccess.get_open_error() == OK:
+			file.store_string(JSON.stringify(Save.data.duplicate(), "\t"))
+			file.close()
+		else:
+			return
 	else:
-		print("Error: ", FileAccess.get_open_error())
-		file.close()
 		return
 
-func delete_save_handler(_name: String) -> void:
-	delete_save(_name)
 
 func delete_save(_name: String) -> void:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(path)	
 	else:
-		print("Error: File not found")
+		print("Error: Файл не существует")
 		return
 		
+func get_files_in_directory(directory_path: String) -> Array:
+	var files: Array[String] = []
+	var dir: DirAccess = DirAccess.open(directory_path)
+	if not dir:
+		push_error("Не удалось открыть директорию: " + directory_path)
+		return files
+
+	dir.list_dir_begin()  
+	var file_name: String = dir.get_next()
+
+	while file_name != "":
+		if not dir.current_is_dir():
+			files.append(file_name)
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+	return files
