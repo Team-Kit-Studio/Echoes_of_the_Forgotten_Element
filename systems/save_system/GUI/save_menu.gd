@@ -1,6 +1,6 @@
 extends Control
 
-signal update_save_name(_name: String)
+signal update_save_name(_name: Node)
 
 @onready var NewSave: Control = $NewSave
 @onready var Confirm: Control = $Confirm
@@ -15,7 +15,7 @@ const MODE_TEXT: Dictionary = {
 	"OVERWRITE": "Перезаписать"
 }
 
-var CurrentSave: String
+var CurrentSave: Node
 
 func _ready() -> void:
 	Confirm._on_apply.connect(Callable(self, "confirm_handeler"))
@@ -38,7 +38,7 @@ func _on_save_pressed() -> void:
 			await NewSave.animate_and_hide()
 			NewSave.hide()
 	else:
-		var save = find_save(CurrentSave)
+		var save = CurrentSave.name
 		if save:
 			Confirm.emit_signal("show_confirm", "OVERWRITE")
 			Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
@@ -65,7 +65,7 @@ func create_save_visual(_name: String) -> void:
 func confirm_handeler(mode: String) -> void:
 	if mode == "DELETE":
 		set_save_button_text("SAVE")
-		SaveSustem.emit_signal("delete_a_save", CurrentSave)
+		SaveSustem.emit_signal("delete_a_save", CurrentSave.name)
 
 	elif mode == "OVERWRITE":
 		pass
@@ -75,26 +75,20 @@ func delete_save_handler(_name: String) -> void:
 	Delete.disabled = true
 	Load.disabled = true
 	NewSaveButton.show()
-	var save: Node = find_save(_name)
+	var save: Node = CurrentSave
 	if save:
 		print(save)
 		save.call_deferred("queue_free")
 		return
 	
-func update_save_name_handler(_name: String) -> void:
-	CurrentSave = _name
+func update_save_name_handler(save_node: Node) -> void:
+	CurrentSave = save_node
 
 func _on_load_pressed() -> void:
 	pass
 
 func set_save_button_text(_mode: String) -> void:
 	NewSaveButton.text = MODE_TEXT[_mode]
-
-func find_save(_name: String) -> Node:
-	for node in SaveList.get_children():
-		if node.name == _name:
-			return node
-	return null
 
 func get_unique_save_name(base_name: String) -> String:
 	var _name = base_name
@@ -104,12 +98,16 @@ func get_unique_save_name(base_name: String) -> String:
 		counter += 1
 	return _name
 
+func find_save(_name: String) -> Node:
+	for node in SaveList.get_children():
+		if node.name == _name:
+			return node
+	return null
+
 func save_create_ready() -> void:
 	for save in SaveSustem.get_files_in_directory(Gvars.SAVE_PATH):
 		var save_name: String = remove_save_extension(save)
-		print(save_name)
-		if save_name:
-			create_save_visual(save_name)
+		create_save_visual(save_name)
 
 func remove_save_extension(file_name: String) -> String:
 	return file_name.substr(0, file_name.length() - 5)

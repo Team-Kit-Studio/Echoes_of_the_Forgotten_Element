@@ -72,11 +72,15 @@ size_flags_vertical = 3
 toggle_mode = true
 text = "Настройки"
 
-[node name="Exit Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit Menu" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Выход в меню"
+
+[node name="Exit game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Выход из игры"
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
 process_mode = 3
@@ -98,6 +102,7 @@ offset_right = 547.0
 offset_bottom = 648.0
 
 [node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
+visible = false
 layout_mode = 1
 offset_left = -391.0
 offset_top = -2.0
@@ -113,5 +118,6 @@ text = "Пауза"
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game" to="." method="_on_save_game_toggled"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_toggled"]
-[connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit Game" to="." method="_on_exit_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit Menu" to="." method="_on_exit_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Exit game" to="." method="_on_exit_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause" to="." method="_on_button_pressed"]

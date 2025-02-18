@@ -13,8 +13,7 @@ func _ready() -> void:
 	mainMenu.visible = false
 	settings.visible = false	
 	pauseButton.visible = true
-	saveMenu.hide()
-	
+
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
@@ -61,9 +60,6 @@ func _on_button_pressed() -> void:
 	mainMenu.visible = true
 	pauseButton.visible = false
 
-func _on_exit_game_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://systems/Main_Menu/Main_Menu.tscn")
-	
 func _on_load_game_pressed() -> void:
 	pass
 
@@ -81,3 +77,11 @@ func _on_save_game_toggled(toggled_on: bool) -> void:
 		tween.tween_property(saveMenu, "position:x", -240, 0.2)
 		await tween.finished
 		saveMenu.visible = false
+
+
+func _on_exit_game_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_exit_menu_pressed() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://systems/Main_Menu/Main_Menu.tscn")

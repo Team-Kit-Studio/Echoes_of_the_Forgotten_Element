@@ -46,7 +46,7 @@ func hide_line() -> void:
 	$Line2D.hide()
 
 func enable_buttons() -> void:
-	parent.emit_signal("update_save_name", self.name)
+	parent.emit_signal("update_save_name", self)
 	await get_tree().create_timer(0.13).timeout
 	parent.set_save_button_text("OVERWRITE")
 	parent.Delete.disabled = false
