@@ -3,6 +3,7 @@ extends Control
 signal update_save_name(_name: String)
 
 @onready var NewSave: Control = $NewSave
+@onready var Confirm: Control = $Confirm
 @onready var Load: Button = $Panel/Load
 @onready var Delete: Button = $Panel/Delete
 @onready var NewSaveButton: Button = $Panel/NewSaveButton
@@ -17,12 +18,16 @@ const MODE_TEXT: Dictionary = {
 var CurrentSave: String
 
 func _ready() -> void:
+	Confirm._on_apply.connect(Callable(self, "confirm_handeler"))
 	SaveSustem.create_a_save.connect(Callable(self, "create_save_visual"))
 	SaveSustem.delete_a_save.connect(Callable(self, "delete_save_handler"))
 	self.update_save_name.connect(Callable(self, "update_save_name_handler"))
 	save_create_ready()
-	
+
 func _on_new_save_pressed() -> void:
+	_on_save_pressed()
+
+func _on_save_pressed() -> void:
 	if NewSaveButton.text != "Перезаписать":
 		if not NewSave.visible:
 			NewSave.show()
@@ -35,8 +40,8 @@ func _on_new_save_pressed() -> void:
 	else:
 		var save = find_save(CurrentSave)
 		if save:
-			save.overwrite_save()
-		
+			Confirm.emit_signal("show_confirm", "OVERWRITE")
+			Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
 
 func _on_cancel_pressed() -> void:
 	cancel_save_menu()
@@ -53,14 +58,18 @@ func cancel_save_menu() -> void:
 func create_save_visual(_name: String) -> void:
 	var created_save: Node = SaveSlot.instantiate()
 	created_save.custom_minimum_size = Vector2(375.135, 70.185)
-	created_save.name = get_unique_save_name(_name)
+	created_save.name = _name
 	created_save.update_time()
 	SaveList.add_child(created_save)
 	
-func _on_delete_pressed() -> void:
-	set_save_button_text("SAVE")
-	SaveSustem.emit_signal("delete_a_save", CurrentSave)
-	
+func confirm_handeler(mode: String) -> void:
+	if mode == "DELETE":
+		set_save_button_text("SAVE")
+		SaveSustem.emit_signal("delete_a_save", CurrentSave)
+
+	elif mode == "OVERWRITE":
+		pass
+		
 func delete_save_handler(_name: String) -> void:
 	print(_name)
 	Delete.disabled = true
@@ -99,9 +108,13 @@ func save_create_ready() -> void:
 	for save in SaveSustem.get_files_in_directory(Gvars.SAVE_PATH):
 		var save_name: String = remove_save_extension(save)
 		print(save_name)
-		if save:
+		if save_name:
 			create_save_visual(save_name)
 
 func remove_save_extension(file_name: String) -> String:
 	return file_name.substr(0, file_name.length() - 5)
+	
+func _on_delete_pressed() -> void:
+	Confirm.emit_signal("show_confirm", "DELETE")
+	Confirm.set_text("Вы уверены, что хотите удалить \nсохранение? \nЭто действие нельзя отменить!")
 	

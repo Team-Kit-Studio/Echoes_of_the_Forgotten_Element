@@ -1,24 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dknegxl7i6pto"]
+[gd_scene load_steps=3 format=3 uid="uid://dknegxl7i6pto"]
 
+[ext_resource type="Script" path="res://systems/Game_Menu/confirm.gd" id="1_w2jub"]
 [ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://Tools/tema/GUI.tres" id="1_xw2wh"]
 
-[node name="Control" type="Control"]
+[node name="Confirm" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -764.0
-offset_bottom = -570.0
+offset_right = -715.0
+offset_bottom = -492.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_w2jub")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 60.0
-offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xw2wh")
@@ -45,19 +45,24 @@ text = "Вы уверены, что хотите удалить
 "
 horizontal_alignment = 1
 
-[node name="Apply" type="Button" parent="Panel"]
-process_mode = 3
-layout_mode = 0
-offset_left = 42.0
-offset_top = 109.0
-offset_right = 213.0
-offset_bottom = 143.0
-text = "Применить"
+[node name="CenterContainer" type="CenterContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
-[node name="Cancel" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 109.0
-offset_right = 404.0
-offset_bottom = 142.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Apply" type="Button" parent="Panel/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Применить"
+flat = true
+vertical_icon_alignment = 0
+
+[node name="Cancel" type="Button" parent="Panel/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Отмена"
+flat = true
+
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Apply" to="." method="_on_apply_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/CenterContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

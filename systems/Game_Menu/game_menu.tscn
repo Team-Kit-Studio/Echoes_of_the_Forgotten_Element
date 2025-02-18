@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7q8p6a0l30lf"]
+[gd_scene load_steps=5 format=3 uid="uid://c7q8p6a0l30lf"]
 
 [ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://Tools/tema/new_theme.tres" id="1_ua2jr"]
 [ext_resource type="Script" path="res://systems/Game_Menu/game_menu.gd" id="1_wlcv1"]
 [ext_resource type="PackedScene" uid="uid://dbufcy3dd28sr" path="res://systems/Game_Menu/Settings/Settings.tscn" id="3_c3v2n"]
 [ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://systems/save_system/GUI/Save_menu.tscn" id="4_ka88v"]
-[ext_resource type="PackedScene" uid="uid://dknegxl7i6pto" path="res://systems/Game_Menu/Confirm.tscn" id="5_w23nt"]
 
 [node name="Game Menu" type="Control"]
 layout_mode = 3
@@ -104,13 +103,6 @@ offset_left = -391.0
 offset_top = -2.0
 offset_right = -741.0
 offset_bottom = -382.0
-
-[node name="Control" parent="CanvasLayer/GUI" instance=ExtResource("5_w23nt")]
-layout_mode = 1
-offset_left = 379.0
-offset_top = 100.0
-offset_right = -385.0
-offset_bottom = -470.0
 
 [node name="Pause" type="Button" parent="CanvasLayer"]
 offset_left = 1.0

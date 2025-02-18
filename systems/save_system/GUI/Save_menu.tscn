@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://5u7mtlbqv4dg"]
+[gd_scene load_steps=4 format=3 uid="uid://5u7mtlbqv4dg"]
 
 [ext_resource type="Script" path="res://systems/save_system/GUI/save_menu.gd" id="1_c4y5q"]
 [ext_resource type="PackedScene" uid="uid://l7jr0kxb6rqm" path="res://systems/save_system/GUI/NewSave.tscn" id="2_3ltuu"]
+[ext_resource type="PackedScene" uid="uid://dknegxl7i6pto" path="res://systems/Game_Menu/Confirm.tscn" id="3_g21pi"]
 
 [node name="SaveMenu" type="Control"]
 layout_mode = 3
@@ -201,6 +202,19 @@ offset_left = 121.0
 offset_top = 103.0
 offset_right = -216.0
 offset_bottom = -31.0
+
+[node name="Confirm" parent="." instance=ExtResource("3_g21pi")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 123.0
+offset_top = 106.0
+offset_right = 618.0
+offset_bottom = 264.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="Panel/NewSaveButton" to="." method="_on_new_save_pressed"]
 [connection signal="pressed" from="Panel/Delete" to="." method="_on_delete_pressed"]
