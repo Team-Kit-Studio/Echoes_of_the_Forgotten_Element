@@ -10,11 +10,6 @@ signal update_save_name(_name: Node)
 @onready var SaveList: VBoxContainer = $Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV
 var SaveSlot: PackedScene = preload("res://systems/save_system/GUI/SaveSlot.tscn")
 
-const MODE_TEXT: Dictionary = {
-	"SAVE": "Сохранить",
-	"OVERWRITE": "Перезаписать"
-}
-
 var CurrentSave: Node
 
 func _ready() -> void:
@@ -28,7 +23,7 @@ func _on_new_save_pressed() -> void:
 	_on_save_pressed()
 
 func _on_save_pressed() -> void:
-	if NewSaveButton.text != "Перезаписать":
+	if NewSaveButton.text == "Создать":
 		if not NewSave.visible:
 			NewSave.show()
 			NewSave.scale = Vector2(0.3, 0.3)
@@ -37,7 +32,7 @@ func _on_save_pressed() -> void:
 		else:
 			await NewSave.animate_and_hide()
 			NewSave.hide()
-	else:
+	elif NewSaveButton.text == "Перезаписать":
 		var save = CurrentSave.name
 		if save:
 			Confirm.emit_signal("show_confirm", "OVERWRITE")
@@ -64,9 +59,8 @@ func create_save_visual(_name: String) -> void:
 	
 func confirm_handeler(mode: String) -> void:
 	if mode == "DELETE":
-		set_save_button_text("SAVE")
+		set_save_button_text("Создать")
 		SaveSustem.emit_signal("delete_a_save", CurrentSave.name)
-
 	elif mode == "OVERWRITE":
 		pass
 		
@@ -87,8 +81,8 @@ func update_save_name_handler(save_node: Node) -> void:
 func _on_load_pressed() -> void:
 	pass
 
-func set_save_button_text(_mode: String) -> void:
-	NewSaveButton.text = MODE_TEXT[_mode]
+func set_save_button_text(_text: String) -> void:
+	NewSaveButton.text = _text
 
 func get_unique_save_name(base_name: String) -> String:
 	var _name = base_name
@@ -115,4 +109,6 @@ func remove_save_extension(file_name: String) -> String:
 func _on_delete_pressed() -> void:
 	Confirm.emit_signal("show_confirm", "DELETE")
 	Confirm.set_text("Вы уверены, что хотите удалить \nсохранение? \nЭто действие нельзя отменить!")
-	
+
+func load_handler(_name: String) -> void:
+	pass

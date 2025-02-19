@@ -12,7 +12,7 @@ func _on_apply_pressed() -> void:
 	line_edit.clear()
 	if save_name:
 		animate_and_hide()
-		SaveSustem.emit_signal("create_a_save", get_parent().get_unique_save_name(save_name))
+		SaveSustem.emit_signal("create_new_saves", get_parent().get_unique_save_name(save_name))
 	else:
 		show_invalid_name_message()
 

@@ -75,3 +75,13 @@ func Move_State() -> void:
 		
 func play_animation(animation: String) -> void:
 	AnimPlayer.play(animation)
+
+func data() -> Dictionary:
+	var player_data: Dictionary = {
+		"file_name": get_scene_file_path(),
+		"position": {"x": self.position.x, "y": self.position.y},
+		"health": health,
+		"last_direction": {"x": last_direction.x, "y": last_direction.y},
+	}
+	return player_data
+

@@ -1,28 +1,16 @@
 class_name SaveSystem
 extends Node
 
-signal create_a_save(_name: String)
+signal create_new_saves(_name: String)
 signal delete_a_save(_name: String)
 
+
 func  _ready() -> void:
-	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
-		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
-	self.create_a_save.connect(Callable(self, "create_save"))
+	self.create_new_saves.connect(Callable(self, "create_new_save"))
 	self.delete_a_save.connect(Callable(self, "delete_save"))
 
-func create_save(_name: String) -> void:
-	var path: String = Gvars.SAVE_PATH + _name + ".save"
-	var Save: DefaultSave = DefaultSave.new(_name)
-	if not FileAccess.file_exists(path):
-		var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
-		if FileAccess.get_open_error() == OK:
-			file.store_string(JSON.stringify(Save.data.duplicate(), "\t"))
-			file.close()
-		else:
-			return
-	else:
-		return
-
+	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
+		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
 
 func delete_save(_name: String) -> void:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"
@@ -49,3 +37,30 @@ func get_files_in_directory(directory_path: String) -> Array:
 
 	dir.list_dir_end()
 	return files
+	
+func create_new_save(_name: String) -> void:
+	var file: FileAccess = FileAccess.open(Gvars.SAVE_PATH + _name + ".save", FileAccess.WRITE)
+	file.close()
+
+func save_game(data: Dictionary, _name: String) -> void:
+	var path: String = Gvars.SAVE_PATH + _name + ".save"
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	var temp: DefaultSave = DefaultSave.new(_name)
+	temp.data["data"] = data
+	if FileAccess.get_open_error() == OK:
+		file.store_string(JSON.stringify(temp.data, "\t"))
+		file.close()
+	else:
+		return
+
+func read_save(_name: String) -> Dictionary:
+	var path: String = Gvars.SAVE_PATH + _name + ".save"
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if FileAccess.get_open_error() == OK:
+		var data: Dictionary = JSON.parse_string(file.get_as_text())
+		file.close()
+		if data:
+			return data
+	else:
+		return {}
+	return {}

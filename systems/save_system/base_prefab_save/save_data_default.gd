@@ -11,6 +11,6 @@ var data: Dictionary = {
 		"current_scene": ""
 	},
 	"data": {
-		"list_objects": {},
+		
 	}
 }

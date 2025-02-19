@@ -80,7 +80,7 @@ offset_left = 421.0
 offset_top = 305.0
 offset_right = 685.0
 offset_bottom = 338.0
-text = "Создать "
+text = "Создать"
 
 [node name="Delete" type="Button" parent="Panel"]
 layout_mode = 0
