@@ -1,15 +1,7 @@
 extends Node2D
 
-signal update_current_save(node: Node)
-
-var current_save: Node
-func _ready():
-	self.update_current_save.connect(Callable(self, "update_current_node"))
-
-func update_current_node(node: Node) -> void:
-	current_save = node
-
 func saves() -> Dictionary:
+	print(1111)
 	var data: Dictionary = {
 		"player": $Objects/Players/Player.data(),
 		"enemy": [],
@@ -28,7 +20,7 @@ func saves() -> Dictionary:
 	for items in $Items.get_children():
 		if items.data():
 			data["items"].append(items.data())
-	SaveSustem.save_game(data, "penis")
+	SaveSustem.save_game(data)
 	return data
 
 func load_from_data(data: Dictionary) -> void:
@@ -56,6 +48,9 @@ func delete_node() -> void:
 	for items in $Items.get_children():
 		$Items.remove_child(items)
 		items.queue_free()
-	$Objects/Players.remove_child($Objects/Players/Player)
-	$Objects/Players/Player.queue_free()
+
+	var player: Node = $Objects/Players/Player
+	$Objects/Players.remove_child(player)
+	player.queue_free()
+
 
