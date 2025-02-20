@@ -8,9 +8,9 @@ func _init(name: String, current_scene: String = "") -> void:
 var data: Dictionary = {
 	"info": {
 		"name": "default_save",
-		"current_scene": ""
+		"current_scene": "",
+		"last_date": Time.get_date_dict_from_system(),
+		"last_time": Time.get_time_dict_from_system()
 	},
-	"data": {
-		
-	}
+	"data": {}
 }

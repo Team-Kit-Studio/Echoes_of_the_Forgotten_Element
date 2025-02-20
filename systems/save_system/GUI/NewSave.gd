@@ -11,7 +11,7 @@ func _on_apply_pressed() -> void:
 	line_edit.clear()
 	if save_name:
 		animate_and_hide()
-		get_parent().emit_signal("create_new_visual_save", save_name)
+		get_parent().emit_signal("create_new_save", save_name)
 	else:
 		show_invalid_name_message()
 

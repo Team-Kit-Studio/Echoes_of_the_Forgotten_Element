@@ -218,3 +218,5 @@ grow_vertical = 1
 
 [connection signal="pressed" from="Panel/NewSaveButton" to="." method="_on_new_save_button_pressed"]
 [connection signal="pressed" from="Panel/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="Panel/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Panel/Cancel" to="." method="_on_cancel_pressed"]

@@ -52,7 +52,8 @@ func Move_State() -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	if input_direction != Vector2.ZERO:
-		
+
+
 		velocity = input_direction * speed
 		
 		
@@ -85,3 +86,7 @@ func data() -> Dictionary:
 	}
 	return player_data
 
+func load_data(data_player: Dictionary) -> void:
+	position = Vector2(data_player["position"]["x"], data_player["position"]["y"])
+	last_direction = Vector2(data_player["last_direction"]["x"], data_player["last_direction"]["y"])
+	

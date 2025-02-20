@@ -1,18 +1,16 @@
 class_name SaveSystem
 extends Node
 
-signal create_new_saves(_name: String)
-signal delete_a_save(_name: String)
+signal load_game(data: Dictionary)
 
-var current_save: Node
+var current_level: Node
+
+
 
 func  _ready() -> void:
-	self.create_new_saves.connect(Callable(self, "create_new_save"))
-	self.delete_a_save.connect(Callable(self, "delete_save"))
-
-
 	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
 		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
+
 
 func delete_save(_name: String) -> void:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"
@@ -22,6 +20,7 @@ func delete_save(_name: String) -> void:
 		print("Error: Файл не существует")
 		return
 		
+
 func get_files_in_directory(directory_path: String) -> Array:
 	var files: Array[String] = []
 	var dir: DirAccess = DirAccess.open(directory_path)
@@ -40,20 +39,6 @@ func get_files_in_directory(directory_path: String) -> Array:
 	dir.list_dir_end()
 	return files
 	
-func create_new_save(_name: String) -> void:
-	var file: FileAccess = FileAccess.open(Gvars.SAVE_PATH + _name + ".save", FileAccess.WRITE)
-	file.close()
-
-func save_game(data: Dictionary) -> void:
-	var path: String = Gvars.SAVE_PATH + current_save.name + ".save"
-	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
-	var temp: DefaultSave = DefaultSave.new(current_save.name)
-	temp.data["data"] = data
-	if FileAccess.get_open_error() == OK:
-		file.store_string(JSON.stringify(temp.data, "\t"))
-		file.close()
-	else:
-		return
 
 func read_save(_name: String) -> Dictionary:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"
@@ -61,8 +46,22 @@ func read_save(_name: String) -> Dictionary:
 	if FileAccess.get_open_error() == OK:
 		var data: Dictionary = JSON.parse_string(file.get_as_text())
 		file.close()
-		if data:
-			return data
+		self.emit_signal("load_game", data)
+		return data
 	else:
 		return {}
-	return {}
+
+
+func save_game(_name: String) -> void:
+	var data: Dictionary
+	if current_level:
+		data = current_level.save_data()
+	var path: String = Gvars.SAVE_PATH + _name + ".save"
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	var temp: DefaultSave = DefaultSave.new(_name)
+	temp.data["data"] = data
+	temp.data["info"]["current_scene"] = current_level
+	if FileAccess.get_open_error() == OK:
+		file.store_string(JSON.stringify(temp.data, "\t"))
+	else:
+		return	
