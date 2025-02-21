@@ -2,7 +2,7 @@ extends Node2D
 
 func _ready() -> void:
 	SaveSustem.current_level = self
-	SaveSustem.load_game.connect(Callable(self, "load_from_data"))
+	SaveSustem.load_from_data.connect(Callable(self, "load_from_data"))
 	
 func save_data() -> Dictionary:
 	var data: Dictionary = {
@@ -42,18 +42,18 @@ func load_from_data(data: Dictionary) -> void:
 	load_player(data)
 
 func delete_node() -> void:
-	# for enemy in $Objects/Enemy.get_children():
-	# 	$Objects/Enemy.remove_child(enemy)
-	# 	enemy.queue_free()
+	for enemy in $Objects/Enemy.get_children():
+		$Objects/Enemy.remove_child(enemy)
+		enemy.queue_free()
 
-	# for allies in $Objects/Allies.get_children():
-	# 	$Objects/Allies.remove_child(allies)
-	# 	allies.queue_free()
+	for allies in $Objects/Allies.get_children():
+		$Objects/Allies.remove_child(allies)
+		allies.queue_free()
 
 
-	# for items in $Items.get_children():
-	# 	$Items.remove_child(items)
-	# 	items.queue_free()
+	for items in $Items.get_children():
+		$Items.remove_child(items)
+		items.queue_free()
 
 	var player: Node = $Objects/Players/Player
 	$Objects/Players.remove_child(player)

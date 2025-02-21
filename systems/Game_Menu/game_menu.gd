@@ -86,3 +86,5 @@ func _on_exit_game_pressed() -> void:
 func _on_exit_menu_pressed() -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://systems/Main_Menu/Main_Menu.tscn")
 
+func hide_canvas() -> void:
+	$CanvasLayer.hide()

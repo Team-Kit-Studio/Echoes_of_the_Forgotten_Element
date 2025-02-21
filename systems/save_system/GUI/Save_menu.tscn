@@ -195,6 +195,14 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 414.0
+offset_top = 148.0
+offset_right = 697.0
+offset_bottom = 267.0
+
 [node name="NewSave" parent="." instance=ExtResource("2_3ltuu")]
 visible = false
 layout_mode = 1
