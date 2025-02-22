@@ -5,6 +5,8 @@ extends Panel
 var is_pressed: bool = false
 var is_mouse_over: bool = false
 
+var _image: Texture2D
+
 func _ready() -> void:
 	$VBoxContainer/HBoxContainer/SaveName.text = self.name
 	$Line2D.hide()
@@ -36,14 +38,17 @@ func _input(event: InputEvent) -> void:
 		if is_pressed and not is_mouse_over:
 			is_pressed = false
 			parent.disable_buttons()
+			parent.set_image_save(null)
 			hide_line()
 			
 
 func handle_mouse_click() -> void:
 	is_pressed = true
 	show_line()
+	parent.set_image_save(_image)
 	parent.emit_signal("update_current_node", self)
 	parent.enable_buttons()
+	parent.set_image_save(_image)
 	
 
 func hide_line() -> void:

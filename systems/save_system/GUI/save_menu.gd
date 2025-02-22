@@ -9,6 +9,7 @@ signal create_new_save(_name: String)
 @onready var DeleteButton: Button = $Panel/Delete
 @onready var SaveButton: Button = $Panel/NewSaveButton
 @onready var SaveList: VBoxContainer = $Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV
+@onready var SaveImage: TextureRect = $Panel/SaveImage
 
 var SaveSlot: Resource = preload("res://systems/save_system/GUI/SaveSlot.tscn")
 
@@ -42,13 +43,13 @@ func _on_new_save_button_pressed() -> void:
 
 #Save Slot 
 func enable_buttons() -> void:
-	await get_tree().create_timer(0.13).timeout
+	await get_tree().create_timer(0.11).timeout
 	set_text_save_button("Перезаписать")
 	DeleteButton.disabled = false
 	LoadButton.disabled = false
 	
 func disable_buttons() -> void:
-	await get_tree().create_timer(0.13).timeout
+	await get_tree().create_timer(0.11).timeout
 	set_text_save_button("Создать")
 	DeleteButton.disabled = true
 	LoadButton.disabled = true
@@ -70,9 +71,13 @@ func create_visual_save(_name: String, is_time_update: bool) -> void:
 	inst_slot.name = _name
 	inst_slot.custom_minimum_size = Vector2(375.135, 70.185)
 	if is_time_update:
+		inst_slot._image = await image_screen(_name)
 		inst_slot.update_time_ready()
 	else:
 		inst_slot.update_time_json()
+		var image: Image = Image.new()
+		image.load(Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg")
+		inst_slot._image = ImageTexture.create_from_image(image)
 	SaveList.add_child(inst_slot)
 
 
@@ -109,6 +114,7 @@ func delete_visual_save() -> void:
 #Overwrite save
 func overwrite_save() -> void:
 	SaveSustem.save_game(current_save.name)
+	current_save._image = await image_screen(current_save.name)
 	
 
 
@@ -117,6 +123,7 @@ func confirm_apply_handler(_mode) -> void:
 	if _mode == "Delete":
 		delete_visual_save()
 		SaveSustem.delete_save(current_save.name)
+		SaveSustem.delete_jpg(current_save.name)
 
 	elif _mode == "Overwrite":
 		overwrite_save()
@@ -144,7 +151,20 @@ func _on_cancel_pressed() -> void:
 func save_create_ready() -> void:
 	for save in SaveSustem.get_files_in_directory(Gvars.SAVE_PATH):
 		var save_name: String = remove_save_extension(save)
-		create_visual_save(save_name, false)
+		create_visual_save(save_name, false) 
 
 func remove_save_extension(file_name: String) -> String:
 	return file_name.substr(0, file_name.length() - 5)
+
+#Save image add
+func image_screen(_name: String) -> Texture2D:
+	var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	get_parent().get_owner().hide_canvas()
+	await RenderingServer.frame_post_draw
+	var image: Image  = get_viewport().get_texture().get_image()
+	image.save_jpg(path)
+	get_parent().get_owner().show_canvas()
+	return ImageTexture.create_from_image(image)
+
+func set_image_save(_texture: Texture2D) -> void:
+	SaveImage.texture = _texture
