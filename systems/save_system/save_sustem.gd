@@ -16,22 +16,16 @@ func path_save(_name: String) -> String:
 	return Gvars.SAVE_PATH + _name + ".save"
 
 #Delete save
-func delete_save(_name: String) -> void:
+func delete_save_and_image(_name: String) -> void:
 	var path: String = Gvars.SAVE_PATH + _name + ".save"
+	var path_image: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(path)	
-	else:
-		print("Error: Файл не существует")
-		return
+	
+	if FileAccess.file_exists(path_image):
+		DirAccess.remove_absolute(path_image)
 		
-# Delete save image.jpg
-func delete_jpg(_name: String) -> void:
-	var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
-	if FileAccess.file_exists(path):
-		DirAccess.remove_absolute(path)	
-	else:
-		print("Error: Файл не существует")
-		return
+
 
 #Get files in directory to create ready save
 func get_files_in_directory(directory_path: String) -> Array:

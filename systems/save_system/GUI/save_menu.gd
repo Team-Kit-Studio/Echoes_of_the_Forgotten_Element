@@ -66,18 +66,20 @@ func create_new_save_handler(_name: String) -> void:
    
 
 
-func create_visual_save(_name: String, is_time_update: bool) -> void:
+func create_visual_save(_name: String, is_ready: bool) -> void:
 	var inst_slot: Node = SaveSlot.instantiate()
 	inst_slot.name = _name
 	inst_slot.custom_minimum_size = Vector2(375.135, 70.185)
-	if is_time_update:
+	if is_ready:
 		inst_slot._image = await image_screen(_name)
 		inst_slot.update_time_ready()
 	else:
 		inst_slot.update_time_json()
-		var image: Image = Image.new()
-		image.load(Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg")
-		inst_slot._image = ImageTexture.create_from_image(image)
+		var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+		if FileAccess.file_exists(path):
+			var image: Image = Image.new()
+			image.load(path)
+			inst_slot._image = ImageTexture.create_from_image(image)
 	SaveList.add_child(inst_slot)
 
 
@@ -107,33 +109,36 @@ func delete_visual_save() -> void:
 	if current_save:
 		SaveList.remove_child(current_save)
 		current_save.call_deferred("queue_free")
+		current_save = null
 	else:
-		pass
+		return
 
 
 #Overwrite save
 func overwrite_save() -> void:
 	SaveSustem.save_game(current_save.name)
 	current_save._image = await image_screen(current_save.name)
+	current_save = null
 	
 
 
 #call confirm
 func confirm_apply_handler(_mode) -> void:
 	if _mode == "Delete":
+		SaveSustem.delete_save_and_image(current_save.name)
 		delete_visual_save()
-		SaveSustem.delete_save(current_save.name)
-		SaveSustem.delete_jpg(current_save.name)
-
+		
 	elif _mode == "Overwrite":
-		overwrite_save()
 		current_save.update_time_ready()
+		overwrite_save()
 
+	elif _mode == "Load":
+		SaveSustem.read_save(current_save.name)
 
 #load save
 func _on_load_pressed() -> void:
-	if current_save:
-		SaveSustem.read_save(current_save.name)
+	Confirm.set_text("Вы уверены, что хотите загрузить \nсохранение? \nВсе не сохраненные данные будут потеряны!")
+	Confirm.confirm_show("Load")
 
 
 
@@ -159,6 +164,7 @@ func remove_save_extension(file_name: String) -> String:
 #Save image add
 func image_screen(_name: String) -> Texture2D:
 	var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+
 	get_parent().get_owner().hide_canvas()
 	await RenderingServer.frame_post_draw
 	var image: Image  = get_viewport().get_texture().get_image()

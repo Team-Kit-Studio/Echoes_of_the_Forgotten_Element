@@ -204,6 +204,12 @@ offset_bottom = 267.0
 expand_mode = 2
 stretch_mode = 6
 
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 414.0
+offset_right = 697.0
+offset_bottom = 144.0
+
 [node name="NewSave" parent="." instance=ExtResource("2_3ltuu")]
 visible = false
 layout_mode = 1
@@ -218,9 +224,9 @@ layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 123.0
+offset_left = 114.0
 offset_top = 106.0
-offset_right = 618.0
+offset_right = 624.0
 offset_bottom = 264.0
 grow_horizontal = 1
 grow_vertical = 1
