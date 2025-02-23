@@ -115,6 +115,15 @@ offset_right = 57.0
 offset_bottom = 31.0
 text = "Пауза"
 
+[node name="Load_visible" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game" to="." method="_on_save_game_toggled"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_options_toggled"]

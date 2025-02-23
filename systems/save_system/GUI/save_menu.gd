@@ -154,7 +154,9 @@ func overwrite() -> void:
 	overwrite_save()
 
 func load() -> void:
+	get_parent().get_owner().color_rect_show()
 	SaveSustem.read_save(current_save.name)
+	
 
 
 #load save

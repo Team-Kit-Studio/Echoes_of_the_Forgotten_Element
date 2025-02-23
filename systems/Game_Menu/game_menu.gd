@@ -7,6 +7,7 @@ extends Control
 @onready var saveLoadButton: Button = $"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game"
 @onready var options: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var saveMenu: Control = $CanvasLayer/GUI/SaveMenu
+@onready var colorrect: ColorRect = $CanvasLayer/Load_visible
 
 func _ready() -> void:
 	canvas.visible = true
@@ -91,3 +92,12 @@ func hide_canvas() -> void:
 
 func show_canvas() -> void:
 	canvas.show()
+
+func color_rect_show() -> void:
+	colorrect.show()
+	var tween: Tween = create_tween()
+	colorrect.modulate = Color(1, 1, 1, 1)
+	tween.tween_property(colorrect, "modulate", Color(1, 1, 1, 0.1), 1.5)
+	await tween.finished
+	colorrect.hide() 
+
