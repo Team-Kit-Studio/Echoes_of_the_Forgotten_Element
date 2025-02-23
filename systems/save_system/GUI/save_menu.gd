@@ -9,7 +9,7 @@ signal create_new_save(_name: String)
 @onready var DeleteButton: Button = $Panel/Delete
 @onready var SaveButton: Button = $Panel/NewSaveButton
 @onready var SaveList: VBoxContainer = $Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV
-@onready var SaveImage: TextureRect = $Panel/SaveImage
+@onready var SaveImage: TextureRect = $Panel/SaveInfo/SaveImage
 
 var SaveSlot: Resource = preload("res://systems/save_system/GUI/SaveSlot.tscn")
 
@@ -18,7 +18,6 @@ var current_save: Node
 func _ready() -> void:
 	self.create_new_save.connect(Callable(self, "create_new_save_handler"))
 	self.update_current_node.connect(Callable(self, "update_current_node_handler"))
-
 	Confirm.confirm_apply.connect(Callable(self, "confirm_apply_handler"))
 
 	save_create_ready()
@@ -29,30 +28,40 @@ func update_current_node_handler(_node: Node) -> void:
 	current_save = _node
 
 func _on_new_save_button_pressed() -> void:
-	if SaveButton.text == "Создать":
-		if not SaveMenu.visible:
-			SaveMenu.animate_and_show()
-			Confirm.hide()
-		else:
-			SaveMenu.animate_and_hide()
+	var _call: Dictionary = {
+		"Создать": "save_menu_show",
+		"Перезаписать": "confirm_overwtite"
+	}
+	call(_call[SaveButton.text])
+
+func confirm_overwtite() -> void:
+	Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
+	Confirm.confirm_show("Overwrite")
+	SaveMenu.hide()
+
+
+func save_menu_show() -> void:
+	if not SaveMenu.visible:
+		SaveMenu.animate_and_show()
+		Confirm.hide()
 	else:
-		Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
-		Confirm.confirm_show("Overwrite")
-		SaveMenu.hide()
+		SaveMenu.animate_and_hide()
 
 
 #Save Slot 
 func enable_buttons() -> void:
-	await get_tree().create_timer(0.11).timeout
+	await get_tree().create_timer(0.13).timeout
 	set_text_save_button("Перезаписать")
 	DeleteButton.disabled = false
 	LoadButton.disabled = false
 	
+
 func disable_buttons() -> void:
-	await get_tree().create_timer(0.11).timeout
+	await get_tree().create_timer(0.13).timeout
 	set_text_save_button("Создать")
 	DeleteButton.disabled = true
 	LoadButton.disabled = true
+
 
 func set_text_save_button(_text: String) -> void:
 	SaveButton.text = _text
@@ -65,7 +74,6 @@ func create_new_save_handler(_name: String) -> void:
 	create_visual_save(names, true)
    
 
-
 func create_visual_save(_name: String, is_ready: bool) -> void:
 	var inst_slot: Node = SaveSlot.instantiate()
 	inst_slot.name = _name
@@ -75,12 +83,18 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 		inst_slot.update_time_ready()
 	else:
 		inst_slot.update_time_json()
-		var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
-		if FileAccess.file_exists(path):
-			var image: Image = Image.new()
-			image.load(path)
-			inst_slot._image = ImageTexture.create_from_image(image)
+		inst_slot._image = image_load(_name)
+
 	SaveList.add_child(inst_slot)
+
+
+func image_load(_name: String) ->  Texture2D:
+	var path: String = Persistence.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	if FileAccess.file_exists(path):
+		var image: Image = Image.new()
+		image.load(path)
+		return ImageTexture.create_from_image(image)
+	return
 
 
 #Create unique save name
@@ -91,6 +105,7 @@ func get_unique_save_name(base_name: String) -> String:
 		_name = base_name + "-(" + str(counter) + ")"
 		counter += 1
 	return _name
+
 
 func find_save(_name: String) -> Node:
 	for node in SaveList.get_children():
@@ -121,25 +136,31 @@ func overwrite_save() -> void:
 	current_save = null
 	
 
-
 #call confirm
 func confirm_apply_handler(_mode) -> void:
-	if _mode == "Delete":
-		SaveSustem.delete_save_and_image(current_save.name)
-		delete_visual_save()
-		
-	elif _mode == "Overwrite":
-		current_save.update_time_ready()
-		overwrite_save()
+	var mode: Dictionary = {
+		"Delete": "delete",
+		"Overwrite": 'overwrite',
+		"Load": "load"
+	}
+	call(mode[_mode])
 
-	elif _mode == "Load":
-		SaveSustem.read_save(current_save.name)
+func delete() -> void:
+	SaveSustem.delete_save_and_image(current_save.name)
+	delete_visual_save()
+
+func overwrite() -> void:
+	current_save.update_time_ready()
+	overwrite_save()
+
+func load() -> void:
+	SaveSustem.read_save(current_save.name)
+
 
 #load save
 func _on_load_pressed() -> void:
 	Confirm.set_text("Вы уверены, что хотите загрузить \nсохранение? \nВсе не сохраненные данные будут потеряны!")
 	Confirm.confirm_show("Load")
-
 
 
 #Hided self - save menu
@@ -154,16 +175,18 @@ func _on_cancel_pressed() -> void:
 
 #Ready add save to save list
 func save_create_ready() -> void:
-	for save in SaveSustem.get_files_in_directory(Gvars.SAVE_PATH):
+	for save in SaveSustem.get_files_in_directory(Persistence.SAVE_PATH):
 		var save_name: String = remove_save_extension(save)
 		create_visual_save(save_name, false) 
+
 
 func remove_save_extension(file_name: String) -> String:
 	return file_name.substr(0, file_name.length() - 5)
 
+
 #Save image add
 func image_screen(_name: String) -> Texture2D:
-	var path: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	var path: String = Persistence.SAVES_BACKGROUNG_PATH + _name + ".jpg"
 
 	get_parent().get_owner().hide_canvas()
 	await RenderingServer.frame_post_draw
@@ -171,6 +194,7 @@ func image_screen(_name: String) -> Texture2D:
 	image.save_jpg(path)
 	get_parent().get_owner().show_canvas()
 	return ImageTexture.create_from_image(image)
+
 
 func set_image_save(_texture: Texture2D) -> void:
 	SaveImage.texture = _texture

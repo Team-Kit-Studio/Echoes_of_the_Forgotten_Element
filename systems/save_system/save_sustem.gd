@@ -6,19 +6,19 @@ var current_level: Node
 
 #Create Floader
 func  _ready() -> void:
-	if not DirAccess.dir_exists_absolute(Gvars.SAVE_PATH):
-		DirAccess.make_dir_absolute(Gvars.SAVE_PATH)
-	if not DirAccess.dir_exists_absolute(Gvars.SAVES_BACKGROUNG_PATH):
-		DirAccess.make_dir_absolute(Gvars.SAVES_BACKGROUNG_PATH)
+	if not DirAccess.dir_exists_absolute(Persistence.SAVE_PATH):
+		DirAccess.make_dir_absolute(Persistence.SAVE_PATH)
+	if not DirAccess.dir_exists_absolute(Persistence.SAVES_BACKGROUNG_PATH):
+		DirAccess.make_dir_absolute(Persistence.SAVES_BACKGROUNG_PATH)
 
 #Path to save
 func path_save(_name: String) -> String:
-	return Gvars.SAVE_PATH + _name + ".save"
+	return Persistence.SAVE_PATH + _name + ".save"
 
 #Delete save
 func delete_save_and_image(_name: String) -> void:
-	var path: String = Gvars.SAVE_PATH + _name + ".save"
-	var path_image: String = Gvars.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	var path: String = Persistence.SAVE_PATH + _name + ".save"
+	var path_image: String = Persistence.SAVES_BACKGROUNG_PATH + _name + ".jpg"
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(path)	
 	

@@ -1,13 +1,21 @@
 extends Node
 
-const  PATH: String = "user://settings.cfg" # задаем путь для конфига, он по стандарту
+const FORBIDDEN_CHARACTERS: Array[String] = [
+	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", "#", "%", "{", "}",
+     "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", "!", "+"
+]
+
+const SAVE_PATH: String = "user://saves/" # путы сохранений
+const SAVES_BACKGROUNG_PATH: String = "user://saves_background/" # путь картинок сохранений
+const PATH: String = "user://user_config/settings.cfg" # задаем путь для конфига, он по стандарту
+
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
 
-#часть сохранения
-var array_save: Array[Node]
-var player_node: Node 
 
 func _ready() -> void:
+	if !DirAccess.dir_exists_absolute("user://user_config/"):
+		DirAccess.make_dir_absolute("user://user_config/")
+
 	if !FileAccess.file_exists(PATH):
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
@@ -23,7 +31,7 @@ func _ready() -> void:
 		config.set_value("Аудио", "music_volume", 1.0)
 		
 		
-	
+
 		save_data()
 	else:
 		load_data()
@@ -34,7 +42,7 @@ func save_data() -> void:
 	
 	
 func load_data() -> void:
-	if config.load("user://settings.cfg") != OK:
+	if config.load(PATH) != OK:
 		save_data()
 		print("нет доступа, сохраняю")
 		return 
@@ -56,11 +64,11 @@ func save_control_settings(action: String, event: InputEvent) -> void:
 
 
 func load_control_settings() -> Dictionary:
-	var binds_settings = {}
-	var keys = config.get_section_keys("Управление") #получаем список всех ключей из секции Управление
+	var binds_settings: Dictionary = {}
+	var keys: PackedStringArray = config.get_section_keys("Управление") #получаем список всех ключей из секции Управление
 	for action in keys: #запускаем цикл по всем ключам в keys
-		var input_event
-		var value = config.get_value("Управление", action) #получаем щзначение для текущего действия(action) из секции Управление
+		var input_event: InputEvent
+		var value: String = config.get_value("Управление", action) #получаем значение для текущего действия(action) из секции Управление
 		if value.contains("mouse_"):
 			input_event = InputEventMouseButton.new()
 			input_event.button_index = int(value.split("_")[1])
@@ -75,13 +83,13 @@ func load_control_settings() -> Dictionary:
 	return binds_settings
 
 func load_video_settings() -> void:
-	var screen_type = config.get_value("Видео", "fullscreen")
+	var screen_type: int = config.get_value("Видео", "fullscreen")
 	DisplayServer.window_set_mode(screen_type)
 	
-	var borderless = config.get_value("Видео", "vsync")
+	var borderless: bool = config.get_value("Видео", "vsync")
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, borderless)
 	
-	var vsync_index = config.get_value("Видео", "vsync")
+	var vsync_index: int = config.get_value("Видео", "vsync")
 	DisplayServer.window_set_vsync_mode(vsync_index)
 	
 func save_audio_settings(key:String, value)-> void:
@@ -93,7 +101,7 @@ func load_audio_settings() -> Dictionary:
 	var audio_settings: Dictionary
 	for key in config.get_section_keys("Аудио"):
 		audio_settings[key] = config.get_value("Аудио", key)
-	print(audio_settings)
+	# print(audio_settings)
 	return audio_settings
 	
 	

@@ -39,6 +39,6 @@ func show_invalid_name_message() -> void:
 
 func check_restrictions(input_text: String) -> String:
 	for letter in input_text:
-		if letter in Gvars.FORBIDDEN_CHARACTERS:
+		if letter in Persistence.FORBIDDEN_CHARACTERS:
 			return ""
 	return input_text

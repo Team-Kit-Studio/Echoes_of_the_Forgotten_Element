@@ -4,36 +4,36 @@ enum {
 	INTRO_IN,
 	INTRO_OUT
 }
+var _call: Dictionary = {
+	INTRO_IN: "state_intro_in",
+	INTRO_OUT: "state_intro_out"
+}
+
 var state = INTRO_IN
-@onready var timer = $Timer
-# Called when the node enters the scene tree for the first time.
+
+@onready var timer: Timer = $Timer
+
 func _ready():
 	$DirectionalLight2D.visible = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	match state:
-		INTRO_IN:
-			state_intro_in()
-		INTRO_OUT:
-			state_intro_out()
-	
+	call(_call[state])
 
+	
 func state_intro_in():
-	var tween = get_tree().create_tween()
-	tween.tween_property($DirectionalLight2D, "energy", 0 , 3)
-	#print("gg1")
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property($DirectionalLight2D, "energy", 0 , 2.5)
+
 
 func state_intro_out():
-	var tween = get_tree().create_tween()
-	tween.tween_property($DirectionalLight2D, "energy", 1 , 1)
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property($DirectionalLight2D, "energy", 1.5 , 1)
 	await tween.finished
 	get_tree().call_deferred("change_scene_to_file", "res://systems/Main_Menu/Main_Menu.tscn")
-	#print("gg2")
+
 
 
 func _on_timer_timeout():
 	state = INTRO_OUT
-	#print("gggg")
 	

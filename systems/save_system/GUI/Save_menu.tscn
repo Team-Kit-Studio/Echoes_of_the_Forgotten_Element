@@ -195,20 +195,47 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="SaveImage" type="TextureRect" parent="Panel"]
+[node name="SaveInfo" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_left = 416.0
+offset_top = 5.0
+offset_right = 695.0
+offset_bottom = 265.0
+
+[node name="SaveImage" type="TextureRect" parent="Panel/SaveInfo"]
 layout_mode = 0
-offset_left = 414.0
-offset_top = 148.0
-offset_right = 697.0
-offset_bottom = 267.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 281.0
+offset_bottom = 141.0
 expand_mode = 2
 stretch_mode = 6
+metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = 414.0
-offset_right = 697.0
-offset_bottom = 144.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel/SaveInfo"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 144.0
+offset_right = 281.0
+offset_bottom = 261.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainerLabel" type="VBoxContainer" parent="Panel/SaveInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
+visible = false
+layout_mode = 2
+text = "Задание:"
+
+[node name="Label2" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
+visible = false
+layout_mode = 2
+text = "Шота там"
 
 [node name="NewSave" parent="." instance=ExtResource("2_3ltuu")]
 visible = false
