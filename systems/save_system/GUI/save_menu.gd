@@ -70,9 +70,9 @@ func set_text_save_button(_text: String) -> void:
 #Create visual save
 func create_new_save_handler(_name: String) -> void:
 	var names: String = get_unique_save_name(_name)
-	SaveSustem.save_game(names)
+	SaveSustem.emit_signal("save", names)
 	create_visual_save(names, true)
-   
+
 
 func create_visual_save(_name: String, is_ready: bool) -> void:
 	var inst_slot: Node = SaveSlot.instantiate()
@@ -89,7 +89,7 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 
 
 func image_load(_name: String) ->  Texture2D:
-	var path: String = Persistence.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	var path: String = SaveSustem.path_save(_name, _name, ".jpg")
 	if FileAccess.file_exists(path):
 		var image: Image = Image.new()
 		image.load(path)
@@ -131,7 +131,7 @@ func delete_visual_save() -> void:
 
 #Overwrite save
 func overwrite_save() -> void:
-	SaveSustem.save_game(current_save.name)
+	SaveSustem.emit_signal("save", current_save.name)
 	current_save._image = await image_screen(current_save.name)
 	current_save = null
 	
@@ -146,7 +146,7 @@ func confirm_apply_handler(_mode) -> void:
 	call(mode[_mode])
 
 func delete() -> void:
-	SaveSustem.delete_save_and_image(current_save.name)
+	SaveSustem.emit_signal("delete", current_save.name)
 	delete_visual_save()
 
 func overwrite() -> void:
@@ -155,7 +155,7 @@ func overwrite() -> void:
 
 func load() -> void:
 	get_parent().get_owner().color_rect_show()
-	SaveSustem.read_save(current_save.name)
+	SaveSustem.emit_signal("load", current_save.name)
 	
 
 
@@ -177,7 +177,7 @@ func _on_cancel_pressed() -> void:
 
 #Ready add save to save list
 func save_create_ready() -> void:
-	for save in SaveSustem.get_files_in_directory(Persistence.SAVE_PATH):
+	for save in SaveSustem.get_files_in_directory(SaveSustem.SAVE_PATH):
 		var save_name: String = remove_save_extension(save)
 		create_visual_save(save_name, false) 
 
@@ -188,7 +188,7 @@ func remove_save_extension(file_name: String) -> String:
 
 #Save image add
 func image_screen(_name: String) -> Texture2D:
-	var path: String = Persistence.SAVES_BACKGROUNG_PATH + _name + ".jpg"
+	var path: String = SaveSustem.path_file_save(_name, "save_image", ".jpg")
 
 	get_parent().get_owner().hide_canvas()
 	await RenderingServer.frame_post_draw
@@ -200,3 +200,4 @@ func image_screen(_name: String) -> Texture2D:
 
 func set_image_save(_texture: Texture2D) -> void:
 	SaveImage.texture = _texture
+image

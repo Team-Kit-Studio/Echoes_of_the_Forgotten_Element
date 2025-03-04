@@ -1,11 +1,12 @@
 extends Node2D
 
 func _ready() -> void:
-	SaveSustem.current_level = self
-	SaveSustem.load_from_data.connect(Callable(self, "load_from_data"))
+	SaveSustem.load_from_data.connect(load_from_data)
+	SaveSustem.save_data.connect(_data)
 	
-func save_data() -> Dictionary:
+func _data() -> void:
 	var data: Dictionary = {
+		"level_name": self.name,
 		"player": $Objects/Players/Player.data(),
 		"enemy": [],
 		"allies": [],
@@ -23,8 +24,7 @@ func save_data() -> Dictionary:
 	for items in $Items.get_children():
 		if items.data():
 			data["items"].append(items.data())
-
-	return data
+	SaveSustem.emit_signal("set_data", data)
 
 
 func load_from_data(data: Dictionary) -> void:
@@ -55,7 +55,7 @@ func delete_node() -> void:
 		$Items.remove_child(items)
 		items.queue_free()
 
-	var player: Node = $Objects/Players/Player
+	var player: CharacterBody2D = $Objects/Players/Player
 	$Objects/Players.remove_child(player)
 	player.queue_free()
 

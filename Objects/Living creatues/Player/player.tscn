@@ -1,6 +1,6 @@
 [gd_scene load_steps=103 format=3 uid="uid://dn8amxut4hceo"]
 
-[ext_resource type="Script" path="res://Objects/Living creatues/Player/player.gd" id="1_fkakk"]
+[ext_resource type="Script" uid="uid://16rki2uh0xsf" path="res://Objects/Living creatues/Player/player.gd" id="1_fkakk"]
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://Спрайты/Player/SpriteList_Idle.png" id="2_ssr53"]
 [ext_resource type="Texture2D" uid="uid://cc30f5f1mltn4" path="res://Спрайты/Player/SpriteList_Player_Run.png" id="3_bd4fw"]
 
@@ -839,12 +839,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7u71e"]
 _data = {
-"State_Idle_Down": SubResource("Animation_og2qx"),
-"State_Idle_FromSide": SubResource("Animation_3w3bd"),
-"State_Idle_Up": SubResource("Animation_advun"),
-"State_Run_Down": SubResource("Animation_jrgk1"),
-"State_Run_FromSide": SubResource("Animation_yayod"),
-"State_Run_Up": SubResource("Animation_0aa4w")
+&"State_Idle_Down": SubResource("Animation_og2qx"),
+&"State_Idle_FromSide": SubResource("Animation_3w3bd"),
+&"State_Idle_Up": SubResource("Animation_advun"),
+&"State_Run_Down": SubResource("Animation_jrgk1"),
+&"State_Run_FromSide": SubResource("Animation_yayod"),
+&"State_Run_Up": SubResource("Animation_0aa4w")
 }
 
 [node name="Player" type="CharacterBody2D"]

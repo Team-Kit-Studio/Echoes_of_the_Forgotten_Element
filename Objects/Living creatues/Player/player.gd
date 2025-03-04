@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func Move_State() -> void:
-	input_direction = Input.get_vector("left", "right", "up", "down").normalized()
+	input_direction = Input.get_vector("left", "right", "up", "down")
 	
 	if input_direction != Vector2.ZERO:
 

@@ -66,10 +66,11 @@ func update_time_ready() -> void:
 
 
 func update_time_json() -> void:
-	var data: Dictionary = SaveSustem.read_save(name)
-	var date: Dictionary = data["info"]["last_date"]
-	var time: Dictionary = data["info"]["last_time"]
-	handler_time(date, time)
+	pass
+	# var data: Dictionary = SaveSustem.read_save(SaveSustem.path_save(name, "data", ""))
+	# var date: Dictionary = data["info"]["last_date"]
+	# var time: Dictionary = data["info"]["last_time"]
+	# handler_time(date, time)
 
 
 func handler_time(date: Dictionary, time: Dictionary) -> void:

@@ -1,5 +1,6 @@
-class_name DefaultSave
 extends Object
+class_name DefaultSave
+
 
 func _init(name: String, current_scene: String = "") -> void:
 	data["info"]["name"] = name

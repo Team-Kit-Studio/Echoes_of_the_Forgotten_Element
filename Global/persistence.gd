@@ -5,9 +5,7 @@ const FORBIDDEN_CHARACTERS: Array[String] = [
      "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", "!", "+"
 ]
 
-const SAVE_PATH: String = "user://saves/" # путы сохранений
-const SAVES_BACKGROUNG_PATH: String = "user://saves_background/" # путь картинок сохранений
-const PATH: String = "user://user_config/settings.cfg" # задаем путь для конфига, он по стандарту
+const PATH_CONFIG: String = "user://user_config/settings.cfg" # задаем путь для конфига, он по стандарту
 
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
 
@@ -16,7 +14,7 @@ func _ready() -> void:
 	if !DirAccess.dir_exists_absolute("user://user_config/"):
 		DirAccess.make_dir_absolute("user://user_config/")
 
-	if !FileAccess.file_exists(PATH):
+	if !FileAccess.file_exists(PATH_CONFIG):
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
 		config.set_value("Управление", "down", "S")
@@ -38,11 +36,11 @@ func _ready() -> void:
 			
 			
 func save_data() -> void:
-	config.save(PATH)
+	config.save(PATH_CONFIG)
 	
 	
 func load_data() -> void:
-	if config.load(PATH) != OK:
+	if config.load(PATH_CONFIG) != OK:
 		save_data()
 		print("нет доступа, сохраняю")
 		return 

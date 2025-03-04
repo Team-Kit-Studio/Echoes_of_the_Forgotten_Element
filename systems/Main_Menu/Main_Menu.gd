@@ -5,16 +5,15 @@ enum {
 	Main_Menu
 }
 
-var state = Intro
-@onready var menu = $Main_Menu
-@onready var options = $Options
-@onready var video = $Video
-@onready var audio = $Audio
-@onready var audiogame = $AudioStreamPlayer2D
-@onready var controls = $Controls
+var state: int = Intro
+@onready var menu: Control = $Main_Menu
+@onready var options: Control = $Options
+@onready var video: Control = $Video
+@onready var audio: Control = $Audio
+@onready var audiogame: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var controls: Control = $Controls
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$DirectionalLight2D.enabled = true
 	menu.visible = true
 	options.visible = false
@@ -23,9 +22,7 @@ func _ready():
 	controls.visible = false
 	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	match state:
 		Intro:
 			intro()
@@ -70,13 +67,13 @@ func _on_back_menu_pressed() -> void:
 	menu.visible = true
 
 
-func _on_back_settings_pressed():
+func _on_back_settings_pressed() -> void:
 	video.visible = false
 	audio.visible = false
 	controls.visible = false
 	options.visible = true
 
 
-func _on_controls_pressed():
+func _on_controls_pressed() -> void:
 	options.visible = false
 	controls.visible = true

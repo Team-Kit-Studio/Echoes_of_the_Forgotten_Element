@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgs0hts3r4cey"]
+
+[ext_resource type="Script" uid="uid://bpic0ycqboeh7" path="res://systems/Main_Menu/komet.gd" id="1_8ousu"]
+[ext_resource type="Texture2D" uid="uid://chcnulq1cg2hj" path="res://Спрайты/Gamecraft Project.png" id="1_bkrp3"]
+
+[node name="Komet" type="Sprite2D"]
+scale = Vector2(0.132554, 0.115775)
+texture = ExtResource("1_bkrp3")
+script = ExtResource("1_8ousu")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.14441e-05, -3.8147e-06)
+scale = Vector2(11.3161, 11.2287)

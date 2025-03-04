@@ -30,4 +30,3 @@ func hided() -> void:
 	tween.tween_property(self, "scale", Vector2(0.3, 0.3), 0.15)
 	await tween.finished
 	self.hide()
-
