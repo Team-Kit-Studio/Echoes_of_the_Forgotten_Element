@@ -89,7 +89,8 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 
 
 func image_load(_name: String) ->  Texture2D:
-	var path: String = SaveSustem.path_save(_name, _name, ".jpg")
+	var path: String = SaveSustem.path_file_save(_name, "save_image", ".jpg")
+	print(path)
 	if FileAccess.file_exists(path):
 		var image: Image = Image.new()
 		image.load(path)
@@ -177,8 +178,8 @@ func _on_cancel_pressed() -> void:
 
 #Ready add save to save list
 func save_create_ready() -> void:
-	for save in SaveSustem.get_files_in_directory(SaveSustem.SAVE_PATH):
-		var save_name: String = remove_save_extension(save)
+	for save_name in SaveSustem.get_files_in_directory(SaveSustem.SAVE_PATH):
+		print(save_name)
 		create_visual_save(save_name, false) 
 
 
@@ -200,4 +201,3 @@ func image_screen(_name: String) -> Texture2D:
 
 func set_image_save(_texture: Texture2D) -> void:
 	SaveImage.texture = _texture
-image

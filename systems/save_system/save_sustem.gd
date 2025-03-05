@@ -34,9 +34,19 @@ func path_file_save(floder_name: String, file_name: String, extension: String) -
 
 #Delete save
 func delete_save(_name: String) -> void:
-	var path: String = path_floder_save(_name)
-	if FileAccess.file_exists(path):
-		DirAccess.remove_absolute(path)
+	var path: String = SAVE_PATH + _name
+	var dir := DirAccess.open(path)
+	if dir:
+		var files = dir.get_files()
+		# var subdirs = dir.get_directories()
+
+		for file in files:
+			dir.remove(path + "/" + file)
+	
+		# for subdir in subdirs:
+		# 	delete_save(path + "/" + subdir) Это разкоментить когда появяться подпапки в сохранении
+
+		dir.remove(path)
 
 
 func delete_image(_name: String) -> void:
@@ -47,22 +57,7 @@ func delete_image(_name: String) -> void:
 
 #Get files in directory to create ready save
 func get_files_in_directory(directory_path: String) -> Array:
-	# var files: Array = []
 	var dir: DirAccess = DirAccess.open(directory_path)
-	# if not dir:
-	# 	push_error("Не удалось открыть директорию: " + directory_path)
-	# 	return files
-	
-
-	# dir.list_dir_begin()  
-	# var file_name: String = dir.get_next()
-
-	# while file_name != "":
-	# 	if not dir.current_is_dir():
-	# 		files.append(file_name)
-	# 	file_name = dir.get_next()
-
-	# dir.list_dir_end()
 	return dir.get_directories()
 	
 # Read save to load level 

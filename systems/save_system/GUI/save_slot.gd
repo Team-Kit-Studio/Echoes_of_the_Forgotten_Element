@@ -66,17 +66,16 @@ func update_time_ready() -> void:
 
 
 func update_time_json() -> void:
-	pass
-	# var data: Dictionary = SaveSustem.read_save(SaveSustem.path_save(name, "data", ""))
-	# var date: Dictionary = data["info"]["last_date"]
-	# var time: Dictionary = data["info"]["last_time"]
-	# handler_time(date, time)
+	var data: Dictionary = SaveSustem.read_save(self.name)
+	var date: Dictionary = data["info"]["last_date"]
+	var time: Dictionary = data["info"]["last_time"]
+	handler_time(date, time)
 
 
 func handler_time(date: Dictionary, time: Dictionary) -> void:
-	var sum_time: String = str(date.day) + "." + str(date.month) + "." + str(date.year) + "\n" + str(time.hour) + " : " + str(time.minute)
-	if str(time.minute).length() < 2:
-		sum_time = str(date.day) + "." + str(date.month) + "." + str(date.year) + "\n" + str(time.hour) + " : " + "0" + str(time.minute)
+	var sum_time: String = str(int(date.day)) + "." + str(int(date.month)) + "." + str(int(date.year)) + "\n" + str(int(time.hour)) + " : " + str(int(time.minute))
+	if str(int(time.minute)).length() == 1:
+		sum_time = str(int(date.day)) + "." + str(int(date.month)) + "." + str(int(date.year)) + "\n" + str(int(time.hour)) + " : " + "0" + str(int(time.minute))
 	update_time_text(sum_time)
 
 
