@@ -60,24 +60,21 @@ func show_line() -> void:
 
 
 func update_time_ready() -> void:
-	var date: Dictionary = Time.get_date_dict_from_system()
-	var time: Dictionary = Time.get_time_dict_from_system()
-	handler_time(date, time)
-
+	handle_date_time(Time.get_date_dict_from_system(), Time.get_time_dict_from_system())
 
 func update_time_json() -> void:
-	var data: Dictionary = SaveSustem.read_save(self.name)
-	var date: Dictionary = data["info"]["last_date"]
-	var time: Dictionary = data["info"]["last_time"]
-	handler_time(date, time)
+	var time_data: Dictionary = SaveSustem.read_save(self.name, "metadata" , ".json")
+	handle_date_time(time_data["last_modified_time"]["date"], time_data["last_modified_time"]["time"])
+
+func format_date_time(date: Dictionary, time: Dictionary) -> String:
+	var formatted_date: String = "%02d.%02d.%d" % [date.day, date.month, date.year]
+	var formatted_time: String = "%02d:%02d" % [time.hour, time.minute] 
+	return "%s\n%s" % [formatted_date, formatted_time]
 
 
-func handler_time(date: Dictionary, time: Dictionary) -> void:
-	var sum_time: String = str(int(date.day)) + "." + str(int(date.month)) + "." + str(int(date.year)) + "\n" + str(int(time.hour)) + " : " + str(int(time.minute))
-	if str(int(time.minute)).length() == 1:
-		sum_time = str(int(date.day)) + "." + str(int(date.month)) + "." + str(int(date.year)) + "\n" + str(int(time.hour)) + " : " + "0" + str(int(time.minute))
-	update_time_text(sum_time)
+func handle_date_time(date: Dictionary, time: Dictionary) -> void:
+	var formatted_date_time: String = format_date_time(date, time)
+	update_text(formatted_date_time)
 
-
-func update_time_text(_text: String) -> void:
+func update_text(_text: String) -> void:
 	$VBoxContainer/HBoxContainer/SaveDate.text = _text

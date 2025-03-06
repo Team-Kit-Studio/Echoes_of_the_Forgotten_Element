@@ -80,13 +80,13 @@ func play_animation(animation: String) -> void:
 func data() -> Dictionary:
 	var player_data: Dictionary = {
 		"file_name": get_scene_file_path(),
-		"position": {"x": self.position.x, "y": self.position.y},
+		"pos": {"x": self.position.x, "y": self.position.y},
 		"health": health,
-		"last_direction": {"x": last_direction.x, "y": last_direction.y},
+		"last_dir": {"x": last_direction.x, "y": last_direction.y},
 	}
 	return player_data
 
 func load_data(data_player: Dictionary) -> void:
-	position = Vector2(data_player["position"]["x"], data_player["position"]["y"])
-	last_direction = Vector2(data_player["last_direction"]["x"], data_player["last_direction"]["y"])
+	position = Vector2(data_player["pos"]["x"], data_player["pos"]["y"])
+	last_direction = Vector2(data_player["last_dir"]["x"], data_player["last_dir"]["y"])
 	

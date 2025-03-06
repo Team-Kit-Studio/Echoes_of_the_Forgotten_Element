@@ -28,7 +28,7 @@ func update_current_node_handler(_node: Node) -> void:
 	current_save = _node
 
 func _on_new_save_button_pressed() -> void:
-	var _call: Dictionary = {
+	const _call: Dictionary = {
 		"Создать": "save_menu_show",
 		"Перезаписать": "confirm_overwtite"
 	}
@@ -89,7 +89,7 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 
 
 func image_load(_name: String) ->  Texture2D:
-	var path: String = SaveSustem.path_file_save(_name, "save_image", ".jpg")
+	var path: String = SaveSustem.get_save_file_path(_name, "save_image", ".jpg")
 	print(path)
 	if FileAccess.file_exists(path):
 		var image: Image = Image.new()
@@ -139,7 +139,7 @@ func overwrite_save() -> void:
 
 #call confirm
 func confirm_apply_handler(_mode) -> void:
-	var mode: Dictionary = {
+	const mode: Dictionary = {
 		"Delete": "delete",
 		"Overwrite": 'overwrite',
 		"Load": "load"
@@ -182,14 +182,9 @@ func save_create_ready() -> void:
 		print(save_name)
 		create_visual_save(save_name, false) 
 
-
-func remove_save_extension(file_name: String) -> String:
-	return file_name.substr(0, file_name.length() - 5)
-
-
 #Save image add
 func image_screen(_name: String) -> Texture2D:
-	var path: String = SaveSustem.path_file_save(_name, "save_image", ".jpg")
+	var path: String = SaveSustem.get_save_file_path(_name, "save_image", ".jpg")
 
 	get_parent().get_owner().hide_canvas()
 	await RenderingServer.frame_post_draw
@@ -198,6 +193,9 @@ func image_screen(_name: String) -> Texture2D:
 	get_parent().get_owner().show_canvas()
 	return ImageTexture.create_from_image(image)
 
-
 func set_image_save(_texture: Texture2D) -> void:
 	SaveImage.texture = _texture
+
+
+func set_missions_text(_text: String) -> void: # в будущем будет
+	pass

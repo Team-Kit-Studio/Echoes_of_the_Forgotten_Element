@@ -227,13 +227,11 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
-visible = false
+[node name="Missions text" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
 layout_mode = 2
 text = "Задание:"
 
 [node name="Label2" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
-visible = false
 layout_mode = 2
 text = "Шота там"
 
