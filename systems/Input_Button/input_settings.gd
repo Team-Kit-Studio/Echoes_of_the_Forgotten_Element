@@ -7,7 +7,7 @@ var is_remapping: bool = false
 var action_to_remap = null
 var remaping_button = null
 
-var input_actions: Dictionary = {
+var input_actions: Dictionary[String, String] = {
 	"up": "Вверх", #Inputmode NAME: "New Name"
 	"left": "Влево",
 	"down": "Вниз",

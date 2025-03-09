@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://l7jr0kxb6rqm"]
 
 [ext_resource type="Script" uid="uid://dxh57s0p008h3" path="res://systems/save_system/GUI/NewSave.gd" id="1_ysf5d"]
-[ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://Tools/tema/GUI.tres" id="2_vbgk0"]
+[ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://tool/tema/GUI.tres" id="2_vbgk0"]
 
 [node name="NewSave" type="Control"]
 layout_mode = 3

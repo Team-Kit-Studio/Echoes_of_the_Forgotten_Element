@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="Lost in Planet"
-run/main_scene="res://systems/Intrro/intro.tscn"
+run/main_scene="res://systems/intrro/intro.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [audio]
 
-buses/default_bus_layout="res://Tools/tema/default_bus_layout.tres"
+buses/default_bus_layout="res://tool/tema/default_bus_layout.tres"
 
 [autoload]
 
-Persistence="*res://Global/persistence.gd"
+Persistence="*res://global/persistence/persistence.gd"
 SaveSustem="*res://systems/save_system/save_sustem.gd"
 
 [display]

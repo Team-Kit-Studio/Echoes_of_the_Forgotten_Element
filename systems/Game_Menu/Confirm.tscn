@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dknegxl7i6pto"]
 
 [ext_resource type="Script" uid="uid://bt4qe8pak16d6" path="res://systems/Game_Menu/confirm.gd" id="1_w2jub"]
-[ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://Tools/tema/GUI.tres" id="1_xw2wh"]
+[ext_resource type="Theme" uid="uid://bad1ur757eh46" path="res://tool/tema/GUI.tres" id="1_xw2wh"]
 
 [node name="Confirm" type="Control"]
 layout_mode = 3

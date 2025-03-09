@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btqyey534q0o3"]
 
-[ext_resource type="Texture2D" uid="uid://chcnulq1cg2hj" path="res://Спрайты/Gamecraft Project.png" id="1_bkrp3"]
+[ext_resource type="Texture2D" uid="uid://chcnulq1cg2hj" path="res://sprite/Gamecraft Project.png" id="1_bkrp3"]
 
 [sub_resource type="GDScript" id="GDScript_fl4vb"]
 script/source = "extends Sprite2D

@@ -27,6 +27,7 @@ func _ready() -> void:
 	create_folder_ready()
 
 # Methods for working with paths and directories
+#Блок функций
 func create_folder_ready() -> void:
 	if not DirAccess.dir_exists_absolute(SAVE_PATH):
 		DirAccess.make_dir_absolute(SAVE_PATH)
@@ -48,7 +49,7 @@ func get_save_folder_path(floder_name: String) -> String:
 
 func get_save_file_path(floder_name: String, file_name: String, extension: String) -> String:
 	return "%s%s%s" % [get_save_folder_path(floder_name), file_name, extension]
-
+# Блок функций
 
 #Signal handler
 func load_handler(_name: String) -> void:

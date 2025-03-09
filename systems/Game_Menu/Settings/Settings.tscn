@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cns2st7uxkvd3" path="res://systems/Game_Menu/Settings/видео.gd" id="1_6r7jw"]
 [ext_resource type="Script" uid="uid://cc51t6uh3lwme" path="res://systems/Game_Menu/Settings/аудио.gd" id="2_ue2tf"]
-[ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://systems/Input_Button/input_settings.tscn" id="3_i4v1l"]
+[ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://systems/input_Button/input_settings.tscn" id="3_i4v1l"]
 
 [node name="Settings" type="TabContainer"]
 process_mode = 3

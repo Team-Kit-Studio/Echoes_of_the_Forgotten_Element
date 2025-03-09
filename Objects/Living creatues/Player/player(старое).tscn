@@ -1,9 +1,9 @@
 [gd_scene load_steps=74 format=3 uid="uid://b8hy4l8baaxjh"]
 
-[ext_resource type="Texture2D" uid="uid://b4d20xp8j00w5" path="res://Спрайты/Player/Space Cadet Sprite Sheet.png" id="1_sdcx5"]
-[ext_resource type="Script" uid="uid://05ajjmqiw5wd" path="res://Objects/Living creatues/Player/player(старое).gd" id="1_x1jku"]
-[ext_resource type="Texture2D" uid="uid://grkgm1ib0ns2" path="res://Спрайты/Player/Player_Run_Down.png" id="3_xcdoh"]
-[ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://Спрайты/Player/SpriteList_Idle.png" id="4_y2swj"]
+[ext_resource type="Texture2D" uid="uid://b4d20xp8j00w5" path="res://sprite/Player/Space Cadet Sprite Sheet.png" id="1_sdcx5"]
+[ext_resource type="Script" uid="uid://05ajjmqiw5wd" path="res://objects/Living creatues/Player/player(старое).gd" id="1_x1jku"]
+[ext_resource type="Texture2D" uid="uid://grkgm1ib0ns2" path="res://sprite/Player/Player_Run_Down.png" id="3_xcdoh"]
+[ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://sprite/Player/SpriteList_Idle.png" id="4_y2swj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0f8wc"]
 radius = 9.0
