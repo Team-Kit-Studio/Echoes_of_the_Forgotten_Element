@@ -1,18 +1,20 @@
 extends Node2D
 
 func _ready() -> void:
-	SaveSustem.load_from_data.connect(load_from_data)
-	SaveSustem.save_data.connect(_data)
+	SavesManager.load_from_data.connect(load_from_data)
+	SavesManager.data_update.connect(_data)
 	
 func _data() -> void:
-	var temp: SavesTemplate.BaseDataSaveTemplate = SavesTemplate.BaseDataSaveTemplate.new() 
+	var temp: SavesTemplate.DataTemp = SavesTemplate.DataTemp.new() 
+	var temp_matadata: SavesTemplate.MetaDataTemp = SavesTemplate.MetaDataTemp.new()
 
 	temp.data["data"]["level_scene"] = self.scene_file_path
 	temp.data["data"]["player"] = $Objects/Players/Player.data()
 	
-	temp.data["metadata"]["name"] = self.name
-	temp.data["metadata"]["last_modified_time"]["date"] = Time.get_date_dict_from_system()
-	temp.data["metadata"]["last_modified_time"]["time"] = Time.get_time_dict_from_system()
+	temp_matadata.data["metadata"]["name"] = self.name
+	temp_matadata.data["metadata"]["last_modified_time"]["date"] = Time.get_date_dict_from_system()
+	temp_matadata.data["metadata"]["last_modified_time"]["time"] = Time.get_time_dict_from_system()
+
 
 	for enemy in $Objects/Enemy.get_children():
 		if enemy.data():
@@ -26,10 +28,11 @@ func _data() -> void:
 		if items.data():
 			temp["data"]["items"].append(items.data())
 
-	SaveSustem.emit_signal("set_data", temp.data["data"])
-	SaveSustem.emit_signal("set_metadata", temp.data["metadata"])
+	SavesManager.emit_signal("data_updated", temp.data["data"], temp_matadata.data["metadata"])
+
 
 func load_from_data(data: Dictionary) -> void:
+	print(data)
 	delete_node()
 	if data:
 		for enemy in data["enemy"]:

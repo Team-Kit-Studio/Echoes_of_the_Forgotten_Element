@@ -11,34 +11,51 @@ signal create_new_save(_name: String)
 @onready var SaveList: VBoxContainer = $Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV
 @onready var SaveImage: TextureRect = $Panel/SaveInfo/SaveImage
 
-var SaveSlot: Resource = preload("res://systems/save_system/GUI/SaveSlot.tscn")
+var SaveSlot: Resource = preload("res://global/saves_manager/gui/scenes/SaveSlot.tscn")
+var game_menu: Node 
 
 var current_save: Node
 
 func _ready() -> void:
+	game_menu = get_parent().get_owner()
+
 	self.create_new_save.connect(Callable(self, "create_new_save_handler"))
 	self.update_current_node.connect(Callable(self, "update_current_node_handler"))
 	Confirm.confirm_apply.connect(Callable(self, "confirm_apply_handler"))
 
 	save_create_ready()
 
-
-#Save Menu
+# Handlers
 func update_current_node_handler(_node: Node) -> void:
 	current_save = _node
 
+func create_new_save_handler(save_name: String) -> void:
+	var _name: String = get_unique_save_name(save_name)
+	SavesManager.emit_signal("save", _name)
+	create_visual_save(_name, true)
+
+func confirm_apply_handler(_mode) -> void:
+	const mode: Dictionary = {
+		"Delete": "delete",
+		"Overwrite": 'overwrite',
+		"Load": "load"
+	}
+
+	call(mode[_mode])
+
+# Save Menu
 func _on_new_save_button_pressed() -> void:
 	const _call: Dictionary = {
 		"Создать": "save_menu_show",
 		"Перезаписать": "confirm_overwtite"
 	}
+
 	call(_call[SaveButton.text])
 
 func confirm_overwtite() -> void:
 	Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
 	Confirm.confirm_show("Overwrite")
 	SaveMenu.hide()
-
 
 func save_menu_show() -> void:
 	if not SaveMenu.visible:
@@ -47,14 +64,20 @@ func save_menu_show() -> void:
 	else:
 		SaveMenu.animate_and_hide()
 
+func _on_cancel_pressed() -> void:
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0.1), 0.15) 
+	tween.tween_property(self, "position:x", -240, 0.2)
+	await tween.finished
+	self.hide()
 
-#Save Slot 
+# Save Slot 
 func enable_buttons() -> void:
 	await get_tree().create_timer(0.13).timeout
 	set_text_save_button("Перезаписать")
 	DeleteButton.disabled = false
 	LoadButton.disabled = false
-	
 
 func disable_buttons() -> void:
 	await get_tree().create_timer(0.13).timeout
@@ -62,51 +85,36 @@ func disable_buttons() -> void:
 	DeleteButton.disabled = true
 	LoadButton.disabled = true
 
-
 func set_text_save_button(_text: String) -> void:
 	SaveButton.text = _text
 
-
-#Create visual save
-func create_new_save_handler(_name: String) -> void:
-	var names: String = get_unique_save_name(_name)
-	SaveSustem.emit_signal("save", names)
-	create_visual_save(names, true)
-
-
+# Create visual save
 func create_visual_save(_name: String, is_ready: bool) -> void:
 	var inst_slot: Node = SaveSlot.instantiate()
 	inst_slot.name = _name
 	inst_slot.custom_minimum_size = Vector2(375.135, 70.185)
 	if is_ready:
-		inst_slot._image = await image_screen(_name)
+		inst_slot.image_save = await screen_shot(_name)
 		inst_slot.update_time_ready()
 	else:
 		inst_slot.update_time_json()
-		inst_slot._image = image_load(_name)
+		inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
+
 
 	SaveList.add_child(inst_slot)
 
+func save_create_ready() -> void:
+	for save_name in SavesManager.DirUtil.get_files_in_directory(SavesManager.SAVE_PATH):
+		create_visual_save(save_name, false)
 
-func image_load(_name: String) ->  Texture2D:
-	var path: String = SaveSustem.get_save_file_path(_name, "save_image", ".jpg")
-	print(path)
-	if FileAccess.file_exists(path):
-		var image: Image = Image.new()
-		image.load(path)
-		return ImageTexture.create_from_image(image)
-	return
-
-
-#Create unique save name
+# Create unique save name
 func get_unique_save_name(base_name: String) -> String:
-	var _name = base_name
-	var counter = 1
+	var _name: String = base_name
+	var counter: int = 1
 	while find_save(_name) != null:
 		_name = base_name + "-(" + str(counter) + ")"
 		counter += 1
 	return _name
-
 
 func find_save(_name: String) -> Node:
 	for node in SaveList.get_children():
@@ -114,8 +122,7 @@ func find_save(_name: String) -> Node:
 			return node
 	return null
 
-
-#Delete save visual
+# Delete save visual
 func _on_delete_pressed() -> void:
 	Confirm.set_text("Вы уверены, что хотите удалить \nсохранение? \nЭто действие нельзя отменить!")
 	Confirm.confirm_show("Delete")
@@ -129,73 +136,35 @@ func delete_visual_save() -> void:
 	else:
 		return
 
-
-#Overwrite save
-func overwrite_save() -> void:
-	SaveSustem.emit_signal("save", current_save.name)
-	current_save._image = await image_screen(current_save.name)
-	current_save = null
-	
-
-#call confirm
-func confirm_apply_handler(_mode) -> void:
-	const mode: Dictionary = {
-		"Delete": "delete",
-		"Overwrite": 'overwrite',
-		"Load": "load"
-	}
-	call(mode[_mode])
-
 func delete() -> void:
-	SaveSustem.emit_signal("delete", current_save.name)
+	SavesManager.emit_signal("delete", current_save.name)
 	delete_visual_save()
+
+# Overwrite save
+func overwrite_save() -> void:
+	SavesManager.emit_signal("save", current_save.name)
+	current_save = null
 
 func overwrite() -> void:
 	current_save.update_time_ready()
 	overwrite_save()
 
+# Load save
 func load() -> void:
-	get_parent().get_owner().color_rect_show()
-	SaveSustem.emit_signal("load", current_save.name)
-	
+	game_menu.color_rect_show()
+	SavesManager.emit_signal("load", current_save.name)
 
-
-#load save
 func _on_load_pressed() -> void:
 	Confirm.set_text("Вы уверены, что хотите загрузить \nсохранение? \nВсе не сохраненные данные будут потеряны!")
 	Confirm.confirm_show("Load")
 
-
-#Hided self - save menu
-func _on_cancel_pressed() -> void:
-	var tween: Tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(self, "modulate", Color(1, 1, 1, 0.1), 0.15) 
-	tween.tween_property(self, "position:x", -240, 0.2)
-	await tween.finished
-	self.hide()
-
-
-#Ready add save to save list
-func save_create_ready() -> void:
-	for save_name in SaveSustem.get_files_in_directory(SaveSustem.SAVE_PATH):
-		print(save_name)
-		create_visual_save(save_name, false) 
-
-#Save image add
-func image_screen(_name: String) -> Texture2D:
-	var path: String = SaveSustem.get_save_file_path(_name, "save_image", ".jpg")
-
-	get_parent().get_owner().hide_canvas()
+func screen_shot(folder_name: String) -> Texture2D:
+	game_menu.hide_canvas()
 	await RenderingServer.frame_post_draw
-	var image: Image  = get_viewport().get_texture().get_image()
-	image.save_jpg(path)
-	get_parent().get_owner().show_canvas()
+	var image: Image = ScreenshotManager.save_image(SavesManager.PathManager.build_path(SavesManager.SAVE_PATH + folder_name, "/image", ".jpg"), get_viewport().get_texture().get_image())
+	game_menu.show_canvas()
+
 	return ImageTexture.create_from_image(image)
 
-func set_image_save(_texture: Texture2D) -> void:
-	SaveImage.texture = _texture
-
-
-func set_missions_text(_text: String) -> void: # в будущем будет
-	pass
+func set_save_image(texture: Texture2D) -> void:
+	SaveImage.texture = texture

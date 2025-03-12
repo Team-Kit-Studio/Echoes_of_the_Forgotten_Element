@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://tool/tema/new_theme.tres" id="1_ua2jr"]
 [ext_resource type="Script" uid="uid://br2jj2yncih0b" path="res://systems/Game_Menu/game_menu.gd" id="1_wlcv1"]
 [ext_resource type="PackedScene" uid="uid://dbufcy3dd28sr" path="res://systems/Game_Menu/Settings/Settings.tscn" id="3_c3v2n"]
-[ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://systems/save_system/GUI/Save_menu.tscn" id="4_ka88v"]
+[ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://global/saves_manager/gui/scenes/Save_menu.tscn" id="4_ka88v"]
 
 [node name="Game Menu" type="Control"]
 layout_mode = 3

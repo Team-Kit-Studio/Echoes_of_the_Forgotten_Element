@@ -21,7 +21,7 @@ buses/default_bus_layout="res://tool/tema/default_bus_layout.tres"
 [autoload]
 
 Persistence="*res://global/persistence/persistence.gd"
-SaveSustem="*res://systems/save_system/save_sustem.gd"
+SavesManager="*res://global/saves_manager/scripts/SavesManager.gd"
 
 [display]
 
