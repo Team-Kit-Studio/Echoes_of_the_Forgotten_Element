@@ -30,6 +30,8 @@ func _data() -> void:
 
 
 	SavesManager.emit_signal("data_updated", temp.data["data"], temp_matadata.data["metadata"])
+	temp = null
+	temp_matadata = null
 
 
 func load_from_data(data: Dictionary) -> void:

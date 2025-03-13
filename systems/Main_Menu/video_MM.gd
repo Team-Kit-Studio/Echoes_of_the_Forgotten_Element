@@ -14,23 +14,21 @@ func _ready() -> void:
 	var vsync_index = Persistence.config.get_value("Видео", "vsync")
 	%VSync.selected = vsync_index
 	
-func _on_fullscreen_toggled(_toggled_on) -> void:
+func _on_fullscreen_toggled() -> void:
 	if %Fullscreen.button_pressed == true:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		Persistence.config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_FULLSCREEN)
 		%Borderless.button_pressed = false
-		
-	elif %Borderless.button_pressed == true:
-		pass
-		
-		
+
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 		Persistence.config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_MAXIMIZED)
 	
 	Persistence.save_data()
+	# elif %Borderless.button_pressed == true:
+	# 	pass
 	
-func _on_borderless_toggled(toggled_on) -> void:
+func _on_borderless_toggled(toggled_on: bool) -> void:
 	if %Borderless.button_pressed == true:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		Persistence.config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_WINDOWED)
@@ -44,7 +42,7 @@ func _on_borderless_toggled(toggled_on) -> void:
 	Persistence.config.set_value("Видео", "borderless", toggled_on)
 	Persistence.save_data()
 	
-func _on_v_sync_item_selected(index) -> void:
+func _on_v_sync_item_selected(index: int) -> void:
 	DisplayServer.window_set_vsync_mode(index)
 	Persistence.config.set_value("Видео", "vsync", index)
 	Persistence.save_data()	

@@ -2,47 +2,33 @@ extends Node
 
 const PATH_CONFIG: String = "user://user_config/settings_test.cfg" # задаем путь для конфига, он по стандарту
 
-var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
-
+var config: ConfigFile
 
 func _ready() -> void:
 	if !FileAccess.file_exists(PATH_CONFIG):
-		var settings_data: PrivateSettingsData = PrivateSettingsData.new()
-		ConfigUtil.save_config(settings_data.settings, PATH_CONFIG)
-
-
-		config.set_value("Управление", "up", "W")
-		config.set_value("Управление","left","A")
-		config.set_value("Управление", "down", "S")
-		config.set_value("Управление","right","D")
-			
-		config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_WINDOWED)
-		config.set_value("Видео", "borderless", false)
-		config.set_value("Видео", "vsync", DisplayServer.VSYNC_ENABLED)
-		
-		config.set_value("Аудио", "master_volume", 1.0)
-		config.set_value("Аудио", "sfx_volume", 1.0)
-		config.set_value("Аудио", "music_volume", 1.0)
-		
-
-		save_data()
+		new_config_settings()
+	
 	else:
+		
 		load_data()
 			
 			
+
 func save_data() -> void:
-	config.save(PATH_CONFIG)
-	
-	
+	ConfigUtil.save_config(config, PATH_CONFIG)
+
+func new_config_settings() -> void:
+	pass
+	# config = ConfigUtil.set_config_dict(PrivateDefaultSettingsData.new().settings)
+
 func load_data() -> void:
-	if config.load(PATH_CONFIG) != OK:
+	if not FileAccess.file_exists(PATH_CONFIG):
+		new_config_settings()
 		save_data()
-		print("нет доступа, сохраняю")
-		return 
-	
-	load_control_settings()
+
+	config = ConfigUtil.load_config(PATH_CONFIG)
 	load_video_settings()
-	print("Загрузка файла", "\n")
+	load_control_settings()
 
 
 func save_control_settings(action: String, event: InputEvent) -> void:
@@ -54,6 +40,7 @@ func save_control_settings(action: String, event: InputEvent) -> void:
 		
 	config.set_value("Управление", action, event_str)
 	save_data()
+
 
 
 func load_control_settings() -> Dictionary:
@@ -87,34 +74,12 @@ func load_video_settings() -> void:
 	
 func save_audio_settings(key:String, value: float)-> void:
 	config.set_value("Аудио", key, value)
-	save_data()
+
 	
 	
 func load_audio_settings() -> Dictionary:
 	var audio_settings: Dictionary
 	for key in config.get_section_keys("Аудио"):
 		audio_settings[key] = config.get_value("Аудио", key)
-	# print(audio_settings)
 	return audio_settings
 	
-class PrivateSettingsData:
-	const settings: Dictionary = {
-		"Управление": {
-			"up": "W",
-			"left": "A",
-			"down": "S",
-			"right": "D"
-		},
-
-		"Видео": {
-			"fullscreen": DisplayServer.WINDOW_MODE_WINDOWED,
-			"borderless": false,
-			"vsync": DisplayServer.VSYNC_ENABLED
-		},
-
-		"Аудио": {
-			"master_volume": 1.0,
-			"sfx_volume": 1.0,
-			"music_volume": 1.0
-		}	
-	}
