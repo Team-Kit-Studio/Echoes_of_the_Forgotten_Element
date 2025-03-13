@@ -22,6 +22,11 @@ buses/default_bus_layout="res://tool/tema/default_bus_layout.tres"
 
 Persistence="*res://global/persistence/persistence.gd"
 SavesManager="*res://global/saves_manager/scripts/SavesManager.gd"
+Main="*res://global/main/Main.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [display]
 

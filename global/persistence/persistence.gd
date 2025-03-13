@@ -1,20 +1,16 @@
 extends Node
 
-const FORBIDDEN_CHARACTERS: Array[String] = [
-	"\\", "/", ":", "*", "?", "\"", "<", ">", "|", "#", "%", "{", "}",
-     "^", "~", "[", "]", ";", ",", ".", "(", ")", "@", "$", "&", "!", "+"
-]
-
-const PATH_CONFIG: String = "user://user_config/settings.cfg" # задаем путь для конфига, он по стандарту
+const PATH_CONFIG: String = "user://user_config/settings_test.cfg" # задаем путь для конфига, он по стандарту
 
 var config: ConfigFile = ConfigFile.new()   # создаем новый конфиг и записываем в переменную config
 
 
 func _ready() -> void:
-	if !DirAccess.dir_exists_absolute("user://user_config/"):
-		DirAccess.make_dir_absolute("user://user_config/")
-
 	if !FileAccess.file_exists(PATH_CONFIG):
+		var settings_data: PrivateSettingsData = PrivateSettingsData.new()
+		ConfigUtil.save_config(settings_data.settings, PATH_CONFIG)
+
+
 		config.set_value("Управление", "up", "W")
 		config.set_value("Управление","left","A")
 		config.set_value("Управление", "down", "S")
@@ -27,7 +23,6 @@ func _ready() -> void:
 		config.set_value("Аудио", "master_volume", 1.0)
 		config.set_value("Аудио", "sfx_volume", 1.0)
 		config.set_value("Аудио", "music_volume", 1.0)
-		
 		
 
 		save_data()
@@ -51,7 +46,7 @@ func load_data() -> void:
 
 
 func save_control_settings(action: String, event: InputEvent) -> void:
-	var event_str
+	var event_str: String
 	if event is InputEventKey:
 		event_str = OS.get_keycode_string(event.physical_keycode)
 	elif event is InputEventMouseButton:
@@ -90,7 +85,7 @@ func load_video_settings() -> void:
 	var vsync_index: int = config.get_value("Видео", "vsync")
 	DisplayServer.window_set_vsync_mode(vsync_index)
 	
-func save_audio_settings(key:String, value)-> void:
+func save_audio_settings(key:String, value: float)-> void:
 	config.set_value("Аудио", key, value)
 	save_data()
 	
@@ -102,4 +97,24 @@ func load_audio_settings() -> Dictionary:
 	# print(audio_settings)
 	return audio_settings
 	
-	
+class PrivateSettingsData:
+	const settings: Dictionary = {
+		"Управление": {
+			"up": "W",
+			"left": "A",
+			"down": "S",
+			"right": "D"
+		},
+
+		"Видео": {
+			"fullscreen": DisplayServer.WINDOW_MODE_WINDOWED,
+			"borderless": false,
+			"vsync": DisplayServer.VSYNC_ENABLED
+		},
+
+		"Аудио": {
+			"master_volume": 1.0,
+			"sfx_volume": 1.0,
+			"music_volume": 1.0
+		}	
+	}

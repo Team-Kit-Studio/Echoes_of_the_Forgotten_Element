@@ -1,4 +1,4 @@
-extends FileDirManager
+extends Node 
 
 signal load(folder_name: String)
 signal save(folder_name: String)
@@ -12,7 +12,7 @@ signal load_from_data(data: Dictionary)
 
 const SAVE_PATH: String = "user://saves/"
 
-var save_data: SaveData = SaveData.new()
+var save_data: PrivateSaveData
 
 
 # Функция, вызываемая при готовности узла
@@ -21,10 +21,6 @@ func _ready() -> void:
 	self.save.connect(save_handler)
 	self.delete.connect(delete_handler)
 	self.data_updated.connect(data_update_handler)
-
-	# Создание папки saves при инициализации
-	DirUtil.create_folders("user://", ["saves", "puppu"])
-
 
 # Обработчик сигнала загрузки
 func load_handler(file_path: String) -> void:
@@ -44,26 +40,28 @@ func delete_handler(folder_name: String) -> void:
 
 # Обработчик сигнала обновления данных
 func data_update_handler(data: Dictionary, metadata: Dictionary) -> void:
+	save_data = PrivateSaveData.new()
 	save_data.set_data(data)
 	save_data.set_metadata(metadata)
-	
+
 
 # Сохранение данных игры в файл
 func game_save_to_file(folder_name: String) -> void:
 	var path: String = PathManager.build_directory_path(SAVE_PATH, folder_name)
 	DirUtil.create_folders(path, [""])
-	FilesUtil.save_to_file_as_format_json(save_data.data, path, "data", ".sav")
-	FilesUtil.save_to_file_as_format_json(save_data.metadata, path , "metadata", ".json")
-
+	FileUtil.save_to_file_as_format_json(save_data.data, path, "data", ".sav")
+	FileUtil.save_to_file_as_format_json(save_data.metadata, path , "metadata", ".json")
+	save_data = null
+	
 
 # Загрузка данных игры из файла
 func game_load_from_file(folder_name: String) -> void:
-	var load_content: Dictionary = FilesUtil.file_read(PathManager.build_path(SAVE_PATH + folder_name, "/data", ".sav"))
+	var load_content: Dictionary = FileUtil.file_read(PathManager.build_path(SAVE_PATH + folder_name, "/data", ".sav"))
 	self.emit_signal("load_from_data", load_content)
 
 
 # Класс для хранения данных сохранения
-class SaveData:
+class PrivateSaveData extends RefCounted:
 	var data: Dictionary = {}
 	var metadata: Dictionary = {}
 

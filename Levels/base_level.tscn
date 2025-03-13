@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6ad5iinnl48e"]
 
-[ext_resource type="Script" uid="uid://y5i57ijodhow" path="res://levels/base_level.gd" id="1_ecdjt"]
-[ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://objects/Living creatues/Player/player.tscn" id="2_2qewm"]
+[ext_resource type="Script" uid="uid://y5i57ijodhow" path="res://Levels/base_level.gd" id="1_ecdjt"]
+[ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://Objects/Living creatues/Player/player.tscn" id="2_2qewm"]
 [ext_resource type="PackedScene" uid="uid://c7q8p6a0l30lf" path="res://systems/Game_Menu/game_menu.tscn" id="2_3650t"]
 [ext_resource type="Texture2D" uid="uid://dvxr4qbdj61cy" path="res://sprite/Fire_Spirit/Attack.png" id="4_51p1h"]
 

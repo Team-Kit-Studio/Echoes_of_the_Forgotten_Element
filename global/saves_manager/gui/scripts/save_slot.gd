@@ -58,7 +58,7 @@ func update_time_ready() -> void:
 	handle_date_time(Time.get_date_dict_from_system(), Time.get_time_dict_from_system())
 
 func update_time_json() -> void:
-	var time_data: Dictionary = SavesManager.FilesUtil.file_read(SavesManager.PathManager.build_path(SavesManager.SAVE_PATH + self.name, "/metadata" , ".json"))
+	var time_data: Dictionary = FileUtil.file_read(PathManager.build_path(SavesManager.SAVE_PATH + self.name, "/metadata" , ".json"))
 	if time_data != {}:
 		handle_date_time(time_data["last_modified_time"]["date"], time_data["last_modified_time"]["time"])
 

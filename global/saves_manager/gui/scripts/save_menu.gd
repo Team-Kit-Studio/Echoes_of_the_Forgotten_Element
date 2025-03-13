@@ -12,16 +12,16 @@ signal create_new_save(_name: String)
 @onready var SaveImage: TextureRect = $Panel/SaveInfo/SaveImage
 
 var SaveSlot: Resource = preload("res://global/saves_manager/gui/scenes/SaveSlot.tscn")
-var game_menu: Node 
 
+var game_menu: Node 
 var current_save: Node
 
 func _ready() -> void:
 	game_menu = get_parent().get_owner()
 
-	self.create_new_save.connect(Callable(self, "create_new_save_handler"))
-	self.update_current_node.connect(Callable(self, "update_current_node_handler"))
-	Confirm.confirm_apply.connect(Callable(self, "confirm_apply_handler"))
+	self.create_new_save.connect(create_new_save_handler)
+	self.update_current_node.connect(update_current_node_handler)
+	Confirm.confirm_apply.connect(confirm_apply_handler)
 
 	save_create_ready()
 
@@ -34,8 +34,8 @@ func create_new_save_handler(save_name: String) -> void:
 	SavesManager.emit_signal("save", _name)
 	create_visual_save(_name, true)
 
-func confirm_apply_handler(_mode) -> void:
-	const mode: Dictionary = {
+func confirm_apply_handler(_mode: String) -> void:
+	const mode: Dictionary[String, String] = {
 		"Delete": "delete",
 		"Overwrite": 'overwrite',
 		"Load": "load"
@@ -45,7 +45,7 @@ func confirm_apply_handler(_mode) -> void:
 
 # Save Menu
 func _on_new_save_button_pressed() -> void:
-	const _call: Dictionary = {
+	const _call: Dictionary[String, String] = {
 		"Создать": "save_menu_show",
 		"Перезаписать": "confirm_overwtite"
 	}
@@ -104,7 +104,7 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 	SaveList.add_child(inst_slot)
 
 func save_create_ready() -> void:
-	for save_name in SavesManager.DirUtil.get_files_in_directory(SavesManager.SAVE_PATH):
+	for save_name: String in DirUtil.get_files_in_directory(SavesManager.SAVE_PATH):
 		create_visual_save(save_name, false)
 
 # Create unique save name
@@ -117,7 +117,7 @@ func get_unique_save_name(base_name: String) -> String:
 	return _name
 
 func find_save(_name: String) -> Node:
-	for node in SaveList.get_children():
+	for node: Node in SaveList.get_children():
 		if node.name == _name:
 			return node
 	return null
@@ -153,7 +153,9 @@ func overwrite() -> void:
 func load() -> void:
 	game_menu.color_rect_show()
 	SavesManager.emit_signal("load", current_save.name)
-
+	SaveList.move_child(current_save, 0)
+	reset_scroll()
+	
 func _on_load_pressed() -> void:
 	Confirm.set_text("Вы уверены, что хотите загрузить \nсохранение? \nВсе не сохраненные данные будут потеряны!")
 	Confirm.confirm_show("Load")
@@ -161,10 +163,13 @@ func _on_load_pressed() -> void:
 func screen_shot(folder_name: String) -> Texture2D:
 	game_menu.hide_canvas()
 	await RenderingServer.frame_post_draw
-	var image: Image = ScreenshotManager.save_image(SavesManager.PathManager.build_path(SavesManager.SAVE_PATH + folder_name, "/image", ".jpg"), get_viewport().get_texture().get_image())
+	var image: Image = ScreenshotManager.save_image(PathManager.build_path(SavesManager.SAVE_PATH + folder_name, "/image", ".jpg"), get_viewport().get_texture().get_image())
 	game_menu.show_canvas()
 
 	return ImageTexture.create_from_image(image)
 
 func set_save_image(texture: Texture2D) -> void:
 	SaveImage.texture = texture
+
+func reset_scroll() -> void:
+	$Panel/VBoxContainer/MarginContainer/ScrollContainer.set_deferred("scroll_vertical", 0)

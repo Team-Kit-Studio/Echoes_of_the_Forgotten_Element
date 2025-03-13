@@ -42,7 +42,7 @@ func show_invalid_name_message() -> void:
 
 # Функция для проверки ограничений на вводимый текст
 func check_restrictions(input_text: String) -> String:
-	for letter in input_text:
-		if letter in Persistence.FORBIDDEN_CHARACTERS:
+	for letter: String in input_text:
+		if letter in Main.FORBIDDEN_CHARACTERS:
 			return ""
 	return input_text

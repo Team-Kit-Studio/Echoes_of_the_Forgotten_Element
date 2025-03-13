@@ -16,47 +16,47 @@ func _data() -> void:
 	temp_matadata.data["metadata"]["last_modified_time"]["time"] = Time.get_time_dict_from_system()
 
 
-	for enemy in $Objects/Enemy.get_children():
+	for enemy: Node in $Objects/Enemy.get_children():
 		if enemy.data():
 			temp["data"]["enemy"].append(enemy.data())
 
-	for allies in $Objects/Allies.get_children():
+	for allies: Node in $Objects/Allies.get_children():
 		if allies.data():
 			temp["data"]["allies"].append(allies.data())
 
-	for items in $Items.get_children():
+	for items: Node in $Items.get_children():
 		if items.data():
 			temp["data"]["items"].append(items.data())
+
 
 	SavesManager.emit_signal("data_updated", temp.data["data"], temp_matadata.data["metadata"])
 
 
 func load_from_data(data: Dictionary) -> void:
-	print(data)
 	delete_node()
 	if data:
-		for enemy in data["enemy"]:
+		for enemy: Dictionary in data["enemy"]:
 			pass
 
-		for allies in data["allies"]:
+		for allies: Dictionary in data["allies"]:
 			pass
 
-		for items in data["items"]:
+		for items: Dictionary in data["items"]:
 			pass
 
 	load_player(data)
 
 func delete_node() -> void:
-	for enemy in $Objects/Enemy.get_children():
+	for enemy: Node in $Objects/Enemy.get_children():
 		$Objects/Enemy.remove_child(enemy)
 		enemy.queue_free()
 
-	for allies in $Objects/Allies.get_children():
+	for allies: Node in $Objects/Allies.get_children():
 		$Objects/Allies.remove_child(allies)
 		allies.queue_free()
 
 
-	for items in $Items.get_children():
+	for items: Node in $Items.get_children():
 		$Items.remove_child(items)
 		items.queue_free()
 

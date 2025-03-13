@@ -1,15 +1,15 @@
 extends TabBar
 
-@onready var Music = %music
-@onready var sfx_value = %Sound_FX
-@onready var audio_num_music_text = $HBoxContainer/VBoxContainer3/Audio_Num_LBL
-@onready var audio_num_sfx_text = $HBoxContainer/VBoxContainer3/Audio_Num_LBL2
+@onready var Music := %music
+@onready var sfx_value := %Sound_FX
+@onready var audio_num_music_text := $HBoxContainer/VBoxContainer3/Audio_Num_LBL
+@onready var audio_num_sfx_text := $HBoxContainer/VBoxContainer3/Audio_Num_LBL2
 
 
 var bus_index_music : int = 2
 var bus_index_sfx : int = 1
 
-func _ready():
+func _ready() -> void:
 	get_bus_index()
 	
 	
@@ -31,14 +31,14 @@ func set_audio_num_text() -> void:
 	audio_num_sfx_text.text = str(sfx_value.value * 100)
 
 
-func _on_music_value_changed(value):
+func _on_music_value_changed(value: float) -> void:
 	set_volume(bus_index_music, value)
 
 
-func _on_sound_fx_value_changed(value):
+func _on_sound_fx_value_changed(value: float) -> void:
 	set_volume(bus_index_sfx, value)
 
-func set_volume(idx, value) -> void:
+func set_volume(idx: int, value: float) -> void:
 	AudioServer.set_bus_volume_db(idx, linear_to_db(value))
 	if idx == bus_index_music:
 		Persistence.config.set_value("Аудио", "music_volume", value)
