@@ -1,6 +1,6 @@
 class_name  PrivateDefaultSettingsData
 
-const settings: Dictionary = {
+const SETTINGS: Dictionary = {
     "Управление": {
         "up": "W",
         "left": "A",

@@ -1,32 +1,32 @@
 extends Node2D
 
-enum {
+enum intro_state {
 	INTRO_IN,
 	INTRO_OUT
 }
-var _call: Dictionary = {
-	INTRO_IN: "state_intro_in",
-	INTRO_OUT: "state_intro_out"
-}
 
-var state = INTRO_IN
+var state: intro_state:
+	set(value):
+		match value:
+			intro_state.INTRO_IN:
+				state_intro_in()
+			
+			intro_state.INTRO_OUT:
+				state_intro_out()
+
 
 @onready var timer: Timer = $Timer
 
-func _ready():
+func _ready() -> void:
+	state = intro_state.INTRO_IN
 	$DirectionalLight2D.visible = true
 
-
-func _process(_delta):
-	call(_call[state])
-
-	
-func state_intro_in():
+func state_intro_in() -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property($DirectionalLight2D, "energy", 0 , 2.5)
 
 
-func state_intro_out():
+func state_intro_out() -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property($DirectionalLight2D, "energy", 1.5 , 1)
 	await tween.finished
@@ -34,6 +34,6 @@ func state_intro_out():
 
 
 
-func _on_timer_timeout():
-	state = INTRO_OUT
+func _on_timer_timeout() -> void:
+	state = intro_state.INTRO_OUT
 	

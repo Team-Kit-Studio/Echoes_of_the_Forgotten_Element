@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbufcy3dd28sr"]
 
-[ext_resource type="Script" uid="uid://cns2st7uxkvd3" path="res://systems/Game_Menu/Settings/видео.gd" id="1_6r7jw"]
-[ext_resource type="Script" uid="uid://cc51t6uh3lwme" path="res://systems/Game_Menu/Settings/аудио.gd" id="2_ue2tf"]
-[ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://systems/input_Button/input_settings.tscn" id="3_i4v1l"]
+[ext_resource type="Script" uid="uid://cns2st7uxkvd3" path="res://global/setting_loader/scripts/VideoSettingGM.gd" id="1_6r7jw"]
+[ext_resource type="Script" uid="uid://cc51t6uh3lwme" path="res://global/setting_loader/scripts/AudioSettingsGM.gd" id="2_ue2tf"]
+[ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://systems/Input_Button/input_settings.tscn" id="3_i4v1l"]
 
 [node name="Settings" type="TabContainer"]
 process_mode = 3
@@ -11,10 +11,9 @@ offset_top = 2.0
 offset_right = 850.0
 offset_bottom = 650.0
 mouse_filter = 0
-current_tab = 1
+current_tab = 0
 
 [node name="Видео" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 script = ExtResource("1_6r7jw")
 metadata/_tab_index = 0
@@ -67,13 +66,15 @@ size_flags_vertical = 6
 selected = 0
 allow_reselect = true
 item_count = 3
-popup/item_0/text = "Включено"
-popup/item_1/text = "Отключено"
+popup/item_0/text = "Отключено"
+popup/item_0/id = 11
+popup/item_1/text = "Включено"
 popup/item_1/id = 1
 popup/item_2/text = "Адаптивная"
 popup/item_2/id = 2
 
 [node name="Аудио" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("2_ue2tf")
 metadata/_tab_index = 1

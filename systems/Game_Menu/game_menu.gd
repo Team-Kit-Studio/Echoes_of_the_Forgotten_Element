@@ -15,15 +15,16 @@ func _ready() -> void:
 	settings.visible = false	
 	pauseButton.visible = true
 
-func _process(_delta) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
+
 	if not saveMenu.visible:
 		saveLoadButton.button_pressed = false
 	
 func load_control_from_settings() -> void:
-	var keybinds = Persistence.load_control_settings()
-	for action in keybinds.keys():
+	var keybinds: Dictionary[String, InputEvent] = SettingsLoader.load_control_settings()
+	for action: String in keybinds.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybinds[action])
 	
@@ -100,4 +101,3 @@ func color_rect_show() -> void:
 	tween.tween_property(colorrect, "modulate", Color(1, 1, 1, 0.1), 1.5)
 	await tween.finished
 	colorrect.hide() 
-

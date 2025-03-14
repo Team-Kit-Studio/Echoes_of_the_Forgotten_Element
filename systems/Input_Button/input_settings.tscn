@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfjbl0hur6i7v"]
 
 [ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://tool/tema/new_theme.tres" id="1_xqpyk"]
-[ext_resource type="Script" uid="uid://d4hj0soiy830h" path="res://systems/input_Button/input_settings.gd" id="2_o1560"]
-[ext_resource type="PackedScene" uid="uid://b0fh2i8c4j20p" path="res://systems/input_Button/Child_Files/button.tscn" id="3_cg6ue"]
+[ext_resource type="Script" uid="uid://d4hj0soiy830h" path="res://systems/Input_Button/input_settings.gd" id="2_o1560"]
+[ext_resource type="PackedScene" uid="uid://b0fh2i8c4j20p" path="res://systems/Input_Button/Child_Files/button.tscn" id="3_cg6ue"]
 
 [node name="InputSettings" type="Control"]
 layout_mode = 3

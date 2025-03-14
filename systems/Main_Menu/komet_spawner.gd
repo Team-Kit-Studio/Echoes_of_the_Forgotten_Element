@@ -13,5 +13,3 @@ func rand_propetry() -> Dictionary:
 	}
 	return property
 
-func spawn(rand_property: Dictionary) -> void:
-	pass 

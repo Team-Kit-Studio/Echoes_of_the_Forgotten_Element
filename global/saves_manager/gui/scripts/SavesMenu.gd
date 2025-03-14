@@ -10,15 +10,13 @@ signal create_new_save(_name: String)
 @onready var SaveButton: Button = $Panel/NewSaveButton
 @onready var SaveList: VBoxContainer = $Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH/SavelistV
 @onready var SaveImage: TextureRect = $Panel/SaveInfo/SaveImage
+@onready var game_menu: Node = get_parent().get_owner()
 
 var SaveSlot: Resource = preload("res://global/saves_manager/gui/scenes/SaveSlot.tscn")
 
-var game_menu: Node 
 var current_save: Node
 
 func _ready() -> void:
-	game_menu = get_parent().get_owner()
-
 	self.create_new_save.connect(create_new_save_handler)
 	self.update_current_node.connect(update_current_node_handler)
 	Confirm.confirm_apply.connect(confirm_apply_handler)
@@ -35,22 +33,26 @@ func create_new_save_handler(save_name: String) -> void:
 	create_visual_save(_name, true)
 
 func confirm_apply_handler(_mode: String) -> void:
-	const mode: Dictionary[String, String] = {
-		"Delete": "delete",
-		"Overwrite": 'overwrite',
-		"Load": "load"
-	}
+	match _mode:
+		"Delete":
+			delete()
 
-	call(mode[_mode])
+		"Overwrite": 
+			overwrite()
+
+		"Load": 
+			_load()
+
 
 # Save Menu
 func _on_new_save_button_pressed() -> void:
-	const _call: Dictionary[String, String] = {
-		"Создать": "save_menu_show",
-		"Перезаписать": "confirm_overwtite"
-	}
+	match SaveButton.text:
+		"Создать":
+			save_menu_show()
 
-	call(_call[SaveButton.text])
+		"Перезаписать":
+			confirm_overwtite()
+
 
 func confirm_overwtite() -> void:
 	Confirm.set_text("Вы уверены, что хотите перезаписать \nсохранение? \nЭто действие нельзя отменить!")
@@ -93,13 +95,14 @@ func create_visual_save(_name: String, is_ready: bool) -> void:
 	var inst_slot: Node = SaveSlot.instantiate()
 	inst_slot.name = _name
 	inst_slot.custom_minimum_size = Vector2(375.135, 70.185)
-	if is_ready:
-		inst_slot.image_save = await screen_shot(_name)
-		inst_slot.update_time_ready()
-	else:
-		inst_slot.update_time_json()
-		inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
-
+	match is_ready:
+		true:
+			inst_slot.image_save = await screen_shot(_name)
+			inst_slot.update_time_ready()
+		
+		false:
+			inst_slot.update_time_json()
+			inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
 
 	SaveList.add_child(inst_slot)
 
@@ -141,16 +144,15 @@ func delete() -> void:
 	delete_visual_save()
 
 # Overwrite save
-func overwrite_save() -> void:
-	SavesManager.emit_signal("save", current_save.name)
-	current_save = null
-
 func overwrite() -> void:
 	current_save.update_time_ready()
-	overwrite_save()
+	screen_shot(current_save.name)
+	SavesManager.emit_signal("save", current_save.name)
+	current_save.image_save = await screen_shot(current_save.name)
+	current_save = null
 
 # Load save
-func load() -> void:
+func _load() -> void:
 	game_menu.color_rect_show()
 	SavesManager.emit_signal("load", current_save.name)
 	SaveList.move_child(current_save, 0)
