@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 	%VSync.selected = SettingsLoader.config.get_value("Видео", "vsync")
 	
-func _on_fullscreen_toggled() -> void:
+func _on_fullscreen_toggled(_toggled_on: bool) -> void:
 	if %Fullscreen.button_pressed == true:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		SettingsLoader.config.set_value("Видео", "fullscreen", DisplayServer.WINDOW_MODE_FULLSCREEN)
