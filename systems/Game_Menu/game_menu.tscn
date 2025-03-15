@@ -70,6 +70,7 @@ custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
 toggle_mode = true
+action_mode = 0
 text = "Настройки"
 
 [node name="Exit Menu" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
@@ -110,6 +111,7 @@ offset_right = -741.0
 offset_bottom = -382.0
 
 [node name="Pause" type="Button" parent="CanvasLayer"]
+visible = false
 offset_left = 1.0
 offset_right = 57.0
 offset_bottom = 31.0
