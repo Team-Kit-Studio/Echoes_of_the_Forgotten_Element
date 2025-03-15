@@ -12,8 +12,6 @@ signal create_new_save(_name: String)
 @onready var SaveImage: TextureRect = $Panel/SaveInfo/SaveImage
 @onready var game_menu: Node = get_parent().get_owner()
 
-var SaveSlot: Resource = preload("res://global/saves_manager/gui/scenes/SaveSlot.tscn")
-
 var current_save: Node
 
 func _ready() -> void:
@@ -37,14 +35,17 @@ func confirm_apply_handler(_mode: String) -> void:
 		"Delete":
 			delete()
 			save_saves_list_config()
+			current_save = null
 
 		"Overwrite": 
 			overwrite()
 			save_saves_list_config()
+			current_save = null
 
 		"Load": 
 			_load()
 			save_saves_list_config()
+			current_save = null
 
 
 # Save Menu
@@ -79,73 +80,53 @@ func _on_cancel_pressed() -> void:
 
 # Save Slot 
 func enable_buttons() -> void:
-	await get_tree().create_timer(0.13).timeout
-	set_text_save_button("Перезаписать")
-	DeleteButton.disabled = false
-	LoadButton.disabled = false
+	if current_save:
+		await get_tree().create_timer(0.13).timeout
+		set_text_save_button("Перезаписать")
+		DeleteButton.disabled = false
+		LoadButton.disabled = false
 
 func disable_buttons() -> void:
-	await get_tree().create_timer(0.13).timeout
-	set_text_save_button("Создать")
-	DeleteButton.disabled = true
-	LoadButton.disabled = true
+	if current_save:
+		await get_tree().create_timer(0.13).timeout
+		set_text_save_button("Создать")
+		DeleteButton.disabled = true
+		LoadButton.disabled = true
 
 func set_text_save_button(_text: String) -> void:
 	SaveButton.text = _text
 
-# Create visual save
-func create_visual_save(_name: String, currently: bool) -> void:
-	while SaveList.get_children().size() != DirUtil.get_directory(SavesManager.SAVE_PATH).size():
-		var inst_slot: Node = SaveSlot.instantiate()
-		inst_slot.name = _name
-		inst_slot.custom_minimum_size = Vector2i(375, 70)
-		match currently:
-			true:
-				inst_slot.image_save = await screen_shot(_name)
-				inst_slot.update_time_ready()
-
-			false:
-				inst_slot.update_time_json()
-				inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
-			
-
-		SaveList.add_child(inst_slot)
-
 func create_save_from_directory(names: PackedStringArray) -> void:
 	for save_name: String in names:
-		print(save_name)
 		var inst_slot: Node = _base_save(save_name)
 		inst_slot.update_time_json()
 		inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, save_name + "/image", ".jpg"))
-		SaveList.add_child(inst_slot)
-		save_saves_list_config()
 
 func _create_new_save(_name: String) -> void:
 	var inst_slot: Node = _base_save(_name)
 	inst_slot.image_save = await screen_shot(_name)
 	inst_slot.update_time_ready()
-	SaveList.add_child(inst_slot)
-	save_saves_list_config()
 
 func _base_save(_name: String) -> Node:
-	var inst_slot: Node = SaveSlot.instantiate()
+	var inst_slot: Node = load("res://global/saves_manager/gui/scenes/SaveSlot.tscn").instantiate()
 	inst_slot.name = _name
 	inst_slot.custom_minimum_size = Vector2i(375, 70)
+	SaveList.add_child(inst_slot)
+	save_saves_list_config()
 	return inst_slot
 
 func save_saves_list_config() -> void:
 	var data: Array[Dictionary] = []
 	var config: ConfigFile = ConfigUtil.load_config(SavesManager.SAVE_LIST_PATH)
 	var children: Array[Node] = SaveList.get_children()
-	if not config.get_sections().size() != children.size() and not config:
-		config = null
+	if not config:
 		return
+	
 	for child in children:
 		data.append({
 			"section_key": child.name,
-			"index": child.get_index()
 		})
-	config = null
+
 	SavesManager.save_list_saves_config(data)
 
 func save_create_ready() -> void:
@@ -157,8 +138,8 @@ func save_create_ready() -> void:
 	if config.get_sections().size() > 0:
 		for section_key: String in config.get_sections():
 			names.append(config.get_value(section_key, config.get_section_keys(section_key)[0]))
-		print(names)
-				
+
+		create_save_from_directory(names)
 
 
 # Create unique save name
@@ -186,7 +167,6 @@ func delete_visual_save() -> void:
 	if current_save:
 		SaveList.remove_child(current_save)
 		current_save.call_deferred("queue_free")
-		current_save = null
 	else:
 		return
 
@@ -200,7 +180,6 @@ func overwrite() -> void:
 	screen_shot(current_save.name)
 	SavesManager.emit_signal("save", current_save.name)
 	current_save.image_save = await screen_shot(current_save.name)
-	current_save = null
 
 # Load save
 func _load() -> void:

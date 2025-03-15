@@ -15,8 +15,6 @@ const SAVE_LIST_PATH: StringName = "user://saves/_save_list.cfg"
 
 var save_data: PrivateSaveData
 
-
-
 # Функция, вызываемая при готовности узла
 func _ready() -> void:
 	self.load.connect(load_handler)
