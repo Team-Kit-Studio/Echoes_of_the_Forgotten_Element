@@ -11,7 +11,7 @@ const SETTINGS: Dictionary = {
     "Видео": {
         "fullscreen": DisplayServer.WINDOW_MODE_WINDOWED,
         "borderless": false,
-        "vsync": DisplayServer.VSYNC_ENABLED
+        "vsync": DisplayServer.VSYNC_DISABLED
     },
 
     "Аудио": {

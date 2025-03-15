@@ -17,7 +17,6 @@ func _ready() -> void:
 	audio.visible = false
 	controls.visible = false
 
-	
 
 func intro() -> void:
 	var tween: Tween = get_tree().create_tween()

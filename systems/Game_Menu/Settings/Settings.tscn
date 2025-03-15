@@ -11,9 +11,10 @@ offset_top = 2.0
 offset_right = 850.0
 offset_bottom = 650.0
 mouse_filter = 0
-current_tab = 0
+current_tab = 2
 
 [node name="Видео" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("1_6r7jw")
 metadata/_tab_index = 0
@@ -67,7 +68,7 @@ selected = 0
 allow_reselect = true
 item_count = 3
 popup/item_0/text = "Отключено"
-popup/item_0/id = 11
+popup/item_0/id = 0
 popup/item_1/text = "Включено"
 popup/item_1/id = 1
 popup/item_2/text = "Адаптивная"
@@ -149,7 +150,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Управление" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 

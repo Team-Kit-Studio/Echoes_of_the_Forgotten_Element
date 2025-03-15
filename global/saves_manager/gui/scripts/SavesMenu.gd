@@ -30,18 +30,21 @@ func update_current_node_handler(_node: Node) -> void:
 func create_new_save_handler(save_name: String) -> void:
 	var _name: String = get_unique_save_name(save_name)
 	SavesManager.emit_signal("save", _name)
-	create_visual_save(_name, true)
+	_create_new_save(_name)
 
 func confirm_apply_handler(_mode: String) -> void:
 	match _mode:
 		"Delete":
 			delete()
+			save_saves_list_config()
 
 		"Overwrite": 
 			overwrite()
+			save_saves_list_config()
 
 		"Load": 
 			_load()
+			save_saves_list_config()
 
 
 # Save Menu
@@ -91,24 +94,72 @@ func set_text_save_button(_text: String) -> void:
 	SaveButton.text = _text
 
 # Create visual save
-func create_visual_save(_name: String, is_ready: bool) -> void:
+func create_visual_save(_name: String, currently: bool) -> void:
+	while SaveList.get_children().size() != DirUtil.get_directory(SavesManager.SAVE_PATH).size():
+		var inst_slot: Node = SaveSlot.instantiate()
+		inst_slot.name = _name
+		inst_slot.custom_minimum_size = Vector2i(375, 70)
+		match currently:
+			true:
+				inst_slot.image_save = await screen_shot(_name)
+				inst_slot.update_time_ready()
+
+			false:
+				inst_slot.update_time_json()
+				inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
+			
+
+		SaveList.add_child(inst_slot)
+
+func create_save_from_directory(names: PackedStringArray) -> void:
+	for save_name: String in names:
+		print(save_name)
+		var inst_slot: Node = _base_save(save_name)
+		inst_slot.update_time_json()
+		inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, save_name + "/image", ".jpg"))
+		SaveList.add_child(inst_slot)
+		save_saves_list_config()
+
+func _create_new_save(_name: String) -> void:
+	var inst_slot: Node = _base_save(_name)
+	inst_slot.image_save = await screen_shot(_name)
+	inst_slot.update_time_ready()
+	SaveList.add_child(inst_slot)
+	save_saves_list_config()
+
+func _base_save(_name: String) -> Node:
 	var inst_slot: Node = SaveSlot.instantiate()
 	inst_slot.name = _name
-	inst_slot.custom_minimum_size = Vector2(375.135, 70.185)
-	match is_ready:
-		true:
-			inst_slot.image_save = await screen_shot(_name)
-			inst_slot.update_time_ready()
-		
-		false:
-			inst_slot.update_time_json()
-			inst_slot.image_save = ImageTexture.create_from_image(ScreenshotManager.load_image(SavesManager.SAVE_PATH, _name + "/image", ".jpg"))
+	inst_slot.custom_minimum_size = Vector2i(375, 70)
+	return inst_slot
 
-	SaveList.add_child(inst_slot)
+func save_saves_list_config() -> void:
+	var data: Array[Dictionary] = []
+	var config: ConfigFile = ConfigUtil.load_config(SavesManager.SAVE_LIST_PATH)
+	var children: Array[Node] = SaveList.get_children()
+	if not config.get_sections().size() != children.size() and not config:
+		config = null
+		return
+	for child in children:
+		data.append({
+			"section_key": child.name,
+			"index": child.get_index()
+		})
+	config = null
+	SavesManager.save_list_saves_config(data)
 
 func save_create_ready() -> void:
-	for save_name: String in DirUtil.get_files_in_directory(SavesManager.SAVE_PATH):
-		create_visual_save(save_name, false)
+	var config: ConfigFile = ConfigUtil.load_config(SavesManager.SAVE_LIST_PATH)
+	var names: PackedStringArray = PackedStringArray()
+	if not config:
+		return
+		
+	if config.get_sections().size() > 0:
+		for section_key: String in config.get_sections():
+			names.append(config.get_value(section_key, config.get_section_keys(section_key)[0]))
+		print(names)
+				
+
 
 # Create unique save name
 func get_unique_save_name(base_name: String) -> String:

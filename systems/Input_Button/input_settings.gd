@@ -21,19 +21,21 @@ func _ready() -> void:
 
 
 func _create_action_list() -> void:
-	for item in changable_list.get_children():
-		item.queue_free()
+	for item: Node in changable_list.get_children():
+		item.call_deferred("queue_free")
 
-	for action in INPUT_ACTION:
+	for action: StringName in INPUT_ACTION.keys():
+		print(action)
 		var button: Button = input_button_scene.instantiate()
-		var action_label: Node = button.find_child("LabelAction")
-		var input_label: Node = button.find_child("InputLabel")
+		var action_label: Label = button.find_child("LabelAction")
+		var input_label: Label = button.find_child("InputLabel")
 		
 		action_label.text = INPUT_ACTION[action]
 		
 		var events: Array[InputEvent] = InputMap.action_get_events(action)
 		if events.size() > 0:
 			input_label.text = events[0].as_text().trim_suffix(" (Physical)")
+
 		else:
 			input_label.text = ""
 		changable_list.add_child(button)
@@ -44,7 +46,7 @@ func _on_button_pressed(button: Button, action: String)-> void:
 		is_remapping = true
 		action_to_remap = action
 		remaping_button = button
-		button.find_child("InputLabel").text ="Press Key To Bind"
+		button.find_child("InputLabel").text = "Press Key To Bind"
 		
 func _input(event: InputEvent) -> void:
 	if not is_remapping:
@@ -63,11 +65,10 @@ func _input(event: InputEvent) -> void:
 		remaping_button = null
 			
 func load_control_from_settings() -> void:
-	var keybinds: Dictionary[String, InputEvent] = SettingsLoader.load_control_settings()
+	var keybinds: Dictionary[String, InputEvent] = SettingsLoader.get_key_binds()
 	for action: String in keybinds.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybinds[action])
 
 func _update_changable_list(button: Button, event: InputEvent) -> void:
 	button.find_child("InputLabel").text = event.as_text().trim_suffix(" (Physical)")
-	

@@ -1,6 +1,10 @@
 extends TabBar
 
 func _ready() -> void:
+	set_property()
+
+
+func set_property() -> void:
 	if SettingsLoader.config.get_value("Видео", "fullscreen") == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		%Fullscreen.button_pressed = true
 	
@@ -8,6 +12,7 @@ func _ready() -> void:
 		%Borderless.button_pressed = true
 	
 	%VSync.selected = SettingsLoader.config.get_value("Видео", "vsync")
+	
 
 func _on_fullscreen_toggled(_toggled_on: bool) -> void:
 	if %Fullscreen.button_pressed == true:
@@ -43,4 +48,4 @@ func _on_v_sync_item_selected(index: int) -> void:
 	DisplayServer.window_set_vsync_mode(index)
 	SettingsLoader.config.set_value("Видео", "vsync", index)
 	SettingsLoader.save_data()
-	
+
