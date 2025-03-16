@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://btqyey534q0o3"]
+
+[ext_resource type="Texture2D" uid="uid://chcnulq1cg2hj" path="res://sprite/Gamecraft Project.png" id="1_yde1n"]
+
+[sub_resource type="GDScript" id="GDScript_fl4vb"]
+script/source = "extends Sprite2D
+
+var property: Dictionary:
+    set(value):
+        property = value
+        set_property()
+
+var speed_x: float
+var speed_y: float
+
+func _physics_process(_delta: float) -> void:
+    is_on_screen()
+    move()
+
+func set_property() -> void:
+    self.scale = Vector2(property[\"scale\"], property[\"scale\"])
+    self.rotation += property[\"rotation_speed\"]
+    speed_x = property[\"speed_x\"]
+    speed_y = property[\"speed_y\"]
+
+
+func is_on_screen() -> void:
+    if not $VisibleOnScreenNotifier2D.is_on_screen():
+        self.queue_free()
+
+func move() -> void:
+    position.x += -speed_x
+    # position.y += property[\"speed_y\"]
+
+    "
+
+[node name="Komet" type="Sprite2D"]
+scale = Vector2(0.132554, 0.115775)
+texture = ExtResource("1_yde1n")
+script = SubResource("GDScript_fl4vb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.14441e-05, -3.8147e-06)
+scale = Vector2(11.3161, 11.2287)

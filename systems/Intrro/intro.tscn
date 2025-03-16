@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx1jgn04pcpgi"]
+
+[ext_resource type="Script" uid="uid://5hn78cmgxcdr" path="res://systems/Intrro/intro.gd" id="1_j1yth"]
+[ext_resource type="Texture2D" uid="uid://chcnulq1cg2hj" path="res://sprite/Gamecraft Project.png" id="2_j887q"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j3vti"]
+
+[node name="intro" type="Node2D"]
+script = ExtResource("1_j1yth")
+
+[node name="Лого" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(571, 355)
+scale = Vector2(1.08294, 1.1039)
+texture = ExtResource("2_j887q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(577, 343.25)
+scale = Vector2(1190, 687.5)
+texture = SubResource("CanvasTexture_j3vti")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+energy = 1.37
+blend_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

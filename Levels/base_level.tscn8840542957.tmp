@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6ad5iinnl48e"]
+
+[ext_resource type="Script" uid="uid://y5i57ijodhow" path="res://Levels/base_level.gd" id="1_ecdjt"]
+[ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://Objects/Living creatues/Player/player.tscn" id="2_2qewm"]
+[ext_resource type="PackedScene" uid="uid://c7q8p6a0l30lf" path="res://systems/Game_Menu/game_menu.tscn" id="2_3650t"]
+[ext_resource type="Texture2D" uid="uid://dvxr4qbdj61cy" path="res://sprite/Fire_Spirit/Attack.png" id="4_51p1h"]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_ecdjt")
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="Players" type="Node" parent="Objects"]
+
+[node name="Player" parent="Objects/Players" instance=ExtResource("2_2qewm")]
+
+[node name="Enemy" type="Node" parent="Objects"]
+
+[node name="Allies" type="Node" parent="Objects"]
+
+[node name="Items" type="Node" parent="."]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Game Menu" parent="GUI" instance=ExtResource("2_3650t")]
+layout_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(359, 418)
+scale = Vector2(1, 0.8125)
+texture = ExtResource("4_51p1h")

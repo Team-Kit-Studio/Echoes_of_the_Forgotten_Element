@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjbl0hur6i7v"]
+
+[ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://tool/tema/new_theme.tres" id="1_xqpyk"]
+[ext_resource type="Script" uid="uid://d4hj0soiy830h" path="res://systems/Input_Button/input_settings.gd" id="2_o1560"]
+[ext_resource type="PackedScene" uid="uid://b0fh2i8c4j20p" path="res://systems/Input_Button/Child_Files/button.tscn" id="3_cg6ue"]
+
+[node name="InputSettings" type="Control"]
+layout_mode = 3
+anchor_top = 0.21142
+anchor_right = 0.505208
+anchor_bottom = 0.748457
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_xqpyk")
+script = ExtResource("2_o1560")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ChangableList" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
+[node name="Button2" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
+[node name="Button3" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
+[node name="Button4" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button3" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button4" to="." method="_on_button_pressed"]
