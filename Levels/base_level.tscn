@@ -13,6 +13,7 @@ script = ExtResource("1_ecdjt")
 [node name="Players" type="Node" parent="Objects"]
 
 [node name="Player" parent="Objects/Players" instance=ExtResource("2_2qewm")]
+position = Vector2(-216, 317)
 
 [node name="Enemy" type="Node" parent="Objects"]
 
@@ -21,6 +22,7 @@ script = ExtResource("1_ecdjt")
 [node name="Items" type="Node" parent="."]
 
 [node name="GUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

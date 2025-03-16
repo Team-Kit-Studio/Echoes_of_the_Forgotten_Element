@@ -1,6 +1,6 @@
 [gd_scene load_steps=103 format=3 uid="uid://dn8amxut4hceo"]
 
-[ext_resource type="Script" uid="uid://16rki2uh0xsf" path="res://objects/Living creatues/Player/player.gd" id="1_fkakk"]
+[ext_resource type="Script" uid="uid://16rki2uh0xsf" path="res://Objects/Living creatues/Player/player.gd" id="1_fkakk"]
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://sprite/Player/SpriteList_Idle.png" id="2_ssr53"]
 [ext_resource type="Texture2D" uid="uid://cc30f5f1mltn4" path="res://sprite/Player/SpriteList_Player_Run.png" id="3_bd4fw"]
 
@@ -848,7 +848,6 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(298, 331)
 script = ExtResource("1_fkakk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -856,23 +855,18 @@ shape = SubResource("CapsuleShape2D_lkmih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mnje")
-animation = &"State_Run_Up"
+animation = &"State_Idle_FromSide"
 autoplay = "State_Idle_FromSide"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2, 0)
 zoom = Vector2(2.4, 2.4)
 process_callback = 0
-limit_left = -200
-limit_top = 200
-limit_right = 1250
-limit_bottom = 783
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7u71e")
+&"": SubResource("AnimationLibrary_7u71e")
 }
 autoplay = "State_Idle_FromSide"
