@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cy6gdpglic3a4"
-path="res://.godot/imported/Thorn_palnt_shadow2_1.png-72f58ba107f4305555dc87408a7a1b9c.ctex"
+path="res://.godot/imported/Thorn_palnt_shadow2_1.png-135665de72a8ab8fce2572d6ab08f98d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Thorn_palnt_shadow2_1.png"
-dest_files=["res://.godot/imported/Thorn_palnt_shadow2_1.png-72f58ba107f4305555dc87408a7a1b9c.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Thorn_palnt_shadow2_1.png"
+dest_files=["res://.godot/imported/Thorn_palnt_shadow2_1.png-135665de72a8ab8fce2572d6ab08f98d.ctex"]
 
 [params]
 

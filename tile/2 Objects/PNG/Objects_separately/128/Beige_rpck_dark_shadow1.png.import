@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwu6hr4lagjue"
-path="res://.godot/imported/Beige_rpck_dark_shadow1.png-ba30489381a612161853277af4e5b329.ctex"
+path="res://.godot/imported/Beige_rpck_dark_shadow1.png-81096a7f4333043d91eed0779ce72946.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/128/Beige_rpck_dark_shadow1.png"
-dest_files=["res://.godot/imported/Beige_rpck_dark_shadow1.png-ba30489381a612161853277af4e5b329.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/128/Beige_rpck_dark_shadow1.png"
+dest_files=["res://.godot/imported/Beige_rpck_dark_shadow1.png-81096a7f4333043d91eed0779ce72946.ctex"]
 
 [params]
 

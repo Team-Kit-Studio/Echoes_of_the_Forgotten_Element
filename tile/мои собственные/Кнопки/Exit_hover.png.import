@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyxbdaup5xfg5"
-path="res://.godot/imported/Exit_hover.png-6ba7540b57963397a0b632b8548d78f9.ctex"
+path="res://.godot/imported/Exit_hover.png-c677477f83a5e0649a4157e1b052e562.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/мои собственные/Кнопки/Exit_hover.png"
-dest_files=["res://.godot/imported/Exit_hover.png-6ba7540b57963397a0b632b8548d78f9.ctex"]
+source_file="res://assets/tile/мои собственные/Кнопки/Exit_hover.png"
+dest_files=["res://.godot/imported/Exit_hover.png-c677477f83a5e0649a4157e1b052e562.ctex"]
 
 [params]
 

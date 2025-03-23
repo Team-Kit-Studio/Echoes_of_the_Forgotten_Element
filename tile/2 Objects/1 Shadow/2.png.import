@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dukqu1q16khen"
-path="res://.godot/imported/2.png-e887de4ce1fba6a747745c755ed41a47.ctex"
+path="res://.godot/imported/2.png-710e0fdef13e393fa81db1bcc714b1e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/1 Shadow/2.png"
-dest_files=["res://.godot/imported/2.png-e887de4ce1fba6a747745c755ed41a47.ctex"]
+source_file="res://assets/tile/2 Objects/1 Shadow/2.png"
+dest_files=["res://.godot/imported/2.png-710e0fdef13e393fa81db1bcc714b1e8.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyposta41lnnu"
-path="res://.godot/imported/Grave_shadow3_9.png-87f17abdcb84dc4df9143fea122dd732.ctex"
+path="res://.godot/imported/Grave_shadow3_9.png-5775caf973f0239fc22de38ba343e2e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Grave_shadow3_9.png"
-dest_files=["res://.godot/imported/Grave_shadow3_9.png-87f17abdcb84dc4df9143fea122dd732.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Grave_shadow3_9.png"
+dest_files=["res://.godot/imported/Grave_shadow3_9.png-5775caf973f0239fc22de38ba343e2e1.ctex"]
 
 [params]
 

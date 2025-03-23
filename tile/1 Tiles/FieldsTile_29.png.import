@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btoxgglunctmc"
-path="res://.godot/imported/FieldsTile_29.png-eb321994c47b00903683be34fec207b3.ctex"
+path="res://.godot/imported/FieldsTile_29.png-5c5f3ca292803e88cc7a0bd27272b575.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/1 Tiles/FieldsTile_29.png"
-dest_files=["res://.godot/imported/FieldsTile_29.png-eb321994c47b00903683be34fec207b3.ctex"]
+source_file="res://assets/tile/1 Tiles/FieldsTile_29.png"
+dest_files=["res://.godot/imported/FieldsTile_29.png-5c5f3ca292803e88cc7a0bd27272b575.ctex"]
 
 [params]
 

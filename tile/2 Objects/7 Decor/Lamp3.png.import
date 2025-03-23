@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb3qstdetgjhn"
-path="res://.godot/imported/Lamp3.png-d5837d1001cec4ce1ca68cb05cf877b3.ctex"
+path="res://.godot/imported/Lamp3.png-58a409eb029ef868722c22961eda12ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/7 Decor/Lamp3.png"
-dest_files=["res://.godot/imported/Lamp3.png-d5837d1001cec4ce1ca68cb05cf877b3.ctex"]
+source_file="res://assets/tile/2 Objects/7 Decor/Lamp3.png"
+dest_files=["res://.godot/imported/Lamp3.png-58a409eb029ef868722c22961eda12ea.ctex"]
 
 [params]
 

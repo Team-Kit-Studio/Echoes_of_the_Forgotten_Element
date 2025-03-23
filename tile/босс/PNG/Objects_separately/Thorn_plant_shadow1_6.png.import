@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pv7q6sddxxbs"
-path="res://.godot/imported/Thorn_plant_shadow1_6.png-cd1c398a6e65d183630bf06218d6a6e9.ctex"
+path="res://.godot/imported/Thorn_plant_shadow1_6.png-0a5755a3c9bdcf453ab42bccd9bc8bd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Thorn_plant_shadow1_6.png"
-dest_files=["res://.godot/imported/Thorn_plant_shadow1_6.png-cd1c398a6e65d183630bf06218d6a6e9.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Thorn_plant_shadow1_6.png"
+dest_files=["res://.godot/imported/Thorn_plant_shadow1_6.png-0a5755a3c9bdcf453ab42bccd9bc8bd5.ctex"]
 
 [params]
 

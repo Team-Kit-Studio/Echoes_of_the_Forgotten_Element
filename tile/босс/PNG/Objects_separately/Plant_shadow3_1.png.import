@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b437o7l8qknf5"
-path="res://.godot/imported/Plant_shadow3_1.png-79340644d4e49c25d2c01bd336734a3f.ctex"
+path="res://.godot/imported/Plant_shadow3_1.png-d1d0dc85157dccc603de5a7505828c0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Plant_shadow3_1.png"
-dest_files=["res://.godot/imported/Plant_shadow3_1.png-79340644d4e49c25d2c01bd336734a3f.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Plant_shadow3_1.png"
+dest_files=["res://.godot/imported/Plant_shadow3_1.png-d1d0dc85157dccc603de5a7505828c0d.ctex"]
 
 [params]
 

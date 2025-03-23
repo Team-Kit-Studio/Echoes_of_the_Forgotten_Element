@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4nt67su3ffhn"
-path="res://.godot/imported/4.png-3834ffa110579f32e50bc31ec788e4a3.ctex"
+path="res://.godot/imported/4.png-eb4fb1b0a8d567b6009b8c7d208bde55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/3 Animated Objects/1 Flag/4.png"
-dest_files=["res://.godot/imported/4.png-3834ffa110579f32e50bc31ec788e4a3.ctex"]
+source_file="res://assets/tile/3 Animated Objects/1 Flag/4.png"
+dest_files=["res://.godot/imported/4.png-eb4fb1b0a8d567b6009b8c7d208bde55.ctex"]
 
 [params]
 

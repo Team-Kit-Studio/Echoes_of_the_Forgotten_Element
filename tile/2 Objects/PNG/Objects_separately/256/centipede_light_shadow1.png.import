@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b76l84po7q1na"
-path="res://.godot/imported/centipede_light_shadow1.png-f8248a4fdc7b158dc164207b9b4c4ca8.ctex"
+path="res://.godot/imported/centipede_light_shadow1.png-6a1a7a3f4c5a3e5d3a1682100528c4bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/256/centipede_light_shadow1.png"
-dest_files=["res://.godot/imported/centipede_light_shadow1.png-f8248a4fdc7b158dc164207b9b4c4ca8.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/256/centipede_light_shadow1.png"
+dest_files=["res://.godot/imported/centipede_light_shadow1.png-6a1a7a3f4c5a3e5d3a1682100528c4bf.ctex"]
 
 [params]
 

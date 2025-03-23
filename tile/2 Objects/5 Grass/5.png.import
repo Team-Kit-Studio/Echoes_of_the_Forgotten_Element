@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0muqok7rpgrt"
-path="res://.godot/imported/5.png-d2c34086180bac114ba30312376a879a.ctex"
+path="res://.godot/imported/5.png-d2a730b7486a8b8b5f0149f77acd1a33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/5 Grass/5.png"
-dest_files=["res://.godot/imported/5.png-d2c34086180bac114ba30312376a879a.ctex"]
+source_file="res://assets/tile/2 Objects/5 Grass/5.png"
+dest_files=["res://.godot/imported/5.png-d2a730b7486a8b8b5f0149f77acd1a33.ctex"]
 
 [params]
 

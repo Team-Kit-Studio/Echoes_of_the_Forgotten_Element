@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv8eb50hv7gjq"
-path="res://.godot/imported/Start.png-94d37f7d53f556f28e7470c71087e1e9.ctex"
+path="res://.godot/imported/Start.png-2f07f3453b102537afa07a368915f5aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/мои собственные/Кнопки/Start.png"
-dest_files=["res://.godot/imported/Start.png-94d37f7d53f556f28e7470c71087e1e9.ctex"]
+source_file="res://assets/tile/мои собственные/Кнопки/Start.png"
+dest_files=["res://.godot/imported/Start.png-2f07f3453b102537afa07a368915f5aa.ctex"]
 
 [params]
 

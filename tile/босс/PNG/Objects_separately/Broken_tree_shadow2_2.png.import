@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c13py5gtfrvd"
-path="res://.godot/imported/Broken_tree_shadow2_2.png-ef878c82a2e2410ffe33f31881442451.ctex"
+path="res://.godot/imported/Broken_tree_shadow2_2.png-f404e4ff7bbc9dbd19bee768f3c2f979.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Broken_tree_shadow2_2.png"
-dest_files=["res://.godot/imported/Broken_tree_shadow2_2.png-ef878c82a2e2410ffe33f31881442451.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Broken_tree_shadow2_2.png"
+dest_files=["res://.godot/imported/Broken_tree_shadow2_2.png-f404e4ff7bbc9dbd19bee768f3c2f979.ctex"]
 
 [params]
 

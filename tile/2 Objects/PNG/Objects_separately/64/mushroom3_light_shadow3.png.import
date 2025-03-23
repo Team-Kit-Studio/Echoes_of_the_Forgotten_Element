@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5tdh31avj5eg"
-path="res://.godot/imported/mushroom3_light_shadow3.png-247028179fc3d49669b3bbe658a60ec5.ctex"
+path="res://.godot/imported/mushroom3_light_shadow3.png-111f56fc7f03eb990b5df92a53d7b544.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/64/mushroom3_light_shadow3.png"
-dest_files=["res://.godot/imported/mushroom3_light_shadow3.png-247028179fc3d49669b3bbe658a60ec5.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/64/mushroom3_light_shadow3.png"
+dest_files=["res://.godot/imported/mushroom3_light_shadow3.png-111f56fc7f03eb990b5df92a53d7b544.ctex"]
 
 [params]
 

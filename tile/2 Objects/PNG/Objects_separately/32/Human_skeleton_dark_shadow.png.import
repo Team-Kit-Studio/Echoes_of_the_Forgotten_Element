@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dih5h571a2tkc"
-path="res://.godot/imported/Human_skeleton_dark_shadow.png-e8fec9e2bc52ea3f38797d4cc451ccae.ctex"
+path="res://.godot/imported/Human_skeleton_dark_shadow.png-7826c8b5417d3fa93f02d109a2ba3758.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/32/Human_skeleton_dark_shadow.png"
-dest_files=["res://.godot/imported/Human_skeleton_dark_shadow.png-e8fec9e2bc52ea3f38797d4cc451ccae.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/32/Human_skeleton_dark_shadow.png"
+dest_files=["res://.godot/imported/Human_skeleton_dark_shadow.png-7826c8b5417d3fa93f02d109a2ba3758.ctex"]
 
 [params]
 

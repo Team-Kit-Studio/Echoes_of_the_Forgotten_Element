@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c56de78yxmj3d"
-path="res://.godot/imported/magic_circle_light_shadow.png-27d86e7fe0cef18c4a958bc7871f3686.ctex"
+path="res://.godot/imported/magic_circle_light_shadow.png-f786ca1f8278c930398b0ceef525561d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/128/magic_circle_light_shadow.png"
-dest_files=["res://.godot/imported/magic_circle_light_shadow.png-27d86e7fe0cef18c4a958bc7871f3686.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/128/magic_circle_light_shadow.png"
+dest_files=["res://.godot/imported/magic_circle_light_shadow.png-f786ca1f8278c930398b0ceef525561d.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkyc6cdqd8dit"
-path="res://.godot/imported/Start_Hover.png-21a3f9a5da1bbabf9a8bcf61ae646e04.ctex"
+path="res://.godot/imported/Start_Hover.png-9f2807ffd4fbd079e227f413667bb49f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/мои собственные/Кнопки/Start_Hover.png"
-dest_files=["res://.godot/imported/Start_Hover.png-21a3f9a5da1bbabf9a8bcf61ae646e04.ctex"]
+source_file="res://assets/tile/мои собственные/Кнопки/Start_Hover.png"
+dest_files=["res://.godot/imported/Start_Hover.png-9f2807ffd4fbd079e227f413667bb49f.ctex"]
 
 [params]
 

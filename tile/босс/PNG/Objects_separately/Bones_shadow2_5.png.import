@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://i1naa75y5ecc"
-path="res://.godot/imported/Bones_shadow2_5.png-d800cc2d047b4ba4a61a6fab52c13d4f.ctex"
+path="res://.godot/imported/Bones_shadow2_5.png-8fec1413b077b93ddedc319cbe32684a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Bones_shadow2_5.png"
-dest_files=["res://.godot/imported/Bones_shadow2_5.png-d800cc2d047b4ba4a61a6fab52c13d4f.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Bones_shadow2_5.png"
+dest_files=["res://.godot/imported/Bones_shadow2_5.png-8fec1413b077b93ddedc319cbe32684a.ctex"]
 
 [params]
 

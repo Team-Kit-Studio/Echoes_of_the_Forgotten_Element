@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwdl0v6d6raop"
-path="res://.godot/imported/Rock_shadow3_1.png-b110442e0041223eaf9a2e038cf730ea.ctex"
+path="res://.godot/imported/Rock_shadow3_1.png-02ed2ab59a910b8f499827acb2cf92be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/босс/PNG/Objects_separately/Rock_shadow3_1.png"
-dest_files=["res://.godot/imported/Rock_shadow3_1.png-b110442e0041223eaf9a2e038cf730ea.ctex"]
+source_file="res://assets/tile/босс/PNG/Objects_separately/Rock_shadow3_1.png"
+dest_files=["res://.godot/imported/Rock_shadow3_1.png-02ed2ab59a910b8f499827acb2cf92be.ctex"]
 
 [params]
 

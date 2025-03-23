@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wn3hqtytdb6f"
-path="res://.godot/imported/Blue-green_crystal_light_shadow4.png-b07961b39e188ea5b0704d5767324610.ctex"
+path="res://.godot/imported/Blue-green_crystal_light_shadow4.png-471d7c8e1bdc856087ca77524b025266.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/16/Blue-green_crystal_light_shadow4.png"
-dest_files=["res://.godot/imported/Blue-green_crystal_light_shadow4.png-b07961b39e188ea5b0704d5767324610.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/16/Blue-green_crystal_light_shadow4.png"
+dest_files=["res://.godot/imported/Blue-green_crystal_light_shadow4.png-471d7c8e1bdc856087ca77524b025266.ctex"]
 
 [params]
 

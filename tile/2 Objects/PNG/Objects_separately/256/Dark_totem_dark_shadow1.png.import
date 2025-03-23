@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdn8boroprgqu"
-path="res://.godot/imported/Dark_totem_dark_shadow1.png-081a93dee5eade24d6d1dd1bf08f5803.ctex"
+path="res://.godot/imported/Dark_totem_dark_shadow1.png-a00354ce1aca3eac54d0cc7a140fffb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/256/Dark_totem_dark_shadow1.png"
-dest_files=["res://.godot/imported/Dark_totem_dark_shadow1.png-081a93dee5eade24d6d1dd1bf08f5803.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/256/Dark_totem_dark_shadow1.png"
+dest_files=["res://.godot/imported/Dark_totem_dark_shadow1.png-a00354ce1aca3eac54d0cc7a140fffb8.ctex"]
 
 [params]
 

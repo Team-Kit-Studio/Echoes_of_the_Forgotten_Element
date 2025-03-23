@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bas2w01e2kfo5"
-path="res://.godot/imported/Box1.png-5306586265342feb9d0f1bb102dbb7c2.ctex"
+path="res://.godot/imported/Box1.png-711306d9bf387cd1f74a74ba2a430d0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/7 Decor/Box1.png"
-dest_files=["res://.godot/imported/Box1.png-5306586265342feb9d0f1bb102dbb7c2.ctex"]
+source_file="res://assets/tile/2 Objects/7 Decor/Box1.png"
+dest_files=["res://.godot/imported/Box1.png-711306d9bf387cd1f74a74ba2a430d0a.ctex"]
 
 [params]
 

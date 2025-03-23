@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsa1b46t8c75u"
-path="res://.godot/imported/Тайлмап звезды.tga-87404fa346a2d7b8f7e81ba379b3e4a5.ctex"
+path="res://.godot/imported/Тайлмап звезды.tga-53eeffa5af1a261b67a01657fbeb14a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/мои собственные/Тайлмап звезды.tga"
-dest_files=["res://.godot/imported/Тайлмап звезды.tga-87404fa346a2d7b8f7e81ba379b3e4a5.ctex"]
+source_file="res://assets/tile/мои собственные/Тайлмап звезды.tga"
+dest_files=["res://.godot/imported/Тайлмап звезды.tga-53eeffa5af1a261b67a01657fbeb14a8.ctex"]
 
 [params]
 

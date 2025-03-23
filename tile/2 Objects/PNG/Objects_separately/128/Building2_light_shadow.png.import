@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnvulncsku5ak"
-path="res://.godot/imported/Building2_light_shadow.png-d9bed9ea925a265691fe06f98e4ea58e.ctex"
+path="res://.godot/imported/Building2_light_shadow.png-dd9e8d81a817a814820632d3748aec99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/128/Building2_light_shadow.png"
-dest_files=["res://.godot/imported/Building2_light_shadow.png-d9bed9ea925a265691fe06f98e4ea58e.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/128/Building2_light_shadow.png"
+dest_files=["res://.godot/imported/Building2_light_shadow.png-dd9e8d81a817a814820632d3748aec99.ctex"]
 
 [params]
 

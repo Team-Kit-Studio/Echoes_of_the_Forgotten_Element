@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1qrdtv0a4oeo"
-path="res://.godot/imported/Cloud_posion.png-844ebecb1f97b7c603ca2d3f2070ada9.ctex"
+path="res://.godot/imported/Cloud_posion.png-ddcef8f2f15f95c97292131d5800e8c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/Plent/Cloud_posion.png"
-dest_files=["res://.godot/imported/Cloud_posion.png-844ebecb1f97b7c603ca2d3f2070ada9.ctex"]
+source_file="res://assets/sprite/Plent/Cloud_posion.png"
+dest_files=["res://.godot/imported/Cloud_posion.png-ddcef8f2f15f95c97292131d5800e8c1.ctex"]
 
 [params]
 

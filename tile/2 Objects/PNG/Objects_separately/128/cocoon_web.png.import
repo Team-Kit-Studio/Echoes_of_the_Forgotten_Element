@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gq4prxr7h6sl"
-path="res://.godot/imported/cocoon_web.png-6846d6bea565aa2225d2345d7b7c5204.ctex"
+path="res://.godot/imported/cocoon_web.png-db03374a03fe24bdaf5c35682783708c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/128/cocoon_web.png"
-dest_files=["res://.godot/imported/cocoon_web.png-6846d6bea565aa2225d2345d7b7c5204.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/128/cocoon_web.png"
+dest_files=["res://.godot/imported/cocoon_web.png-db03374a03fe24bdaf5c35682783708c.ctex"]
 
 [params]
 

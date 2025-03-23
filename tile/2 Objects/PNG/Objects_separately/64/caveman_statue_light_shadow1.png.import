@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0y1fuigd11xc"
-path="res://.godot/imported/caveman_statue_light_shadow1.png-df7ecd93854c2c570a1b572f455c1d69.ctex"
+path="res://.godot/imported/caveman_statue_light_shadow1.png-3756f177e81241d08a0d90b693d9e2b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/64/caveman_statue_light_shadow1.png"
-dest_files=["res://.godot/imported/caveman_statue_light_shadow1.png-df7ecd93854c2c570a1b572f455c1d69.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/64/caveman_statue_light_shadow1.png"
+dest_files=["res://.godot/imported/caveman_statue_light_shadow1.png-3756f177e81241d08a0d90b693d9e2b1.ctex"]
 
 [params]
 

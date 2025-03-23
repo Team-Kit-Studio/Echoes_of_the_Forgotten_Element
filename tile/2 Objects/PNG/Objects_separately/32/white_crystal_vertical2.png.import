@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btcqbvbi3e647"
-path="res://.godot/imported/white_crystal_vertical2.png-bef2c96f6f99d479200c402c2174d940.ctex"
+path="res://.godot/imported/white_crystal_vertical2.png-de8b8074b1cf7a08635b222b98762b96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/32/white_crystal_vertical2.png"
-dest_files=["res://.godot/imported/white_crystal_vertical2.png-bef2c96f6f99d479200c402c2174d940.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/32/white_crystal_vertical2.png"
+dest_files=["res://.godot/imported/white_crystal_vertical2.png-de8b8074b1cf7a08635b222b98762b96.ctex"]
 
 [params]
 

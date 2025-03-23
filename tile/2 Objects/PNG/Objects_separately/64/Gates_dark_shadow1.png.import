@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ppf757jmi30l"
-path="res://.godot/imported/Gates_dark_shadow1.png-1f93e8fd5e7ef15f9938fe7258c2c754.ctex"
+path="res://.godot/imported/Gates_dark_shadow1.png-ba44319ffbc789234744a560065005b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/2 Objects/PNG/Objects_separately/64/Gates_dark_shadow1.png"
-dest_files=["res://.godot/imported/Gates_dark_shadow1.png-1f93e8fd5e7ef15f9938fe7258c2c754.ctex"]
+source_file="res://assets/tile/2 Objects/PNG/Objects_separately/64/Gates_dark_shadow1.png"
+dest_files=["res://.godot/imported/Gates_dark_shadow1.png-ba44319ffbc789234744a560065005b8.ctex"]
 
 [params]
 
