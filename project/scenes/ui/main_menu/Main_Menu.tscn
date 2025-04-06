@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=4 uid="uid://cc7qcsof7gam5"]
+[gd_scene load_steps=23 format=4 uid="uid://cc7qcsof7gam5"]
 
 [ext_resource type="Script" uid="uid://byl26cbrqt0b4" path="res://project/scripts/ui/main_menu/Main_Menu.gd" id="1_h15ec"]
 [ext_resource type="Texture2D" uid="uid://cbcyxtegi25uw" path="res://project/assets/tiles/timemap_space/tilemap space.png" id="2_4ydw1"]
-[ext_resource type="Texture2D" uid="uid://cny4pq7nojan0" path="res://project/assets/project_assets/NameGame.png" id="3_sywbp"]
 [ext_resource type="Texture2D" uid="uid://bf0qdsf4dh5ip" path="res://project/assets/sprites/ui/button_main_menu/Start.png" id="4_a214n"]
 [ext_resource type="Texture2D" uid="uid://nxqkoufxgsi5" path="res://project/assets/sprites/ui/button_main_menu/Start_Pressed.png" id="5_34mu2"]
 [ext_resource type="Texture2D" uid="uid://cru4ghk5c5q62" path="res://project/assets/sprites/ui/button_main_menu/Start_Hover.png" id="6_etry0"]
@@ -16,6 +15,8 @@
 [ext_resource type="Script" uid="uid://b38iswqaka4v2" path="res://project/scripts/ui/main_menu/settings/VideoSettingsMM.gd" id="13_32gmx"]
 [ext_resource type="Script" uid="uid://dn1d0nv8is5p6" path="res://project/scripts/ui/main_menu/settings/AudioSettingsMM.gd" id="14_h6pl6"]
 [ext_resource type="PackedScene" uid="uid://cfjbl0hur6i7v" path="res://project/scenes/ui/input_settings/input_settings.tscn" id="15_c86yk"]
+[ext_resource type="Texture2D" uid="uid://th1pjrjpyuud" path="res://project/assets/tiles/timemap_space/Planet.png" id="16_bi6or"]
+[ext_resource type="Texture2D" uid="uid://dvf81l4842gen" path="res://project/assets/tiles/timemap_space/LogoName.png" id="17_s2h7x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_deg2e"]
 texture = ExtResource("2_4ydw1")
@@ -153,18 +154,13 @@ blend_mode = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 325)
 
-[node name="NameGame" type="Sprite2D" parent="."]
-position = Vector2(580, 181)
-scale = Vector2(2.76697, 2.67443)
-texture = ExtResource("3_sywbp")
-
 [node name="Main_Menu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 8.0
-offset_top = 1.0
-offset_right = 1158.0
-offset_bottom = 653.0
+offset_left = -146.0
+offset_top = -8.0
+offset_right = 1004.0
+offset_bottom = 644.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("12_bi6or")
@@ -178,10 +174,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -49.0
-offset_top = -18.0
-offset_right = -1.0
-offset_bottom = 37.0
+offset_left = -106.0
+offset_top = -36.0
+offset_right = -58.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(7.25624, 5.65482)
@@ -511,6 +507,17 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Назад"
+
+[node name="Planet" type="Sprite2D" parent="."]
+position = Vector2(959, 413)
+rotation = -0.380501
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("16_bi6or")
+
+[node name="LogoName" type="Sprite2D" parent="."]
+position = Vector2(362, 89)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("17_s2h7x")
 
 [connection signal="pressed" from="Main_Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main_Menu/VBoxContainer/Options" to="." method="_on_options_pressed"]
