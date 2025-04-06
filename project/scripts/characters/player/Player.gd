@@ -1,0 +1,126 @@
+extends CharacterBody2D
+
+enum state {
+	MOVE,
+	DAMAGE,
+	ATTACK,
+	DEATH
+}
+
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
+
+const speed: int = 100
+
+const ANIMATION_NAMES: PackedStringArray = [
+	#idle animations names
+	StringName("State_Idle_FromSide"),  # 0
+	StringName("State_Idle_Up"),        # 1
+	StringName("State_Idle_Down"),      # 2
+	#run animations names
+	StringName("State_Run_FromSide"),   # 3
+	StringName("State_Run_Up"),         # 4
+	StringName("State_Run_Down"),       # 5
+]
+
+var alive: bool = true
+var health: int = 100
+var current_state: state = state.MOVE
+var combo: bool = false
+var input_direction: Vector2 = Vector2.ZERO
+var last_direction: Vector2i = Vector2.ZERO
+
+func get_animation_index(index: int, key: Vector2i) -> int:
+	match index:
+		0:  # idle
+			match key:
+				Vector2i.RIGHT, Vector2i.LEFT:
+					return 0
+				Vector2i.UP:
+					return 1
+				Vector2i.DOWN:
+					return 2
+				Vector2i.ZERO:
+					return 0
+		1:  # run
+			match key:
+				Vector2i.RIGHT, Vector2i.LEFT:
+					return 3
+				Vector2i.UP:
+					return 4
+				Vector2i.DOWN:
+					return 5
+				Vector2i.ZERO:
+					return 0
+	return 0  # значение по умолчанию
+
+func get_clean_direction(raw_input: Vector2) -> Vector2i:
+# Если вертикальное движение сильнее -> используем его
+	if abs(raw_input.y) > abs(raw_input.x):
+		return Vector2i(0, sign(raw_input.y))  # UP или DOWN
+		
+	elif raw_input.x != 0:
+		return Vector2i(sign(raw_input.x), 0)  # LEFT или RIGHT
+
+	return Vector2i.ZERO
+
+func _physics_process(_delta: float) -> void:
+	match current_state:
+		state.MOVE:
+			Move_State()
+			
+		state.DAMAGE:
+			pass
+
+		state.ATTACK:
+			pass
+
+		state.DEATH:
+			pass
+
+func _unhandled_input(_event: InputEvent) -> void:
+	input_direction = Input.get_vector("left", "right", "up", "down")
+	
+func Move_State() -> void:
+	if input_direction != Vector2.ZERO:
+		last_direction = get_clean_direction(input_direction)
+		
+		velocity = input_direction * speed
+		
+	else:
+		velocity = Vector2.ZERO  
+
+	Move_State_Play_Animation()
+	move_and_slide()
+
+func Move_State_Play_Animation() -> void:
+	if input_direction != Vector2.ZERO:
+		flip_anim()
+		play_animation(1, last_direction)
+
+	else:
+		play_animation(0, last_direction)
+
+func flip_anim() -> void:
+	if last_direction.x != 0: anim.flip_h = last_direction.x > 0
+
+func play_animation(index: int, key:=) -> void:
+	AnimPlayer.play(ANIMATION_NAMES[get_animation_index(index, key)])
+	flip_anim()
+
+func data() -> Dictionary:
+	var player_data: Dictionary = {
+		"file_name": get_scene_file_path(),
+		"pos": {"x": self.position.x, "y": self.position.y},
+		"health": health,
+		"last_dir": {"x": last_direction.x, "y": last_direction.y},
+	}
+	return player_data
+
+func load_data(_data: Dictionary) -> void:
+	position = Vector2(_data["pos"]["x"], _data["pos"]["y"])
+	last_direction = Vector2i(_data["last_dir"]["x"], _data["last_dir"]["y"])
+	play_animation(0, last_direction)
+	flip_anim()
+	
