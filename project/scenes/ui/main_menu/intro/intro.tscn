@@ -1,24 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://cx1jgn04pcpgi"]
 
 [ext_resource type="Script" uid="uid://b3ph7uojwbn1r" path="res://project/scripts/ui/main_menu/intro/intro.gd" id="1_j1yth"]
-[ext_resource type="Texture2D" uid="uid://cydwq13f2qwbu" path="res://project/assets/project_assets/Gamecraft Project.png" id="2_j887q"]
+[ext_resource type="Texture2D" uid="uid://blyg5etevd41d" path="res://project/assets/project_assets/Team Kit Studios.png" id="2_gj7h6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3vti"]
 
 [node name="intro" type="Node2D"]
 script = ExtResource("1_j1yth")
 
-[node name="Лого" type="Sprite2D" parent="."]
-top_level = true
-position = Vector2(571, 355)
-scale = Vector2(1.08294, 1.1039)
-texture = ExtResource("2_j887q")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(577, 343.25)
 scale = Vector2(1190, 687.5)
 texture = SubResource("CanvasTexture_j3vti")
+
+[node name="TeamKitStudios" type="Sprite2D" parent="."]
+position = Vector2(614, 311)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_gj7h6")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
