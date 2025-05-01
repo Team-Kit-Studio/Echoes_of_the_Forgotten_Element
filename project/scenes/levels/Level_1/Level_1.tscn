@@ -1,0 +1,172 @@
+[gd_scene load_steps=32 format=4 uid="uid://4iv1hqmclnma"]
+
+[ext_resource type="Texture2D" uid="uid://rptj47sosrqu" path="res://tile/мои собственные/Floor/Floor_Command_Post1.png" id="1_85ii1"]
+[ext_resource type="Texture2D" uid="uid://dwidjqs8os4tm" path="res://project/assets/tiles/tilemap_spaceship/Floor/Floor_Cabin.png" id="1_lpjld"]
+[ext_resource type="Texture2D" uid="uid://c2wtpyekc6uvk" path="res://tile/мои собственные/Wall/Wall1.png" id="1_vo4os"]
+[ext_resource type="Texture2D" uid="uid://boo2gx18iodct" path="res://tile/мои собственные/Floor/floor1.png" id="2_4xjd1"]
+[ext_resource type="Texture2D" uid="uid://cu4n6b3yeyuad" path="res://tile/мои собственные/Wall/Wall 3.png" id="2_oyocx"]
+[ext_resource type="Texture2D" uid="uid://bntnw7r5x51iv" path="res://tile/мои собственные/Wall/Wall2.png" id="2_qvpkp"]
+[ext_resource type="Texture2D" uid="uid://du6cxkotpp7ay" path="res://tile/мои собственные/Wall/Wall4.png" id="3_64jha"]
+[ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://project/scenes/characters/player/player.tscn" id="3_vo4os"]
+[ext_resource type="Texture2D" uid="uid://dxfaetxwqmkam" path="res://tile/мои собственные/Wall/Wall5.png" id="4_cba48"]
+[ext_resource type="Texture2D" uid="uid://coddn5r2546fr" path="res://tile/мои собственные/Wall/Wall6.png" id="5_cba48"]
+[ext_resource type="Texture2D" uid="uid://c0yw7huq357q1" path="res://tile/мои собственные/Wall/Wall7.png" id="6_uq5yu"]
+[ext_resource type="Texture2D" uid="uid://cnof62cmht83" path="res://tile/мои собственные/Floor/Floor_Corridor3.png" id="7_uq5yu"]
+[ext_resource type="Texture2D" uid="uid://dcseimr5cqgjt" path="res://tile/мои собственные/Wall/Wall8.png" id="11_563p0"]
+[ext_resource type="Texture2D" uid="uid://c2eu5kml1jure" path="res://tile/мои собственные/Wall/Wall9.png" id="12_hhtvi"]
+[ext_resource type="PackedScene" uid="uid://chbaujlj47kwf" path="res://project/scenes/objects/door_inter.tscn" id="13_hhtvi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lto12"]
+texture = ExtResource("1_lpjld")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+1:0/next_alternative_id = 2
+1:0/0 = 0
+2:0/next_alternative_id = 2
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cba48"]
+texture = ExtResource("1_vo4os")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qvpkp"]
+resource_name = "Floor1"
+texture = ExtResource("1_85ii1")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 3
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.881937, 0.881937, 0.881937, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2bar"]
+texture = ExtResource("7_uq5yu")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.699653, 0.699653, 0.699653, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcs0g"]
+atlas = ExtResource("2_4xjd1")
+region = Rect2(16, 16, 32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wqkh"]
+resource_name = "Floor2"
+texture = SubResource("AtlasTexture_tcs0g")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.762404, 0.762404, 0.762403, 1)
+
+[sub_resource type="TileSet" id="TileSet_poiis"]
+tile_offset_axis = 1
+tile_size = Vector2i(32, 32)
+sources/2 = SubResource("TileSetAtlasSource_qvpkp")
+sources/4 = SubResource("TileSetAtlasSource_4wqkh")
+sources/1 = SubResource("TileSetAtlasSource_cba48")
+sources/3 = SubResource("TileSetAtlasSource_w2bar")
+sources/0 = SubResource("TileSetAtlasSource_lto12")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oyocx"]
+texture = ExtResource("2_qvpkp")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 3
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.877616, 0.877616, 0.877616, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_563p0"]
+texture = ExtResource("2_oyocx")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hhtvi"]
+texture = ExtResource("3_64jha")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lpjld"]
+texture = ExtResource("4_cba48")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 4
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qjhnp"]
+texture = ExtResource("5_cba48")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18uq7"]
+texture = ExtResource("6_uq5yu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vcvnr"]
+texture = ExtResource("11_563p0")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.738795, 0.689952, 0.654591, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7cpc"]
+texture = ExtResource("12_hhtvi")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_64jha"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_oyocx")
+sources/2 = SubResource("TileSetAtlasSource_563p0")
+sources/3 = SubResource("TileSetAtlasSource_hhtvi")
+sources/4 = SubResource("TileSetAtlasSource_lpjld")
+sources/5 = SubResource("TileSetAtlasSource_qjhnp")
+sources/6 = SubResource("TileSetAtlasSource_18uq7")
+sources/7 = SubResource("TileSetAtlasSource_vcvnr")
+sources/8 = SubResource("TileSetAtlasSource_f7cpc")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Floor" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAA1ADcAAAABAAEAAAA2ADcAAAABAAEAAAA3ADcAAAABAAEAAAA1ADMAAAABAAAAAAA2ADMAAAABAAAAAAA1ADQAAAABAAEAAAA2ADQAAAABAAEAAAA2ADUAAAABAAEAAAA1ADUAAAABAAEAAAA1ADYAAAABAAEAAAA2ADYAAAABAAEAAAA3ADMAAAABAAAAAAA3ADQAAAABAAEAAAA3ADUAAAABAAEAAAA3ADYAAAABAAEAAAA0ADcAAAABAAEAAAA0ADYAAAABAAEAAAA0ADUAAAABAAEAAAA0ADQAAAABAAEAAAA0ADMAAAABAAAAAAA4ADYAAAABAAEAAAA4ADcAAAABAAEAAAA5ADcAAAABAAEAAAA5ADYAAAABAAEAAAAyADcAAAAAAAEAAAAyADYAAAAAAAEAAAAyADUAAAAAAAEAAAAyADQAAAAAAAEAAAAyADMAAAAAAAAAAAAzADMAAAABAAAAAAAzADQAAAABAAEAAAAzADUAAAABAAEAAAAzADYAAAABAAEAAAAzADcAAAABAAEAAAA6ADYAAAACAAEAAAA6ADcAAAACAAEAAAAyADgAAAAAAAEAAAAzADgAAAABAAEAAAA0ADgAAAABAAEAAAA1ADgAAAABAAEAAAA2ADgAAAABAAEAAAA3ADgAAAABAAEAAAA4ADgAAAABAAEAAAA5ADgAAAABAAEAAAA6ADgAAAACAAEAAAA4ADMAAAABAAAAAAA4ADQAAAABAAEAAAA4ADUAAAABAAEAAAA5ADMAAAABAAAAAAA5ADQAAAABAAEAAAA5ADUAAAABAAEAAAA6ADMAAAACAAAAAAA6ADQAAAACAAEAAAA6ADUAAAACAAEAAAA1ADIAAwAAAAAAAQA2ADIAAwAAAAAAAQAzADkAAgAAAAAAAAA0ADkAAAABAAIAAAA1ADkAAAABAAIAAAA2ADkAAAABAAIAAAA3ADkAAAABAAIAAAA4ADkAAAABAAIAAAA5ADkAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_poiis")
+
+[node name="Wall" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAA4ADIAAQAAAAAAAQA5ADIAAQAAAAAAAQA6ADIAAQAAAAAAAQAzADIAAQAAAAAAAQAyADIAAQAAAAAAAQA7ADIAAwAAAAAAAAAxADIAAwAAAAAAABA7ADMAAgAAAAAAAAA7ADQAAgAAAAAAAAA7ADUAAgAAAAAAAAA7ADYAAgAAAAAAAAA7ADcAAgAAAAAAAAA7ADgAAgAAAAAAAAAxADMAAgAAAAAAAQAxADQAAgAAAAAAAQAxADUAAgAAAAAAAQAxADYAAgAAAAAAAQAxADcAAgAAAAAAAQAxADgAAgAAAAAAAQAyADkABgAAAAAAAAA0ADIABAAAAAAAAAA3ADIABAAAAAAAAQAxADkABQAAAAAAAAA7ADkABQAAAAAAABA6ADkABgAAAAAAAAAzADkACAAAAAAAAAA0ADkABwAAAAAAAQA1ADkABwAAAAAAAQA2ADkABwAAAAAAAQA3ADkABwAAAAAAAQA4ADkABwAAAAAAAQA5ADkACAAAAAAAABA=")
+tile_set = SubResource("TileSet_64jha")
+
+[node name="Interactive" type="Node" parent="."]
+
+[node name="Door_Inter" parent="Interactive" instance=ExtResource("13_hhtvi")]
+position = Vector2(1728, 1616)
+
+[node name="Player" parent="." instance=ExtResource("3_vo4os")]
+position = Vector2(1794, 1789)
+scale = Vector2(1.3, 1.3)

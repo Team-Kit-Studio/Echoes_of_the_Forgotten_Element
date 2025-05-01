@@ -24,6 +24,13 @@ SettingsLoader="*res://project/scripts/core/SettingsLoader.gd"
 Main="*res://project/scripts/core/Main.gd"
 SavesManager="*res://project/scripts/core/SavesManager.gd"
 
+[display]
+
+window/size/viewport_width=1680
+window/size/viewport_height=1050
+window/size/borderless=true
+window/stretch/mode="viewport"
+
 [input]
 
 left={

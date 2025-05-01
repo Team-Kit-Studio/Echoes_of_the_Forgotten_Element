@@ -16,7 +16,7 @@ texture = SubResource("CanvasTexture_j3vti")
 
 [node name="TeamKitStudios" type="Sprite2D" parent="."]
 position = Vector2(614, 311)
-scale = Vector2(0.12, 0.12)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_gj7h6")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -28,5 +28,9 @@ blend_mode = 1
 process_callback = 0
 wait_time = 4.0
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 341)
+zoom = Vector2(1.6, 1.6)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

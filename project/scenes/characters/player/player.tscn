@@ -856,8 +856,10 @@ shape = SubResource("CapsuleShape2D_lkmih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mnje")
-animation = &"State_Idle_Down"
+animation = &"State_Idle_FromSide"
 autoplay = "State_Idle_FromSide"
+frame = 1
+frame_progress = 0.818596
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
