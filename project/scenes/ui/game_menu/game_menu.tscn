@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://project/scenes/ui/game_menu/saves_menu/save_menu.tscn" id="4_ka88v"]
 
 [node name="Game Menu" type="Control"]
+process_mode = 3
+process_priority = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

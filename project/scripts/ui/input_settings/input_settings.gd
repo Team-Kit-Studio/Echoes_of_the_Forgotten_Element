@@ -7,6 +7,8 @@ const INPUT_ACTION: Dictionary[StringName, String] = {
 	StringName("left"): "Влево",
 	StringName("down"): "Вниз",
 	StringName("right"): "Вправо",
+	StringName("Inventory"): "Инвентарь",
+	StringName("Interaction"): "Взаимодействие"
 }
 
 var is_remapping: bool = false

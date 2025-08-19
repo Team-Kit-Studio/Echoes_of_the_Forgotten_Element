@@ -28,7 +28,7 @@ func _on_exit_pressed() -> void:
 	get_tree().quit()
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://project/scenes/levels/test_level/test_level.tscn")
+	get_tree().change_scene_to_file("res://project/scenes/levels/Level_1/Level_1.tscn")
 
 func _on_options_pressed() -> void:
 	menu.visible = false

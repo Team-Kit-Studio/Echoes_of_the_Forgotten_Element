@@ -27,6 +27,8 @@ func toggle() -> void:
 	saveMenu.hide()
 	settings.hide()
 	off_toggeled()
+	get_tree().paused = !get_tree().paused
+	
 
 func _on_options_toggled(toggled_on: bool) -> void:
 	saveMenu.hide()
@@ -42,6 +44,8 @@ func _on_options_toggled(toggled_on: bool) -> void:
 		tween.tween_property(settings, "position:x", -240, 0.2)
 		await(tween.finished)
 		settings.hide()
+		
+		
 
 func _on_continue_pressed() -> void:
 	continues()
@@ -56,6 +60,7 @@ func continues() -> void:
 	saveMenu.hide()
 	off_toggeled()
 	settings.hide()
+	get_tree().paused = false
 
 	if not settings.visible:
 		optionsButton.button_pressed = false

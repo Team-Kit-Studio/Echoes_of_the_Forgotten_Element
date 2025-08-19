@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cx1jgn04pcpgi"]
 
 [ext_resource type="Script" uid="uid://b3ph7uojwbn1r" path="res://project/scripts/ui/main_menu/intro/intro.gd" id="1_j1yth"]
-[ext_resource type="Texture2D" uid="uid://blyg5etevd41d" path="res://project/assets/project_assets/Team Kit Studios.png" id="2_gj7h6"]
+[ext_resource type="Texture2D" uid="uid://blyg5etevd41d" path="res://project/assets/UI/Team Kit Studios.png" id="2_gj7h6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3vti"]
 

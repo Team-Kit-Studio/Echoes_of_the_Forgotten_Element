@@ -10,6 +10,9 @@ enum state {
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
+@onready var Gun: Node2D = $Gun
+#@onready var ShadowPlayer: AnimationPlayer = %AnimationPlayer2
+@onready var ShadowSprite: AnimatedSprite2D = %AnimatedSprite2D2
 
 const speed: int = 100
 
@@ -30,6 +33,8 @@ var current_state: state = state.MOVE
 var combo: bool = false
 var input_direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2i = Vector2.ZERO
+
+
 
 func get_animation_index(index: int, key: Vector2i) -> int:
 	match index:
@@ -103,10 +108,15 @@ func Move_State_Play_Animation() -> void:
 		play_animation(0, last_direction)
 
 func flip_anim() -> void:
-	if last_direction.x != 0: anim.flip_h = last_direction.x > 0
+	if last_direction.x != 0: 
+		anim.flip_h = last_direction.x > 0
+		ShadowSprite.flip_h = last_direction.x > 0
 
-func play_animation(index: int, key:=) -> void:
-	AnimPlayer.play(ANIMATION_NAMES[get_animation_index(index, key)])
+func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
+	var anim_index = get_animation_index(index, key)
+	#print("Playing animation:", ANIMATION_NAMES[anim_index])  # Отладка
+	ShadowSprite.play(ANIMATION_NAMES[anim_index])
+	AnimPlayer.play(ANIMATION_NAMES[anim_index])
 	flip_anim()
 
 func data() -> Dictionary:

@@ -50,7 +50,15 @@ layout_mode = 2
 [node name="Button4" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
 layout_mode = 2
 
+[node name="Button5" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
+[node name="Button6" parent="PanelContainer/MarginContainer/ScrollContainer/ChangableList" instance=ExtResource("3_cg6ue")]
+layout_mode = 2
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button2" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button3" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button4" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button5" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/ChangableList/Button6" to="." method="_on_button_pressed"]

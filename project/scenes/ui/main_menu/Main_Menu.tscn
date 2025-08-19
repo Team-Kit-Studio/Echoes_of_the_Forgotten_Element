@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cbcyxtegi25uw" path="res://project/assets/tiles/timemap_space/tilemap space.png" id="2_4ydw1"]
 [ext_resource type="AudioStream" uid="uid://c8omhfknp8sxl" path="res://project/assets/sounds/music/Sound_MM.mp3" id="3_b1wmw"]
 [ext_resource type="Texture2D" uid="uid://bf0qdsf4dh5ip" path="res://project/assets/sprites/ui/button_main_menu/Start.png" id="4_a214n"]
-[ext_resource type="Texture2D" uid="uid://css7wwlxfsngp" path="res://project/assets/tiles/timemap_space/LogoName2.png" id="4_s2h7x"]
 [ext_resource type="Texture2D" uid="uid://nxqkoufxgsi5" path="res://project/assets/sprites/ui/button_main_menu/Start_Pressed.png" id="5_34mu2"]
+[ext_resource type="Texture2D" uid="uid://buy2qs4x7oljt" path="res://project/assets/UI/LogoName.png" id="5_b1wmw"]
 [ext_resource type="Texture2D" uid="uid://cru4ghk5c5q62" path="res://project/assets/sprites/ui/button_main_menu/Start_Hover.png" id="6_etry0"]
 [ext_resource type="Texture2D" uid="uid://e0xbbc0gkb3s" path="res://project/assets/sprites/ui/button_main_menu/options.png" id="7_bmo4t"]
 [ext_resource type="Texture2D" uid="uid://k3s6bg13op6y" path="res://project/assets/sprites/ui/button_main_menu/options_Pressed.png" id="8_rl2wa"]
@@ -153,10 +153,10 @@ rotation = -0.380501
 scale = Vector2(6, 6)
 texture = ExtResource("16_bi6or")
 
-[node name="LogoName2" type="Sprite2D" parent="."]
-position = Vector2(383, 83)
-scale = Vector2(0.27, 0.27)
-texture = ExtResource("4_s2h7x")
+[node name="LogoName" type="Sprite2D" parent="."]
+position = Vector2(389, 100)
+scale = Vector2(3, 3)
+texture = ExtResource("5_b1wmw")
 
 [node name="Main_Menu" type="Control" parent="."]
 layout_mode = 3
@@ -513,8 +513,10 @@ size_flags_horizontal = 4
 text = "Назад"
 
 [node name="Camera2D2" type="Camera2D" parent="."]
+visible = false
 position = Vector2(576, 357)
 scale = Vector2(1.04, 0.880001)
+enabled = false
 zoom = Vector2(1.5, 1.5)
 
 [connection signal="pressed" from="Main_Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]

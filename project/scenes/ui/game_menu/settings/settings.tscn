@@ -156,9 +156,9 @@ metadata/_tab_index = 2
 [node name="InputSettings" parent="Управление" instance=ExtResource("3_i4v1l")]
 layout_mode = 1
 anchor_left = 0.0219378
-anchor_top = 0.0292208
+anchor_top = 0.0291734
 anchor_right = 0.967093
-anchor_bottom = 0.433442
+anchor_bottom = 0.60778
 
 [node name="Графика" type="TabBar" parent="."]
 visible = false

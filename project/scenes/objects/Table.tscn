@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dthswwr0380vt"]
+
+[ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/tiles/tilemap_spaceship/Object/Стол.png" id="1_jl7mm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6xhhb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs10s"]
+size = Vector2(29, 42)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_6xhhb")
+gravity_scale = 0.0
+
+[node name="Стол" type="Sprite2D" parent="."]
+position = Vector2(-2, 0)
+texture = ExtResource("1_jl7mm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13.5, -6)
+shape = SubResource("RectangleShape2D_bs10s")
