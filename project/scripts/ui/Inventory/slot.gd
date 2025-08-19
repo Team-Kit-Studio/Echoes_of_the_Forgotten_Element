@@ -1,6 +1,9 @@
 extends Panel
 
 
+var ItemClass =preload("res://project/scenes/objects/item.tscn")
+
+
 @export var item: Item = null:
 	set(value):
 		item = value
