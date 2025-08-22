@@ -1,62 +1,51 @@
 extends Panel
 
+class_name Slot
 
-var ItemClass =preload("res://project/scenes/objects/item.tscn")
-
+@onready var texture = $Icon
 
 @export var item: Item = null:
 	set(value):
 		item = value
 		
-		if value == null:
+		if value != null:
+			$Icon.texture = value.texture
+		else:
 			$Icon.texture = null
-			$Amount.text = " "
-			return
-		$Icon.texture = value.icon
-		
-@export var amount: int = 0:
+			
+@export var count: int = 1:
 	set(value):
-		amount = value
-		$Amount.text = str(value)
-		if amount <= 0:
-			item = null
-			
-			
-func set_amount(value: int):
-	amount = value
+		count = value
+		if value != null:
+			if value > 1:
+				$Amount.show()
+			else:
+				$Amount.hide()
+			$Amount.text = str(value)
+		else:
+			$Amount.hide()
+			$Amount.text = "1"
+
+func get_preview():
+	var preview_text: TextureRect = TextureRect.new()
+	preview_text.texture = texture.texture
 	
-func add_amount(value: int):
-	amount += value
+	var preview = Control.new()
+	preview.add_child(preview_text)
 	
-func _can_drop_data(at_position: Vector2, data: Variant):
-	if "item" in data:
-		return is_instance_of(data.item, Item)
-	return false
+	return preview
 	
-func _drop_data(at_position: Vector2, data: Variant) -> void:
-	var temp = item
-	item = data.item
-	data.item = temp
-	
-	temp = amount
-	amount = data.amount
-	data.amount = temp
-	
-	if get_parent().has_method("update"):
-		get_parent().update()
-	if data.get_parent().has_method("update"):
-		data.get_parent().update()
-		
-func _get_drag_data(at_position: Vector2):
-	if item:
-		var preview_texture = TextureRect.new()
-		
-		preview_texture.texture = item.icon
-		preview_texture.size = Vector2(16,16)
-		preview_texture.position = -Vector2(8,8)
-		
-		var preview = Control.new()
-		preview.add_child(preview_texture)
-		set_drag_preview(preview)
-		
+func _get_drag_data(at_position: Vector2) -> Variant:
+	set_drag_preview(get_preview())
 	return self
+	
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	return data is Slot
+		
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+	var tempItem = item
+	var tempCount = count
+	item = data.item
+	count = data.count
+	data.item = tempItem
+	data.count = tempCount

@@ -1,8 +1,7 @@
 extends Node2D
 
-@onready var Inventory: Node = $UI/Inventory
-@export var block: Dictionary[String, BlockData]
-var currently_equipped: Item = null
+
+
 
 
 
@@ -15,7 +14,7 @@ func explore_territory(room: String, state: float) -> void:
 	for points in get_tree().get_nodes_in_group(room):
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property(points, "energy", state, 1)
-
+	
 
 func _on_spawn_body_entered(body: Node2D) -> void:
 	if body.name == "Player":

@@ -72,6 +72,14 @@ Interaction={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="Level 1"
+2d_render/layer_2="Player"
+2d_render/layer_3="Item"
+2d_render/layer_4="door_inter"
+2d_physics/layer_4="door_inter"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal datainv(dict: Dictionary)
+
 enum state {
 	MOVE,
 	DAMAGE,
@@ -13,6 +15,10 @@ enum state {
 @onready var Gun: Node2D = $Gun
 #@onready var ShadowPlayer: AnimationPlayer = %AnimationPlayer2
 @onready var ShadowSprite: AnimatedSprite2D = %AnimatedSprite2D2
+#@onready var inventory: Inventory = get_node("UI/Inventory")
+@onready var hotbar = get_node("UI/Inventory/UI/Hotbar")
+var interact_body: Node2D
+var react_item:bool = false
 
 const speed: int = 100
 
@@ -98,6 +104,7 @@ func Move_State() -> void:
 
 	Move_State_Play_Animation()
 	move_and_slide()
+	
 
 func Move_State_Play_Animation() -> void:
 	if input_direction != Vector2.ZERO:
@@ -133,4 +140,23 @@ func load_data(_data: Dictionary) -> void:
 	last_direction = Vector2i(_data["last_dir"]["x"], _data["last_dir"]["y"])
 	play_animation(0, last_direction)
 	flip_anim()
+
+func _on_pick_up_body_entered(body: Node2D) -> void:
+	print(body.item.resource_name)
+	interact_body = body
+		
+func _unhandled_key_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Interaction") and interact_body != null:
+		if interact_body.get("item"):
+			get_node("UI/Inventory/UI/Hotbar").addItem(interact_body.item)
+			interact_body.queue_free()
+			
+
+
+func _on_pick_up_body_exited(body: Node2D) -> void:
+	interact_body = null
+
+func DataInventory():
+	var arr: Array = get_node("UI/Inventory/UI/Hotbar").Slots
+	return arr
 	

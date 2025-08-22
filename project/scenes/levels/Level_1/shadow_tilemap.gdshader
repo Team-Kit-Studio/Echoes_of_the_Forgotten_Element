@@ -35,7 +35,7 @@ vec2 get_tile_uvs(vec2 p_uv,vec2 p_tex_size,vec2 p_region_size) {
 //2D top-down shadow shader by WizardWand123
 void fragment() {
 	COLOR = texture(TEXTURE,UV);
-	
+
 	vec2 uv = UV;
 	vec2 tileUV = UV;
 	//Change uv value for tilemap
@@ -45,7 +45,7 @@ void fragment() {
 	}
 
 	vec2 pixSize = TEXTURE_PIXEL_SIZE * (isTileMap ? vec2(textureSize(TEXTURE,0))/vec2(tileSize) : vec2(1));
-	
+
 	uv += vec2(shadowOffset) * pixSize;
 	//Test for cutoff or cover mask
 	vec2 modCutoff = vec2(shadowCutoffStart) * pixSize;
@@ -53,7 +53,7 @@ void fragment() {
 	if(clamp(tileUV,modCutoff,modCutoffEnd) == tileUV && texture(coverMask,tileUV).a == 0.0){
 		//Find direction of angle
 		vec2 direct = vec2(cos(shadowAngle * (PI/180.0)),sin(shadowAngle * (PI/180.0)));
-		
+
 		vec2 depthUV = uv;
 		vec2 floorCorner = (vec2(floorStart)*pixSize);
 		vec2 floorAutoStart = sign(uv-floorCorner);
@@ -61,24 +61,24 @@ void fragment() {
 		int loopTimeout = 0;
 		while(loopTimeout < max(int(wallDepth*10.0) * sampleMult,1)){
 			loopTimeout += 1;
-			
+
 			vec2 floorDifference = depthUV-floorCorner;
 			bvec2 skip = bvec2(sign(depthUV.x-floorCorner.x) != floorAutoStart.x && floorDepthAutoCutoff,sign(depthUV.y-floorCorner.y) != floorAutoStart.y && floorDepthAutoCutoff);
-			
+
 			//Find UV for Shadow
 			vec2 flipUV = floorCorner-((floorDifference/direct)/wallHeight);
 			vec2 maskUVTop = vec2(uv.x,flipUV.y) + vec2(-(floorDifference.y/direct.y)*direct.x,0.0);
 			vec2 maskUVLeft = vec2(flipUV.x,uv.y) + vec2(0.0,-(floorDifference.x/direct.x)*direct.y);
-				
+
 			if(maskWrap){
 				maskUVTop = vec2(fract(maskUVTop.x),maskUVTop.y);
 				maskUVLeft = vec2(maskUVLeft.x,fract(maskUVLeft.y));
 			}
-			
+
 			//Test if UV is beyond usual values (only useful when maskwrap disabled) to prevent stretching
 			bool offMaskTop = clamp(maskUVTop,vec2(0.0),vec2(1.0)) != maskUVTop;
 			bool offMaskLeft = clamp(maskUVLeft,vec2(0.0),vec2(1.0)) != maskUVLeft;
-			
+
 			//Test if moddified UV collides with mask
 			if((texture(maskTop,maskUVTop).a > 0.0 && !offMaskTop && !skip.y) || (texture(maskLeft,maskUVLeft).a > 0.0 && !offMaskLeft && !skip.x)){
 				COLOR.rgb = mix(COLOR.rgb,shadowColor.rgb,shadowColor.a);

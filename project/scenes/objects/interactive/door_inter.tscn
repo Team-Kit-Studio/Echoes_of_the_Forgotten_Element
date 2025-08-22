@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://chbaujlj47kwf"]
 
 [ext_resource type="Texture2D" uid="uid://c3c11hese64x0" path="res://project/assets/tiles/tilemap_spaceship/Interactive/Door2_Int.png" id="1_72qqx"]
-[ext_resource type="Script" uid="uid://b0m7mlckmjeoi" path="res://project/scenes/objects/interactive/door_inter.gd" id="1_owx80"]
+[ext_resource type="Script" uid="uid://b0m7mlckmjeoi" path="res://project/scripts/objects/door_inter.gd" id="1_owx80"]
 [ext_resource type="Texture2D" uid="uid://bhk0pu3i887xp" path="res://project/assets/tiles/tilemap_spaceship/Interactive/Door2_Open.png" id="1_ugjse"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k55x2"]
@@ -191,6 +191,8 @@ size = Vector2(62, 33)
 stream_count = 1
 
 [node name="Door_Inter" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 2
 gravity_scale = 0.0
 freeze = true
 script = ExtResource("1_owx80")
@@ -212,6 +214,8 @@ shape = SubResource("RectangleShape2D_clgt2")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="react" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="react"]
 top_level = true

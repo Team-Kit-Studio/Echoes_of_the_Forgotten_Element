@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl2eo6hegn2yt"]
+
+[ext_resource type="Script" uid="uid://dyyswsr4oxiw7" path="res://item_scene.gd" id="1_xlfv5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uwb5"]
+size = Vector2(16, 16)
+
+[node name="Item" type="RigidBody2D"]
+collision_layer = 4
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("1_xlfv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0uwb5")
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(8, 8)
+scale = Vector2(0.485, 0.485)
+region_rect = Rect2(2, 0, 29, 29)

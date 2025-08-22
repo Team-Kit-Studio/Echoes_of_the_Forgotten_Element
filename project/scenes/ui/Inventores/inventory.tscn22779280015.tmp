@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c14fwdvy3mg46"]
+[gd_scene load_steps=17 format=3 uid="uid://c14fwdvy3mg46"]
 
 [ext_resource type="Script" uid="uid://dbjvc14lqokir" path="res://project/scripts/ui/Inventory/inventory.gd" id="1_mrqgh"]
 [ext_resource type="PackedScene" uid="uid://bep6pyliivi1b" path="res://project/scenes/ui/Inventores/Components/slot.tscn" id="1_pohso"]
 [ext_resource type="Texture2D" uid="uid://bjsi0dwmjry4x" path="res://project/assets/UI/Inventary.png" id="2_pjl5h"]
 [ext_resource type="Texture2D" uid="uid://dxtcg2p3pyu8m" path="res://sprite/Player/SpriteList_Idle.png" id="6_4qat3"]
-[ext_resource type="Script" uid="uid://1jwlsfwm1h1c" path="res://project/scripts/ui/Inventory/hotbar.gd" id="6_o2gw5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pjl5h"]
 texture = ExtResource("2_pjl5h")
@@ -198,32 +197,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Slot12" parent="UI/GridContainer" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Hotbar" type="HBoxContainer" parent="UI"]
-offset_left = 349.0
-offset_top = 581.0
-offset_right = 793.0
-offset_bottom = 641.0
-script = ExtResource("6_o2gw5")
-
-[node name="Slot" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot2" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot3" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot4" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot5" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot6" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
-layout_mode = 2
-
-[node name="Slot7" parent="UI/Hotbar" instance=ExtResource("1_pohso")]
 layout_mode = 2

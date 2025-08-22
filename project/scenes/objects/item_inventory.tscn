@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmw5u3gv0g6t7"]
+
+[ext_resource type="Script" uid="uid://b4tb3vwof644" path="res://project/scenes/objects/itemSettings.gd" id="1_4vrvu"]
+[ext_resource type="Texture2D" uid="uid://dvaxoj0reg0jd" path="res://project/assets/sprites/Objects/Key Card.png" id="2_8le46"]
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_4vrvu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8le46")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 26.0
+offset_right = 70.0
+offset_bottom = 49.0
+scale = Vector2(0.7, 0.7)
+text = "1"
