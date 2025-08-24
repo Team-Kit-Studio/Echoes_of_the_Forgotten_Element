@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://johug8s1yskq"]
 
 [ext_resource type="Material" uid="uid://bfsx266cs5k1w" path="res://project/assets/theme/Shadow_Shader.tres" id="1_3vlgy"]
-[ext_resource type="Texture2D" uid="uid://d5qkm48d228x" path="res://project/assets/tiles/tilemap_spaceship/Interactive/Шкаф.png" id="1_sye0t"]
+[ext_resource type="Texture2D" uid="uid://d5qkm48d228x" path="res://project/assets/sprites/Objects/Interactive/Шкаф.png" id="1_sye0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vlgy"]
 size = Vector2(63, 32)

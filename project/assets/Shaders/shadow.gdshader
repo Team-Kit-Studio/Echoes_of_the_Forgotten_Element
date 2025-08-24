@@ -24,18 +24,18 @@ void vertex() {
 }
 
 vec4 sample_texture_safe(sampler2D tex, vec2 uv) {
-    return (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) 
-        ? vec4(0.0) 
+    return (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)
+        ? vec4(0.0)
         : texture(tex, uv);
 }
 
 vec4 apply_gaussian_blur(sampler2D tex, vec2 uv, vec2 pixel_size) {
     if (blur_amount <= 0.0) return sample_texture_safe(tex, uv);
-    
+
     vec4 color_blur = vec4(0.0);
     float total_weight = 0.0;
     int kernel_size = int(blur_amount * 3.0);
-    
+
     for (int x = -kernel_size; x <= kernel_size; x++) {
         for (int y = -kernel_size; y <= kernel_size; y++) {
             vec2 blur_offset = vec2(float(x), float(y)) * pixel_size;
@@ -44,12 +44,12 @@ vec4 apply_gaussian_blur(sampler2D tex, vec2 uv, vec2 pixel_size) {
             total_weight += weight;
         }
     }
-    
+
     return total_weight > 0.0 ? color_blur / total_weight : vec4(0.0);
 }
 
 bool is_within_cutoff(vec2 uv) {
-    return uv.x >= cutoff_start.x && uv.x <= cutoff_end.x && 
+    return uv.x >= cutoff_start.x && uv.x <= cutoff_end.x &&
            uv.y >= cutoff_start.y && uv.y <= cutoff_end.y;
 }
 
@@ -75,30 +75,30 @@ vec4 process_texture(vec2 uv, sampler2D tex, bool is_main, vec2 pixel_size) {
     if (is_main) {
         return sample_texture_safe(tex, uv) * modulate;
     }
-    
+
     vec4 blurred = apply_gaussian_blur(tex, uv, pixel_size);
     float fade_x = calculate_fade(uv.x, shadow_scale);
     float fade_y = calculate_fade(uv.y, shadow_scale);
     float fade = smoothstep(0.0, 1.0, min(fade_x, fade_y));
-    
+
     return vec4(color.rgb, (blurred.a * color.a) * modulate.a * fade);
 }
 
 void fragment() {
     float final_scale = max(border_scale, border_scale * shadow_scale);
     vec2 scaled_uv = UV * final_scale - (0.5 * (final_scale - 1.0));
-    
+
     vec4 main_texture = process_texture(scaled_uv, TEXTURE, true, TEXTURE_PIXEL_SIZE);
-    
+
     vec2 adjusted_offset = disable_rotating ? shadow_offset : rotate_point(shadow_offset, -sprite_rotation);
     vec2 shadow_uv = scaled_uv + adjusted_offset * TEXTURE_PIXEL_SIZE;
-    
+
     vec4 shadow = process_texture(shadow_uv, TEXTURE, false, TEXTURE_PIXEL_SIZE);
-    
+
 	if (!is_within_cutoff(shadow_uv)) {
         shadow.a = 0.0; // Делает тень прозрачной, если она выходит за пределы
     }
-	
+
     vec4 main_pm = vec4(main_texture.rgb * main_texture.a, main_texture.a);
     vec4 shadow_pm = vec4(shadow.rgb * shadow.a, shadow.a);
 

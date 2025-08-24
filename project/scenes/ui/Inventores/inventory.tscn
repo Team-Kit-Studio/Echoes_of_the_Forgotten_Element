@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbjvc14lqokir" path="res://project/scripts/ui/Inventory/inventory.gd" id="1_mrqgh"]
 [ext_resource type="PackedScene" uid="uid://bep6pyliivi1b" path="res://project/scenes/ui/Inventores/Components/slot.tscn" id="1_pohso"]
-[ext_resource type="Texture2D" uid="uid://bjsi0dwmjry4x" path="res://project/assets/UI/Inventary.png" id="2_pjl5h"]
+[ext_resource type="Texture2D" uid="uid://bjsi0dwmjry4x" path="res://project/assets/sprites/UI/Inventary.png" id="2_pjl5h"]
 [ext_resource type="Texture2D" uid="uid://dxtcg2p3pyu8m" path="res://sprite/Player/SpriteList_Idle.png" id="6_4qat3"]
 [ext_resource type="Script" uid="uid://1jwlsfwm1h1c" path="res://project/scripts/ui/Inventory/hotbar.gd" id="6_o2gw5"]
 

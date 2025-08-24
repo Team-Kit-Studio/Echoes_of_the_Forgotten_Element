@@ -7,6 +7,6 @@
 script = ExtResource("1_8068f")
 ItemName = "KeyCardGray"
 texture = ExtResource("2_hbvq1")
-type = "Tools"
 recipe = Array[ExtResource("1_8068f")]([])
+type = "Tools"
 metadata/_custom_type_script = "uid://b4tb3vwof644"

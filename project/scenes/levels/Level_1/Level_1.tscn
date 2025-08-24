@@ -1,17 +1,17 @@
 [gd_scene load_steps=58 format=4 uid="uid://4iv1hqmclnma"]
 
-[ext_resource type="Texture2D" uid="uid://dwidjqs8os4tm" path="res://project/assets/tiles/tilemap_spaceship/Floor/Floor_Cabin.png" id="1_lpjld"]
+[ext_resource type="Texture2D" uid="uid://dwidjqs8os4tm" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_Cabin.png" id="1_lpjld"]
 [ext_resource type="Script" uid="uid://b4rls403471qn" path="res://project/scenes/levels/Level_1/level_1.gd" id="1_vcvnr"]
-[ext_resource type="Texture2D" uid="uid://bm2e107xqmm6c" path="res://project/assets/tiles/Floor/Floor_Cabin.png" id="3_cba48"]
+[ext_resource type="Texture2D" uid="uid://bm2e107xqmm6c" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_Cabin3.png" id="3_cba48"]
 [ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://project/scenes/characters/player/player.tscn" id="3_vo4os"]
-[ext_resource type="Texture2D" uid="uid://di53rmhtw6gty" path="res://project/assets/tiles/tilemap_spaceship/Wall/Wall 1.png" id="4_4wqkh"]
-[ext_resource type="Texture2D" uid="uid://cnof62cmht83" path="res://project/assets/tiles/tilemap_spaceship/Floor/Floor_Corridor3.png" id="4_oyocx"]
-[ext_resource type="Texture2D" uid="uid://bmq5k85y4hy26" path="res://project/assets/tiles/tilemap_spaceship/Interactive/bed_cabin.png" id="5_64jha"]
-[ext_resource type="Texture2D" uid="uid://uphoiujsjqi2" path="res://project/assets/tiles/tilemap_spaceship/Floor/Floor_corridor.png" id="7_f7cpc"]
-[ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/tiles/tilemap_spaceship/Object/Стол.png" id="8_uq5yu"]
+[ext_resource type="Texture2D" uid="uid://di53rmhtw6gty" path="res://project/assets/sprites/tiles/tilemap_spaceship/Wall/Wall 1.png" id="4_4wqkh"]
+[ext_resource type="Texture2D" uid="uid://cnof62cmht83" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_Corridor3.png" id="4_oyocx"]
+[ext_resource type="Texture2D" uid="uid://bmq5k85y4hy26" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/bed_cabin.png" id="5_64jha"]
+[ext_resource type="Texture2D" uid="uid://uphoiujsjqi2" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_corridor.png" id="7_f7cpc"]
+[ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/Стол.png" id="8_uq5yu"]
 [ext_resource type="Shader" uid="uid://dbbe7bnfypjqd" path="res://project/scenes/levels/Level_1/shadow_tilemap.gdshader" id="8_w2bar"]
-[ext_resource type="Texture2D" uid="uid://dcx5whwm2u88" path="res://project/assets/tiles/tilemap_spaceship/Object/chair.png" id="9_lpjld"]
-[ext_resource type="Texture2D" uid="uid://7e432d5m3f64" path="res://project/assets/tiles/tilemap_spaceship/Object/стул.png" id="9_vcvnr"]
+[ext_resource type="Texture2D" uid="uid://dcx5whwm2u88" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/chair.png" id="9_lpjld"]
+[ext_resource type="Texture2D" uid="uid://7e432d5m3f64" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/стул.png" id="9_vcvnr"]
 [ext_resource type="PackedScene" uid="uid://cpnvcqb45r1fu" path="res://project/scenes/objects/interactive/safe_terminal.tscn" id="10_563p0"]
 [ext_resource type="PackedScene" uid="uid://johug8s1yskq" path="res://project/scenes/objects/interactive/closet.tscn" id="11_hhtvi"]
 [ext_resource type="PackedScene" uid="uid://chbaujlj47kwf" path="res://project/scenes/objects/interactive/door_inter.tscn" id="13_hhtvi"]
@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://j1oibmfwhl2g" path="res://project/data/Items/KeyCardGray.tres" id="16_lto12"]
 [ext_resource type="PackedScene" uid="uid://dthswwr0380vt" path="res://project/scenes/objects/Table.tscn" id="16_vcvnr"]
 [ext_resource type="PackedScene" uid="uid://c7q8p6a0l30lf" path="res://project/scenes/ui/game_menu/game_menu.tscn" id="16_w2bar"]
-[ext_resource type="Texture2D" uid="uid://1gygrvemkis" path="res://project/assets/tiles/tilemap_spaceship/Object/свет.png" id="19_vcvnr"]
+[ext_resource type="Texture2D" uid="uid://1gygrvemkis" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/свет.png" id="19_vcvnr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lto12"]
 texture = ExtResource("1_lpjld")
@@ -344,8 +344,8 @@ fill_from = Vector2(0.518349, 0.495413)
 fill_to = Vector2(0.894495, 0.12844)
 
 [sub_resource type="Gradient" id="Gradient_18uq7"]
-offsets = PackedFloat32Array(0, 0.987013)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0.987013)
+colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vcvnr"]
 gradient = SubResource("Gradient_18uq7")
@@ -530,8 +530,8 @@ polygon = PackedVector2Array(-605, -411, -606, -77, 736, -78, 735, -459, 1262, -
 
 [node name="PointLight2D" type="PointLight2D" parent="Rooms/Corridor/CollisionPolygon2D" groups=["corridor"]]
 z_index = 1
-position = Vector2(64.5, -150)
-scale = Vector2(20.9531, 2.40625)
+position = Vector2(64.5, -149.5)
+scale = Vector2(20.9531, 2.39062)
 energy = 0.97
 blend_mode = 1
 texture = SubResource("GradientTexture2D_vcvnr")
@@ -561,7 +561,6 @@ blend_mode = 1
 texture = SubResource("GradientTexture2D_vcvnr")
 
 [node name="Spawn" type="Area2D" parent="Rooms"]
-visible = false
 collision_mask = 2
 
 [node name="light" type="PointLight2D" parent="Rooms/Spawn" groups=["spawn"]]

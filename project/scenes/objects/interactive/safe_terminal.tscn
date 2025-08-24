@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpnvcqb45r1fu"]
 
 [ext_resource type="Material" uid="uid://bfsx266cs5k1w" path="res://project/assets/theme/Shadow_Shader.tres" id="1_khm08"]
-[ext_resource type="Texture2D" uid="uid://cimujx66q1rlq" path="res://project/assets/tiles/tilemap_spaceship/Interactive/Терминал сохранения.png" id="1_o3d1o"]
+[ext_resource type="Texture2D" uid="uid://cimujx66q1rlq" path="res://project/assets/sprites/Objects/Interactive/Терминал сохранения.png" id="1_o3d1o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_psp75"]
 blend_mode = 1

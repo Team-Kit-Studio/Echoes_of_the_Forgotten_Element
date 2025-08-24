@@ -61,6 +61,7 @@ action_mode = 0
 text = "Продолжить"
 
 [node name="SaveLoad_Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
@@ -108,10 +109,10 @@ offset_bottom = 648.0
 [node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
 visible = false
 layout_mode = 1
-offset_left = -386.0
-offset_top = -2.0
-offset_right = -735.0
-offset_bottom = -380.0
+offset_left = -390.0
+offset_top = -1.0
+offset_right = -739.0
+offset_bottom = -379.0
 
 [node name="Pause" type="Button" parent="CanvasLayer"]
 visible = false

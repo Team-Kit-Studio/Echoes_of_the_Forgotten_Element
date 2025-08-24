@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bep6pyliivi1b"]
 
-[ext_resource type="Texture2D" uid="uid://bx2smwr5aqsdm" path="res://project/assets/UI/def slot.png" id="1_0bg46"]
+[ext_resource type="Texture2D" uid="uid://bx2smwr5aqsdm" path="res://project/assets/sprites/UI/def slot.png" id="1_0bg46"]
 [ext_resource type="Script" uid="uid://byfiidayr6ujb" path="res://project/scripts/ui/Inventory/slot.gd" id="1_57j5s"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_puupx"]

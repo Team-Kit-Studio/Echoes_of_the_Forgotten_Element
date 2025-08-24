@@ -21,6 +21,9 @@ func _ready() -> void:
 	self.save.connect(func(folder_name: String) -> void: self.emit_signal("data_update"); game_save_to_file(folder_name))
 	self.delete.connect(func(folder_name: String) -> void: DirUtil.delete_folder_recursively(Main.SAVE_FOLDER_PATH + folder_name))
 	self.data_updated.connect(data_update_handler)
+	
+func _physics_process(delta: float) -> void:
+	print
 
 # Обработчик сигнала сохранения
 func save_handler(folder_name: String) -> void:
@@ -41,10 +44,10 @@ func game_save_to_file(folder_name: String) -> void:
 		FileUtil.save_to_file_as_format_json(save_data.data, path, "data", ".sav", FileUtil.encrypt_mode.NO_ENCRYPT) #пока не надо шифровать
 		FileUtil.save_to_file_as_format_json(save_data.metadata, path , "metadata", ".json", FileUtil.encrypt_mode.NO_ENCRYPT)
 	else:
-		save_data = null
+		#save_data = null
 		return
 
-	save_data = null
+	#save_data = null
 
 # Загрузка данных игры из файла
 func game_load_from_file(folder_name: String) -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dthswwr0380vt"]
 
-[ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/tiles/tilemap_spaceship/Object/Стол.png" id="1_jl7mm"]
+[ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/Стол.png" id="1_jl7mm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6xhhb"]
 
