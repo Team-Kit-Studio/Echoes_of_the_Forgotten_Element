@@ -1,6 +1,8 @@
 extends Node2D
 
 
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 
 
@@ -36,6 +38,7 @@ func _on_spawn_body_exited(body: Node2D) -> void:
 func _ready() -> void:
 	SavesManager.load_from_data.connect(load_from_data)
 	SavesManager.data_update.connect(self_objects_saves)
+	Play_Music("res://project/assets/sounds/music/Sound_Game_Background.mp3")
 	
 func self_objects_saves() -> void:
 	var temp: SavesTemplate.DataTemp = SavesTemplate.DataTemp.new() 
@@ -102,3 +105,14 @@ func load_player(data: Dictionary) -> void:
 	add_child(inst_player)
 	inst_player.call_deferred("load_data", data["player"])
 	inst_player.name = "Player"
+
+func Play_Music(path: String) -> void:
+	var stream = load(path)
+	if audio.playing:
+		return
+	
+	if stream is AudioStream:
+		audio.stream = stream
+		audio.play()
+	else:
+		push_error("Ошибка загрузки музыки")

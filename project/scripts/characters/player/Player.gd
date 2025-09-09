@@ -9,10 +9,9 @@ enum state {
 	DEATH
 }
 
-
+@onready var audioPl: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
-@onready var Gun: Node2D = $Gun
 #@onready var ShadowPlayer: AnimationPlayer = %AnimationPlayer2
 @onready var ShadowSprite: AnimatedSprite2D = %AnimatedSprite2D2
 #@onready var inventory: Inventory = get_node("UI/Inventory")
@@ -99,6 +98,8 @@ func Move_State() -> void:
 		
 		velocity = input_direction * speed
 		
+		Play_Music("res://project/assets/sounds/MSE/zhelezo.mp3")
+		
 	else:
 		velocity = Vector2.ZERO  
 
@@ -160,3 +161,30 @@ func DataInventory():
 	var arr: Array = get_node("UI/Inventory/UI/Hotbar").Slots
 	return arr
 	
+func Play_Music(music_path: String) -> void:
+	var stream = load(music_path)
+	if audioPl.playing:
+		return
+	if stream is AudioStream:
+		audioPl.stream = stream
+		audioPl.play()
+		# Пока играет — каждофреймово проверяем скорость
+		while audioPl.playing:
+			# Для Vector2/Vector3:
+			if velocity.length() <= 0.01:
+				audioPl.stop()
+				break
+			# Ждём следующий кадр
+			await get_tree().process_frame
+	else:
+		push_error("Ошибка загрузки музыки")
+
+	
+
+
+func _on_audio_stream_player_2d_finished() -> void:
+	print("velocity")
+	if velocity != Vector2.ZERO: 
+		Play_Music("res://project/assets/sounds/MSE/Step1.wav")
+	else:
+		print("no")

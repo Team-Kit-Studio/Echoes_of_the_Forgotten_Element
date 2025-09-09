@@ -99,12 +99,11 @@ mouse_filter = 2
 theme = ExtResource("1_ua2jr")
 
 [node name="Settings" parent="CanvasLayer/GUI" instance=ExtResource("3_c3v2n")]
-visible = false
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 547.0
-offset_bottom = 648.0
+offset_left = -240.0
+offset_top = -1.0
+offset_right = 307.0
+offset_bottom = 647.0
 
 [node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
 visible = false

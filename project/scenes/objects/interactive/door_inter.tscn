@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://chbaujlj47kwf"]
+[gd_scene load_steps=42 format=3 uid="uid://chbaujlj47kwf"]
 
 [ext_resource type="Script" uid="uid://b0m7mlckmjeoi" path="res://project/scripts/objects/door_inter.gd" id="1_owx80"]
 [ext_resource type="Texture2D" uid="uid://wpu53100mvk1" path="res://project/assets/sprites/Objects/Interactive/Door_Inter.png" id="2_6nvkh"]
@@ -263,9 +263,6 @@ size = Vector2(32, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nvkh"]
 size = Vector2(62, 33)
 
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_7xsov"]
-stream_count = 1
-
 [node name="Door_Inter" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 2
@@ -306,7 +303,8 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_6nvkh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamPlaylist_7xsov")
+max_distance = 246.0
+bus = &"sfx_volume"
 
 [connection signal="body_entered" from="react" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="react" to="." method="_on_react_body_exited"]

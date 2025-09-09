@@ -31,7 +31,7 @@ func toggle() -> void:
 	
 
 func _on_options_toggled(toggled_on: bool) -> void:
-	saveMenu.hide()
+	#saveMenu.hide()
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	if toggled_on:

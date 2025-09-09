@@ -608,6 +608,9 @@ position = Vector2(1451, 1023)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rooms/Simulation"]
 polygon = PackedVector2Array(1494, 1217, 1494, 936, 1838, 936, 1837, 1215)
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_distance = 4096.0
+
 [connection signal="body_entered" from="Rooms/Corridor" to="." method="_on_corridor_body_entered"]
 [connection signal="body_exited" from="Rooms/Corridor" to="." method="_on_corridor_body_exited"]
 [connection signal="body_entered" from="Rooms/Spawn" to="." method="_on_spawn_body_entered"]
