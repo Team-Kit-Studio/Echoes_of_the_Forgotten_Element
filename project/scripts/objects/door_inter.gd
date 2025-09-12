@@ -50,7 +50,7 @@ func interactive() -> void:
 		anim.play("Lock")
 			
 func _unhandled_key_input(event: InputEvent) -> void:
-	if area and Input.is_action_just_pressed("Interaction"):
+	if area:
 		interactive()
 		print("взаимодействие")
 
