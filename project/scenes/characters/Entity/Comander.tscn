@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://rc1cyn3sceyf"]
+[gd_scene load_steps=21 format=3 uid="uid://rc1cyn3sceyf"]
 
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://project/assets/sprites/characters/player/movment_sprite/SpriteList_Idle.png" id="1_3g2ou"]
 [ext_resource type="Script" uid="uid://bsj1ymole3hih" path="res://project/scenes/characters/Entity/comander.gd" id="1_xbpnl"]
 [ext_resource type="Texture2D" uid="uid://dttrmn6vahuup" path="res://project/trash/360_F_452523668_OgoKSCEwWkroiyn7JmAR5fgfsrSKpdNe.jpg" id="2_nmchh"]
+[ext_resource type="Texture2D" uid="uid://rabkk3vfd5hh" path="res://project/assets/sprites/Objects/Interactive/chat_sprite.png" id="3_3qd7a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qd7a"]
 radius = 20.0
@@ -24,6 +25,14 @@ region = Rect2(560, 192, 28, 32)
 atlas = ExtResource("2_nmchh")
 region = Rect2(588, 192, 28, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_peqcw"]
+atlas = ExtResource("3_3qd7a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fhfu"]
+atlas = ExtResource("3_3qd7a")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_nmchh"]
 animations = [{
 "frames": [{
@@ -43,7 +52,13 @@ animations = [{
 "name": &"Active",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peqcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fhfu")
+}],
 "loop": true,
 "name": &"chat",
 "speed": 5.0
@@ -119,6 +134,7 @@ position = Vector2(14, -15)
 scale = Vector2(0.5, 0.40625)
 sprite_frames = SubResource("SpriteFrames_nmchh")
 animation = &"chat"
+frame_progress = 0.071504615
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3g2ou")
