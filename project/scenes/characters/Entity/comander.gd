@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var interaction: AnimatedSprite2D = $Area2D/Interaction
+@onready var interact: AnimatedSprite2D = $Area2D/Interactive_Flow
 
 
 var triger:bool = false
@@ -8,15 +8,17 @@ var triger:bool = false
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		var tween = get_tree().create_tween()
-		tween.tween_property(interaction, "modulate", Color(1,1,1,0.6), 0.5)
+		interact.play("chat_icon_Up")
+		tween.tween_property(interact, "modulate", Color(1,1,1,1), 0.5)
 		triger = true
 		
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("Interaction") and triger:
-		interaction.play("Active")
+		interact.play("Active")
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		var tween = get_tree().create_tween()
-		tween.tween_property(interaction, "modulate", Color(1,1,1,0), 0.2)
+		interact.play("chat_icon_down")
+		tween.tween_property(interact, "modulate", Color(1,1,1,0), 0.2)
 		triger = false

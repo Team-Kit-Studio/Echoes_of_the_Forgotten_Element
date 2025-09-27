@@ -30,13 +30,14 @@ func check_item(BodyFunc: Node2D):
 		
 func interactive() -> void:
 	#print("клавиша нажата")
+	var nodes = get_tree().get_nodes_in_group("collision")
 	if Open:
-		var nodes = get_tree().get_nodes_in_group("collision")
 		anim.play("Open")
 		Play_Music("res://project/assets/sounds/MSE/SealedDoorOpen (3).wav")
 		for anima in nodes:
 			var tween: Tween = get_tree().create_tween()
 			tween.tween_property(anima, "position:x", anima.position.x * 3.0625, 0.8)
+		await anim.animation_finished
 		timer.start(4)
 		await timer.timeout
 		for anima in nodes:
