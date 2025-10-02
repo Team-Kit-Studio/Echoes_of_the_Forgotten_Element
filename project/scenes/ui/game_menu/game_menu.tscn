@@ -101,17 +101,15 @@ theme = ExtResource("1_ua2jr")
 [node name="Settings" parent="CanvasLayer/GUI" instance=ExtResource("3_c3v2n")]
 layout_mode = 0
 offset_left = -240.0
-offset_top = -1.0
+offset_top = 0.0
 offset_right = 307.0
-offset_bottom = 647.0
+offset_bottom = 648.0
 
 [node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
 visible = false
 layout_mode = 1
-offset_left = -390.0
-offset_top = -1.0
-offset_right = -739.0
-offset_bottom = -379.0
+offset_left = -240.0
+offset_right = -589.0
 
 [node name="Pause" type="Button" parent="CanvasLayer"]
 visible = false

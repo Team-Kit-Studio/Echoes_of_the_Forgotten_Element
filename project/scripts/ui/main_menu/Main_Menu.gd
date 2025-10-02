@@ -16,6 +16,7 @@ func _ready() -> void:
 	video.visible = false
 	audio.visible = false
 	controls.visible = false
+	audiogame.play()
 
 
 func intro() -> void:

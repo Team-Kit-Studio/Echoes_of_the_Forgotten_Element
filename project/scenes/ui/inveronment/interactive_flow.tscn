@@ -155,6 +155,7 @@ sprite_frames = SubResource("SpriteFrames_jy1ma")
 animation = &"chat_icon_Up"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 offset_top = -48.0
 offset_right = 120.0
 texture = ExtResource("1_gwhpv")

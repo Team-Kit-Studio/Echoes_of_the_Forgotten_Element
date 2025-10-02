@@ -37,11 +37,11 @@ func _on_options_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		saveLoadButton.button_pressed = false
 		settings.show()
-		tween.tween_property(settings, "modulate", Color(1, 1, 1, 1), 0.30) 
 		tween.tween_property(settings, "position:x", 310, 0.2)
+		tween.tween_property(settings, "modulate:a", 1.0, 0.30) 
 	else:
-		tween.tween_property(settings, "modulate", Color(1, 1, 1, 0.1), 0.15) 
 		tween.tween_property(settings, "position:x", -240, 0.2)
+		tween.tween_property(settings, "modulate:a", 1.0, 0.15) 
 		await(tween.finished)
 		settings.hide()
 		
