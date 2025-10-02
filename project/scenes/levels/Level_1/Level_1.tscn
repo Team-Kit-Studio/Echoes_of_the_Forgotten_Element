@@ -639,11 +639,8 @@ position = Vector2(2331, 1537)
 
 [node name="Interactive" type="Node" parent="Objects"]
 
-[node name="Door_Inter_Warhouse" parent="Objects/Interactive" instance=ExtResource("13_hhtvi")]
-position = Vector2(1152, 1264)
-
 [node name="Door_Inter_Spaceship" parent="Objects/Interactive" instance=ExtResource("13_hhtvi")]
-position = Vector2(2560, 1072)
+position = Vector2(2561, 1072)
 
 [node name="Interactive" type="TileMapLayer" parent="Objects/Interactive"]
 tile_map_data = PackedByteArray("AAA7ADYAAAAAAAAAAAA8ADYAAAABAAAAAAA9ADYAAAACAAAAAAA9ADcAAAACAAEAAAA8ADcAAAABAAEAAAA7ADcAAAAAAAEAAAA=")
@@ -731,7 +728,7 @@ visible = false
 polygon = PackedVector2Array(1589, 1609, 1589, 1826, 1890, 1825, 1889, 1630, 1887, 1610)
 
 [node name="Door_Inter_Spawn" parent="Rooms/Spawn" instance=ExtResource("13_hhtvi")]
-position = Vector2(1729, 1586)
+position = Vector2(1729, 1584)
 collision_layer = 1
 
 [node name="Safe_Terminal" parent="Rooms/Spawn" instance=ExtResource("10_563p0")]
@@ -765,6 +762,9 @@ texture = SubResource("GradientTexture2D_lto12")
 
 [node name="Safe_Terminal2" parent="Rooms/Warhouse" instance=ExtResource("10_563p0")]
 position = Vector2(1451, 1023)
+
+[node name="Door_Inter_Warhouse" parent="Rooms/Warhouse" instance=ExtResource("13_hhtvi")]
+position = Vector2(1153, 1264)
 
 [node name="Simulation" type="Area2D" parent="Rooms"]
 
