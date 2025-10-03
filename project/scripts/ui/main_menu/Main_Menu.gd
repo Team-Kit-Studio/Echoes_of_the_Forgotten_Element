@@ -7,6 +7,7 @@ extends Node2D
 @onready var audio: Control = $Audio
 @onready var audiogame: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var controls: Control = $Controls
+@onready var Anim: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	intro()
@@ -20,8 +21,7 @@ func _ready() -> void:
 
 
 func intro() -> void:
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property($DirectionalLight2D, "energy", 0 , 5)
+	Anim.play("intro")
 	if audiogame.playing == false:
 		audiogame.playing = true
 

@@ -742,7 +742,7 @@ tile_set = SubResource("TileSet_563p0")
 
 [node name="Items" type="Node" parent="Objects"]
 
-[node name="KeyCardGray" parent="Objects/Items" instance=ExtResource("15_f7cpc")]
+[node name="Item" parent="Objects/Items" instance=ExtResource("15_f7cpc")]
 z_index = 1
 position = Vector2(1674, 1734)
 item = ExtResource("16_lto12")

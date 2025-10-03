@@ -1,9 +1,123 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7q8p6a0l30lf"]
+[gd_scene load_steps=9 format=3 uid="uid://c7q8p6a0l30lf"]
 
 [ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://project/assets/theme/new_theme.tres" id="1_ua2jr"]
 [ext_resource type="Script" uid="uid://dhwi4xp43wggc" path="res://project/scripts/ui/game_menu/game_menu.gd" id="1_wlcv1"]
 [ext_resource type="PackedScene" uid="uid://dbufcy3dd28sr" path="res://project/scenes/ui/game_menu/settings/settings.tscn" id="3_c3v2n"]
 [ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://project/scenes/ui/game_menu/saves_menu/save_menu.tscn" id="4_ka88v"]
+
+[sub_resource type="Animation" id="Animation_nc7ay"]
+resource_name = "settings"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/GUI/Settings:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.3660405, 1.6817931),
+"update": 0,
+"values": [Vector2(-500, 5), Vector2(55, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/GUI/Settings:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vtjwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/GUI/Settings:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-240, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/GUI/Settings:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/GUI/SaveMenu:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-240, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/GUI/SaveMenu:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_67y5g"]
+resource_name = "SalveLoad"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/GUI/SaveMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.6245049, 2.219139),
+"update": 0,
+"values": [Vector2(-500, 0), Vector2(55, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/GUI/SaveMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.011764706), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67y5g"]
+_data = {
+&"RESET": SubResource("Animation_vtjwh"),
+&"SalveLoad": SubResource("Animation_67y5g"),
+&"settings": SubResource("Animation_nc7ay")
+}
 
 [node name="Game Menu" type="Control"]
 process_mode = 3
@@ -21,6 +135,7 @@ script = ExtResource("1_wlcv1")
 process_mode = 3
 
 [node name="Main_Menu" type="Control" parent="CanvasLayer"]
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,12 +204,13 @@ text = "Выход из игры"
 
 [node name="GUI" type="Control" parent="CanvasLayer"]
 process_mode = 3
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
-offset_left = -1.0
-offset_top = 2.0
-offset_right = 1148.0
-offset_bottom = 652.0
+offset_left = 254.0
+offset_top = -5.0
+offset_right = 1403.0
+offset_bottom = 645.0
 mouse_filter = 2
 theme = ExtResource("1_ua2jr")
 
@@ -118,14 +234,10 @@ offset_right = 57.0
 offset_bottom = 31.0
 text = "Пауза"
 
-[node name="Load_visible" type="ColorRect" parent="CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_67y5g")
+}
 
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game" to="." method="_on_save_game_toggled"]

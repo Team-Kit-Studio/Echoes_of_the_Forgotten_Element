@@ -1,5 +1,4 @@
 extends Control
-@onready var button: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var canvas: CanvasLayer = $CanvasLayer
 @onready var mainMenu: Control = $CanvasLayer/Main_Menu
 @onready var settings: TabContainer = $CanvasLayer/GUI/Settings
@@ -7,14 +6,16 @@ extends Control
 @onready var saveLoadButton: Button = $"CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game"
 @onready var optionsButton: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var saveMenu: Control = $CanvasLayer/GUI/SaveMenu
-@onready var colorrect: ColorRect = $CanvasLayer/Load_visible
+@onready var Anim: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	saveMenu.hidden.connect(func() -> void: if saveMenu.visible: return else: saveLoadButton.button_pressed = false)
 	canvas.show()
 	mainMenu.hide()
 	settings.hide()	
+	settings.modulate = Color(1,1,1,0.1)
 	pauseButton.show()
+	
 
 func _unhandled_key_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -31,19 +32,18 @@ func toggle() -> void:
 	
 
 func _on_options_toggled(toggled_on: bool) -> void:
-	#saveMenu.hide()
-	var tween: Tween = get_tree().create_tween()
-	tween.set_parallel(true)
+	saveMenu.hide()
 	if toggled_on:
 		saveLoadButton.button_pressed = false
 		settings.show()
-		tween.tween_property(settings, "position:x", 310, 0.2)
-		tween.tween_property(settings, "modulate:a", 1.0, 0.30) 
+		Anim.play("settings")
+		#tween.tween_property(settings, "position:x", 310, 1)
 	else:
-		tween.tween_property(settings, "position:x", -240, 0.2)
-		tween.tween_property(settings, "modulate:a", 1.0, 0.15) 
-		await(tween.finished)
+		Anim.play_backwards("settings")
+		await Anim.animation_finished
 		settings.hide()
+		
+	
 		
 		
 
@@ -74,17 +74,13 @@ func off_toggeled() -> void:
 
 func _on_save_game_toggled(toggled_on: bool) -> void:
 	settings.hide()
-	var tween: Tween = get_tree().create_tween()
-	tween.set_parallel(true)
 	if toggled_on:
 		optionsButton.button_pressed = false
 		saveMenu.show()
-		tween.tween_property(saveMenu, "modulate", Color(1, 1, 1, 1), 0.30) 
-		tween.tween_property(saveMenu, "position:x", 310, 0.2)
+		Anim.play("SalveLoad")
 	else:
-		tween.tween_property(saveMenu, "modulate", Color(1, 1, 1, 0.1), 0.15) 
-		tween.tween_property(saveMenu, "position:x", -240, 0.2)
-		await(tween.finished)
+		Anim.play_backwards("SalveLoad")
+		await Anim.animation_finished
 		saveMenu.hide()
 
 
@@ -93,7 +89,7 @@ func _on_exit_game_pressed() -> void:
 
 
 func _on_exit_menu_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://project/scenes/ui/main_menu/Main_Menu.tscn")
+	get_tree().change_scene_to_file("res://project/scenes/ui/main_menu/Main_Menu.tscn")
 
 func hide_canvas() -> void:
 	mainMenu.hide()
@@ -102,11 +98,3 @@ func hide_canvas() -> void:
 func show_canvas() -> void:
 	mainMenu.show()
 	canvas.show()
-
-func color_rect_show() -> void:
-	colorrect.show()
-	var tween: Tween = create_tween()
-	colorrect.modulate = Color(1, 1, 1, 1)
-	tween.tween_property(colorrect, "modulate", Color(1, 1, 1, 0.1), 1.5)
-	await tween.finished
-	colorrect.hide() 
