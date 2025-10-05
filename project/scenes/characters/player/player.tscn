@@ -669,6 +669,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkmih"]
+radius = 9.981036
+height = 33.871716
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2mnje"]
 animations = [{

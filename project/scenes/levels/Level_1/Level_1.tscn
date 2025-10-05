@@ -767,9 +767,8 @@ position = Vector2(1716, 1532)
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rooms/Corridor"]
-visible = false
-position = Vector2(-20, 143)
-polygon = PackedVector2Array(-605, -411, -606, -77, 736, -78, 735, -459, 1262, -459, 1260, -588, 1260, -602, 607, -601, 608, -205, -477, -206, -478, -414)
+position = Vector2(-18, 141)
+polygon = PackedVector2Array(-605, -411, -623, -94, 749, -104, 735, -459, 1262, -459, 1260, -588, 1260, -602, 607, -601, 608, -205, -477, -206, -478, -414)
 
 [node name="PointLight2D" type="PointLight2D" parent="Rooms/Corridor/CollisionPolygon2D" groups=["corridor"]]
 z_index = 1
@@ -807,8 +806,7 @@ texture = SubResource("GradientTexture2D_vcvnr")
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rooms/Spawn"]
-visible = false
-polygon = PackedVector2Array(1589, 1609, 1589, 1826, 1890, 1825, 1889, 1630, 1887, 1610)
+polygon = PackedVector2Array(1589, 1576, 1591, 1792, 1891, 1792, 1889, 1630, 1892, 1575)
 
 [node name="light" type="PointLight2D" parent="Rooms/Spawn/CollisionPolygon2D" groups=["spawn"]]
 material = SubResource("CanvasItemMaterial_lpjld")
