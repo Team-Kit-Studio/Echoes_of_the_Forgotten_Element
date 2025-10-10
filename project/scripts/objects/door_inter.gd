@@ -35,6 +35,7 @@ func _ready():
 	
 	_enter_state(current_state)
 
+# Управляет переходами между состояниями двери
 func _enter_state(new_state: DoorState):
 	if animation_player.is_playing():
 		animation_player.stop()
@@ -50,10 +51,12 @@ func _enter_state(new_state: DoorState):
 		DoorState.CLOSING:
 			_on_closing_enter()
 
+#Безопасный переход между состояниями двери
 func transition_to(new_state: DoorState):
 	if _can_transition_to(new_state):
 		_enter_state(new_state)
 
+#Проверяет допустимость перехода между состояниями двери
 func _can_transition_to(new_state: DoorState) -> bool:
 	match current_state:
 		DoorState.LOCKED:
@@ -72,13 +75,14 @@ func _on_locked_enter():
 		print("ЗАКРЫТО")
 		animation_player.play("Door_Lock")
 
+# открытие двери
 func _on_opening_enter():
 	if animation_player.has_animation("Door_Open"):
 		animation_player.play("Door_Open")
 	else:
 		# Если нет анимации, сразу открываем
 		transition_to(DoorState.OPEN)
-
+# оставляем открытым если игрок находится в двери
 func _on_open_enter():
 	if animation_player.has_animation("Door_Open_Idle"):
 		animation_player.play("Door_Open_Idle")
@@ -88,7 +92,7 @@ func _on_open_enter():
 	if not player_in_area:
 		print("Таймер ПУСК")
 		start_close_timer()
-
+# закрытие двери
 func _on_closing_enter():
 	if animation_player.has_animation("Door_Close"):
 		animation_player.play("Door_Close")

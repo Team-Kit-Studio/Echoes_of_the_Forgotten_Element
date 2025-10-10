@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal datainv(dict: Dictionary)
 
+#перечисление (enum) для состояний персонажа или врага в игре
 enum state {
 	MOVE,
 	DAMAGE,
@@ -21,6 +22,7 @@ var react_item:bool = false
 
 const speed: int = 100
 
+#константный массив с именами анимаций для системы анимаций персонажа
 const ANIMATION_NAMES: PackedStringArray = [
 	#idle animations names
 	StringName("State_Idle_FromSide"),  # 0
@@ -40,7 +42,7 @@ var input_direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2i = Vector2.ZERO
 
 
-
+#для определения индекса анимации на основе состояния и направления движения.
 func get_animation_index(index: int, key: Vector2i) -> int:
 	match index:
 		0:  # idle
@@ -65,6 +67,7 @@ func get_animation_index(index: int, key: Vector2i) -> int:
 					return 0
 	return 0  # значение по умолчанию
 
+#преобразует аналоговый ввод в дискретные направления
 func get_clean_direction(raw_input: Vector2) -> Vector2i:
 # Если вертикальное движение сильнее -> используем его
 	if abs(raw_input.y) > abs(raw_input.x):
@@ -75,6 +78,7 @@ func get_clean_direction(raw_input: Vector2) -> Vector2i:
 
 	return Vector2i.ZERO
 
+#state machine для состояний  персонажа.
 func _physics_process(_delta: float) -> void:
 	match current_state:
 		state.MOVE:
@@ -89,9 +93,11 @@ func _physics_process(_delta: float) -> void:
 		state.DEATH:
 			pass
 
+# получение вектора направления при нажатии на кнопки управления
 func _unhandled_input(_event: InputEvent) -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down")
 	
+#  функция движения персонажа
 func Move_State() -> void:
 	if input_direction != Vector2.ZERO:
 		last_direction = get_clean_direction(input_direction)
@@ -106,7 +112,7 @@ func Move_State() -> void:
 	Move_State_Play_Animation()
 	move_and_slide()
 	
-
+#управляет анимациями персонажа в зависимости от движения
 func Move_State_Play_Animation() -> void:
 	if input_direction != Vector2.ZERO:
 		flip_anim()
@@ -115,11 +121,13 @@ func Move_State_Play_Animation() -> void:
 	else:
 		play_animation(0, last_direction)
 
+# отзеркаливает спрайт при изменении направлени движения
 func flip_anim() -> void:
 	if last_direction.x != 0: 
 		anim.flip_h = last_direction.x > 0
 		ShadowSprite.flip_h = last_direction.x > 0
 
+# в зависиммости от направления включает определенную анимацию
 func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	var anim_index = get_animation_index(index, key)
 	#print("Playing animation:", ANIMATION_NAMES[anim_index])  # Отладка
@@ -127,6 +135,7 @@ func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	AnimPlayer.play(ANIMATION_NAMES[anim_index])
 	flip_anim()
 
+# сохраняет словарь с данными о персонаже
 func data() -> Dictionary:
 	var player_data: Dictionary = {
 		"file_name": get_scene_file_path(),
@@ -136,6 +145,7 @@ func data() -> Dictionary:
 	}
 	return player_data
 
+# загружает данные о персонаже
 func load_data(_data: Dictionary) -> void:
 	position = Vector2(_data["pos"]["x"], _data["pos"]["y"])
 	last_direction = Vector2i(_data["last_dir"]["x"], _data["last_dir"]["y"])
@@ -146,6 +156,7 @@ func _on_pick_up_body_entered(body: Node2D) -> void:
 	print(body.item.resource_name)
 	interact_body = body
 		
+#добавление предмета в хотбар
 func _unhandled_key_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Interaction") and interact_body != null:
 		if interact_body.get("item"):
@@ -157,10 +168,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _on_pick_up_body_exited(body: Node2D) -> void:
 	interact_body = null
 
+# сохранение словаря с инвентарем
 func DataInventory():
 	var arr: Array = get_node("UI/Inventory/UI/Hotbar").Slots
 	return arr
-	
+
+#включение музыки
 func Play_Music(music_path: String) -> void:
 	var stream = load(music_path)
 	if audioPl.playing:

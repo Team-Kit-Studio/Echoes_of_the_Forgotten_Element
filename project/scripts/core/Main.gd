@@ -24,6 +24,7 @@ func _ready() -> void:
 	DirUtil.create_folders(USER_FOLDER_PATH, ["saves", "user_config", "screenshot"])
 	if not FileAccess.file_exists(SAVE_LIST_CONFIG_PATH): ConfigFile.new().save(SAVE_LIST_CONFIG_PATH)
 	
+# использование памяти
 func debag_memory() -> void:
 	var memory_info: Dictionary = OS.get_memory_info()
 

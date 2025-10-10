@@ -40,6 +40,7 @@ func _ready() -> void:
 	SavesManager.data_update.connect(self_objects_saves)
 	Play_Music("res://project/assets/sounds/music/Sound_Game_Background.mp3")
 	
+#реализует систему сохранения состояния сцены
 func self_objects_saves() -> void:
 	var temp: SavesTemplate.DataTemp = SavesTemplate.DataTemp.new() 
 	var temp_matadata: SavesTemplate.MetaDataTemp = SavesTemplate.MetaDataTemp.new()
@@ -67,7 +68,7 @@ func self_objects_saves() -> void:
 
 
 
-
+#загружает состояние сцены из сохраненных данных.
 func load_from_data(data: Dictionary) -> void:
 	if data:
 		delete_node()
@@ -100,6 +101,7 @@ func delete_node() -> void:
 	$Player.remove_child(player)
 	player.queue_free()
 
+#загружает и восстанавливает состояние игрока из сохраненных данных
 func load_player(data: Dictionary) -> void:
 	var inst_player: Node = load(data["player"]["file_name"]).instantiate()
 	add_child(inst_player)

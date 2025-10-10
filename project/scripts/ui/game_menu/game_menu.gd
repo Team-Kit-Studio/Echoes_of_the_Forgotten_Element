@@ -21,6 +21,7 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		toggle()
 
+#режим отжимной кнопки
 func toggle() -> void:
 	visible = !visible
 	pauseButton.visible = !pauseButton.visible	
@@ -30,7 +31,7 @@ func toggle() -> void:
 	off_toggeled()
 	get_tree().paused = !get_tree().paused
 	
-
+# при нажатии на кнопку настроек
 func _on_options_toggled(toggled_on: bool) -> void:
 	saveMenu.hide()
 	if toggled_on:

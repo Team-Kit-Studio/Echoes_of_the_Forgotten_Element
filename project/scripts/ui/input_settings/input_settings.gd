@@ -1,7 +1,7 @@
 extends Control
 
 @onready var changable_list: VBoxContainer = $PanelContainer/MarginContainer/ScrollContainer/ChangableList
-
+# наш список кнопок
 const INPUT_ACTION: Dictionary[StringName, String] = {
 	StringName("up"): "Вверх",
 	StringName("left"): "Влево",
@@ -20,7 +20,7 @@ func _ready() -> void:
 	_create_action_list()
 
 
-
+#создает список кнопок для переназначения управлений
 func _create_action_list() -> void:
 	for item: Node in changable_list.get_children():
 		item.call_deferred("queue_free")
@@ -41,6 +41,7 @@ func _create_action_list() -> void:
 		changable_list.add_child(button)
 		button.pressed.connect(Callable(self, "_on_button_pressed").bind(button, action))
 
+# при нажатии на кнопку в управлении
 func _on_button_pressed(button: Button, action: String)-> void:
 	if not is_remapping:
 		is_remapping = true
@@ -48,6 +49,7 @@ func _on_button_pressed(button: Button, action: String)-> void:
 		remaping_button = button
 		button.find_child("InputLabel").text = "Press Key To Bind"
 		
+#обрабатывает переназначение управлений
 func _input(event: InputEvent) -> void:
 	if not is_remapping:
 		return
@@ -64,11 +66,13 @@ func _input(event: InputEvent) -> void:
 		action_to_remap = ""
 		remaping_button = null
 			
+#загружает пользовательские настройки управления из сохраненного файла
 func load_control_from_settings() -> void:
 	var keybinds: Dictionary[String, InputEvent] = SettingsLoader.get_key_binds()
 	for action: String in keybinds.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybinds[action])
 
+#обновляет текст на кнопке после переназначения управления
 func _update_changable_list(button: Button, event: InputEvent) -> void:
 	button.find_child("InputLabel").text = event.as_text().trim_suffix(" (Physical)")

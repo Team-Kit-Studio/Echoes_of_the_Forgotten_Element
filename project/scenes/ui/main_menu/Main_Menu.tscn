@@ -130,6 +130,21 @@ atlas = ExtResource("6_etry0")
 region = Rect2(144, 21, 33, 16)
 filter_clip = true
 
+[sub_resource type="Animation" id="Animation_b1wmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.28]
+}
+
 [sub_resource type="Animation" id="Animation_s2h7x"]
 resource_name = "intro"
 length = 5.0
@@ -144,21 +159,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.28, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_b1wmw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.28]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gb1rm"]

@@ -20,16 +20,18 @@ func _ready() -> void:
 	audiogame.play()
 
 
-func intro() -> void:
+func intro() -> void: # функция появления меню
 	Anim.play("intro")
 	if audiogame.playing == false:
 		audiogame.playing = true
 
-func _on_exit_pressed() -> void:
+func _on_exit_pressed() -> void: # при нажатии на кнопку выхода, закрваем игру
 	get_tree().quit()
 
-func _on_start_pressed() -> void:
+func _on_start_pressed() -> void: # При нажатии на кнопку старта, перенаправляем на 1 уровелнь
 	get_tree().change_scene_to_file("res://project/scenes/levels/Level_1/Level_1.tscn")
+
+# Дальше функции при выполнении которых меняются страницы меню
 
 func _on_options_pressed() -> void:
 	menu.visible = false
