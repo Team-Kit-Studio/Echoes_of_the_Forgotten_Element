@@ -41,4 +41,3 @@ func _on_v_sync_item_selected(index: int) -> void:
 	DisplayServer.window_set_vsync_mode(index)
 	SettingsLoader.config.set_value("Video", "vsync", index)
 	SettingsLoader.save_data()
-
