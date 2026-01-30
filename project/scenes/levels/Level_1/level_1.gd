@@ -1,39 +1,6 @@
 extends Node2D
 
-
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
-
-
-
-
-func _on_corridor_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		print("Corridor True")
-		explore_territory("corridor", 0)
-
-func explore_territory(room: String, state: float) -> void:
-	for points in get_tree().get_nodes_in_group(room):
-		var tween: Tween = get_tree().create_tween()
-		tween.tween_property(points, "energy", state, 1)
-	
-
-func _on_spawn_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		print("Spawn true")
-		explore_territory("spawn", 0)
-
-
-func _on_corridor_body_exited(body: Node2D) -> void:
-	if body.name == "Player":
-		print("Corridor False")
-		explore_territory("corridor", 0.97)
-
-
-func _on_spawn_body_exited(body: Node2D) -> void:
-	if body.name == "Player":
-		print("Spawn False")
-		explore_territory("spawn", 0.97)
 
 func _ready() -> void:
 	SavesManager.load_from_data.connect(load_from_data)
@@ -42,15 +9,19 @@ func _ready() -> void:
 	
 #реализует систему сохранения состояния сцены
 func self_objects_saves() -> void:
-	var temp: SavesTemplate.DataTemp = SavesTemplate.DataTemp.new() 
-	var temp_matadata: SavesTemplate.MetaDataTemp = SavesTemplate.MetaDataTemp.new()
-
-	temp.data["data"]["level_scene"] = self.scene_file_path
-	temp.data["data"]["player"] = $Player.data()
+	var game_data: Dictionary = {
+		"level_scene": scene_file_path,
+		"player": $"1_floor/Entity/Player".data()
+	}
 	
-	temp_matadata.data["metadata"]["name"] = self.name
-	temp_matadata.data["metadata"]["last_modified_time"]["date"] = Time.get_date_dict_from_system()
-	temp_matadata.data["metadata"]["last_modified_time"]["time"] = Time.get_time_dict_from_system()
+	var metadata: Dictionary = {
+		"name": name,
+		"last_modified_date": Time.get_date_dict_from_system(),
+		"last_modified_time": Time.get_time_dict_from_system()
+	}
+	
+	# Передаем данные напрямую (без лишней вложенности)
+	SavesManager.emit_signal("data_updated", game_data, metadata)
 
 	#for enemy: Node in $Objects/Enemy.get_children():
 	#	if enemy.data(): temp["data"]["enemy"].append(enemy.data())
@@ -61,27 +32,24 @@ func self_objects_saves() -> void:
 	#for items: Node in $Items.get_children():
 	#	if items.data(): temp["data"]["items"].append(items.data())
 		
-	SavesManager.emit_signal("data_updated", temp.data["data"], temp_matadata.data["metadata"])
-	temp = null
-	temp_matadata = null
 
 
 
 
 #загружает состояние сцены из сохраненных данных.
 func load_from_data(data: Dictionary) -> void:
-	if data:
-		delete_node()
-		for enemy: Dictionary in data["enemy"]:
-			pass
+	if not data.has("player"):
+		return
+	
+	# Удаляем старого игрока
+	var old_player = get_node_or_null("1_floor/Entity/Player")
+	if old_player:
+		old_player.get_parent().remove_child(old_player)
+		old_player.queue_free()
+	
+	# Загружаем нового
+	load_player(data.player)
 
-		for allies: Dictionary in data["allies"]:
-			pass
-
-		for items: Dictionary in data["items"]:
-			pass
-
-		load_player(data)
 
 func delete_node() -> void:
 #	for enemy: Node in $Objects/Enemy.get_children():
@@ -102,11 +70,24 @@ func delete_node() -> void:
 	player.queue_free()
 
 #загружает и восстанавливает состояние игрока из сохраненных данных
-func load_player(data: Dictionary) -> void:
-	var inst_player: Node = load(data["player"]["file_name"]).instantiate()
-	add_child(inst_player)
-	inst_player.call_deferred("load_data", data["player"])
+func load_player(player_data: Dictionary) -> void:
+	var player_scene = load(player_data.file_name)
+	if not player_scene:
+		push_error("Не удалось загрузить сцену игрока: " + str(player_data.file_name))
+		return
+	
+	var inst_player = player_scene.instantiate()
+	
+	# Добавляем в правильное место
+	var entity_parent = get_node_or_null("1_floor/Entity")
+	if entity_parent:
+		entity_parent.add_child(inst_player)
+	else:
+		add_child(inst_player)
+	
 	inst_player.name = "Player"
+	inst_player.call_deferred("load_data", player_data)
+
 
 func Play_Music(path: String) -> void:
 	var stream = load(path)

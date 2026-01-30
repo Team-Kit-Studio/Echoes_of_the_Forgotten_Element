@@ -22,7 +22,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		triger = true
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("Interaction") and triger:
 		toggle_mode()
 		if action:

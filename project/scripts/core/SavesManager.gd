@@ -22,8 +22,8 @@ func _ready() -> void:
 	self.delete.connect(func(folder_name: String) -> void: DirUtil.delete_folder_recursively(Main.SAVE_FOLDER_PATH + folder_name))
 	self.data_updated.connect(data_update_handler)
 	
-func _physics_process(delta: float) -> void:
-	print
+func _physics_process(_delta: float) -> void:
+	pass
 
 # Обработчик сигнала сохранения
 func save_handler(folder_name: String) -> void:

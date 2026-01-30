@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgrmdy8v57ng7"]
+
+[ext_resource type="Script" uid="uid://yg0e2hqkotp4" path="res://project/scripts/objects/chest.gd" id="1_j66t8"]
+[ext_resource type="Texture2D" uid="uid://crewvntw64igg" path="res://project/assets/sprites/Objects/Interactive/chest.png" id="2_lcyy3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy5e1"]
+size = Vector2(27, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqd3d"]
+size = Vector2(42, 41)
+
+[node name="Chest" type="StaticBody2D" groups=["interactable"]]
+texture_filter = 1
+script = ExtResource("1_j66t8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_sy5e1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lcyy3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gqd3d")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = -4.0
+offset_top = -22.0
+offset_right = 4.0
+offset_bottom = -15.0
+
+[node name="HitMarker2" type="Label" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -5.5
+offset_right = 2.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 7
+text = "F"

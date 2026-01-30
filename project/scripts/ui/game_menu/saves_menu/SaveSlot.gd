@@ -58,9 +58,22 @@ func update_time_ready() -> void:
 	handle_date_time(Time.get_date_dict_from_system(), Time.get_time_dict_from_system())
 
 func update_time_json() -> void:
-	var time_data: Dictionary = FileUtil.file_read(PathManager.build_path(Main.SAVE_FOLDER_PATH + self.name, "/metadata" , ".json"), FileUtil.encrypt_mode.NO_DECRYPTION)
-	if time_data != {}:
-		handle_date_time(time_data["last_modified_time"]["date"], time_data["last_modified_time"]["time"])
+	var time_data: Dictionary = FileUtil.file_read(
+		PathManager.build_path(Main.SAVE_FOLDER_PATH + self.name, "/metadata", ".json"), 
+		FileUtil.encrypt_mode.NO_DECRYPTION
+	)
+	
+	# Проверяем структуру данных правильно
+	if (time_data.is_empty() or 
+		not time_data.has("last_modified_time") or 
+		not time_data["last_modified_time"].has("date")):
+		return  # Файл пустой или структура неверная
+	
+	handle_date_time(
+		time_data["last_modified_time"]["date"], 
+		time_data["last_modified_time"]["time"]
+	)
+
 
 # Форматирование даты и времени
 func format_date_time(date: Dictionary, time: Dictionary) -> String:

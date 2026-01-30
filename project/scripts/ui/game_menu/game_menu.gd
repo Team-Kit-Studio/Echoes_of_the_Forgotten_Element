@@ -8,6 +8,8 @@ extends Control
 @onready var saveMenu: Control = $CanvasLayer/GUI/SaveMenu
 @onready var Anim: AnimationPlayer = $AnimationPlayer
 
+
+
 func _ready() -> void:
 	saveMenu.hidden.connect(func() -> void: if saveMenu.visible: return else: saveLoadButton.button_pressed = false)
 	canvas.show()

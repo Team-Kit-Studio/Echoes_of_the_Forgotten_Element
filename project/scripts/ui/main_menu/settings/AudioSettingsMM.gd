@@ -5,6 +5,7 @@ extends Control
 @onready var audio_num_music_text: Label = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Audio_Num_LBL
 @onready var audio_num_sfx_text: Label = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Audio_Num_LBL2
 
+const MAX_BOOST: float = 2.0 # Коэффициент усиления (2.0 = +6dB, 3.0 = +9.5dB)
 
 var bus_index_music: int = 2
 var bus_index_sfx: int = 1
@@ -15,11 +16,13 @@ func _ready() -> void:
 
 # настраивает громкость аудио-шинов (audio buses)
 func set_bus_index() -> void:
-	music.value = SettingsLoader.config.get_value("Audio", "music_volume")
-	AudioServer.set_bus_volume_db(bus_index_music, linear_to_db(music.value))
-
-	sfx_value.value = SettingsLoader.config.get_value("Audio", "sfx_volume")
-	AudioServer.set_bus_volume_db(bus_index_sfx, linear_to_db(sfx_value.value))
+	music.value = SettingsLoader.config.get_value("Audio", "music_volume", 0.5)
+	# Умножаем на MAX_BOOST
+	AudioServer.set_bus_volume_db(bus_index_music, linear_to_db(music.value * MAX_BOOST))
+	
+	sfx_value.value = SettingsLoader.config.get_value("Audio", "sfx_volume", 0.5)
+	# Умножаем на MAX_BOOST
+	AudioServer.set_bus_volume_db(bus_index_sfx, linear_to_db(sfx_value.value * MAX_BOOST))
 
 # получение индекса басов
 func get_bus_index() -> void:
@@ -41,12 +44,13 @@ func _on_sound_fx_value_changed(value: float) -> void:
 
 # вводим новое значение громкости
 func set_volume(idx: int, value: float) -> void:
-	AudioServer.set_bus_volume_db(idx, linear_to_db(value))
+	# Умножаем на MAX_BOOST
+	AudioServer.set_bus_volume_db(idx, linear_to_db(value * MAX_BOOST))
+	
 	if idx == bus_index_music:
 		SettingsLoader.config.set_value("Audio", "music_volume", value)
-
 	elif idx == bus_index_sfx:
 		SettingsLoader.config.set_value("Audio", "sfx_volume", value)
-
+		
 	set_audio_num_text()
 	SettingsLoader.save_data()

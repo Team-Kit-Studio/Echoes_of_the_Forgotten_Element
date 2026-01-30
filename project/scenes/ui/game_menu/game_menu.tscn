@@ -1,37 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7q8p6a0l30lf"]
+[gd_scene format=3 uid="uid://c7q8p6a0l30lf"]
 
 [ext_resource type="Theme" uid="uid://nc5ecqmt7j3g" path="res://project/assets/theme/new_theme.tres" id="1_ua2jr"]
 [ext_resource type="Script" uid="uid://dhwi4xp43wggc" path="res://project/scripts/ui/game_menu/game_menu.gd" id="1_wlcv1"]
 [ext_resource type="PackedScene" uid="uid://dbufcy3dd28sr" path="res://project/scenes/ui/game_menu/settings/settings.tscn" id="3_c3v2n"]
 [ext_resource type="PackedScene" uid="uid://5u7mtlbqv4dg" path="res://project/scenes/ui/game_menu/saves_menu/save_menu.tscn" id="4_ka88v"]
-
-[sub_resource type="Animation" id="Animation_nc7ay"]
-resource_name = "settings"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/GUI/Settings:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1.3660405, 1.6817931),
-"update": 0,
-"values": [Vector2(-500, 5), Vector2(55, 5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/GUI/Settings:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_vtjwh"]
 length = 0.001
@@ -112,6 +84,34 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0.011764706), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_nc7ay"]
+resource_name = "settings"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/GUI/Settings:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.3660405, 1.6817931),
+"update": 0,
+"values": [Vector2(-500, 5), Vector2(55, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/GUI/Settings:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_67y5g"]
 _data = {
 &"RESET": SubResource("Animation_vtjwh"),
@@ -119,7 +119,7 @@ _data = {
 &"settings": SubResource("Animation_nc7ay")
 }
 
-[node name="Game Menu" type="Control"]
+[node name="Game Menu" type="Control" unique_id=1209530635]
 process_mode = 3
 process_priority = 1
 layout_mode = 3
@@ -131,10 +131,11 @@ grow_vertical = 2
 theme = ExtResource("1_ua2jr")
 script = ExtResource("1_wlcv1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=176642573]
 process_mode = 3
 
-[node name="Main_Menu" type="Control" parent="CanvasLayer"]
+[node name="Main_Menu" type="Control" parent="CanvasLayer" unique_id=640752402]
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -145,38 +146,37 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main_Menu"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main_Menu" unique_id=232516212]
 layout_mode = 0
 offset_right = 308.0
 offset_bottom = 649.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main_Menu/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Main_Menu/PanelContainer" unique_id=1148089730]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer" unique_id=2014876524]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=53002644]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Пауза"
 horizontal_alignment = 1
 
-[node name="Continue" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Continue" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=2125104081]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
 action_mode = 0
 text = "Продолжить"
 
-[node name="SaveLoad_Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
-visible = false
+[node name="SaveLoad_Game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1102442555]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
@@ -184,7 +184,7 @@ toggle_mode = true
 text = "Сохранить/Загрузить
 Игру"
 
-[node name="Options" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1732988294]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
@@ -192,17 +192,17 @@ toggle_mode = true
 action_mode = 0
 text = "Настройки"
 
-[node name="Exit Menu" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit Menu" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1370427621]
 custom_minimum_size = Vector2(0, 38.165)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Выход в меню"
 
-[node name="Exit game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Exit game" type="Button" parent="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer" unique_id=1624478636]
 layout_mode = 2
 text = "Выход из игры"
 
-[node name="GUI" type="Control" parent="CanvasLayer"]
+[node name="GUI" type="Control" parent="CanvasLayer" unique_id=2118069531]
 process_mode = 3
 z_index = 1
 layout_mode = 3
@@ -214,30 +214,27 @@ offset_bottom = 645.0
 mouse_filter = 2
 theme = ExtResource("1_ua2jr")
 
-[node name="Settings" parent="CanvasLayer/GUI" instance=ExtResource("3_c3v2n")]
+[node name="Settings" parent="CanvasLayer/GUI" unique_id=2060490471 instance=ExtResource("3_c3v2n")]
 layout_mode = 0
 offset_left = -240.0
 offset_top = 0.0
 offset_right = 307.0
 offset_bottom = 648.0
 
-[node name="SaveMenu" parent="CanvasLayer/GUI" instance=ExtResource("4_ka88v")]
+[node name="SaveMenu" parent="CanvasLayer/GUI" unique_id=1535028240 instance=ExtResource("4_ka88v")]
 visible = false
 layout_mode = 1
 offset_left = -240.0
 offset_right = -589.0
 
-[node name="Pause" type="Button" parent="CanvasLayer"]
-visible = false
+[node name="Pause" type="Button" parent="CanvasLayer" unique_id=1224675774]
 offset_left = 1.0
 offset_right = 57.0
 offset_bottom = 31.0
 text = "Пауза"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_67y5g")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2127233086]
+libraries/ = SubResource("AnimationLibrary_67y5g")
 
 [connection signal="pressed" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="toggled" from="CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/SaveLoad_Game" to="." method="_on_save_game_toggled"]

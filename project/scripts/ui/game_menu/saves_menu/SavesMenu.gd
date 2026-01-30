@@ -197,7 +197,7 @@ func overwrite() -> void:
 
 # Load save
 func _load() -> void:
-	gameMenu.color_rect_show()
+	gameMenu.hide_canvas()
 	SavesManager.emit_signal("load", current_save.name)
 	saveList.move_child(current_save, 0)
 	reset_scroll()
