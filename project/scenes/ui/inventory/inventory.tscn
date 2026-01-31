@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bw1dsjxiijb6f"]
+
+[ext_resource type="Script" uid="uid://dccp8ygn7f8gk" path="res://project/scripts/ui/inventory/inventory.gd" id="1_p7iul"]
+[ext_resource type="PackedScene" uid="uid://b43vbcqhnboih" path="res://project/scenes/ui/inventory/components/inventory_item.tscn" id="8_k86sa"]
+[ext_resource type="Script" uid="uid://b7wl0ggtolnj2" path="res://project/scripts/ui/inventory/Components/item_grid.gd" id="9_40feg"]
+[ext_resource type="PackedScene" uid="uid://btnqd3waxpl6l" path="res://project/scenes/ui/inventory/components/inventory_slot.tscn" id="10_tla8l"]
+
+[node name="Inventory" type="PanelContainer" unique_id=1102897991]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p7iul")
+inventory_item_scene = ExtResource("8_k86sa")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=734957791]
+layout_mode = 2
+
+[node name="ItemGrid" type="GridContainer" parent="MarginContainer" unique_id=1340846301]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("9_40feg")
+inventory_slot_scene = ExtResource("10_tla8l")
+inventory_item_scene = ExtResource("8_k86sa")
+grid_width = 5

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://johug8s1yskq"]
+
+[ext_resource type="Material" uid="uid://bfsx266cs5k1w" path="res://project/assets/theme/Shadow_Shader.tres" id="1_3vlgy"]
+[ext_resource type="Texture2D" uid="uid://d5qkm48d228x" path="res://project/assets/sprites/Objects/Interactive/Шкаф.png" id="1_sye0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vlgy"]
+size = Vector2(63, 32)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sye0t"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3vlgy"]
+polygon = PackedVector2Array(-31, -32, -31, -31, -32, -31, -32, 31, -31, 31, -31, 32, 31, 32, 31, 31, 32, 31, 32, -31, 31, -31, 31, -32)
+
+[node name="closet" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Шкаф" type="Sprite2D" parent="."]
+material = ExtResource("1_3vlgy")
+texture = ExtResource("1_sye0t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -16)
+shape = SubResource("RectangleShape2D_3vlgy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+material = SubResource("CanvasItemMaterial_sye0t")
+occluder = SubResource("OccluderPolygon2D_3vlgy")
