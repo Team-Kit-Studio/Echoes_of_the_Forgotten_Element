@@ -6,20 +6,17 @@ enum state { MOVE, DAMAGE, ATTACK, DEATH }
 @export var acceleration: float = 800.0
 @export var friction: float = 1000.0
 
-@onready var audioPl: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_sfx1: AudioStreamPlayer2D = $AudioSFX
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
 @onready var ShadowSprite: AnimatedSprite2D = %AnimatedSprite2D2
 
-# Зона взаимодействия (Area2D) — как во втором скрипте
+# Зона взаимодействия (Area2D)
 @onready var interact: Area2D = $interact
 
 # Инвентари (ищем в дереве)
 @onready var player_inventory: CanvasItem = get_tree().root.find_child("PlayerInventory", true, false) as CanvasItem
 @onready var external_inventory: CanvasItem = get_tree().root.find_child("ExternalInventory", true, false) as CanvasItem
-
-# Шаги
-@onready var footstep_timer: Timer = Timer.new()
 
 const ANIMATION_NAMES: PackedStringArray = [
 	"State_Idle_FromSide", "State_Idle_Up", "State_Idle_Down",
@@ -31,17 +28,18 @@ var current_state: state = state.MOVE
 var input_direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2i = Vector2i.ZERO
 var was_moving: bool = false
-
-# Текущая цель для F (DroppedItem приоритетнее сундуков)
 var current_target: Node = null
 
-
 func _ready() -> void:
-	add_child(footstep_timer)
-	footstep_timer.one_shot = false
-	footstep_timer.wait_time = 0.4
-	footstep_timer.timeout.connect(_on_footstep_timeout)
-
+	# ✅ Загружаем звук шагов
+	var step_sound = preload("res://project/assets/sounds/MSE/zhelezo.mp3")
+	audio_sfx1.stream = step_sound
+	
+	# ✅ ВКЛЮЧАЕМ LOOP В КОДЕ (если забыли в Import Settings)
+	if audio_sfx1.stream is AudioStreamMP3:
+		audio_sfx1.stream.loop = true
+	elif audio_sfx1.stream is AudioStreamOggVorbis:
+		audio_sfx1.stream.loop = true
 
 func _physics_process(delta: float) -> void:
 	# Если инвентарь открыт — игрок стоит
@@ -69,7 +67,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	update_nearest_target()
-
+	_check_movement_for_footsteps()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_filedialog_delete"):
@@ -87,13 +85,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Interaction"):
 		handle_f_action()
 
-
 # =========================================================
 # Движение + анимации
 # =========================================================
 
 func Move_State(delta: float) -> void:
-	# WASD из вашего проекта (a/d/w/s)
 	input_direction = Input.get_vector("left", "right", "up", "down")
 
 	if input_direction != Vector2.ZERO:
@@ -104,13 +100,10 @@ func Move_State(delta: float) -> void:
 	velocity = velocity.move_toward(target_velocity, accel_value * delta)
 
 	Move_State_Play_Animation()
-	_update_footsteps()
-
 
 func Move_State_Play_Animation() -> void:
 	var index := 1 if input_direction != Vector2.ZERO else 0
 	play_animation(index, last_direction)
-
 
 func get_animation_index(index: int, key: Vector2i) -> int:
 	match index:
@@ -128,18 +121,15 @@ func get_animation_index(index: int, key: Vector2i) -> int:
 				_: return 0
 	return 0
 
-
 func get_clean_direction(raw_input: Vector2) -> Vector2i:
 	if abs(raw_input.y) > abs(raw_input.x):
 		return Vector2i(0, int(sign(raw_input.y)))
 	return Vector2i(int(sign(raw_input.x)), 0) if raw_input.x != 0 else Vector2i.ZERO
 
-
 func flip_anim() -> void:
 	if last_direction.x != 0:
 		anim.flip_h = last_direction.x > 0
 		ShadowSprite.flip_h = last_direction.x > 0
-
 
 func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	var anim_index := get_animation_index(index, key)
@@ -147,6 +137,26 @@ func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	AnimPlayer.play(ANIMATION_NAMES[anim_index])
 	flip_anim()
 
+# =========================================================
+# ✅ ШАГИ С АВТОРЕЕСТАРТОМ
+# =========================================================
+
+func _check_movement_for_footsteps() -> void:
+	var is_moving := velocity.length() > 10.0
+	
+	if is_moving:
+		# ✅ Если звук не играет → запускаем
+		if not audio_sfx1.playing:
+			audio_sfx1.play()
+		was_moving = true
+	elif was_moving:
+		# ✅ Остановились → останавливаем
+		_stop_footsteps()
+
+func _stop_footsteps() -> void:
+	if audio_sfx1.playing:
+		audio_sfx1.stop()
+	was_moving = false
 
 # =========================================================
 # Инвентари
@@ -157,14 +167,12 @@ func is_inventory_open() -> bool:
 	var e_open := (external_inventory != null and external_inventory.visible)
 	return p_open or e_open
 
-
 func close_all_inventories() -> void:
 	if external_inventory and external_inventory.visible:
 		if external_inventory.has_method("close_container"):
 			external_inventory.call("close_container")
 	if player_inventory:
 		player_inventory.visible = false
-
 
 # =========================================================
 # Поиск ближайшего (DroppedItem приоритетнее сундуков)
@@ -213,7 +221,6 @@ func update_nearest_target() -> void:
 	if current_target and current_target.has_method("set_highlight"):
 		current_target.call("set_highlight", true)
 
-
 # =========================================================
 # Нажатие F: поднять предмет или открыть/закрыть сундук
 # =========================================================
@@ -249,47 +256,17 @@ func handle_f_action() -> void:
 		if external_inventory and external_inventory.has_method("open_container"):
 			external_inventory.call("open_container", current_target)
 
-
 # =========================================================
-# Шаги (footsteps)
+# Сохранение/загрузка
 # =========================================================
 
-func _update_footsteps() -> void:
-	var is_moving := velocity.length() > 0.1
-	if is_moving and not was_moving:
-		footstep_timer.start()
-		was_moving = true
-	elif not is_moving and was_moving:
-		_stop_footsteps()
-
-
-func _stop_footsteps() -> void:
-	footstep_timer.stop()
-	was_moving = false
-
-
-func _on_footstep_timeout() -> void:
-	Play_Footstep("res://project/assets/sounds/MSE/zhelezo.mp3")
-
-
-func Play_Footstep(path: String) -> void:
-	var stream = load(path)
-	if stream:
-		audioPl.stream = stream
-		# Если хотите, чтобы шаг всегда срабатывал даже когда звук ещё играет:
-		# audioPl.stop()
-		audioPl.play()
-
-# Сохранение данных игрока
 func data() -> Dictionary:
 	return {
-		"file_name": get_scene_file_path(),  # Путь к сцене Player.tscn
 		"position": {"x": global_position.x, "y": global_position.y},
 		"direction": {"x": last_direction.x, "y": last_direction.y},
 		"velocity": {"x": velocity.x, "y": velocity.y}
 	}
 
-# Загрузка данных игрока
 func load_data(save_data: Dictionary) -> void:
 	if save_data.has("position"):
 		global_position.x = save_data.position.x
@@ -303,5 +280,4 @@ func load_data(save_data: Dictionary) -> void:
 		velocity.x = save_data.velocity.x
 		velocity.y = save_data.velocity.y
 	
-	# Обновляем анимацию после загрузки
 	play_animation(0 if velocity.length() < 0.1 else 1, last_direction)

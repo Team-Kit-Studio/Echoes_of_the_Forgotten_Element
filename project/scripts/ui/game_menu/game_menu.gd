@@ -7,6 +7,7 @@ extends Control
 @onready var optionsButton: Button = $CanvasLayer/Main_Menu/PanelContainer/HBoxContainer/VBoxContainer/Options
 @onready var saveMenu: Control = $CanvasLayer/GUI/SaveMenu
 @onready var Anim: AnimationPlayer = $AnimationPlayer
+@onready var audio_menu: AudioStreamPlayer2D = $AudioMenu
 
 
 
@@ -25,13 +26,19 @@ func _unhandled_key_input(_event: InputEvent) -> void:
 
 #режим отжимной кнопки
 func toggle() -> void:
-	visible = !visible
+	#visible = !visible
 	pauseButton.visible = !pauseButton.visible	
 	mainMenu.visible = !mainMenu.visible
 	saveMenu.hide()
 	settings.hide()
 	off_toggeled()
-	get_tree().paused = !get_tree().paused
+	
+	if !pauseButton.visible:
+		audio_menu.play()
+	else:
+		audio_menu.stop()
+	
+	get_tree().paused = !get_tree().paused  # Игровая пауза остаётся
 	
 # при нажатии на кнопку настроек
 func _on_options_toggled(toggled_on: bool) -> void:
@@ -58,6 +65,7 @@ func _on_button_pressed() -> void:
 	
 
 func continues() -> void:
+	audio_menu.stop() 
 	pauseButton.show()
 	mainMenu.hide()
 	saveMenu.hide()

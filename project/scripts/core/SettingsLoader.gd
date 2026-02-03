@@ -1,6 +1,6 @@
 extends Node
 
-# const Main.SETTINGS_CONFIG_PATH: String = "user://user_config/settings.cfg"
+#const Main.SETTINGS_CONFIG_PATH: String = "user://user_config/settings.cfg"
 
 var config: ConfigFile
 
@@ -11,10 +11,12 @@ func _ready() -> void:
 	
 	else:
 		load_data()
+	
 
 # сохранение данных
 func save_data() -> void:
 	config.save(Main.SETTINGS_CONFIG_PATH)
+	
 
 
 func new_config_settings() -> void:
@@ -68,9 +70,8 @@ func load_video_settings() -> void:
 func save_audio_settings(key: String, value: float)-> void:
 	config.set_value("Audio", key, value)
 
-# func load_audio_settings() -> Dictionary[String, float]: Я хуй знает зачем это тут
-# 	var audio_settings: Dictionary[String, float] = {}
-# 	for key in config.get_section_keys("Аудио"):
-# 		audio_settings[key] = config.get_value("Аудио", key)
-
-# 	return audio_settings
+func load_audio_settings() -> Dictionary[String, float]:
+	var audio_settings: Dictionary[String, float] = {}
+	for key in config.get_section_keys("Аудио"):
+		audio_settings[key] = config.get_value("Аудио", key)
+	return audio_settings

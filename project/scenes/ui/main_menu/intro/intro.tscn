@@ -1,35 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx1jgn04pcpgi"]
+[gd_scene format=3 uid="uid://cx1jgn04pcpgi"]
 
 [ext_resource type="Script" uid="uid://b3ph7uojwbn1r" path="res://project/scripts/ui/main_menu/intro/intro.gd" id="1_j1yth"]
 [ext_resource type="Texture2D" uid="uid://blyg5etevd41d" path="res://project/assets/sprites/UI/Team Kit Studios.png" id="2_gj7h6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3vti"]
 
-[node name="intro" type="Node2D"]
+[node name="intro" type="Node2D" unique_id=309977729]
 script = ExtResource("1_j1yth")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1622778751]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(577, 343.25)
 scale = Vector2(1190, 687.5)
 texture = SubResource("CanvasTexture_j3vti")
 
-[node name="TeamKitStudios" type="Sprite2D" parent="."]
+[node name="TeamKitStudios" type="Sprite2D" parent="." unique_id=474662146]
 position = Vector2(614, 311)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_gj7h6")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=891674082]
 visible = false
 energy = 1.37
 blend_mode = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=80370747]
 process_callback = 0
 wait_time = 4.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1898579099]
 position = Vector2(576, 341)
 zoom = Vector2(1.6, 1.6)
 

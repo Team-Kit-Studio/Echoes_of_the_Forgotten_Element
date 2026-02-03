@@ -1,6 +1,9 @@
 extends Node2D
 
-@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var audio_music: AudioStreamPlayer2D = $AudioMusic
+@onready var audio_sfx: AudioStreamPlayer2D = $AudioSFX
+@onready var player: CharacterBody2D = $"1_floor/Entity/Player"
+
 
 func _ready() -> void:
 	SavesManager.load_from_data.connect(load_from_data)
@@ -9,19 +12,23 @@ func _ready() -> void:
 	
 #реализует систему сохранения состояния сцены
 func self_objects_saves() -> void:
-	var game_data: Dictionary = {
-		"level_scene": scene_file_path,
-		"player": $"1_floor/Entity/Player".data()
-	}
+	var temp_data: Dictionary = {} 
+	var temp_metadata: Dictionary = {}
+
+	# Сохраняем путь сцены уровня
+	temp_data["level_scene"] = self.scene_file_path
 	
-	var metadata: Dictionary = {
-		"name": name,
-		"last_modified_date": Time.get_date_dict_from_system(),
-		"last_modified_time": Time.get_time_dict_from_system()
-	}
+	# Сохраняем данные игрока (вызываем его метод data())
+	if player:
+		temp_data["player"] = player.data()
 	
-	# Передаем данные напрямую (без лишней вложенности)
-	SavesManager.emit_signal("data_updated", game_data, metadata)
+	temp_metadata["name"] = self.name
+	temp_metadata["last_modified_time"] = {
+		"date": Time.get_date_dict_from_system(),
+		"time": Time.get_time_dict_from_system()
+	}
+
+	SavesManager.emit_signal("data_updated", temp_data, temp_metadata)
 
 	#for enemy: Node in $Objects/Enemy.get_children():
 	#	if enemy.data(): temp["data"]["enemy"].append(enemy.data())
@@ -38,17 +45,18 @@ func self_objects_saves() -> void:
 
 #загружает состояние сцены из сохраненных данных.
 func load_from_data(data: Dictionary) -> void:
-	if not data.has("player"):
-		return
+	# 1. Мы НЕ удаляем игрока. Мы обновляем того, кто уже стоит на уровне.
 	
-	# Удаляем старого игрока
-	var old_player = get_node_or_null("1_floor/Entity/Player")
-	if old_player:
-		old_player.get_parent().remove_child(old_player)
-		old_player.queue_free()
+	if data.has("player"):
+		# Проверяем, жив ли узел игрока
+		if is_instance_valid(player):
+			player.load_data(data["player"])
+		else:
+			push_error("Игрок не найден на сцене при загрузке!")
 	
-	# Загружаем нового
-	load_player(data.player)
+	# Если нужно загружать врагов или предметы, которые СПАВНЯТСЯ (которых не было в редакторе),
+	# то их старые версии надо удалить, а новые создать.
+	# Но Игрока трогать нельзя.
 
 
 func delete_node() -> void:
@@ -91,11 +99,12 @@ func load_player(player_data: Dictionary) -> void:
 
 func Play_Music(path: String) -> void:
 	var stream = load(path)
-	if audio.playing:
+	if audio_music.playing:
 		return
 	
-	if stream is AudioStream:
-		audio.stream = stream
-		audio.play()
+	if stream is AudioStream or audio_music.finished:
+		audio_music.stream = stream
+		audio_music.play()
+		
 	else:
 		push_error("Ошибка загрузки музыки")

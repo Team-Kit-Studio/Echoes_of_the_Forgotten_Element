@@ -1,15 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bfsx266cs5k1w"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bfsx266cs5k1w"]
 
 [ext_resource type="Shader" uid="uid://w5jfaqlv7agw" path="res://project/assets/Shaders/shadow.gdshader" id="1_pyrvw"]
 
 [resource]
 shader = ExtResource("1_pyrvw")
 shader_parameter/debug = false
-shader_parameter/border_scale = 1.205
+shader_parameter/border_scale = 2.0
 shader_parameter/shadow_offset = Vector2(10, 10)
-shader_parameter/color = Color(0, 0, 0, 0.490196)
-shader_parameter/blur_amount = 0.899
+shader_parameter/color = Color(0, 0, 0, 0.44705883)
+shader_parameter/blur_amount = 0.0
 shader_parameter/shadow_scale = 1.5
 shader_parameter/disable_rotating = false
-shader_parameter/cutoff_start = Vector2(0, 0.47)
+shader_parameter/cutoff_start = Vector2(0, 0.455)
 shader_parameter/cutoff_end = Vector2(1, 1)

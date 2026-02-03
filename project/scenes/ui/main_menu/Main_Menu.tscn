@@ -180,7 +180,7 @@ use_kinematic_bodies = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1064767681]
 stream = SubResource("AudioStreamMP3_s2h7x")
-volume_db = -0.016
+volume_db = 5.139
 bus = &"music"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1478946003]
