@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dm0awyo7fjnc4"
+path="res://.godot/imported/Mouse on Mars.mp3-3301838eb611c471cdc08f2d4edc0348.mp3str"
+
+[deps]
+
+source_file="res://project/assets/sounds/music/Mouse on Mars.mp3"
+dest_files=["res://.godot/imported/Mouse on Mars.mp3-3301838eb611c471cdc08f2d4edc0348.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

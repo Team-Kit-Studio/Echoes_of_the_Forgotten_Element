@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buy2qs4x7oljt"
-path="res://.godot/imported/LogoName.png-32eb418405afecb055fee2413655d066.ctex"
+uid="uid://cydwq13f2qwbu"
+path="res://.godot/imported/Gamecraft Project.png-edec02f227deeb51ac344a2c48ce4475.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/LogoName.png"
-dest_files=["res://.godot/imported/LogoName.png-32eb418405afecb055fee2413655d066.ctex"]
+source_file="res://project/assets/sprites/UI/other/Gamecraft Project.png"
+dest_files=["res://.godot/imported/Gamecraft Project.png-edec02f227deeb51ac344a2c48ce4475.ctex"]
 
 [params]
 

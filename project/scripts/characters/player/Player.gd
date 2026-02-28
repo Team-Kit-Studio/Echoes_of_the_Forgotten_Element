@@ -1,41 +1,44 @@
 extends CharacterBody2D
 
+# Состояния игрока
 enum state { MOVE, DAMAGE, ATTACK, DEATH }
-
 @export var speed: float = 100.0
 @export var acceleration: float = 800.0
 @export var friction: float = 1000.0
 
+# Ссылки на ноды
 @onready var audio_sfx1: AudioStreamPlayer2D = $AudioSFX
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
 @onready var ShadowSprite: AnimatedSprite2D = %AnimatedSprite2D2
-
-# Зона взаимодействия (Area2D)
-@onready var interact: Area2D = $interact
+@onready var interact: Area2D = $interact  # Зона взаимодействия
 
 # Инвентари (ищем в дереве)
 @onready var player_inventory: CanvasItem = get_tree().root.find_child("PlayerInventory", true, false) as CanvasItem
 @onready var external_inventory: CanvasItem = get_tree().root.find_child("ExternalInventory", true, false) as CanvasItem
 
+var can_move: bool = true
+
+# Названия анимаций
 const ANIMATION_NAMES: PackedStringArray = [
 	"State_Idle_FromSide", "State_Idle_Up", "State_Idle_Down",
 	"State_Run_FromSide", "State_Run_Up", "State_Run_Down"
 ]
 
+# Переменные состояния
 var current_state: state = state.MOVE
-
 var input_direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2i = Vector2i.ZERO
 var was_moving: bool = false
-var current_target: Node = null
+var current_target: Node = null  # Текущая цель для взаимодействия
 
 func _ready() -> void:
-	# ✅ Загружаем звук шагов
+	Global.player = self
+	# Загружаем звук шагов
 	var step_sound = preload("res://project/assets/sounds/MSE/zhelezo.mp3")
 	audio_sfx1.stream = step_sound
 	
-	# ✅ ВКЛЮЧАЕМ LOOP В КОДЕ (если забыли в Import Settings)
+	# Включаем зацикливание звука
 	if audio_sfx1.stream is AudioStreamMP3:
 		audio_sfx1.stream.loop = true
 	elif audio_sfx1.stream is AudioStreamOggVorbis:
@@ -50,8 +53,8 @@ func _physics_process(delta: float) -> void:
 		Move_State_Play_Animation()
 		move_and_slide()
 		return
-
-	# Движение + анимация + шаги
+	
+	# Обработка состояний
 	match current_state:
 		state.MOVE:
 			Move_State(delta)
@@ -64,15 +67,16 @@ func _physics_process(delta: float) -> void:
 		state.DEATH:
 			velocity = Vector2.ZERO
 			_stop_footsteps()
-
+	
 	move_and_slide()
-	update_nearest_target()
-	_check_movement_for_footsteps()
+	update_nearest_target()  # Обновляем ближайшую цель
+	_check_movement_for_footsteps()  # Проверяем шаги
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_filedialog_delete"):
+	# Выход из игры
+	if Input.is_action_just_pressed("ui_text_delete"):
 		get_tree().quit()
-
+	
 	# E — открыть/закрыть инвентари
 	if event.is_action_pressed("Inventory"):
 		if is_inventory_open():
@@ -80,57 +84,61 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			if player_inventory:
 				player_inventory.visible = true
-
-	# F — поднять предмет или открыть/закрыть контейнер
+	
+	# F — взаимодействие с выбранной целью
 	if event.is_action_pressed("Interaction"):
 		handle_f_action()
 
 # =========================================================
 # Движение + анимации
 # =========================================================
-
 func Move_State(delta: float) -> void:
+	# Получаем направление ввода
 	input_direction = Input.get_vector("left", "right", "up", "down")
-
 	if input_direction != Vector2.ZERO:
 		last_direction = get_clean_direction(input_direction)
-
+	
+	# Рассчитываем скорость
 	var target_velocity: Vector2 = input_direction * speed
 	var accel_value: float = acceleration if input_direction != Vector2.ZERO else friction
 	velocity = velocity.move_toward(target_velocity, accel_value * delta)
-
 	Move_State_Play_Animation()
 
 func Move_State_Play_Animation() -> void:
+	# Определяем индекс анимации (0 - idle, 1 - run)
 	var index := 1 if input_direction != Vector2.ZERO else 0
 	play_animation(index, last_direction)
 
+# Получение индекса анимации по состоянию и направлению
 func get_animation_index(index: int, key: Vector2i) -> int:
 	match index:
-		0: # idle
+		0:  # idle
 			match key:
-				Vector2i.RIGHT, Vector2i.LEFT: return 0
-				Vector2i.UP: return 1
-				Vector2i.DOWN: return 2
+				Vector2i.RIGHT, Vector2i.LEFT: return 0  # State_Idle_FromSide
+				Vector2i.UP: return 1  # State_Idle_Up
+				Vector2i.DOWN: return 2  # State_Idle_Down
 				_: return 0
-		1: # run
+		1:  # run
 			match key:
-				Vector2i.RIGHT, Vector2i.LEFT: return 3
-				Vector2i.UP: return 4
-				Vector2i.DOWN: return 5
+				Vector2i.RIGHT, Vector2i.LEFT: return 3  # State_Run_FromSide
+				Vector2i.UP: return 4  # State_Run_Up
+				Vector2i.DOWN: return 5  # State_Run_Down
 				_: return 0
 	return 0
 
+# Преобразование вектора направления в дискретные значения
 func get_clean_direction(raw_input: Vector2) -> Vector2i:
 	if abs(raw_input.y) > abs(raw_input.x):
 		return Vector2i(0, int(sign(raw_input.y)))
 	return Vector2i(int(sign(raw_input.x)), 0) if raw_input.x != 0 else Vector2i.ZERO
 
+# Отражение спрайта по горизонтали
 func flip_anim() -> void:
 	if last_direction.x != 0:
 		anim.flip_h = last_direction.x > 0
 		ShadowSprite.flip_h = last_direction.x > 0
 
+# Воспроизведение анимации
 func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	var anim_index := get_animation_index(index, key)
 	ShadowSprite.play(ANIMATION_NAMES[anim_index])
@@ -138,19 +146,17 @@ func play_animation(index: int, key: Vector2i = Vector2i.ZERO) -> void:
 	flip_anim()
 
 # =========================================================
-# ✅ ШАГИ С АВТОРЕЕСТАРТОМ
+# Шаги с авторестартом
 # =========================================================
-
 func _check_movement_for_footsteps() -> void:
 	var is_moving := velocity.length() > 10.0
-	
 	if is_moving:
-		# ✅ Если звук не играет → запускаем
+		# Если звук не играет → запускаем
 		if not audio_sfx1.playing:
 			audio_sfx1.play()
 		was_moving = true
 	elif was_moving:
-		# ✅ Остановились → останавливаем
+		# Остановились → останавливаем звук
 		_stop_footsteps()
 
 func _stop_footsteps() -> void:
@@ -161,7 +167,6 @@ func _stop_footsteps() -> void:
 # =========================================================
 # Инвентари
 # =========================================================
-
 func is_inventory_open() -> bool:
 	var p_open := (player_inventory != null and player_inventory.visible)
 	var e_open := (external_inventory != null and external_inventory.visible)
@@ -175,91 +180,143 @@ func close_all_inventories() -> void:
 		player_inventory.visible = false
 
 # =========================================================
-# Поиск ближайшего (DroppedItem приоритетнее сундуков)
+# Система выбора целей с приоритетами:
+# 1. Предметы (группа "item") - самый высокий приоритет
+# 2. Сундуки/контейнеры (группа "interactable")
+# 3. NPC (группа "NPC")
 # =========================================================
-
 func update_nearest_target() -> void:
 	if interact == null:
 		return
-
+	
 	var areas := interact.get_overlapping_areas()
-
-	var best_item: DroppedItem = null
+	
+	# Храним лучшие цели каждого типа
+	var best_item: Node = null
 	var best_item_dist := INF
-
-	var best_chest: Node = null
-	var best_chest_dist := INF
-
-	for a in areas:
-		# 1) Предмет (DroppedItem)
-		var di := a as DroppedItem
-		if di != null and di.data != null:
-			var d := global_position.distance_to(di.global_position)
-			if d < best_item_dist:
-				best_item_dist = d
-				best_item = di
+	
+	var best_container: Node = null
+	var best_container_dist := INF
+	
+	var best_npc: Node = null
+	var best_npc_dist := INF
+	
+	# Сканируем все объекты в зоне взаимодействия
+	for area in areas:
+		var distance := global_position.distance_to(area.global_position)
+		
+		# 1) ПРОВЕРКА НА ПРЕДМЕТ (группа "item") - ВЫСШИЙ ПРИОРИТЕТ
+		if area.is_in_group("item"):
+			if distance < best_item_dist:
+				best_item_dist = distance
+				best_item = area
 			continue
-
-		# 2) Сундук (родитель area в группе interactable)
-		var parent := a.get_parent()
-		if parent and parent.is_in_group("interactable"):
-			var d2 := global_position.distance_to(parent.global_position)
-			if d2 < best_chest_dist:
-				best_chest_dist = d2
-				best_chest = parent
-
-	var new_target: Node = best_item if best_item != null else best_chest
-
-	if new_target == current_target:
-		return
-
-	if current_target and current_target.has_method("set_highlight"):
-		current_target.call("set_highlight", false)
-
-	current_target = new_target
-
-	if current_target and current_target.has_method("set_highlight"):
-		current_target.call("set_highlight", true)
-
+		
+		# 2) ПРОВЕРКА НА КОНТЕЙНЕР (группа "interactable")
+		if area.is_in_group("interactable"):
+			if distance < best_container_dist:
+				best_container_dist = distance
+				best_container = area
+			continue
+		
+		# 3) ПРОВЕРКА НА NPC (группа "NPC") - НИЗШИЙ ПРИОРИТЕТ
+		if area.is_in_group("NPC"):
+			if distance < best_npc_dist:
+				best_npc_dist = distance
+				best_npc = area
+			continue
+		
+		# Проверяем родителя area
+		var parent := area.get_parent()
+		if parent:
+			if parent.is_in_group("item"):
+				if distance < best_item_dist:
+					best_item_dist = distance
+					best_item = parent
+				continue
+			
+			if parent.is_in_group("interactable"):
+				if distance < best_container_dist:
+					best_container_dist = distance
+					best_container = parent
+				continue
+			
+			if parent.is_in_group("NPC"):
+				if distance < best_npc_dist:
+					best_npc_dist = distance
+					best_npc = parent
+	# ВЫБОР ЦЕЛИ ПО ПРИОРИТЕТУ
+	var new_target: Node = null
+	
+	# 1. Сначала предметы (дистанция до 50 пикселей)
+	if best_item != null and best_item_dist <= 50.0:
+		new_target = best_item
+	# 2. Потом контейнеры
+	elif best_container != null and best_container_dist <= 50.0:
+		new_target = best_container
+	# 3. И только потом NPC
+	elif best_npc != null and best_npc_dist <= 50.0:
+		new_target = best_npc
+	
+	# Обновление подсветки
+	if new_target != current_target:
+		# Убираем подсветку со старой цели
+		if current_target and current_target.has_method("set_highlight"):
+			current_target.call("set_highlight", false)
+		
+		# Устанавливаем новую цель
+		current_target = new_target
+		
+		# Добавляем подсветку новой цели
+		if current_target and current_target.has_method("set_highlight"):
+			current_target.call("set_highlight", true)
 # =========================================================
-# Нажатие F: поднять предмет или открыть/закрыть сундук
+# Нажатие F: взаимодействие с выбранной целью
 # =========================================================
-
 func handle_f_action() -> void:
 	if current_target == null:
 		return
-
-	# 1) Предмет — поднять
-	if current_target is DroppedItem:
-		var item := current_target as DroppedItem
-		if item.data == null:
-			return
-
-		if player_inventory and player_inventory.has_method("add_item"):
-			player_inventory.call("add_item", item.data)
-
-		if item.has_method("set_highlight"):
-			item.call("set_highlight", false)
-		item.queue_free()
-
-		current_target = null
+	
+	# Проверяем группу объекта
+	if current_target.is_in_group("item"):
+		# Предмет — поднять
+		if current_target.has_method("pick_up"):
+			current_target.call("pick_up")
+		elif current_target.has_method("add_to_inventory"):
+			current_target.call("add_to_inventory")
+		else:
+			print("У предмета нет метода pick_up() или add_to_inventory()")
 		return
-
-	# 2) Сундук — toggle
-	if current_target.is_in_group("interactable"):
+	
+	elif current_target.is_in_group("interactable"):
+		# Сундук — открыть/закрыть
 		if external_inventory and external_inventory.visible and external_inventory.has_method("is_bound_to") and external_inventory.call("is_bound_to", current_target):
 			close_all_inventories()
 			return
-
+		
 		if player_inventory:
 			player_inventory.visible = true
+		
 		if external_inventory and external_inventory.has_method("open_container"):
 			external_inventory.call("open_container", current_target)
+		return
+	
+	elif current_target.is_in_group("NPC"):
+		# NPC — взаимодействие
+		print("Взаимодействие с NPC: ", current_target.name)
+		
+		# Ищем метод start_dialog() у NPC
+		if current_target.has_method("start_dialog"):
+			current_target.call("start_dialog")
+		else:
+			print("У NPC нет метода start_dialog()")
+		return
+
+
 
 # =========================================================
 # Сохранение/загрузка
 # =========================================================
-
 func data() -> Dictionary:
 	return {
 		"position": {"x": global_position.x, "y": global_position.y},
@@ -280,4 +337,5 @@ func load_data(save_data: Dictionary) -> void:
 		velocity.x = save_data.velocity.x
 		velocity.y = save_data.velocity.y
 	
+	# Воспроизводим анимацию в зависимости от скорости
 	play_animation(0 if velocity.length() < 0.1 else 1, last_direction)

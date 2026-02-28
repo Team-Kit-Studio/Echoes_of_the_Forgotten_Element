@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cbcyxtegi25uw" path="res://project/assets/sprites/tiles/timemap_space/tilemap space.png" id="2_4ydw1"]
 [ext_resource type="Texture2D" uid="uid://bf0qdsf4dh5ip" path="res://project/assets/sprites/ui_main/button_main_menu/Start.png" id="4_a214n"]
 [ext_resource type="Texture2D" uid="uid://nxqkoufxgsi5" path="res://project/assets/sprites/ui_main/button_main_menu/Start_Pressed.png" id="5_34mu2"]
-[ext_resource type="Texture2D" uid="uid://buy2qs4x7oljt" path="res://project/assets/sprites/UI/LogoName.png" id="5_b1wmw"]
+[ext_resource type="Texture2D" uid="uid://buy2qs4x7oljt" path="res://project/assets/sprites/UI/other/LogoName.png" id="5_b1wmw"]
 [ext_resource type="Texture2D" uid="uid://cru4ghk5c5q62" path="res://project/assets/sprites/ui_main/button_main_menu/Start_Hover.png" id="6_etry0"]
 [ext_resource type="Texture2D" uid="uid://e0xbbc0gkb3s" path="res://project/assets/sprites/ui_main/button_main_menu/options.png" id="7_bmo4t"]
 [ext_resource type="Texture2D" uid="uid://k3s6bg13op6y" path="res://project/assets/sprites/ui_main/button_main_menu/options_Pressed.png" id="8_rl2wa"]

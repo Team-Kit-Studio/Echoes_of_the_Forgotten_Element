@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coedi7oa4afyr"
-path="res://.godot/imported/slot_chip.png-b615ac2f1aa180c5398dc40848e6bc6e.ctex"
+uid="uid://buy2qs4x7oljt"
+path="res://.godot/imported/LogoName.png-e19cd05d93d3b968086303ebb6d29720.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/slot_chip.png"
-dest_files=["res://.godot/imported/slot_chip.png-b615ac2f1aa180c5398dc40848e6bc6e.ctex"]
+source_file="res://project/assets/sprites/UI/other/LogoName.png"
+dest_files=["res://.godot/imported/LogoName.png-e19cd05d93d3b968086303ebb6d29720.ctex"]
 
 [params]
 

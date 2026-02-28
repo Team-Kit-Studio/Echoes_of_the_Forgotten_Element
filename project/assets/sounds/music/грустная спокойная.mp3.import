@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dkq532hnd6lqa"
+path="res://.godot/imported/грустная спокойная.mp3-4e1ffea64c1141096f5aa58254043b61.mp3str"
+
+[deps]
+
+source_file="res://project/assets/sounds/music/грустная спокойная.mp3"
+dest_files=["res://.godot/imported/грустная спокойная.mp3-4e1ffea64c1141096f5aa58254043b61.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

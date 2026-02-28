@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://7cuwhsnjxoqp"]
+
+[ext_resource type="Texture2D" uid="uid://2mn6p2qllxcf" path="res://project/assets/sprites/UI/text_box/Dialog_Flow.png" id="1_a8w8i"]
+[ext_resource type="Script" uid="uid://cfxy0hr0ap0ao" path="res://project/scripts/ui/text_box/text_box.gd" id="1_e0o8r"]
+[ext_resource type="FontFile" uid="uid://b00ct6lnvs48l" path="res://project/assets/fronts/Comic Sans MS Pixel.ttf" id="2_a8w8i"]
+
+[node name="TextBox" type="MarginContainer" unique_id=2022081076]
+script = ExtResource("1_e0o8r")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1015435873]
+layout_mode = 2
+texture = ExtResource("1_a8w8i")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=277433373]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=90576489]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3764706)
+theme_override_colors/font_outline_color = Color(0.14532572, 0.44085366, 0.66373265, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_a8w8i")
+theme_override_font_sizes/font_size = 16
+vertical_alignment = 1
+
+[node name="LetterDisplayTimer" type="Timer" parent="." unique_id=971136120]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

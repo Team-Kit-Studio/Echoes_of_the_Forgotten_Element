@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx2smwr5aqsdm"
-path="res://.godot/imported/def slot.png-e9c99d6adf4c4f2eef944203a74dc159.ctex"
+uid="uid://c8xda35fdg8c1"
+path="res://.godot/imported/chat_sprite-sheet.png-f63c77aeed4102ee6381ba5b99cbf996.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/def slot.png"
-dest_files=["res://.godot/imported/def slot.png-e9c99d6adf4c4f2eef944203a74dc159.ctex"]
+source_file="res://project/assets/sprites/UI/text_box/chat_sprite-sheet.png"
+dest_files=["res://.godot/imported/chat_sprite-sheet.png-f63c77aeed4102ee6381ba5b99cbf996.ctex"]
 
 [params]
 

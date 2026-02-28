@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://7e432d5m3f64" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/стул.png" id="9_vcvnr"]
 [ext_resource type="PackedScene" uid="uid://cpnvcqb45r1fu" path="res://project/scenes/objects/interactive/safe_terminal.tscn" id="10_563p0"]
 [ext_resource type="PackedScene" uid="uid://johug8s1yskq" path="res://project/scenes/objects/interactive/closet.tscn" id="11_hhtvi"]
-[ext_resource type="PackedScene" uid="uid://rc1cyn3sceyf" path="res://project/scenes/characters/Entity/Comander.tscn" id="11_lto12"]
+[ext_resource type="PackedScene" uid="uid://rc1cyn3sceyf" path="res://project/scenes/characters/Entity/NPC.tscn" id="11_lto12"]
 [ext_resource type="PackedScene" uid="uid://cgrmdy8v57ng7" path="res://project/scenes/objects/interactive/chest.tscn" id="14_qjhnp"]
 [ext_resource type="Material" uid="uid://bfsx266cs5k1w" path="res://project/assets/theme/Shadow_Shader.tres" id="15_0udst"]
 [ext_resource type="Script" uid="uid://ipa0bxfn4i43" path="res://project/data/item/item_data.gd" id="15_f7cpc"]
@@ -554,7 +554,7 @@ sources/5 = SubResource("TileSetAtlasSource_20t25")
 sources/6 = SubResource("TileSetAtlasSource_64jha")
 sources/1 = SubResource("TileSetAtlasSource_563p0")
 
-[sub_resource type="Resource" id="Resource_sfn6e"]
+[sub_resource type="Resource" id="Resource_0udst"]
 script = ExtResource("15_f7cpc")
 name = "Черная Ключ-Карта"
 texture = ExtResource("16_lto12")
@@ -640,7 +640,7 @@ tile_set = SubResource("TileSet_poiis")
 position = Vector2(1762, 1680)
 
 [node name="Chest" parent="1_floor/Rooms/Spawn" unique_id=532434632 instance=ExtResource("14_qjhnp")]
-position = Vector2(111, 36)
+position = Vector2(110, 42)
 
 [node name="Chest2" parent="1_floor/Rooms/Spawn" unique_id=784172812 instance=ExtResource("14_qjhnp")]
 position = Vector2(110, 80)
@@ -659,8 +659,8 @@ position = Vector2(-99, -78)
 [node name="Items" type="Node" parent="1_floor/Rooms/Spawn" unique_id=247696632]
 
 [node name="Drop_item" parent="1_floor/Rooms/Spawn/Items" unique_id=127834688 instance=ExtResource("28_s4qvm")]
-position = Vector2(1673, 1740)
-data = SubResource("Resource_sfn6e")
+position = Vector2(1672, 1743)
+data = SubResource("Resource_0udst")
 
 [node name="Entity" type="Node" parent="1_floor" unique_id=433729004]
 
@@ -670,7 +670,7 @@ y_sort_enabled = true
 position = Vector2(1767.0001, 1713.0001)
 scale = Vector2(1.3, 1.3)
 
-[node name="CharacterBody2D" parent="1_floor/Entity" unique_id=1741641539 instance=ExtResource("11_lto12")]
+[node name="NPC" parent="1_floor/Entity" unique_id=1741641539 instance=ExtResource("11_lto12")]
 position = Vector2(1875.0002, 1524.0001)
 
 [node name="AudioSFX" type="AudioStreamPlayer2D" parent="." unique_id=1155707719]

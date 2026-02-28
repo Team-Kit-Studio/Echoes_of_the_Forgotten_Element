@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blyg5etevd41d"
-path="res://.godot/imported/Team Kit Studios.png-0d6899e1dac43db48984817f796a6f0d.ctex"
+path="res://.godot/imported/Team Kit Studios.png-6da4f51dd0958c16d2901723dbff70d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/Team Kit Studios.png"
-dest_files=["res://.godot/imported/Team Kit Studios.png-0d6899e1dac43db48984817f796a6f0d.ctex"]
+source_file="res://project/assets/sprites/UI/other/Team Kit Studios.png"
+dest_files=["res://.godot/imported/Team Kit Studios.png-6da4f51dd0958c16d2901723dbff70d1.ctex"]
 
 [params]
 

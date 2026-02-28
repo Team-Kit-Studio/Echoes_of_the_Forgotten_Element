@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nxb5yetph35k"
-path="res://.godot/imported/chat_sprite_down.png-f7a949cfc3a6d406df9921f6a05c7912.ctex"
+uid="uid://2mn6p2qllxcf"
+path="res://.godot/imported/Dialog_Flow.png-4393da275d9a733c1ad81a3ef28c1464.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/environment/chat_sprite_down.png"
-dest_files=["res://.godot/imported/chat_sprite_down.png-f7a949cfc3a6d406df9921f6a05c7912.ctex"]
+source_file="res://project/assets/sprites/UI/text_box/Dialog_Flow.png"
+dest_files=["res://.godot/imported/Dialog_Flow.png-4393da275d9a733c1ad81a3ef28c1464.ctex"]
 
 [params]
 

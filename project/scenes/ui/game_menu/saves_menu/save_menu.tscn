@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://5u7mtlbqv4dg"]
+[gd_scene format=3 uid="uid://5u7mtlbqv4dg"]
 
 [ext_resource type="Script" uid="uid://dccmmf8x0phru" path="res://project/scripts/ui/game_menu/saves_menu/SavesMenu.gd" id="1_c4y5q"]
 [ext_resource type="PackedScene" uid="uid://l7jr0kxb6rqm" path="res://project/scenes/ui/game_menu/saves_menu/new_save.tscn" id="2_3ltuu"]
 [ext_resource type="PackedScene" uid="uid://dknegxl7i6pto" path="res://project/scenes/ui/components/confirm.tscn" id="3_g21pi"]
 
-[node name="SaveMenu" type="Control"]
+[node name="SaveMenu" type="Control" unique_id=1711766257]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c4y5q")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1454817275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,30 +25,30 @@ offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel"]
-layout_mode = 2
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel" unique_id=1748568568]
+layout_mode = 0
 offset_right = 411.0
 offset_bottom = 88.0
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer2"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer2" unique_id=572894080]
 modulate = Color(0.501407, 0.501406, 0.501406, 1)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer2" unique_id=460961462]
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "Сохранения
 "
 horizontal_alignment = 1
 
-[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer2"]
+[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer2" unique_id=651016598]
 modulate = Color(0.501407, 0.501406, 0.501406, 1)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=376515086]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 85.0
 offset_right = 404.0
@@ -57,23 +57,23 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer" unique_id=1603902945]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer" unique_id=1254527087]
 layout_mode = 2
 
-[node name="SaveListH" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="SaveListH" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer" unique_id=974394303]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SavelistV" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH"]
+[node name="SavelistV" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer/SaveListH" unique_id=860106685]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewSaveButton" type="Button" parent="Panel"]
+[node name="NewSaveButton" type="Button" parent="Panel" unique_id=1878546705]
 process_mode = 3
 layout_mode = 0
 offset_left = 421.0
@@ -82,7 +82,7 @@ offset_right = 685.0
 offset_bottom = 338.0
 text = "Создать"
 
-[node name="Delete" type="Button" parent="Panel"]
+[node name="Delete" type="Button" parent="Panel" unique_id=2042766723]
 layout_mode = 0
 offset_left = 421.0
 offset_top = 344.0
@@ -91,7 +91,7 @@ offset_bottom = 375.0
 disabled = true
 text = "Удалить"
 
-[node name="Load" type="Button" parent="Panel"]
+[node name="Load" type="Button" parent="Panel" unique_id=972333562]
 layout_mode = 0
 offset_left = 421.0
 offset_top = 271.0
@@ -100,7 +100,7 @@ offset_bottom = 302.0
 disabled = true
 text = "Загрузить"
 
-[node name="Cancel" type="Button" parent="Panel"]
+[node name="Cancel" type="Button" parent="Panel" unique_id=156660672]
 layout_mode = 0
 offset_left = 561.0
 offset_top = 344.0
@@ -108,7 +108,7 @@ offset_right = 686.0
 offset_bottom = 375.0
 text = "Отмена"
 
-[node name="Line2D8" type="Control" parent="Panel"]
+[node name="Line2D8" type="Control" parent="Panel" unique_id=283887474]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +118,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="Line2D" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D" type="Line2D" parent="Panel/Line2D8" unique_id=1256594967]
 position = Vector2(413.667, 4.76721)
 scale = Vector2(1.16667, 1.25574)
 points = PackedVector2Array(-1, 0, -1, 299)
@@ -129,7 +129,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D2" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D2" type="Line2D" parent="Panel/Line2D8" unique_id=1544570904]
 position = Vector2(2.48407, 382)
 scale = Vector2(1.16254, 1.00328)
 points = PackedVector2Array(-0.857146, 0.996735, 598.286, 0.996735)
@@ -140,7 +140,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D3" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D3" type="Line2D" parent="Panel/Line2D8" unique_id=1415417240]
 position = Vector2(2.48407, 382.031)
 scale = Vector2(1.16254, 0.992939)
 points = PackedVector2Array(-0.416391, 0, -0.416391, -382.755)
@@ -151,7 +151,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D4" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D4" type="Line2D" parent="Panel/Line2D8" unique_id=658147972]
 position = Vector2(2.48407, 382.031)
 scale = Vector2(1.16254, 0.992939)
 points = PackedVector2Array(-0.416391, -382.734, 597.415, -382.734)
@@ -162,7 +162,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D5" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D5" type="Line2D" parent="Panel/Line2D8" unique_id=609374725]
 position = Vector2(4, 382)
 scale = Vector2(1.16254, 0.992939)
 points = PackedVector2Array(597.415, -382.734, 597.415, -0.0312195)
@@ -173,7 +173,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D6" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D6" type="Line2D" parent="Panel/Line2D8" unique_id=420849648]
 position = Vector2(4, 337)
 scale = Vector2(1.16254, 0.992939)
 points = PackedVector2Array(351.817, -69.4907, 596.971, -69.4907)
@@ -184,7 +184,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="Line2D7" type="Line2D" parent="Panel/Line2D8"]
+[node name="Line2D7" type="Line2D" parent="Panel/Line2D8" unique_id=1379493708]
 position = Vector2(4, 216)
 scale = Vector2(1.16254, 0.992939)
 points = PackedVector2Array(351.817, -69.4907, 596.971, -69.4907)
@@ -195,14 +195,14 @@ begin_cap_mode = 2
 end_cap_mode = 2
 sharp_limit = 11.51
 
-[node name="SaveInfo" type="Control" parent="Panel"]
+[node name="SaveInfo" type="Control" parent="Panel" unique_id=941859223]
 anchors_preset = 0
 offset_left = 416.0
 offset_top = 5.0
 offset_right = 695.0
 offset_bottom = 265.0
 
-[node name="SaveImage" type="TextureRect" parent="Panel/SaveInfo"]
+[node name="SaveImage" type="TextureRect" parent="Panel/SaveInfo" unique_id=591218813]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -1.0
@@ -212,8 +212,8 @@ expand_mode = 2
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/SaveInfo"]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="Panel/SaveInfo" unique_id=260507912]
+layout_mode = 0
 offset_left = -2.0
 offset_top = 144.0
 offset_right = 281.0
@@ -223,19 +223,19 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainerLabel" type="VBoxContainer" parent="Panel/SaveInfo/MarginContainer"]
+[node name="VBoxContainerLabel" type="VBoxContainer" parent="Panel/SaveInfo/MarginContainer" unique_id=88515610]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Missions text" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
+[node name="Missions text" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel" unique_id=191752599]
 layout_mode = 2
 text = "Задание:"
 
-[node name="Label2" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel"]
+[node name="Label2" type="Label" parent="Panel/SaveInfo/MarginContainer/VBoxContainerLabel" unique_id=968965587]
 layout_mode = 2
 text = "Шота там"
 
-[node name="NewSave" parent="." instance=ExtResource("2_3ltuu")]
+[node name="NewSave" parent="." unique_id=1894656494 instance=ExtResource("2_3ltuu")]
 visible = false
 layout_mode = 1
 offset_left = 121.0
@@ -243,7 +243,7 @@ offset_top = 103.0
 offset_right = -216.0
 offset_bottom = -31.0
 
-[node name="Confirm" parent="." instance=ExtResource("3_g21pi")]
+[node name="Confirm" parent="." unique_id=1022724543 instance=ExtResource("3_g21pi")]
 visible = false
 layout_mode = 1
 offset_left = 114.0

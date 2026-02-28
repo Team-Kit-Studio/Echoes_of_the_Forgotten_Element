@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8xda35fdg8c1"
-path="res://.godot/imported/chat_sprite-sheet.png-33ac4172105e009320549e83401e0a4e.ctex"
+uid="uid://bjsi0dwmjry4x"
+path="res://.godot/imported/Inventary.png-04585cc15c795210d7e9a371428e7692.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/environment/chat_sprite-sheet.png"
-dest_files=["res://.godot/imported/chat_sprite-sheet.png-33ac4172105e009320549e83401e0a4e.ctex"]
+source_file="res://project/assets/sprites/UI/inventory/Inventary.png"
+dest_files=["res://.godot/imported/Inventary.png-04585cc15c795210d7e9a371428e7692.ctex"]
 
 [params]
 

@@ -1,13 +1,18 @@
+@tool
 extends Area2D
 class_name DroppedItem
 
 @export var data: ItemData
+@export var item_id: String = ""
+
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var amount_label: Label = $Amount
 @onready var hint_f: CanvasItem = $HintF
 
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		sprite.texture = data.texture
 	add_to_group("dropped_item")
 	input_pickable = true
 
@@ -15,6 +20,10 @@ func _ready() -> void:
 		hint_f.visible = false
 
 	update_visual()
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		sprite.texture = data.texture
 
 func update_visual() -> void:
 	if data and sprite:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu206iv0dx3s6"
-path="res://.godot/imported/slot.png-513aa9d9afcb478ca80261e4c5982858.ctex"
+uid="uid://rabkk3vfd5hh"
+path="res://.godot/imported/chat_sprite.png-ff5c3529fba5400ae8ccd21923e96375.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/slot.png"
-dest_files=["res://.godot/imported/slot.png-513aa9d9afcb478ca80261e4c5982858.ctex"]
+source_file="res://project/assets/sprites/UI/text_box/chat_sprite.png"
+dest_files=["res://.godot/imported/chat_sprite.png-ff5c3529fba5400ae8ccd21923e96375.ctex"]
 
 [params]
 

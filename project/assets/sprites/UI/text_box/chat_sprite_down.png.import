@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cydwq13f2qwbu"
-path="res://.godot/imported/Gamecraft Project.png-5681e1a58199bf5f9870e2f0a1d51ee4.ctex"
+uid="uid://nxb5yetph35k"
+path="res://.godot/imported/chat_sprite_down.png-7f4f09d9570ccee0ff48deac8478d26b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/UI/Gamecraft Project.png"
-dest_files=["res://.godot/imported/Gamecraft Project.png-5681e1a58199bf5f9870e2f0a1d51ee4.ctex"]
+source_file="res://project/assets/sprites/UI/text_box/chat_sprite_down.png"
+dest_files=["res://.godot/imported/chat_sprite_down.png-7f4f09d9570ccee0ff48deac8478d26b.ctex"]
 
 [params]
 

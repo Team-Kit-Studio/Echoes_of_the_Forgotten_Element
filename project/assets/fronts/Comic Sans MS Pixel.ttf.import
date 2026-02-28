@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://deub1saso812y"
-path="res://.godot/imported/FieldGuide.ttf-a6ec75fb953d523da93f9c472f9ea888.fontdata"
+uid="uid://b00ct6lnvs48l"
+path="res://.godot/imported/Comic Sans MS Pixel.ttf-2af37dd316357f0b563156e2e6dece2b.fontdata"
 
 [deps]
 
-source_file="res://project/assets/fronts/FieldGuide.ttf"
-dest_files=["res://.godot/imported/FieldGuide.ttf-a6ec75fb953d523da93f9c472f9ea888.fontdata"]
+source_file="res://project/assets/fronts/Comic Sans MS Pixel.ttf"
+dest_files=["res://.godot/imported/Comic Sans MS Pixel.ttf-2af37dd316357f0b563156e2e6dece2b.fontdata"]
 
 [params]
 
