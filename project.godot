@@ -32,11 +32,13 @@ SettingsLoader="*res://project/scripts/core/SettingsLoader.gd"
 Main="*res://project/scripts/core/Main.gd"
 SavesManager="*res://project/scripts/core/SavesManager.gd"
 Global="*uid://chonba3yaomve"
+InventoryManage="*uid://brnwxmaaue1ge"
 
 [display]
 
 window/size/borderless=true
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [global_group]
 

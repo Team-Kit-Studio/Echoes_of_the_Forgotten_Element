@@ -17,6 +17,9 @@ enum state { MOVE, DAMAGE, ATTACK, DEATH }
 @onready var player_inventory: CanvasItem = get_tree().root.find_child("PlayerInventory", true, false) as CanvasItem
 @onready var external_inventory: CanvasItem = get_tree().root.find_child("ExternalInventory", true, false) as CanvasItem
 
+# Менеджер инвентаря (автозагрузка)
+@onready var inventory_manager = InventoryManage
+
 var can_move: bool = true
 
 # Названия анимаций
@@ -83,6 +86,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			close_all_inventories()
 		else:
 			if player_inventory:
+				# Проверяем, не держим ли мы предмет из другого инвентаря
+				if inventory_manager and inventory_manager.has_held():
+					var source_info = inventory_manager.get_source()
+					# Если предмет из внешнего инвентаря - сначала откроем его
+					if source_info.inventory == external_inventory:
+						if external_inventory and external_inventory.has_method("open_container"):
+							external_inventory.open_container(source_info.inventory.bound_container)
+						return
+				
+				# Иначе открываем инвентарь игрока
 				player_inventory.visible = true
 	
 	# F — взаимодействие с выбранной целью
@@ -173,17 +186,28 @@ func is_inventory_open() -> bool:
 	return p_open or e_open
 
 func close_all_inventories() -> void:
+	# Если держим предмет - обрабатываем через менеджер
+	if inventory_manager and inventory_manager.has_held():
+		var source_info = inventory_manager.get_source()
+		
+		# Если предмет из инвентаря игрока - возвращаем
+		if source_info.inventory == player_inventory:
+			inventory_manager.return_item()
+		# Если из внешнего инвентаря - закрываем и возвращаем
+		elif external_inventory and external_inventory.visible:
+			if external_inventory.has_method("close_container"):
+				external_inventory.close_container()
+	
+	# Закрываем инвентари
 	if external_inventory and external_inventory.visible:
 		if external_inventory.has_method("close_container"):
 			external_inventory.call("close_container")
+	
 	if player_inventory:
 		player_inventory.visible = false
 
 # =========================================================
-# Система выбора целей с приоритетами:
-# 1. Предметы (группа "item") - самый высокий приоритет
-# 2. Сундуки/контейнеры (группа "interactable")
-# 3. NPC (группа "NPC")
+# Система выбора целей с приоритетами
 # =========================================================
 func update_nearest_target() -> void:
 	if interact == null:
@@ -245,6 +269,7 @@ func update_nearest_target() -> void:
 				if distance < best_npc_dist:
 					best_npc_dist = distance
 					best_npc = parent
+	
 	# ВЫБОР ЦЕЛИ ПО ПРИОРИТЕТУ
 	var new_target: Node = null
 	
@@ -270,6 +295,7 @@ func update_nearest_target() -> void:
 		# Добавляем подсветку новой цели
 		if current_target and current_target.has_method("set_highlight"):
 			current_target.call("set_highlight", true)
+
 # =========================================================
 # Нажатие F: взаимодействие с выбранной целью
 # =========================================================
@@ -280,39 +306,46 @@ func handle_f_action() -> void:
 	# Проверяем группу объекта
 	if current_target.is_in_group("item"):
 		# Предмет — поднять
-		if current_target.has_method("pick_up"):
-			current_target.call("pick_up")
-		elif current_target.has_method("add_to_inventory"):
-			current_target.call("add_to_inventory")
-		else:
-			print("У предмета нет метода pick_up() или add_to_inventory()")
+		var item := current_target as DroppedItem
+		if item.data == null:
+			return
+
+		if item.has_method("set_highlight"):
+			item.set_highlight(false)
+		item.queue_free()
+
+		current_target = null
 		return
+		#if current_target.has_method("pick_up"):
+		#	current_target.call("pick_up")
 	
 	elif current_target.is_in_group("interactable"):
 		# Сундук — открыть/закрыть
 		if external_inventory and external_inventory.visible and external_inventory.has_method("is_bound_to") and external_inventory.call("is_bound_to", current_target):
+			# Если этот сундук уже открыт - закрываем
 			close_all_inventories()
 			return
 		
-		if player_inventory:
+		# Если держим предмет из другого инвентаря - сначала закроем всё
+		if inventory_manager and inventory_manager.has_held():
+			var source_info = inventory_manager.get_source()
+			if source_info.inventory != external_inventory:
+				close_all_inventories()
+		
+		# Открываем инвентарь игрока (если закрыт)
+		if player_inventory and not player_inventory.visible:
 			player_inventory.visible = true
 		
+		# Открываем сундук
 		if external_inventory and external_inventory.has_method("open_container"):
 			external_inventory.call("open_container", current_target)
 		return
 	
 	elif current_target.is_in_group("NPC"):
 		# NPC — взаимодействие
-		print("Взаимодействие с NPC: ", current_target.name)
-		
-		# Ищем метод start_dialog() у NPC
 		if current_target.has_method("start_dialog"):
 			current_target.call("start_dialog")
-		else:
-			print("У NPC нет метода start_dialog()")
 		return
-
-
 
 # =========================================================
 # Сохранение/загрузка

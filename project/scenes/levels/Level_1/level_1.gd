@@ -74,7 +74,7 @@ func delete_node() -> void:
 #		items.queue_free()
 
 	var player: CharacterBody2D = $Player
-	$Player.remove_child(player)
+	player.remove_child(player)
 	player.queue_free()
 
 #загружает и восстанавливает состояние игрока из сохраненных данных

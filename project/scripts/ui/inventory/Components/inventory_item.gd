@@ -9,7 +9,6 @@ var is_picked: bool = false
 @onready var hover_area: Area2D = $HoverArea
 @onready var hover_shape: CollisionShape2D = $HoverArea/CollisionShape2D
 
-
 var size: Vector2:
 	get:
 		var s = data.get_size()
@@ -20,7 +19,6 @@ func _exit_tree() -> void:
 		var dz = get_tree().root.find_child("DropZone", true, false)
 		if dz and dz.has_method("hide_zone"):
 			dz.hide_zone()
-
 
 func _ready() -> void:
 	add_to_group("inventory_item")
@@ -35,15 +33,12 @@ func _ready() -> void:
 		sprite.rotation_degrees = 90.0 if data.is_rotated else 0.0
 		update_visual()
 
-
 func _process(_delta: float) -> void:
 	if is_picked:
 		global_position = get_global_mouse_position()
 
-
 func set_grid_position(pos: Vector2) -> void:
 	global_position = pos + size / 2
-
 
 func update_visual() -> void:
 	if not data or not sprite.texture:
@@ -74,12 +69,10 @@ func update_visual() -> void:
 		else:
 			amount_label.visible = false
 
-
 func _input(event: InputEvent) -> void:
 	if is_picked and event is InputEventKey and event.keycode == KEY_R and event.is_pressed():
 		do_rotation()
 		get_tree().root.set_input_as_handled()
-
 
 func do_rotation() -> void:
 	data.is_rotated = !data.is_rotated
@@ -89,7 +82,6 @@ func do_rotation() -> void:
 	var target = 90.0 if data.is_rotated else 0.0
 	tween.tween_property(sprite, "rotation_degrees", target, 0.2).set_trans(Tween.TRANS_CUBIC)
 
-
 # =========================================================
 # DropZone
 # =========================================================
@@ -97,9 +89,8 @@ func do_rotation() -> void:
 func _get_drop_zone() -> Node:
 	return get_tree().root.find_child("DropZone", true, false)
 
-
 func get_picked_up() -> void:
-	add_to_group("held_item") # группы: add_to_group/remove_from_group [web:190]
+	add_to_group("held_item")
 	is_picked = true
 	z_index = 100
 
@@ -111,12 +102,11 @@ func get_picked_up() -> void:
 		amount_label.visible = true
 		update_visual()
 
-
 func get_placed(pos: Vector2) -> void:
 	is_picked = false
 	global_position = pos + size / 2
 	z_index = 0
-	remove_from_group("held_item") # [web:190]
+	remove_from_group("held_item")
 
 	var dz = _get_drop_zone()
 	if dz and dz.has_method("hide_zone"):

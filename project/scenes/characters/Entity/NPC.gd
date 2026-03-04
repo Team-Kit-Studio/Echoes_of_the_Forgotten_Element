@@ -19,8 +19,9 @@ const lines: Array[String] = [
 ]
 
 func _ready() -> void:
-	$TextureRect.hide()
+	#$TextureRect.hide()
 	#interact.modulate = Color(10.453, 0.931, 0.0)
+	pass
 
 func toggle_mode() -> void:
 	action = !action

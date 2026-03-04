@@ -17,11 +17,11 @@ var held_item_intersects: bool = false
 var cached_held_visual: Node2D = null
 var last_mouse_pos := Vector2.ZERO
 
+@onready var inventory_manager = InventoryManage
 
 func _ready() -> void:
 	create_slots()
 	init_grid()
-
 
 func create_slots() -> void:
 	columns = grid_width
@@ -30,11 +30,9 @@ func create_slots() -> void:
 			var slot = inventory_slot_scene.instantiate()
 			add_child(slot)
 
-
 func init_grid() -> void:
 	grid.resize(grid_width * grid_height)
 	grid.fill(null)
-
 
 # ✅ ОПТИМИЗИРОВАННЫЙ _process
 func _process(_delta: float) -> void:
@@ -63,14 +61,12 @@ func _process(_delta: float) -> void:
 			held_item_intersects = false
 			clear_highlights()
 
-
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			handle_left_click()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			handle_right_click()
-
 
 # =========================================================
 # Helpers: найти корень Inventory и корректно репарентить предметы
@@ -84,7 +80,6 @@ func _get_inventory_root() -> Node:
 		p = p.get_parent()
 	return null
 
-
 func _reparent_to_inventory_root(visual_node: Node2D) -> void:
 	var inv_root = _get_inventory_root()
 	if inv_root == null:
@@ -95,7 +90,6 @@ func _reparent_to_inventory_root(visual_node: Node2D) -> void:
 			visual_node.get_parent().remove_child(visual_node)
 		inv_root.add_child(visual_node)
 
-
 func _get_visual(item: ItemData) -> Node2D:
 	if not visual_map.has(item):
 		return null
@@ -104,7 +98,6 @@ func _get_visual(item: ItemData) -> Node2D:
 		visual_map.erase(item)
 		return null
 	return v
-
 
 # =========================================================
 # Подсветка
@@ -115,7 +108,6 @@ func clear_highlights() -> void:
 		if slot.has_method("set_state"):
 			slot.set_state(InventorySlot.SlotState.DEFAULT)
 
-
 func highlight_cells(origin: Vector2i, item_size: Vector2i, state: InventorySlot.SlotState) -> void:
 	for y in range(item_size.y):
 		for x in range(item_size.x):
@@ -125,8 +117,6 @@ func highlight_cells(origin: Vector2i, item_size: Vector2i, state: InventorySlot
 				if slot.has_method("set_state"):
 					slot.set_state(state)
 
-
-# ✅ ИСПРАВЛЕННЫЙ update_highlight
 func update_highlight() -> void:
 	clear_highlights()
 
@@ -137,7 +127,7 @@ func update_highlight() -> void:
 	var held_item: ItemData = held_visual.data
 	var item_px_size = Vector2(held_item.get_size()) * SLOT_SIZE
 	var grid_pos = get_grid_pos_centered(item_px_size)
-	var item_size = held_item.get_size()  # ✅ ОПРЕДЕЛЯЕМ item_size
+	var item_size = held_item.get_size()
 
 	# 1) Свободно -> VALID
 	if can_place_item(held_item, grid_pos):
@@ -160,7 +150,7 @@ func update_highlight() -> void:
 		var target_visual: Node2D = _get_visual(target_item)
 
 		if target_visual == null:
-			highlight_cells(grid_pos, item_size, InventorySlot.SlotState.INVALID)  # ✅ ИСПРАВЛЕНО
+			highlight_cells(grid_pos, item_size, InventorySlot.SlotState.INVALID)
 			return
 
 		var held_rect = Rect2(held_visual.global_position, held_visual.size)
@@ -179,12 +169,11 @@ func update_highlight() -> void:
 				_silent_place(target_item, target_origin)
 
 				if can_swap:
-					highlight_cells(grid_pos, item_size, InventorySlot.SlotState.SWAP)  # ✅ ИСПРАВЛЕНО
+					highlight_cells(grid_pos, item_size, InventorySlot.SlotState.SWAP)
 					return
 
 	# 4) Нельзя -> INVALID
-	highlight_cells(grid_pos, item_size, InventorySlot.SlotState.INVALID)  # ✅ ИСПРАВЛЕНО
-
+	highlight_cells(grid_pos, item_size, InventorySlot.SlotState.INVALID)
 
 # =========================================================
 # "Тихие" функции
@@ -195,7 +184,6 @@ func _silent_pick_up(item: ItemData) -> void:
 		if grid[i] == item:
 			grid[i] = null
 
-
 func _silent_place(item: ItemData, origin: Vector2i) -> void:
 	var s = item.get_size()
 	for dy in range(s.y):
@@ -203,51 +191,70 @@ func _silent_place(item: ItemData, origin: Vector2i) -> void:
 			var idx = index_from_pos(origin + Vector2i(dx, dy))
 			grid[idx] = item
 
-
 # =========================================================
 # Клики
 # =========================================================
 
 func handle_left_click() -> void:
 	var held_visual = cached_held_visual
-
+	
 	# 1) Взять предмет
 	if not held_visual:
 		var grid_pos = screen_to_grid(get_global_mouse_position())
 		var item = get_item_at(grid_pos)
 		if item:
 			var v = _get_visual(item)
-			pick_up_item_from_grid(item)
 			if v:
+				# Сообщаем менеджеру о взятии предмета
+				var inventory_node = _get_inventory_root()
+				inventory_manager.pick_up(item, v, self, inventory_node)
+				pick_up_item_from_grid(item)
 				v.get_picked_up()
 		return
-
+	
 	# 2) Действия с предметом в руке
 	var held_item: ItemData = held_visual.data
 	var item_px_size = Vector2(held_item.get_size()) * SLOT_SIZE
 	var dest_grid_pos = get_grid_pos_centered(item_px_size)
-
+	
+	# Получаем информацию об источнике
+	var source_info = inventory_manager.get_source()
+	
 	# A) Положить в пустое место
 	if can_place_item(held_item, dest_grid_pos):
+		# Если источник - другой инвентарь, удаляем оттуда
+		if source_info.grid != self and source_info.grid:
+			source_info.grid.pick_up_item_from_grid(held_item)
+		
 		place_item(held_item, dest_grid_pos, held_visual)
 		held_visual.get_placed(grid_to_screen(dest_grid_pos))
+		
+		# Сообщаем менеджеру о размещении
+		inventory_manager.place(held_item, held_visual)
 		clear_highlights()
 		return
-
+	
 	# B) Стакинг
 	var mouse_grid_pos = screen_to_grid(get_global_mouse_position())
 	var item_under_mouse = get_item_at(mouse_grid_pos)
-
+	
 	if item_under_mouse and item_under_mouse != held_item:
 		if item_under_mouse.try_merge(held_item):
 			update_existing_visual(item_under_mouse)
+			
 			if held_item.amount <= 0:
+				# Удаляем из источника
+				if source_info.grid:
+					source_info.grid.pick_up_item_from_grid(held_item)
+				
 				held_visual.queue_free()
+				inventory_manager.clear()
 			else:
 				held_visual.update_visual()
+			
 			clear_highlights()
 			return
-
+	
 	# C) SWAP
 	var overlapping_items = get_unique_items_in_area(dest_grid_pos, held_item.get_size())
 	if overlapping_items.size() == 1:
@@ -255,73 +262,99 @@ func handle_left_click() -> void:
 		var target_visual: Node2D = _get_visual(target_item)
 		if target_visual == null:
 			return
-
+		
 		var held_rect = Rect2(held_visual.global_position, held_visual.size)
 		var target_rect = Rect2(target_visual.global_position, target_visual.size)
-
+		
 		if held_rect.intersects(target_rect):
 			var intersection = held_rect.intersection(target_rect)
 			var intersection_area = intersection.size.x * intersection.size.y
 			var min_area = min(held_rect.size.x * held_rect.size.y, target_rect.size.x * target_rect.size.y)
-
+			
 			if (intersection_area / min_area) > 0.5:
 				var target_origin = get_item_origin(target_item)
-
+				
+				# Убираем целевой предмет из текущего инвентаря
 				pick_up_item_from_grid(target_item)
-
+				
 				if can_place_item(held_item, dest_grid_pos):
+					# Если источник - другой инвентарь, удаляем оттуда
+					if source_info.grid != self and source_info.grid:
+						source_info.grid.pick_up_item_from_grid(held_item)
+					
+					# Кладём держимый предмет
 					place_item(held_item, dest_grid_pos, held_visual)
 					held_visual.get_placed(grid_to_screen(dest_grid_pos))
+					
+					# Обновляем менеджер - теперь держим целевой предмет
+					inventory_manager.place(held_item, held_visual)
+					inventory_manager.pick_up(target_item, target_visual, self, _get_inventory_root())
+					
+					# Берём целевой предмет в руку
 					target_visual.get_picked_up()
 				else:
+					# Возвращаем целевой предмет на место
 					place_item(target_item, target_origin, target_visual)
-
+				
 				clear_highlights()
-
 
 func handle_right_click() -> void:
 	var held_visual = cached_held_visual
 	if not held_visual:
 		return
-
+	
 	var held_data: ItemData = held_visual.data
 	if not held_data.stackable:
 		return
-
+	
+	var source_info = inventory_manager.get_source()
 	var mouse_grid_pos = screen_to_grid(get_global_mouse_position())
 	var item_under_mouse = get_item_at(mouse_grid_pos)
-
+	
 	# 1) Положить 1 шт в пустое
 	if item_under_mouse == null:
 		var item_px_size = Vector2(held_data.get_size()) * SLOT_SIZE
 		var place_pos = get_grid_pos_centered(item_px_size)
-
+		
 		if can_place_item(held_data, place_pos):
 			var single_data = held_data.duplicate()
 			single_data.amount = 1
-
+			
 			var new_visual = inventory_item_scene.instantiate()
 			new_visual.data = single_data
-
+			
 			place_item(single_data, place_pos, new_visual)
-
+			
 			held_data.amount -= 1
-			held_visual.update_visual()
+			
 			if held_data.amount <= 0:
+				# Удаляем из источника
+				if source_info.grid:
+					source_info.grid.pick_up_item_from_grid(held_data)
 				held_visual.queue_free()
+				inventory_manager.clear()
+			else:
+				held_visual.update_visual()
+			
 			clear_highlights()
 		return
-
+	
 	# 2) Добавить 1 шт в стак
 	if item_under_mouse.name == held_data.name and item_under_mouse.amount < item_under_mouse.max_stack_size:
 		item_under_mouse.amount += 1
 		held_data.amount -= 1
 		update_existing_visual(item_under_mouse)
-		held_visual.update_visual()
+		
 		if held_data.amount <= 0:
+			# Удаляем из источника
+			if source_info.grid:
+				source_info.grid.pick_up_item_from_grid(held_data)
 			held_visual.queue_free()
+			inventory_manager.clear()
+		else:
+			held_visual.update_visual()
+		
 		clear_highlights()
-
 
 # =========================================================
 # API (для сундуков/очистки)
@@ -330,9 +363,8 @@ func handle_right_click() -> void:
 func clear_grid_data_only() -> void:
 	grid.fill(null)
 	visual_map.clear()
-	cached_held_visual = null  # ✅ СБРОС кэша
+	cached_held_visual = null
 	clear_highlights()
-
 
 func export_layout() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
@@ -346,7 +378,6 @@ func export_layout() -> Array[Dictionary]:
 
 	return result
 
-
 func try_add_item(item: ItemData, visual_node: Node2D) -> bool:
 	for y in range(grid_height):
 		for x in range(grid_width):
@@ -355,7 +386,6 @@ func try_add_item(item: ItemData, visual_node: Node2D) -> bool:
 				place_item(item, pos, visual_node)
 				return true
 	return false
-
 
 func try_add_item_at(item: ItemData, visual_node: Node2D, origin: Vector2i) -> bool:
 	if origin.x < 0 or origin.y < 0:
@@ -367,7 +397,6 @@ func try_add_item_at(item: ItemData, visual_node: Node2D, origin: Vector2i) -> b
 
 	return false
 
-
 # =========================================================
 # Служебные функции сетки
 # =========================================================
@@ -377,7 +406,6 @@ func get_grid_pos_centered(item_size_px: Vector2) -> Vector2i:
 	var top_left_world = mouse_pos - item_size_px / 2.0
 	var snap_offset = Vector2(SLOT_SIZE / 2.0, SLOT_SIZE / 2.0)
 	return screen_to_grid(top_left_world + snap_offset)
-
 
 func get_unique_items_in_area(origin: Vector2i, item_size: Vector2i) -> Array[ItemData]:
 	var found_items: Array[ItemData] = []
@@ -389,7 +417,6 @@ func get_unique_items_in_area(origin: Vector2i, item_size: Vector2i) -> Array[It
 				found_items.append(item)
 	return found_items
 
-
 func place_item(item: ItemData, origin: Vector2i, visual_node: Node2D) -> void:
 	_reparent_to_inventory_root(visual_node)
 
@@ -400,29 +427,26 @@ func place_item(item: ItemData, origin: Vector2i, visual_node: Node2D) -> void:
 			grid[idx] = item
 
 	visual_map[item] = visual_node
-	cached_held_visual = null  # ✅ СБРОС кэша
+	cached_held_visual = null
 
 	var pixel_pos = grid_to_screen(origin)
 	visual_node.set_grid_position(pixel_pos)
 
 	refresh_slot_amounts()
 
-
 func pick_up_item_from_grid(item: ItemData) -> void:
 	for i in range(grid.size()):
 		if grid[i] == item:
 			grid[i] = null
 	visual_map.erase(item)
-	cached_held_visual = null  # ✅ СБРОС кэша
+	cached_held_visual = null
 	refresh_slot_amounts()
-
 
 func update_existing_visual(item: ItemData) -> void:
 	var v = _get_visual(item)
 	if v:
 		v.update_visual()
 	refresh_slot_amounts()
-
 
 func refresh_slot_amounts() -> void:
 	for child in get_children():
@@ -445,7 +469,6 @@ func refresh_slot_amounts() -> void:
 				if slot_node.has_method("set_amount"):
 					slot_node.set_amount(item.amount)
 
-
 func can_place_item(item: ItemData, origin: Vector2i) -> bool:
 	var s = item.get_size()
 
@@ -464,13 +487,11 @@ func can_place_item(item: ItemData, origin: Vector2i) -> bool:
 
 	return true
 
-
 func get_item_at(grid_pos: Vector2i) -> ItemData:
 	var idx = index_from_pos(grid_pos)
 	if idx >= 0 and idx < grid.size():
 		return grid[idx]
 	return null
-
 
 func get_item_origin(item: ItemData) -> Vector2i:
 	for y in range(grid_height):
@@ -480,15 +501,26 @@ func get_item_origin(item: ItemData) -> Vector2i:
 				return pos
 	return Vector2i(-1, -1)
 
-
 func index_from_pos(pos: Vector2i) -> int:
 	return pos.x + pos.y * grid_width
-
 
 func screen_to_grid(screen_pos: Vector2) -> Vector2i:
 	var local = screen_pos - global_position
 	return Vector2i(int(local.x / SLOT_SIZE), int(local.y / SLOT_SIZE))
 
-
 func grid_to_screen(grid_pos: Vector2i) -> Vector2:
 	return global_position + Vector2(grid_pos) * SLOT_SIZE
+
+# Функция для обработки закрытия инвентаря
+func on_inventory_closed() -> void:
+	# Если держим предмет и он не из этого инвентаря - возвращаем
+	if inventory_manager and inventory_manager.has_held():
+		var source_info = inventory_manager.get_source()
+		if source_info.grid != self:
+			# Предмет из другого инвентаря - возвращаем
+			inventory_manager.return_item()
+		
+		# Сбрасываем состояние
+		cached_held_visual = null
+		held_item_intersects = false
+		clear_highlights()

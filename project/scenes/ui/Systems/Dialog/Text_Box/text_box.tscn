@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7cuwhsnjxoqp"]
 
 [ext_resource type="Texture2D" uid="uid://2mn6p2qllxcf" path="res://project/assets/sprites/UI/text_box/Dialog_Flow.png" id="1_a8w8i"]
-[ext_resource type="Script" uid="uid://cfxy0hr0ap0ao" path="res://project/scripts/ui/text_box/text_box.gd" id="1_e0o8r"]
+[ext_resource type="Script" uid="uid://cfxy0hr0ap0ao" path="res://project/scripts/systems/Dialog/text_box/text_box.gd" id="1_e0o8r"]
 [ext_resource type="FontFile" uid="uid://b00ct6lnvs48l" path="res://project/assets/fronts/Comic Sans MS Pixel.ttf" id="2_a8w8i"]
 
 [node name="TextBox" type="MarginContainer" unique_id=2022081076]
