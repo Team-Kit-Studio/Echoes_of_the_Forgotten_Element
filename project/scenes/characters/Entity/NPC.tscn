@@ -3,7 +3,30 @@
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://project/assets/sprites/characters/player/movment_sprite/SpriteList_Idle.png" id="1_3g2ou"]
 [ext_resource type="Script" uid="uid://bsj1ymole3hih" path="res://project/scenes/characters/Entity/NPC.gd" id="1_xbpnl"]
 [ext_resource type="Texture2D" uid="uid://nxb5yetph35k" path="res://project/assets/sprites/UI/text_box/chat_sprite_down.png" id="2_3qd7a"]
+[ext_resource type="Script" uid="uid://ciqwx6sf3urkl" path="res://project/data/Resources/Dialog/Dialog.gd" id="2_4pqtl"]
+[ext_resource type="Script" uid="uid://c1ooabv6ofu7" path="res://project/data/Resources/quests/Quest.gd" id="3_aemsr"]
 [ext_resource type="Texture2D" uid="uid://c8xda35fdg8c1" path="res://project/assets/sprites/UI/text_box/chat_sprite-sheet.png" id="3_vu838"]
+[ext_resource type="Script" uid="uid://dfae136l0alhw" path="res://project/data/Resources/quests/Objectives.gd" id="4_5tq58"]
+[ext_resource type="Script" uid="uid://ccl3wemqkkmiv" path="res://project/data/Resources/quests/Rewards.gd" id="5_stcet"]
+[ext_resource type="PackedScene" uid="uid://wvs1ukjjbjlj" path="res://project/scenes/ui/Systems/Dialog/dialog_manager.tscn" id="6_u6edg"]
+
+[sub_resource type="Resource" id="Resource_u6edg"]
+script = ExtResource("2_4pqtl")
+metadata/_custom_type_script = "uid://ciqwx6sf3urkl"
+
+[sub_resource type="Resource" id="Resource_gb7t6"]
+script = ExtResource("4_5tq58")
+metadata/_custom_type_script = "uid://dfae136l0alhw"
+
+[sub_resource type="Resource" id="Resource_csyp4"]
+script = ExtResource("5_stcet")
+metadata/_custom_type_script = "uid://ccl3wemqkkmiv"
+
+[sub_resource type="Resource" id="Resource_n64ha"]
+script = ExtResource("3_aemsr")
+objectives = Array[ExtResource("4_5tq58")]([SubResource("Resource_gb7t6")])
+rewards = Array[ExtResource("5_stcet")]([SubResource("Resource_csyp4")])
+metadata/_custom_type_script = "uid://c1ooabv6ofu7"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qd7a"]
 radius = 51.538467
@@ -249,6 +272,8 @@ _data = {
 [node name="NPC" type="CharacterBody2D" unique_id=1038824773 groups=["NPC"]]
 scale = Vector2(1.3, 1.3)
 script = ExtResource("1_xbpnl")
+dialog_resourse = SubResource("Resource_u6edg")
+quests = Array[ExtResource("3_aemsr")]([SubResource("Resource_n64ha")])
 
 [node name="Area2D" type="Area2D" parent="." unique_id=988000368]
 collision_layer = 12
@@ -287,6 +312,8 @@ shape = SubResource("CapsuleShape2D_085td")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1469780986]
 libraries/ = SubResource("AnimationLibrary_gux0t")
+
+[node name="DialogManager" parent="." unique_id=1379734728 instance=ExtResource("6_u6edg")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

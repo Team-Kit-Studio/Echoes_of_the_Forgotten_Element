@@ -1,0 +1,179 @@
+{
+	"npc_1": {
+		"trees": [
+			{
+				"branch_id": "npc_1_1",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Рад тебя видеть, солдат!",
+						"options": {
+							"Спросить": "in_progress",
+							"Получить Квест": "give_quests",
+							"Попрощаться": "exit"
+						}
+					},
+					{
+						"state": "in_progress",
+						"text": "Сегодня ты получишь задание..",
+						"options": {
+							"Продолжить": "in_progress1",
+							"Попрощаться": "end",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "in_progress1",
+						"text": "шутка :]",
+						"options": {
+							"Попрощаться": "end",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Конечно, ты можешь посмотреть его у себя в журнале.",
+						"options": {
+							"Say Goodbye": "exit",
+							"Go Back": "start"
+						}
+					},
+					{
+						"state": "end",
+						"text": "До встречи, солдат!",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "Возвращайся скорее, солдат!",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "npc_1_2",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Приветсвую, ты уже вернулся?",
+						"options": {
+							"Продолжать распрашивать": "in_progress",
+							"Получить квест": "give_quests",
+							"Попрощаться": "exit"
+						}
+					},
+					{
+						"state": "in_progress",
+						"text": "Я слышал, что тебя звали на стрельбище.",
+						"options": {
+							"Попрощаться": "end",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Конесно! Ты можешь найти его у себя в журнале.",
+						"options": {
+							"Попрощаться": "exit",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "end",
+						"text": "до встречи солдат!",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "Возвращайся скорее!",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "npc_default",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Эй солдат! Еще раз спасибо за помощь.",
+						"options": {
+							"Получить квест": "give_quests",
+							"Попрощаться": "exit"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Sure! If I have anything, you can find it in your Quest Log.",
+						"options": {
+							"Вернуться": "start"
+						}
+					}
+				]
+			}
+		]
+	},
+	"npc_2": {
+		"trees": [
+			{
+				"branch_id": "npc_2_1",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Приветсвую путник! Чем могу помочь?",
+						"options": {
+							"Спросить про лес": "in_progress",
+							"Получить квест": "give_quests",
+							"Попрощаться": "exit"
+						}
+					},
+					{
+						"state": "in_progress",
+						"text": "В лесу обитают множество мистических существ.",
+						"options": {
+							"Попрощаться": "end",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Хорошо, я обновил ваш журнал заданий. Посмотри там, что нужно сделать.",
+						"options": {
+							"Попрощаться": "exit",
+							"Вернуться": "start"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Прощай путник!",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "озвращайся поскорее!",
+						"options": {}
+					}
+				]
+			},
+			{
+			"branch_id": "npc_default",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "интересно, почему бобби постоянно меня обнюхивает...",
+						"options": {
+							"получить квест": "give_quests",
+							"Попрощаться": "exit"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Хорошо, я обновил ваш журнал заданий",
+						"options": {
+							"Вернуться": "start"
+						}
+					},
+				]
+			}
+		]
+	}
+}

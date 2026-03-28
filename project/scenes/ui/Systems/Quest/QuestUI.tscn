@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://dprpipewc6le"]
+
+[ext_resource type="Script" uid="uid://d0mbyihla10kt" path="res://project/scripts/systems/Quest/quest_ui.gd" id="1_xpfvl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tf81x"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.05490196, 0.16078432, 0.28235295, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.6666667, 1, 0.8, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ti36"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.061035536, 0.20039728, 0.47153687, 1)
+border_width_right = 10
+border_color = Color(0.03529412, 0.105882354, 0.1882353, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpfvl"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.05490196, 0.16078432, 0.28235295, 1)
+border_width_left = 10
+border_color = Color(0.05490196, 0.16078432, 0.28235295, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="QuestUI" type="Control" unique_id=1088698478]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xpfvl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1357068183]
+layer = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1728741464]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tf81x")
+
+[node name="Backgrounds" type="HBoxContainer" parent="CanvasLayer/Panel" unique_id=879942589]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG_1" type="Panel" parent="CanvasLayer/Panel/Backgrounds" unique_id=970220019]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ti36")
+
+[node name="BG_2" type="Panel" parent="CanvasLayer/Panel/Backgrounds" unique_id=322520213]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xpfvl")
+
+[node name="Contents" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=130778415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Heading" type="HBoxContainer" parent="CanvasLayer/Panel/Contents" unique_id=527119493]
+layout_mode = 2
+
+[node name="List" type="Label" parent="CanvasLayer/Panel/Contents/Heading" unique_id=488111685]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Available Quests"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Details" type="Label" parent="CanvasLayer/Panel/Contents/Heading" unique_id=65923068]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Quest Details"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Details" type="HBoxContainer" parent="CanvasLayer/Panel/Contents" unique_id=1291048779]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="QuestList" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details" unique_id=805940712]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="QuestDetails" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details" unique_id=932973285]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="QuestTitle" type="Label" parent="CanvasLayer/Panel/Contents/Details/QuestDetails" unique_id=1490366624]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestDescription" type="Label" parent="CanvasLayer/Panel/Contents/Details/QuestDetails" unique_id=1588033935]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Description"
+
+[node name="QuestObjectives" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details/QuestDetails" unique_id=1541394476]
+layout_mode = 2
+
+[node name="QuestRewards" type="VBoxContainer" parent="CanvasLayer/Panel/Contents/Details/QuestDetails" unique_id=464001829]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/Panel" unique_id=1071756300]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[connection signal="pressed" from="CanvasLayer/Panel/CloseButton" to="." method="_on_close_button_pressed"]

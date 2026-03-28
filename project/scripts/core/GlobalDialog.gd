@@ -1,8 +1,9 @@
 extends Node
-
-@onready var text_box_scene = preload("res://project/scenes/ui/Text_Box/text_box.tscn")
-
+# Код первой версии(TextBox)
+@onready var text_box_scene = preload("res://project/scenes/ui/Systems/Dialog/Text_Box/text_box.tscn")
+###
 var player: Node = null
+###
 var dialog_lines: Array[String] = []
 var current_line_index: int = 0
 
@@ -47,3 +48,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		
 		_show_text_box()
+
+# Код второй версии диалога(Json)

@@ -8,7 +8,7 @@ extends Node2D
 func _ready() -> void:
 	SavesManager.load_from_data.connect(load_from_data)
 	SavesManager.data_update.connect(self_objects_saves)
-	Play_Music("res://project/assets/sounds/music/Sound_Game_Background.mp3")
+	Play_Music("res://project/assets/sounds/music/Trip Land.mp3")
 	
 #реализует систему сохранения состояния сцены
 func self_objects_saves() -> void:

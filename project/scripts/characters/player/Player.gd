@@ -20,7 +20,19 @@ enum state { MOVE, DAMAGE, ATTACK, DEATH }
 # Менеджер инвентаря (автозагрузка)
 @onready var inventory_manager = InventoryManage
 
+#HUD игрока
+@onready var icon: TextureRect = $HUD/QuestTreker/Icon
+@onready var amount: Label = $HUD/QuestTreker/Amount
+@onready var quest_tracker: ColorRect = $HUD/QuestTracker
+@onready var title: Label = $HUD/QuestTracker/Details/Title
+@onready var objectives: VBoxContainer = $HUD/QuestTracker/Details/Objectives
+@onready var quest_manager = $QuestManager
+
 var can_move: bool = true
+
+# Диалги и квесты
+var selected_quest: Quest = null
+var coin_amount: int = 0
 
 # Названия анимаций
 const ANIMATION_NAMES: PackedStringArray = [
@@ -40,6 +52,14 @@ func _ready() -> void:
 	# Загружаем звук шагов
 	var step_sound = preload("res://project/assets/sounds/MSE/zhelezo.mp3")
 	audio_sfx1.stream = step_sound
+	quest_tracker.visible = false
+	update_coins()
+	#can_move = true
+	
+	# подключение сигналов
+	quest_manager.quest_updated.connect(_on_quest_updated)
+	quest_manager.objective_updated.connect(_on_objective_updated)
+	
 	
 	# Включаем зацикливание звука
 	if audio_sfx1.stream is AudioStreamMP3:
@@ -49,7 +69,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Если инвентарь открыт — игрок стоит
-	if is_inventory_open():
+	if is_inventory_open() or !can_move:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		_stop_footsteps()
 		input_direction = Vector2.ZERO
@@ -101,6 +121,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# F — взаимодействие с выбранной целью
 	if event.is_action_pressed("Interaction"):
 		handle_f_action()
+	
+	# М - открытие\закрытие журнала заданий
+	if event.is_action_pressed("ui_quest_menu"):
+		quest_manager.show_quest_log()
 
 # =========================================================
 # Движение + анимации
@@ -312,12 +336,17 @@ func handle_f_action() -> void:
 
 		if item.has_method("set_highlight"):
 			item.set_highlight(false)
-		item.queue_free()
+		if is_item_needed(current_target.item_id):
+			check_quest_objectives(item.item_id, "collection", item.item_quantity)
+			item.queue_free()
+		else:
+			print("Предмет не найден ни для какого квеста")
+		#if current_target.has_method("pick_up"):
+		#	current_target.call("pick_up")
 
 		current_target = null
 		return
-		#if current_target.has_method("pick_up"):
-		#	current_target.call("pick_up")
+		
 	
 	elif current_target.is_in_group("interactable"):
 		# Сундук — открыть/закрыть
@@ -343,8 +372,11 @@ func handle_f_action() -> void:
 	
 	elif current_target.is_in_group("NPC"):
 		# NPC — взаимодействие
+		can_move = false
 		if current_target.has_method("start_dialog"):
 			current_target.call("start_dialog")
+			check_quest_objectives(current_target.npc_id, "talk_to")
+			
 		return
 
 # =========================================================
@@ -372,3 +404,82 @@ func load_data(save_data: Dictionary) -> void:
 	
 	# Воспроизводим анимацию в зависимости от скорости
 	play_animation(0 if velocity.length() < 0.1 else 1, last_direction)
+
+# Check if quest item is needed
+func is_item_needed(item_id: String) -> bool:
+	if selected_quest != null:
+		for objective in selected_quest.objectives:
+			if objective.target_id == item_id and objective.target_type == "collection" and not objective.is_completed:
+				return true				
+	return false
+
+func check_quest_objectives(target_id: String, target_type: String, quantity: int = 1):
+	if selected_quest == null:
+		return
+	
+	# Update objectives
+	var objective_updated = false
+	for objective in selected_quest.objectives:
+		if objective.target_id == target_id and objective.target_type == target_type and not objective.is_completed:
+			print("Completing objective for quest: ", selected_quest.quest_name)
+			selected_quest.complete_objective(objective.id, quantity)
+			objective_updated = true
+			break
+	
+	# Provide rewards
+	if objective_updated:
+		if selected_quest.is_completed():
+			handle_quest_completion(selected_quest)
+	
+		# Update UI
+		update_quest_tracker(selected_quest)
+
+# Player rewards
+func handle_quest_completion(quest: Quest):
+	for reward in quest.rewards:
+		if reward.reward_type == "coins":
+			coin_amount += reward.reward_amount
+			update_coins()
+	update_quest_tracker(quest)
+	quest_manager.update_quest(quest.quest_id, "completed")
+
+# update coin UI
+func update_coins() -> void:
+	amount.text = str(coin_amount)
+
+# Update tracker UI
+func update_quest_tracker(quest: Quest):
+	# if we have an active quest, populate tracker
+	if quest:
+		quest_tracker.visible = true
+		title.text = quest.quest_name	
+		
+		for child in objectives.get_children():
+			objectives.remove_child(child)
+			
+		for objective in quest.objectives:
+			var label = Label.new()
+			label.text = objective.description
+			
+			if objective.is_completed:
+				label.add_theme_color_override("font_color", Color(0, 1, 0))
+			else:
+				label.add_theme_color_override("font_color", Color(1,0, 0))
+				
+			objectives.add_child(label)
+	# no active quest, hide tracker		
+	else:
+		quest_tracker.visible = false
+				
+# Update tracker if quest is complete
+func _on_quest_updated(quest_id: String):
+	var quest = quest_manager.get_quest(quest_id)
+	if quest == selected_quest:
+		update_quest_tracker(quest)
+	selected_quest = null
+		
+# Update tracker if objective is complete
+func _on_objective_updated(quest_id: String, objective_id: String):
+	if selected_quest and selected_quest.quest_id == quest_id:
+		update_quest_tracker(selected_quest)
+	selected_quest = null

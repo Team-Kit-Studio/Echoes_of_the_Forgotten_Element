@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://d30uwyavq2hlh" path="res://project/scripts/characters/player/Player.gd" id="1_fkakk"]
 [ext_resource type="Texture2D" uid="uid://bwp6wgn2gg4fw" path="res://project/assets/sprites/characters/player/movment_sprite/SpriteList_Idle.png" id="2_ssr53"]
 [ext_resource type="Texture2D" uid="uid://cc30f5f1mltn4" path="res://project/assets/sprites/characters/player/movment_sprite/SpriteList_Player_Run.png" id="3_bd4fw"]
+[ext_resource type="Texture2D" uid="uid://bh0n1lgkm17o8" path="res://project/assets/sprites/Loots/Battery.png" id="4_ltdim"]
+[ext_resource type="PackedScene" uid="uid://ss8dqwqeop0v" path="res://project/scenes/ui/Systems/Quest/QuestManager.tscn" id="5_ltdim"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsdqv"]
 atlas = ExtResource("2_ssr53")
@@ -1161,6 +1163,7 @@ data = PackedByteArray("SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhY
 loop = true
 
 [node name="Player" type="CharacterBody2D" unique_id=903312043]
+position = Vector2(0, 8)
 collision_layer = 2
 collision_mask = 9
 motion_mode = 1
@@ -1209,5 +1212,73 @@ autoplay = &"State_Idle_FromSide"
 stream = SubResource("AudioStreamMP3_jeday")
 volume_db = 10.0
 bus = &"sfx_volume"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=974908572]
+
+[node name="QuestTreker" type="ColorRect" parent="HUD" unique_id=1271505539]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 116.0
+grow_horizontal = 0
+color = Color(0.14117648, 0.14117648, 0.14117648, 0.7882353)
+
+[node name="Icon" type="TextureRect" parent="HUD/QuestTreker" unique_id=423709019]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 32.0
+grow_vertical = 2
+texture = ExtResource("4_ltdim")
+expand_mode = 2
+
+[node name="Amount" type="Label" parent="HUD/QuestTreker" unique_id=2041555289]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="QuestTracker" type="ColorRect" parent="HUD" unique_id=1449171702]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 316.0
+offset_bottom = 216.0
+color = Color(0.14117648, 0.14117648, 0.14117648, 0.7882353)
+
+[node name="Details" type="VBoxContainer" parent="HUD/QuestTracker" unique_id=481114790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="HUD/QuestTracker/Details" unique_id=1667915624]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6862745, 0.80784315, 0.95686275, 1)
+theme_override_font_sizes/font_size = 25
+text = "title"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Objectives" type="VBoxContainer" parent="HUD/QuestTracker/Details" unique_id=1019850767]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestManager" parent="." unique_id=685866995 instance=ExtResource("5_ltdim")]
 
 [connection signal="finished" from="AudioSFX" to="." method="_on_audio_stream_player_2d_finished"]
