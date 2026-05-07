@@ -9,8 +9,8 @@ var text:String = ""
 var letter_index: int = 0
 
 var leter_time = 0.03
-var space_time: int = 0.06
-var punctuation_time: int = 0.2
+var space_time: float = 0.06
+var punctuation_time: float = 0.2
 
 
 signal finished_displaying()

@@ -3,13 +3,19 @@ extends Node2D
 @onready var audio_music: AudioStreamPlayer2D = $AudioMusic
 @onready var audio_sfx: AudioStreamPlayer2D = $AudioSFX
 @onready var player: CharacterBody2D = $"1_floor/Entity/Player"
+@onready var animation_player: AnimationPlayer = $"Kut-Scene/AnimationPlayer"
 
+var cut_scene: bool = false
 
 func _ready() -> void:
 	SavesManager.load_from_data.connect(load_from_data)
 	SavesManager.data_update.connect(self_objects_saves)
 	Play_Music("res://project/assets/sounds/music/Trip Land.mp3")
+	#animation_player.play("Kut-Scene")
 	
+	
+	
+
 #реализует систему сохранения состояния сцены
 func self_objects_saves() -> void:
 	var temp_data: Dictionary = {} 

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://wvs1ukjjbjlj"]
 
-[ext_resource type="PackedScene" uid="uid://bqo3bh535rkip" path="res://project/scenes/ui/Systems/Dialog/DialogUI.tscn" id="1_8c8i7"]
 [ext_resource type="Script" uid="uid://coyvsw62ybj6" path="res://project/scripts/systems/Dialog/dialog_manager.gd" id="1_jui8g"]
+[ext_resource type="PackedScene" uid="uid://dabf0454v44j" path="res://project/scenes/ui/Systems/cinematic_bars.tscn" id="2_jui8g"]
 
 [node name="DialogManager" type="Node2D" unique_id=1379734728]
 script = ExtResource("1_jui8g")
 
-[node name="DialogUI" parent="." unique_id=1778946686 instance=ExtResource("1_8c8i7")]
+[node name="CinemticBars" parent="." unique_id=1121583383 instance=ExtResource("2_jui8g")]

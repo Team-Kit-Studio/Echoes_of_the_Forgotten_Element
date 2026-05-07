@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://em5rusdknb61"]
+
+[ext_resource type="Script" uid="uid://dua5rbluir7eb" path="res://project/scripts/systems/Dialog/choice_panel.gd" id="1_agqa7"]
+
+[node name="ChoicePanel" type="Control" unique_id=1321118810]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_agqa7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=791576417]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=233066288]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -319.0
+offset_top = -42.0
+offset_right = -19.0
+offset_bottom = 156.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=337913074]
+layout_direction = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1

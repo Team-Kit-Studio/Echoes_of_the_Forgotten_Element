@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di53rmhtw6gty"
-path="res://.godot/imported/Wall 1.png-337173fd7a684200198467292bb16ee7.ctex"
+uid="uid://chfyjrin1osto"
+path="res://.godot/imported/Sprite3.png-7988b48ab972d82658476eba95b9d976.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://project/assets/sprites/tiles/tilemap_spaceship/Wall/Wall 1.png"
-dest_files=["res://.godot/imported/Wall 1.png-337173fd7a684200198467292bb16ee7.ctex"]
+source_file="res://project/assets/sprites/tiles/tilemap_spaceship/Kut-Scene/Sprite3.png"
+dest_files=["res://.godot/imported/Sprite3.png-7988b48ab972d82658476eba95b9d976.ctex"]
 
 [params]
 

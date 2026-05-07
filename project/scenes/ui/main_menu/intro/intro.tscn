@@ -5,6 +5,57 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j3vti"]
 
+[sub_resource type="Animation" id="Animation_gj7h6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.37]
+}
+
+[sub_resource type="Animation" id="Animation_6a4go"]
+resource_name = "intro"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9333333, 4.3333335),
+"transitions": PackedFloat32Array(1, 12.553326, 1e-05),
+"update": 0,
+"values": [1.5, 0.0, 1.5]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"to_main"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cpj5"]
+_data = {
+&"RESET": SubResource("Animation_gj7h6"),
+&"intro": SubResource("Animation_6a4go")
+}
+
 [node name="intro" type="Node2D" unique_id=309977729]
 script = ExtResource("1_j1yth")
 
@@ -20,17 +71,12 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_gj7h6")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=891674082]
-visible = false
 energy = 1.37
 blend_mode = 1
-
-[node name="Timer" type="Timer" parent="." unique_id=80370747]
-process_callback = 0
-wait_time = 4.0
-autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1898579099]
 position = Vector2(576, 341)
 zoom = Vector2(1.6, 1.6)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=855184641]
+libraries/ = SubResource("AnimationLibrary_6cpj5")

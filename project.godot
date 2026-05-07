@@ -30,14 +30,18 @@ buses/default_bus_layout="uid://bktsatfm5jjr2"
 
 SettingsLoader="*res://project/scripts/core/SettingsLoader.gd"
 Main="*res://project/scripts/core/Main.gd"
+Global="*uid://cbuo328mmfd4b"
 SavesManager="*res://project/scripts/core/SavesManager.gd"
-Global="*uid://chonba3yaomve"
 InventoryManage="*uid://brnwxmaaue1ge"
 
 [display]
 
 window/size/borderless=true
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
 [global_group]
 
