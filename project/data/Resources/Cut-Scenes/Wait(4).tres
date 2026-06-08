@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CutsceneAction" format=3 uid="uid://dy8atgnobmnkf"]
+
+[ext_resource type="Script" uid="uid://b5oysxrwfkd3s" path="res://project/data/Resources/Cut-Scenes/scripts/cutscene_action.gd" id="1_rc7x4"]
+
+[resource]
+script = ExtResource("1_rc7x4")
+duration = 1.5
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"

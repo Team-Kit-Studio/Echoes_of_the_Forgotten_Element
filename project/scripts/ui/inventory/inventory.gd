@@ -110,3 +110,13 @@ func close_player_inventory() -> void:
 		item_grid.on_inventory_closed()
 	
 	visible = false
+
+## Проверяет, есть ли в инвентаре предмет с указанным item_id.
+## Используется дверью для проверки ключ-карты.
+func has_item_by_id(item_id: String) -> bool:
+	if not item_grid:
+		return false
+	for item_data in item_grid.grid:
+		if item_data != null and item_data.item_id == item_id:
+			return true
+	return false

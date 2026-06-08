@@ -5,6 +5,11 @@
 [ext_resource type="FontFile" uid="uid://b00ct6lnvs48l" path="res://project/assets/fronts/Comic Sans MS Pixel.ttf" id="2_a8w8i"]
 
 [node name="TextBox" type="MarginContainer" unique_id=2022081076]
+top_level = true
+z_index = 100
+offset_right = 32.0
+offset_bottom = 33.0
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_e0o8r")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1015435873]

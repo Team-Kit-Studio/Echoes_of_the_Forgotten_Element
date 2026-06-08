@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://chbaujlj47kwf"]
+[gd_scene format=3 uid="uid://chbaujlj47kwf"]
 
 [ext_resource type="Script" uid="uid://b0m7mlckmjeoi" path="res://project/scripts/objects/door_inter.gd" id="1_owx80"]
 [ext_resource type="Texture2D" uid="uid://b6138fisri8ai" path="res://project/assets/sprites/Objects/Interactive/SpaceShipDoorOpenAnimation-Sheet.png" id="2_7xsov"]
@@ -14,7 +14,7 @@ size = Vector2(31, 8)
 size = Vector2(31, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nvkh"]
-size = Vector2(62, 43)
+size = Vector2(62, 46)
 
 [sub_resource type="Animation" id="Animation_7xsov"]
 resource_name = "Door_Close"
@@ -29,7 +29,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5521231),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-40, -10), Vector2(-15.5, -10)]
+"values": [Vector2(-40, -5), Vector2(-15.5, -5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -41,7 +41,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5583973),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(40, -10), Vector2(15.5, -10)]
+"values": [Vector2(40, -5), Vector2(15.5, -5)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -93,6 +93,69 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bu2s3"]
+resource_name = "Door_Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Left:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-15.5, -5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Right:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15.5, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_cb0ms"]
@@ -163,7 +226,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.48748916, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-15.5, -10), Vector2(-40, -10)]
+"values": [Vector2(-15.5, -5), Vector2(-40, -5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -175,7 +238,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.48748916, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(15.5, -10), Vector2(40, -10)]
+"values": [Vector2(15.5, -5), Vector2(40, -5)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -227,6 +290,45 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_osdo3"]
+resource_name = "Door_Open_Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Right:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_6x5el"]
@@ -304,55 +406,17 @@ tracks/5/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_osdo3"]
-resource_name = "Door_Open_Idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Left:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.06666667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-40, -10)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Right:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.06666667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(40, -10)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xsov"]
 _data = {
 &"Door_Close": SubResource("Animation_7xsov"),
+&"Door_Idle": SubResource("Animation_bu2s3"),
 &"Door_Lock": SubResource("Animation_cb0ms"),
 &"Door_Open": SubResource("Animation_owx80"),
 &"Door_Open_Idle": SubResource("Animation_osdo3"),
 &"RESET": SubResource("Animation_6x5el")
 }
 
-[node name="Door_Inter" type="RigidBody2D"]
+[node name="Door_Inter" type="RigidBody2D" unique_id=895654224]
 z_index = -1
 collision_layer = 8
 collision_mask = 2
@@ -360,7 +424,7 @@ gravity_scale = 0.0
 freeze = true
 script = ExtResource("1_owx80")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1714410666]
 visible = false
 texture_filter = 3
 position = Vector2(1.3113022e-06, 0)
@@ -370,7 +434,7 @@ hframes = 10
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 32)
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=547434508]
 visible = false
 texture_filter = 3
 position = Vector2(1.3113022e-06, 0)
@@ -380,35 +444,34 @@ hframes = 13
 region_enabled = true
 region_rect = Rect2(0, 0, 832, 32)
 
-[node name="Left" type="CollisionShape2D" parent="."]
+[node name="Left" type="CollisionShape2D" parent="." unique_id=1789539709]
 physics_interpolation_mode = 1
 position = Vector2(-15.5, -10)
 shape = SubResource("RectangleShape2D_72qqx")
 
-[node name="Right" type="CollisionShape2D" parent="."]
+[node name="Right" type="CollisionShape2D" parent="." unique_id=182276217]
 position = Vector2(15.5, -10)
 shape = SubResource("RectangleShape2D_clgt2")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=559760046]
 
-[node name="react" type="Area2D" parent="."]
+[node name="react" type="Area2D" parent="." unique_id=1730877589]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="react"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="react" unique_id=289800318]
 top_level = true
 texture_filter = 1
-position = Vector2(0, -2.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_6nvkh")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=625136231]
 max_distance = 246.0
 bus = &"sfx_volume"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7xsov")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=357819228]
+libraries/ = SubResource("AnimationLibrary_7xsov")
+autoplay = &"Door_Idle"
 
 [connection signal="body_entered" from="react" to="." method="_on_react_body_entered"]
 [connection signal="body_exited" from="react" to="." method="_on_react_body_exited"]

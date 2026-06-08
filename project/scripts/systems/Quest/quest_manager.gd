@@ -1,13 +1,8 @@
-### QuestManager.gd
-
 extends Node
-
 class_name QuestManager
 
-# Node Refs
 @onready var quest_ui = $QuestUI
 
-# vars
 signal quest_updated(quest_id: String)
 signal objective_updated(quest_id: String, objective_id: String)
 signal quest_list_updated()
@@ -15,10 +10,19 @@ var quests = {}
 
 func add_quest(quest: Quest):
 	quests[quest.quest_id] = quest
+	# Автоматически делаем этот квест активным в трекере
+	if Global.player:
+		Global.player.selected_quest = quest
+		Global.player.update_quest_tracker(quest)
 	quest_updated.emit(quest.quest_id)
+	quest_list_updated.emit()
 
 func _remove_quest(quest_id: String):
 	quests.erase(quest_id)
+	# Если удаляем выбранный квест, сбрасываем трекер
+	if Global.player and Global.player.selected_quest and Global.player.selected_quest.quest_id == quest_id:
+		Global.player.selected_quest = null
+		Global.player.update_quest_tracker(null)
 	quest_list_updated.emit()
 	
 func get_quest(quest_id: String) -> Quest:
@@ -47,3 +51,20 @@ func complete_objective(quest_id: String, objective_id: String):
 						
 func show_quest_log():
 	quest_ui.show_hide_log()
+
+func complete_quest_ex(quest_id: String) -> void:
+	var quest = get_quest(quest_id)
+	if not quest or quest.state != "in_progress":
+		return
+
+	for reward in quest.rewards:
+		match reward.reward_type:
+			Rewards.RewardType.COINS:
+				Global.player.coin_amount += reward.reward_amount
+				Global.player.update_coins()
+			Rewards.RewardType.ITEM:
+				pass  # выдача предмета при необходимости
+			Rewards.RewardType.EXPERIENCE:
+				pass
+
+	_remove_quest(quest_id)

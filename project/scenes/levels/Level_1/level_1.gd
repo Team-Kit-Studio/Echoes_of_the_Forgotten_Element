@@ -4,6 +4,7 @@ extends Node2D
 @onready var audio_sfx: AudioStreamPlayer2D = $AudioSFX
 @onready var player: CharacterBody2D = $"1_floor/Entity/Player"
 @onready var animation_player: AnimationPlayer = $"Kut-Scene/AnimationPlayer"
+@onready var cutscene_manager: Node = $CutScene_Manager
 
 var cut_scene: bool = false
 
@@ -12,8 +13,11 @@ func _ready() -> void:
 	SavesManager.data_update.connect(self_objects_saves)
 	Play_Music("res://project/assets/sounds/music/Trip Land.mp3")
 	#animation_player.play("Kut-Scene")
+	# Пример запуска катсцены (можно вызвать из любого места)
+	# cutscene_manager.play_cutscene(preload("res://cutscenes/intro.tres"))
 	
-	
+func start_cutscene() -> void:
+	cutscene_manager.play_cutscene(preload("res://project/data/Resources/Cut-Scenes/Cutscene1.tres"))
 	
 
 #реализует систему сохранения состояния сцены

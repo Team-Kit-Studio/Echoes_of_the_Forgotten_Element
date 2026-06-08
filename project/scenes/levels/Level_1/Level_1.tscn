@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chfyjrin1osto" path="res://project/assets/sprites/tiles/tilemap_spaceship/Kut-Scene/Sprite3.png" id="4_l1vrp"]
 [ext_resource type="Texture2D" uid="uid://cnof62cmht83" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_Corridor3.png" id="4_oyocx"]
 [ext_resource type="Texture2D" uid="uid://bmq5k85y4hy26" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/bed_cabin.png" id="5_64jha"]
-[ext_resource type="Script" uid="uid://cwesv582fjfs" path="res://project/scenes/levels/Level_1/player_follower.gd" id="5_gu4hv"]
+[ext_resource type="Script" uid="uid://cwesv582fjfs" path="res://project/scripts/systems/Cut-Scenes/actor_follower.gd" id="5_gu4hv"]
 [ext_resource type="PackedScene" uid="uid://dn8amxut4hceo" path="res://project/scenes/characters/player/player.tscn" id="6_vcvnr"]
 [ext_resource type="Texture2D" uid="uid://uphoiujsjqi2" path="res://project/assets/sprites/tiles/tilemap_spaceship/Floor/Floor_corridor.png" id="7_f7cpc"]
 [ext_resource type="Texture2D" uid="uid://vevwcw0bunkp" path="res://project/assets/sprites/tiles/tilemap_spaceship/Object/Стол.png" id="8_uq5yu"]
@@ -23,18 +23,20 @@
 [ext_resource type="Texture2D" uid="uid://7d6boju35p6f" path="res://project/assets/sprites/Loots/KeyCardBlack.png" id="16_lto12"]
 [ext_resource type="PackedScene" uid="uid://dthswwr0380vt" path="res://project/scenes/objects/Table.tscn" id="16_vcvnr"]
 [ext_resource type="PackedScene" uid="uid://c7q8p6a0l30lf" path="res://project/scenes/ui/game_menu/game_menu.tscn" id="16_w2bar"]
+[ext_resource type="Resource" uid="uid://dy2jadhtctilo" path="res://project/data/Items_Samples/Key_card_Grey.tres" id="21_dxl77"]
 [ext_resource type="PackedScene" uid="uid://bw1dsjxiijb6f" path="res://project/scenes/ui/inventory/inventory.tscn" id="22_20t25"]
 [ext_resource type="Texture2D" uid="uid://cwe6frn1bfng1" path="res://project/assets/sprites/Weapons/laser_gun.png" id="22_sfn6e"]
-[ext_resource type="Texture2D" uid="uid://dvaxoj0reg0jd" path="res://project/assets/sprites/Objects/Key Card.png" id="24_0udst"]
-[ext_resource type="Script" uid="uid://c1ooabv6ofu7" path="res://project/data/Resources/quests/Quest.gd" id="24_61cnm"]
+[ext_resource type="PackedScene" uid="uid://chbaujlj47kwf" path="res://project/scenes/objects/interactive/door_inter.tscn" id="23_dxl77"]
+[ext_resource type="Script" uid="uid://c1ooabv6ofu7" path="res://project/scripts/systems/Quest/Components/Quest.gd" id="24_61cnm"]
 [ext_resource type="Texture2D" uid="uid://ckium8f85irdp" path="res://project/assets/sprites/Weapons/gun.png" id="25_qujv1"]
-[ext_resource type="Script" uid="uid://dfae136l0alhw" path="res://project/data/Resources/quests/Objectives.gd" id="25_sfn6e"]
-[ext_resource type="Script" uid="uid://ccl3wemqkkmiv" path="res://project/data/Resources/quests/Rewards.gd" id="26_c4afl"]
+[ext_resource type="Script" uid="uid://dfae136l0alhw" path="res://project/scripts/systems/Quest/Components/Objectives.gd" id="25_sfn6e"]
+[ext_resource type="Script" uid="uid://ccl3wemqkkmiv" path="res://project/scripts/systems/Quest/Components/Rewards.gd" id="26_c4afl"]
 [ext_resource type="Script" uid="uid://dy1lo6wbqirsy" path="res://project/scripts/ui/inventory/Components/drop_zone.gd" id="27_ql43b"]
 [ext_resource type="Script" uid="uid://brnwxmaaue1ge" path="res://project/scripts/core/inventory_manager.gd" id="27_s4qvm"]
 [ext_resource type="PackedScene" uid="uid://cxhqernnxs7tg" path="res://project/scenes/objects/interactive/drop_item.tscn" id="28_s4qvm"]
 [ext_resource type="Texture2D" uid="uid://csasilrv3qqh6" path="res://project/assets/sprites/tiles/tilemap_spaceship/Kut-Scene/Sprite1.png" id="32_dqoqb"]
 [ext_resource type="Texture2D" uid="uid://dv31fenfkyj71" path="res://project/assets/sprites/tiles/tilemap_spaceship/Kut-Scene/Sprite2.png" id="33_l1vrp"]
+[ext_resource type="Script" uid="uid://bjh8qsndlo5um" path="res://project/scripts/systems/Cut-Scenes/cutscene_manager.gd" id="35_5x84b"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lpjld"]
 polygon = PackedVector2Array(-6.96299, -8, 8, -8, 8, 8, -8, 8, -8, -6.99164, -7.03177, -6.93879)
@@ -573,12 +575,6 @@ name = "Черная Ключ-Карта"
 texture = ExtResource("16_lto12")
 description = "Ключ-карта первого уровня"
 
-[sub_resource type="Resource" id="Resource_dqoqb"]
-script = ExtResource("15_f7cpc")
-name = "KeyCard"
-texture = ExtResource("24_0udst")
-metadata/_custom_type_script = "uid://ipa0bxfn4i43"
-
 [sub_resource type="Resource" id="Resource_dxl77"]
 script = ExtResource("15_f7cpc")
 name = "Laser Gun"
@@ -597,7 +593,6 @@ metadata/_custom_type_script = "uid://dfae136l0alhw"
 
 [sub_resource type="Resource" id="Resource_mt5x5"]
 script = ExtResource("26_c4afl")
-reward_type = "battery"
 reward_amount = 100
 metadata/_custom_type_script = "uid://ccl3wemqkkmiv"
 
@@ -630,7 +625,6 @@ metadata/_custom_type_script = "uid://dfae136l0alhw"
 
 [sub_resource type="Resource" id="Resource_ylqv8"]
 script = ExtResource("26_c4afl")
-reward_type = "coins"
 reward_amount = 50
 metadata/_custom_type_script = "uid://ccl3wemqkkmiv"
 
@@ -703,21 +697,29 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CutScenePath/PlayerFollower")
+tracks/2/path = NodePath("..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 4, 12),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_cutscene"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CutScene_Manager")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"show_bars"
-}, {
-"args": [],
-"method": &"start"
-}, {
-"args": [],
-"method": &"hide_bars"
 }]
 }
 
@@ -756,43 +758,9 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_l1vrp"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1857, 1679, 0, 0, 0, 0, 1854, 1729)
+"points": PackedVector2Array(0, 0, 0, 0, 1857, 1679, 0, 0, 0, 0, 1857, 1728)
 }
 point_count = 2
-
-[sub_resource type="Resource" id="Resource_ql43b"]
-script = ExtResource("15_f7cpc")
-name = "Черная Ключ-Карта"
-texture = ExtResource("16_lto12")
-description = "Ключ-карта первого уровня"
-
-[sub_resource type="Resource" id="Resource_s4qvm"]
-script = ExtResource("15_f7cpc")
-name = "Test KeyCard"
-texture = ExtResource("24_0udst")
-amount = 4
-max_stack_size = 10
-metadata/_custom_type_script = "uid://ipa0bxfn4i43"
-
-[sub_resource type="Resource" id="Resource_vvp2o"]
-script = ExtResource("15_f7cpc")
-name = "Test KeyCard"
-texture = ExtResource("24_0udst")
-amount = 7
-max_stack_size = 10
-metadata/_custom_type_script = "uid://ipa0bxfn4i43"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqoqb"]
-atlas = ExtResource("25_qujv1")
-region = Rect2(30, 61, 59, 41)
-
-[sub_resource type="Resource" id="Resource_61cnm"]
-script = ExtResource("15_f7cpc")
-name = "Glock-18"
-texture = SubResource("AtlasTexture_dqoqb")
-description = "Пистолет ближнего действия"
-width = 2
-metadata/_custom_type_script = "uid://ipa0bxfn4i43"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcvnr"]
 bg_color = Color(0.941555, 3.9948522e-06, 1.347661e-06, 0.4627451)
@@ -865,33 +833,33 @@ position = Vector2(64, -66)
 material = ExtResource("15_0udst")
 position = Vector2(-103, -67)
 
+[node name="Door_Inter" parent="1_floor/Rooms/Spawn" unique_id=895654224 instance=ExtResource("23_dxl77")]
+z_index = 0
+y_sort_enabled = true
+position = Vector2(-33, -97)
+required_item_id = "ID_Key_Card_Grey"
+
 [node name="Items" type="Node" parent="1_floor/Rooms/Spawn" unique_id=247696632]
 
 [node name="Drop_item" parent="1_floor/Rooms/Spawn/Items" unique_id=127834688 instance=ExtResource("28_s4qvm")]
 position = Vector2(1672, 1743)
 data = SubResource("Resource_0udst")
-item_id = "item_key_card_black"
-item_quantity = 0
 
 [node name="Drop_item2" parent="1_floor/Rooms/Spawn/Items" unique_id=1590766144 instance=ExtResource("28_s4qvm")]
 position = Vector2(1661, 1662)
-data = SubResource("Resource_dqoqb")
-item_id = "item_key_card"
+data = ExtResource("21_dxl77")
 
 [node name="Drop_item3" parent="1_floor/Rooms/Spawn/Items" unique_id=69063437 instance=ExtResource("28_s4qvm")]
 position = Vector2(1773, 1362)
 data = SubResource("Resource_dxl77")
-item_id = "laser_gun"
 
 [node name="Entity" type="Node2D" parent="1_floor" unique_id=303448597]
 z_index = 1
 y_sort_enabled = true
 
-[node name="Player" parent="1_floor/Entity" unique_id=1532343694 instance=ExtResource("6_vcvnr")]
+[node name="Player" parent="1_floor/Entity" unique_id=903312043 instance=ExtResource("6_vcvnr")]
 visible = false
-y_sort_enabled = true
-position = Vector2(1857.0001, 1702.0001)
-scale = Vector2(1.3, 1.3)
+position = Vector2(1857, 1710)
 
 [node name="NPC" parent="1_floor/Entity" unique_id=1741641539 instance=ExtResource("11_lto12")]
 position = Vector2(1832.0001, 1520.0001)
@@ -930,13 +898,14 @@ autoplay = &"Kut-Scene"
 [node name="CutScenePath" type="Path2D" parent="Kut-Scene" unique_id=1651344979]
 curve = SubResource("Curve2D_l1vrp")
 
-[node name="PlayerFollower" type="PathFollow2D" parent="Kut-Scene/CutScenePath" unique_id=902223447]
+[node name="PlayerMover" type="PathFollow2D" parent="Kut-Scene/CutScenePath" unique_id=902223447]
 position = Vector2(1857, 1679)
 rotation = 1.5707964
 rotates = false
 loop = false
 script = ExtResource("5_gu4hv")
 speed = 50.0
+actor_path = NodePath("../../../1_floor/Entity/Player")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1732100513]
 
@@ -946,7 +915,6 @@ speed = 50.0
 visible = false
 offset_left = 183.0
 offset_right = 215.0
-items = Array[ExtResource("15_f7cpc")]([SubResource("Resource_ql43b"), SubResource("Resource_s4qvm"), SubResource("Resource_vvp2o"), SubResource("Resource_61cnm")])
 
 [node name="ExternalInventory" parent="UI" unique_id=135977470 instance=ExtResource("22_20t25")]
 visible = false
@@ -966,6 +934,9 @@ button_mask = 3
 text = "DROP"
 script = ExtResource("27_ql43b")
 dropped_item_scene = ExtResource("28_s4qvm")
+
+[node name="CutScene_Manager" type="Node" parent="." unique_id=1490577249]
+script = ExtResource("35_5x84b")
 
 [node name="InventoryManager" type="Node" parent="." unique_id=1776361470]
 script = ExtResource("27_s4qvm")

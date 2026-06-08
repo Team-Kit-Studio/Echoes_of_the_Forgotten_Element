@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://vgc7svgk2wrf"]
+
+[ext_resource type="Script" uid="uid://dfae136l0alhw" path="res://project/scripts/systems/Quest/Components/Objectives.gd" id="1_8ytg6"]
+[ext_resource type="Script" uid="uid://ccl3wemqkkmiv" path="res://project/scripts/systems/Quest/Components/Rewards.gd" id="2_dytbp"]
+[ext_resource type="Script" uid="uid://c1ooabv6ofu7" path="res://project/scripts/systems/Quest/Components/Quest.gd" id="3_vuiwb"]
+
+[sub_resource type="Resource" id="Resource_8ytg6"]
+script = ExtResource("1_8ytg6")
+id = "12345"
+description = "поднять ключ карту"
+target_id = "ID_Key_Card_Grey"
+target_type = "collection"
+metadata/_custom_type_script = "uid://dfae136l0alhw"
+
+[sub_resource type="Resource" id="Resource_dytbp"]
+script = ExtResource("2_dytbp")
+reward_type = 1
+custom_id = "res://project/data/Items_Samples/Energy_Battery.tres"
+metadata/_custom_type_script = "uid://ccl3wemqkkmiv"
+
+[resource]
+script = ExtResource("3_vuiwb")
+quest_id = "Quest_Cutscene1"
+quest_name = "Cutscene1"
+quest_description = "Пройди первую катсцену"
+objectives = Array[ExtResource("1_8ytg6")]([SubResource("Resource_8ytg6")])
+rewards = Array[ExtResource("2_dytbp")]([SubResource("Resource_dytbp")])
+metadata/_custom_type_script = "uid://c1ooabv6ofu7"

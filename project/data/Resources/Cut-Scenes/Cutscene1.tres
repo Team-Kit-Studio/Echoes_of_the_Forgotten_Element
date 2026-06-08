@@ -1,0 +1,101 @@
+[gd_resource type="Resource" script_class="CutsceneData" format=3 uid="uid://u6q6gurtm1y3"]
+
+[ext_resource type="Script" uid="uid://b5oysxrwfkd3s" path="res://project/data/Resources/Cut-Scenes/scripts/cutscene_action.gd" id="1_5djfw"]
+[ext_resource type="Resource" uid="uid://dy8atgnobmnkf" path="res://project/data/Resources/Cut-Scenes/Wait(4).tres" id="2_6qgac"]
+[ext_resource type="Resource" uid="uid://do30tdhsr2x0k" path="res://project/data/Resources/Cut-Scenes/Set_Skin(No_Suit).tres" id="2_7lsg5"]
+[ext_resource type="Resource" uid="uid://jnr574ax5up2" path="res://project/data/Resources/Cut-Scenes/Move_Player1.tres" id="2_cid7v"]
+[ext_resource type="Script" uid="uid://ca6kx47561obk" path="res://project/data/Resources/Cut-Scenes/scripts/cutscene_data.gd" id="3_6qgac"]
+
+[sub_resource type="Resource" id="Resource_q5cqb"]
+script = ExtResource("1_5djfw")
+duration = 2.515
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_6qgac"]
+script = ExtResource("1_5djfw")
+type = 2
+actor_path = "/root/Level 1/1_floor/Entity/Player"
+path_node = "/root/Level 1/Kut-Scene/CutScenePath"
+target_path = "/root/Level 1/1_floor/Entity/Player"
+method_name = "set_skin"
+args = ["suit"]
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_7lsg5"]
+script = ExtResource("1_5djfw")
+type = 3
+text_actor_path = "/root/Level 1/1_floor/Entity/Player"
+text_to_show = "Сегодня мое вступление в элитную группу."
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_johsy"]
+script = ExtResource("1_5djfw")
+type = 3
+text_actor_path = "/root/Level 1/1_floor/Entity/Player"
+text_to_show = "Я так долго этого ждал. Сегодня все должно идти по плану."
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_ovmrh"]
+script = ExtResource("1_5djfw")
+type = 5
+spawn_id = "Soldier"
+scene_path = "res://project/scenes/characters/Entity/NPC.tscn"
+spawn_position = Vector2(1729, 1505)
+parent_path = "/root/Level 1/1_floor/Entity"
+hide_marker = true
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_n1vb7"]
+script = ExtResource("1_5djfw")
+duration = 1.275
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_nxxy1"]
+script = ExtResource("1_5djfw")
+type = 4
+actor_path = "Soldier"
+move_speed = 50.0
+points = [Vector2(1729, 1505), Vector2(1729, 1585), Vector2(1746.405, 1672.375), Vector2(1775, 1696.31)]
+points_speed = 50.0
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_86wvr"]
+script = ExtResource("1_5djfw")
+type = 3
+text_actor_path = "Soldier"
+text_to_show = "Номер 574, вас Вызывают на главный мостик."
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_hluuv"]
+script = ExtResource("1_5djfw")
+type = 3
+text_actor_path = "Soldier"
+text_to_show = "Не опаздывайте!"
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_kgj7j"]
+script = ExtResource("1_5djfw")
+type = 4
+actor_path = "Soldier"
+move_speed = 50.0
+wait_for_completion = false
+points = [Vector2(1776, 1712), Vector2(1729, 1664), Vector2(1729, 1585), Vector2(1729, 1536)]
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_a2rge"]
+script = ExtResource("1_5djfw")
+type = 6
+remove_target = "Soldier"
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[sub_resource type="Resource" id="Resource_oa3l3"]
+script = ExtResource("1_5djfw")
+type = 8
+quest_resource_path = "res://project/data/Resources/quests/Quest_CutScene1.tres"
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
+
+[resource]
+script = ExtResource("3_6qgac")
+actions = Array[ExtResource("1_5djfw")]([ExtResource("2_7lsg5"), ExtResource("2_6qgac"), ExtResource("2_cid7v"), SubResource("Resource_q5cqb"), SubResource("Resource_6qgac"), ExtResource("2_6qgac"), SubResource("Resource_7lsg5"), SubResource("Resource_johsy"), SubResource("Resource_ovmrh"), SubResource("Resource_n1vb7"), SubResource("Resource_nxxy1"), SubResource("Resource_86wvr"), SubResource("Resource_hluuv"), SubResource("Resource_kgj7j"), SubResource("Resource_a2rge"), SubResource("Resource_oa3l3")])
+show_bars_at_start = false
+metadata/_custom_type_script = "uid://ca6kx47561obk"

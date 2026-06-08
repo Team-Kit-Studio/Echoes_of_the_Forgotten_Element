@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CutsceneAction" format=3 uid="uid://jnr574ax5up2"]
+
+[ext_resource type="Script" uid="uid://b5oysxrwfkd3s" path="res://project/data/Resources/Cut-Scenes/scripts/cutscene_action.gd" id="1_5qh7d"]
+
+[resource]
+script = ExtResource("1_5qh7d")
+type = 1
+actor_path = "/root/Level 1/1_floor/Entity/Player"
+path_node = "/root/Level 1/Kut-Scene/CutScenePath"
+move_speed = 50.0
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"

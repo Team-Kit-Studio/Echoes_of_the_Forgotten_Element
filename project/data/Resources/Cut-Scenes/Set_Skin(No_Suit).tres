@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CutsceneAction" format=3 uid="uid://do30tdhsr2x0k"]
+
+[ext_resource type="Script" uid="uid://b5oysxrwfkd3s" path="res://project/data/Resources/Cut-Scenes/scripts/cutscene_action.gd" id="1_ta1qg"]
+
+[resource]
+script = ExtResource("1_ta1qg")
+type = 2
+actor_path = "/root/Level 1/1_floor/Entity/Player"
+path_node = "/root/Level 1/Kut-Scene/CutScenePath"
+target_path = "/root/Level 1/1_floor/Entity/Player"
+method_name = "set_skin"
+args = ["no_suit"]
+metadata/_custom_type_script = "uid://b5oysxrwfkd3s"
